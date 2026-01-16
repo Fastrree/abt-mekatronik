@@ -810,7 +810,7 @@ export default function Home() {
       <Newsletter />
 
       {/* CLIENT LOGOS / PARTNERS SECTION */}
-      <section id="partners">
+      <section id="partners" className="scroll-mt-24">
         <ClientLogos />
       </section>
 

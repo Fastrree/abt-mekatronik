@@ -7,7 +7,7 @@ export function Testimonials() {
   const testimonials = tArray('testimonials.items');
 
   return (
-    <section className="py-20 bg-gradient-to-r from-red-700 to-red-600">
+    <section className="py-20 bg-zinc-900">
       <div className="container mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -15,7 +15,7 @@ export function Testimonials() {
           viewport={{ once: true }}
           className="text-center mb-12"
         >
-          <h3 className="text-white/80 font-bold tracking-widest uppercase mb-2">
+          <h3 className="text-red-500 font-bold tracking-widest uppercase mb-2">
             {t('testimonials.subtitle')}
           </h3>
           <h2 className="text-3xl md:text-4xl font-black text-white">
@@ -31,9 +31,9 @@ export function Testimonials() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.15 }}
-              className="bg-white/10 backdrop-blur-sm border border-white/20 p-6 rounded-lg relative"
+              className="bg-zinc-800 border border-zinc-700 p-6 rounded-lg relative"
             >
-              <Quote className="absolute top-4 right-4 w-8 h-8 text-white/20" />
+              <Quote className="absolute top-4 right-4 w-8 h-8 text-red-600/20" />
               
               {/* Stars */}
               <div className="flex gap-1 mb-4">
@@ -43,14 +43,14 @@ export function Testimonials() {
               </div>
 
               {/* Quote */}
-              <p className="text-white/90 mb-6 leading-relaxed">
+              <p className="text-zinc-300 mb-6 leading-relaxed">
                 "{t(`testimonials.items.${index}.quote`)}"
               </p>
 
               {/* Author */}
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center">
-                  <span className="text-white font-bold">
+                <div className="w-10 h-10 bg-red-600/20 rounded-full flex items-center justify-center">
+                  <span className="text-red-500 font-bold">
                     {t(`testimonials.items.${index}.name`).charAt(0)}
                   </span>
                 </div>
@@ -58,7 +58,7 @@ export function Testimonials() {
                   <p className="text-white font-semibold text-sm">
                     {t(`testimonials.items.${index}.name`)}
                   </p>
-                  <p className="text-white/60 text-xs">
+                  <p className="text-zinc-500 text-xs">
                     {t(`testimonials.items.${index}.company`)}
                   </p>
                 </div>

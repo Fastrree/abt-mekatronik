@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Menu, X, ChevronDown, Truck, Factory, Layers, Wrench } from "lucide-react";
+import { Menu, ChevronDown, Truck, Factory, Layers, Wrench } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { LanguageSelector } from "@/components/LanguageSelector";
 import { useI18n } from "@/lib/i18n";
@@ -13,7 +13,6 @@ interface NavbarProps {
 export function Navbar({ onOpenProduct }: NavbarProps) {
   const { t } = useI18n();
   const [isScrolled, setIsScrolled] = useState(false);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isQuickMenuOpen, setIsQuickMenuOpen] = useState(false);
 
   useEffect(() => {
@@ -48,7 +47,6 @@ export function Navbar({ onOpenProduct }: NavbarProps) {
 
   const handleProductClick = (key: ProductKey) => {
     setIsQuickMenuOpen(false);
-    setIsMobileMenuOpen(false);
     if (onOpenProduct) {
       onOpenProduct(key);
     }
@@ -151,60 +149,11 @@ export function Navbar({ onOpenProduct }: NavbarProps) {
           </a>
         </div>
 
-        {/* Mobile: Language Selector + Menu Toggle */}
-        <div className="lg:hidden flex items-center gap-2">
+        {/* Mobile: Only Language Selector */}
+        <div className="lg:hidden">
           <LanguageSelector />
-          <button
-            className="text-white p-2"
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            aria-label="Menu"
-          >
-            {isMobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
-          </button>
         </div>
       </div>
-
-      {/* Mobile Menu */}
-      {isMobileMenuOpen && (
-        <div className="lg:hidden absolute top-full left-0 right-0 bg-zinc-900 border-b border-zinc-700 p-6 animate-in slide-in-from-top-5">
-          <div className="flex flex-col space-y-2">
-            <div className="text-xs font-semibold text-zinc-400 uppercase tracking-wider py-2">
-              {t('footer.productGroups')}
-            </div>
-            {productLinks.map((product) => {
-              const IconComponent = product.icon;
-              return (
-                <button
-                  key={product.key}
-                  onClick={() => handleProductClick(product.key)}
-                  className="flex items-center gap-3 py-2 text-base text-zinc-300 hover:text-primary text-left"
-                >
-                  <IconComponent size={18} className="text-red-500" />
-                  {product.name}
-                </button>
-              );
-            })}
-            <div className="border-t border-zinc-700 my-2 pt-2">
-              <div className="text-xs font-semibold text-zinc-400 uppercase tracking-wider py-2">
-                {t('nav.quickAccess')}
-              </div>
-              {navLinks.map((link) => (
-                <a
-                  key={link.name}
-                  href={link.href}
-                  className="block py-2 text-base text-zinc-300 hover:text-primary"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                >
-                  {link.name}
-                </a>
-              ))}
-            </div>
-            <a href="#contact" onClick={() => setIsMobileMenuOpen(false)}>
-              <Button className="w-full bg-primary hover:bg-primary/90 mt-4">{t('products.getQuote')}</Button>
-            </a>
-          </div>
-        </div>
-      )}
 
       {/* Click outside to close quick menu */}
       {isQuickMenuOpen && (

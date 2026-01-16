@@ -253,6 +253,8 @@
         justify-content: center;
         background: linear-gradient(135deg, #18181b 0%, #27272a 100%);
         transition: opacity 0.5s ease-out, visibility 0.5s ease-out;
+        padding: 1rem;
+        text-align: center;
       }
       #splash-screen.hidden {
         opacity: 0;
@@ -264,6 +266,13 @@
         color: white;
         font-family: 'Montserrat', sans-serif;
         letter-spacing: -0.05em;
+        text-align: center;
+        width: 100%;
+      }
+      @media (max-width: 480px) {
+        #splash-screen .logo {
+          font-size: 1.75rem;
+        }
       }
       #splash-screen .logo span {
         color: #dc2626;

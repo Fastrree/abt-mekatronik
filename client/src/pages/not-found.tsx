@@ -1,21 +1,71 @@
-import { Card, CardContent } from "@/components/ui/card";
-import { AlertCircle } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Home, ArrowLeft, Phone } from "lucide-react";
+import { useI18n } from "@/lib/i18n";
 
 export default function NotFound() {
+  const { t } = useI18n();
+  
   return (
-    <div className="min-h-screen w-full flex items-center justify-center bg-gray-50">
-      <Card className="w-full max-w-md mx-4">
-        <CardContent className="pt-6">
-          <div className="flex mb-4 gap-2">
-            <AlertCircle className="h-8 w-8 text-red-500" />
-            <h1 className="text-2xl font-bold text-gray-900">404 Page Not Found</h1>
-          </div>
-
-          <p className="mt-4 text-sm text-gray-600">
-            Did you forget to add the page to the router?
-          </p>
-        </CardContent>
-      </Card>
+    <div className="min-h-screen w-full flex items-center justify-center bg-zinc-900 relative overflow-hidden">
+      {/* Background decoration */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-red-600/10 rounded-full blur-3xl" />
+        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-zinc-700/20 rounded-full blur-3xl" />
+      </div>
+      
+      <div className="relative z-10 text-center px-6 max-w-2xl mx-auto">
+        {/* 404 Number */}
+        <div className="mb-8">
+          <span className="text-[12rem] md:text-[16rem] font-black text-transparent bg-clip-text bg-gradient-to-b from-zinc-600 to-zinc-800 leading-none select-none">
+            404
+          </span>
+        </div>
+        
+        {/* Message */}
+        <h1 className="text-3xl md:text-4xl font-bold text-white mb-4">
+          {t('notFound.title')}
+        </h1>
+        <p className="text-zinc-400 text-lg mb-10 max-w-md mx-auto">
+          {t('notFound.description')}
+        </p>
+        
+        {/* Action Buttons */}
+        <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <Button 
+            size="lg"
+            className="bg-red-600 hover:bg-red-700 text-white font-bold"
+            onClick={() => window.location.href = '/'}
+          >
+            <Home className="mr-2 h-5 w-5" />
+            {t('notFound.homeButton')}
+          </Button>
+          <Button 
+            size="lg"
+            variant="outline"
+            className="border-zinc-600 text-zinc-300 hover:bg-zinc-800"
+            onClick={() => window.history.back()}
+          >
+            <ArrowLeft className="mr-2 h-5 w-5" />
+            {t('notFound.backButton')}
+          </Button>
+          <Button 
+            size="lg"
+            variant="outline"
+            className="border-zinc-600 text-zinc-300 hover:bg-zinc-800"
+            onClick={() => window.location.href = '/#contact'}
+          >
+            <Phone className="mr-2 h-5 w-5" />
+            {t('notFound.contactButton')}
+          </Button>
+        </div>
+        
+        {/* Logo */}
+        <div className="mt-16">
+          <a href="/" className="text-2xl font-black text-white hover:opacity-80 transition-opacity">
+            ABT <span className="text-red-600">MEKATRONİK</span>
+          </a>
+        </div>
+      </div>
     </div>
   );
 }

@@ -1,0 +1,11 @@
+# ABT MEKATRONİK - Robots.txt
+# Tüm arama motoru botlarına izin ver
+
+User-agent: *
+Allow: /
+
+# Sitemap konumu
+Sitemap: https://abtmekatronik.com/sitemap.xml
+
+# Crawl-delay önerisi (opsiyonel)
+Crawl-delay: 1

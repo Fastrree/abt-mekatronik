@@ -32,42 +32,42 @@
   --radius-lg: var(--radius);
 }
 
-/* Dark Industrial Theme */
+/* Silver Industrial Theme */
 :root {
-  /* Slate 950 background */
-  --background: 222 47% 11%;
-  /* Light Gray Text */
-  --foreground: 210 40% 98%;
+  /* Dark Silver/Gunmetal background */
+  --background: 220 13% 13%;
+  /* Light Silver Text */
+  --foreground: 220 14% 96%;
 
-  /* Slate 900 Cards */
-  --card: 222 47% 13%;
-  --card-foreground: 210 40% 98%;
+  /* Darker Silver Cards */
+  --card: 220 13% 16%;
+  --card-foreground: 220 14% 96%;
 
-  --popover: 222 47% 11%;
-  --popover-foreground: 210 40% 98%;
+  --popover: 220 13% 13%;
+  --popover-foreground: 220 14% 96%;
 
-  /* Action Red (Fanuc/ABB Style) */
-  --primary: 348 83% 47%;
+  /* Action Red (Industrial Accent) */
+  --primary: 0 72% 51%;
   --primary-foreground: 0 0% 100%;
 
-  /* Metallic Silver / Slate 800 */
-  --secondary: 217 33% 17%;
-  --secondary-foreground: 210 40% 98%;
+  /* Metallic Silver */
+  --secondary: 220 13% 22%;
+  --secondary-foreground: 220 14% 96%;
 
-  /* Muted Slate */
-  --muted: 217 33% 17%;
-  --muted-foreground: 215 20% 65%;
+  /* Muted Silver */
+  --muted: 220 13% 22%;
+  --muted-foreground: 220 9% 60%;
 
   /* Hover accents */
-  --accent: 217 33% 20%;
-  --accent-foreground: 210 40% 98%;
+  --accent: 220 13% 26%;
+  --accent-foreground: 220 14% 96%;
 
   --destructive: 0 62.8% 30.6%;
-  --destructive-foreground: 210 40% 98%;
+  --destructive-foreground: 220 14% 96%;
 
-  --border: 217 33% 20%;
-  --input: 217 33% 17%;
-  --ring: 348 83% 47%;
+  --border: 220 13% 26%;
+  --input: 220 13% 22%;
+  --ring: 0 72% 51%;
 
   --radius: 0rem; /* Industrial look - sharp corners */
 }
@@ -90,9 +90,12 @@
     text-shadow: 0 0 20px rgba(220, 38, 38, 0.5);
   }
   .glass-panel {
-    @apply bg-slate-900/80 backdrop-blur-md border border-slate-700/50;
+    @apply bg-zinc-800/80 backdrop-blur-md border border-zinc-600/50;
   }
   .metallic-gradient {
-    background: linear-gradient(135deg, #e2e8f0 0%, #94a3b8 50%, #64748b 100%);
+    background: linear-gradient(135deg, #d4d4d8 0%, #a1a1aa 50%, #71717a 100%);
+  }
+  .silver-shine {
+    background: linear-gradient(135deg, #3f3f46 0%, #52525b 25%, #3f3f46 50%, #52525b 75%, #3f3f46 100%);
   }
 }

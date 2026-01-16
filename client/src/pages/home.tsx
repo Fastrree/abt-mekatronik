@@ -1,33 +1,101 @@
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { motion } from "framer-motion";
-import { ArrowRight, CheckCircle2, Settings, Cog, PenTool, ChevronRight } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Settings, Cog, PenTool, ChevronRight, X, CheckCircle, Truck, Factory, Wrench, Layers } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { useToast } from "@/hooks/use-toast";
+import { useState } from "react";
+import { useI18n } from "@/lib/i18n";
+import { Testimonials } from "@/components/Testimonials";
+import { Certifications } from "@/components/Certifications";
+import { ClientLogos } from "@/components/ClientLogos";
+import { Newsletter } from "@/components/Newsletter";
+import { FAQ } from "@/components/FAQ";
 
-// Import Generated Assets
-import heroBg from "@assets/generated_images/dark_industrial_factory_hero_background.png";
-import conveyorImg from "@assets/generated_images/industrial_conveyor_belt_system.png";
-import textileImg from "@assets/generated_images/textile_fabric_opening_machine.png";
-import steelImg from "@assets/generated_images/heavy_steel_construction_frame.png";
-import siteImg1 from "@assets/generated_images/industrial_warehouse_steel_structure_site.png";
-import automationImg from "@assets/generated_images/robotic_automation_detail.png";
+// Security: Input sanitization - XSS koruması
+const sanitizeInput = (input: string): string => {
+  return input
+    .replace(/[<>]/g, '')
+    .replace(/javascript:/gi, '')
+    .replace(/on\w+=/gi, '')
+    .trim()
+    .slice(0, 1000);
+};
 
-const contactSchema = z.object({
-  name: z.string().min(2, "İsim en az 2 karakter olmalıdır"),
-  email: z.string().email("Geçerli bir email adresi giriniz"),
-  message: z.string().min(10, "Mesajınız en az 10 karakter olmalıdır"),
+// Security: Enhanced validation schema - moved inside component for i18n
+// Base schema without messages (messages added dynamically in component)
+const createContactSchema = (t: (key: string) => string) => z.object({
+  name: z.string()
+    .min(2, t('validation.nameMin'))
+    .max(100, t('validation.nameMax'))
+    .transform(sanitizeInput),
+  email: z.string()
+    .email(t('validation.emailInvalid'))
+    .max(254, t('validation.emailMax'))
+    .transform(val => val.toLowerCase().trim()),
+  message: z.string()
+    .min(10, t('validation.messageMin'))
+    .max(2000, t('validation.messageMax'))
+    .transform(sanitizeInput),
 });
+
+// Product media assets (text content comes from i18n)
+const productDetails = {
+  konveyor: {
+    icon: Truck,
+    heroImage: "WhatsApp Image 2026-01-16 at 14.32.03.jpeg",
+    gallery: [
+      "WhatsApp Image 2026-01-16 at 14.32.03 (1).jpeg",
+      "WhatsApp Image 2026-01-16 at 14.32.03 (2).jpeg",
+      "WhatsApp Image 2026-01-16 at 14.32.04.jpeg",
+    ],
+  },
+  tekstil: {
+    icon: Factory,
+    heroImage: "WhatsApp Image 2026-01-16 at 14.32.04 (3).jpeg",
+    gallery: [
+      "WhatsApp Image 2026-01-16 at 14.32.04 (4).jpeg",
+      "WhatsApp Image 2026-01-16 at 14.32.04 (5).jpeg",
+      "WhatsApp Image 2026-01-16 at 14.32.05.jpeg",
+    ],
+  },
+  celik: {
+    icon: Layers,
+    heroImage: "WhatsApp Image 2026-01-16 at 14.32.05 (3).jpeg",
+    gallery: [
+      "WhatsApp Image 2026-01-16 at 14.32.05 (4).jpeg",
+      "WhatsApp Image 2026-01-16 at 14.32.06.jpeg",
+      "WhatsApp Image 2026-01-16 at 14.32.06 (1).jpeg",
+    ],
+  },
+  ozelMakine: {
+    icon: Wrench,
+    heroImage: "WhatsApp Image 2026-01-16 at 14.32.06 (5).jpeg",
+    gallery: [
+      "WhatsApp Image 2026-01-16 at 14.32.07.jpeg",
+      "WhatsApp Image 2026-01-16 at 14.32.07 (1).jpeg",
+      "WhatsApp Image 2026-01-16 at 14.32.07 (2).jpeg",
+    ],
+  }
+};
+
+type ProductKey = keyof typeof productDetails;
 
 export default function Home() {
   const { toast } = useToast();
+  const { t, tArray } = useI18n();
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState<ProductKey | null>(null);
+
+  // Create schema with translated messages
+  const contactSchema = createContactSchema(t);
+
   const form = useForm<z.infer<typeof contactSchema>>({
     resolver: zodResolver(contactSchema),
     defaultValues: {
@@ -37,12 +105,16 @@ export default function Home() {
     },
   });
 
-  function onSubmit(data: z.infer<typeof contactSchema>) {
-    toast({
-      title: "Mesajınız Alındı",
-      description: "En kısa sürede sizinle iletişime geçeceğiz.",
-    });
-    form.reset();
+  function onSubmit(_data: z.infer<typeof contactSchema>) {
+    setIsSubmitting(true);
+    setTimeout(() => {
+      toast({
+        title: t('contact.successTitle'),
+        description: t('contact.successDesc'),
+      });
+      form.reset();
+      setIsSubmitting(false);
+    }, 500);
   }
 
   const fadeIn = {
@@ -52,20 +124,208 @@ export default function Home() {
     transition: { duration: 0.6 }
   };
 
+  const openProductModal = (productKey: ProductKey) => {
+    const cardElement = document.getElementById(`product-card-${productKey}`);
+    
+    if (cardElement) {
+      const rect = cardElement.getBoundingClientRect();
+      const isVisible = rect.top >= 0 && rect.bottom <= window.innerHeight;
+      
+      if (isVisible) {
+        // Kart zaten görünüyorsa direkt modal aç
+        setSelectedProduct(productKey);
+        document.body.style.overflow = 'hidden';
+      } else {
+        // Kart görünmüyorsa scroll yap, sonra modal aç
+        cardElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        setTimeout(() => {
+          setSelectedProduct(productKey);
+          document.body.style.overflow = 'hidden';
+        }, 350);
+      }
+    } else {
+      setSelectedProduct(productKey);
+      document.body.style.overflow = 'hidden';
+    }
+  };
+
+  const closeProductModal = () => {
+    setSelectedProduct(null);
+    document.body.style.overflow = 'auto';
+  };
+
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-200 selection:bg-red-900 selection:text-white overflow-x-hidden">
-      <Navbar />
+    <div className="min-h-screen bg-zinc-900 text-zinc-200 selection:bg-red-900 selection:text-white overflow-x-hidden">
+      <Navbar onOpenProduct={openProductModal} />
+
+      {/* PRODUCT DETAIL MODAL */}
+      <AnimatePresence mode="wait">
+        {selectedProduct && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.15 }}
+            className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/85"
+            onClick={closeProductModal}
+          >
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 20 }}
+              transition={{ duration: 0.2, ease: "easeOut" }}
+              className="relative w-full max-w-5xl max-h-[90vh] overflow-y-auto bg-zinc-800 border border-zinc-600 rounded-lg shadow-2xl will-change-transform"
+              onClick={(e) => e.stopPropagation()}
+            >
+              {/* Close Button */}
+              <button
+                onClick={closeProductModal}
+                className="absolute top-4 right-4 z-10 p-2 bg-zinc-700 hover:bg-red-600 rounded-full transition-colors"
+                aria-label={t('products.close')}
+              >
+                <X size={24} />
+              </button>
+
+              {(() => {
+                const product = productDetails[selectedProduct];
+                const IconComponent = product.icon;
+                return (
+                  <>
+                    {/* Hero Image */}
+                    <div className="relative h-64 md:h-80 overflow-hidden bg-zinc-700">
+                      <img
+                        src={`/media/${product.heroImage}`}
+                        alt={t(`productItems.${selectedProduct}.title`)}
+                        className="w-full h-full object-cover"
+                        loading="eager"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-zinc-800 via-zinc-800/50 to-transparent" />
+                      <div className="absolute bottom-6 left-6 right-6">
+                        <div className="flex items-center gap-3 mb-2">
+                          <div className="p-2 bg-red-600 rounded-lg">
+                            <IconComponent className="w-6 h-6 text-white" />
+                          </div>
+                          <span className="text-red-400 font-semibold uppercase tracking-wider text-sm">
+                            {t(`productItems.${selectedProduct}.modalSubtitle`)}
+                          </span>
+                        </div>
+                        <h2 className="text-3xl md:text-4xl font-black text-white">
+                          {t(`productItems.${selectedProduct}.title`)}
+                        </h2>
+                      </div>
+                    </div>
+
+                    {/* Content */}
+                    <div className="p-6 md:p-8">
+                      {/* Description */}
+                      <div className="prose prose-invert max-w-none mb-8">
+                        {t(`productItems.${selectedProduct}.description`).split('\n\n').map((paragraph, idx) => {
+                          if (paragraph.startsWith('**')) {
+                            const title = paragraph.match(/\*\*(.*?)\*\*/)?.[1];
+                            const content = paragraph.replace(/\*\*.*?\*\*\n?/, '');
+                            return (
+                              <div key={idx} className="mb-4">
+                                <h3 className="text-lg font-bold text-red-500 mb-2">{title}</h3>
+                                <p className="text-zinc-300 leading-relaxed whitespace-pre-line">{content}</p>
+                              </div>
+                            );
+                          }
+                          return <p key={idx} className="text-zinc-300 leading-relaxed mb-4">{paragraph}</p>;
+                        })}
+                      </div>
+
+                      {/* Gallery */}
+                      <div className="mb-8">
+                        <h3 className="text-xl font-bold text-white mb-4">{t('products.gallery')}</h3>
+                        <div className="grid grid-cols-3 gap-3">
+                          {product.gallery.map((img, idx) => (
+                            <div key={idx} className="aspect-square overflow-hidden rounded-lg border border-zinc-600">
+                              <img
+                                src={`/media/${img}`}
+                                alt={`${t(`productItems.${selectedProduct}.title`)} ${idx + 1}`}
+                                className="w-full h-full object-cover transition-transform duration-200 hover:scale-105"
+                                loading="lazy"
+                              />
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+
+                      {/* Features & Why Us */}
+                      <div className="grid md:grid-cols-2 gap-6 mb-8">
+                        <div className="bg-zinc-700/50 p-6 rounded-lg border border-zinc-600">
+                          <h3 className="text-lg font-bold text-white mb-4 flex items-center gap-2">
+                            <Settings className="w-5 h-5 text-red-500" />
+                            {t('products.features')}
+                          </h3>
+                          <ul className="space-y-2">
+                            {tArray(`productItems.${selectedProduct}.features`).map((feature, idx) => (
+                              <li key={idx} className="flex items-start gap-2 text-zinc-300">
+                                <CheckCircle className="w-4 h-4 text-green-500 mt-1 shrink-0" />
+                                <span>{feature}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+
+                        <div className="bg-red-600/10 p-6 rounded-lg border border-red-600/30">
+                          <h3 className="text-lg font-bold text-white mb-4 flex items-center gap-2">
+                            <CheckCircle className="w-5 h-5 text-red-500" />
+                            {t('products.whyUs')}
+                          </h3>
+                          <ul className="space-y-2">
+                            {tArray(`productItems.${selectedProduct}.whyUs`).map((reason, idx) => (
+                              <li key={idx} className="flex items-start gap-2 text-zinc-300">
+                                <ChevronRight className="w-4 h-4 text-red-500 mt-1 shrink-0" />
+                                <span>{reason}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      </div>
+
+                      {/* CTA */}
+                      <div className="flex flex-col sm:flex-row gap-4">
+                        <Button
+                          onClick={() => {
+                            closeProductModal();
+                            document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+                          }}
+                          className="flex-1 bg-red-600 hover:bg-red-700 text-white font-bold py-6"
+                        >
+                          {t('products.getQuote')}
+                        </Button>
+                        <Button
+                          variant="outline"
+                          className="flex-1 border-zinc-500 text-zinc-200 hover:bg-zinc-700 py-6"
+                          onClick={() => window.open('https://wa.me/905373197281', '_blank')}
+                        >
+                          {t('products.whatsappContact')}
+                        </Button>
+                      </div>
+                    </div>
+                  </>
+                );
+              })()}
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* HERO SECTION */}
       <section id="hero" className="relative h-screen flex items-center justify-center overflow-hidden">
-        {/* Background Image with Overlay */}
         <div className="absolute inset-0 z-0">
-          <img 
-            src={heroBg} 
-            alt="Industrial Factory" 
+          <video 
+            autoPlay 
+            muted 
+            loop 
+            playsInline
             className="w-full h-full object-cover"
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-slate-950/90 via-slate-950/70 to-slate-950/40" />
+            poster="/media/img1.jpeg"
+          >
+            <source src="/media/video1.mp4" type="video/mp4" />
+          </video>
+          <div className="absolute inset-0 bg-gradient-to-r from-zinc-900/90 via-zinc-900/70 to-zinc-900/40" />
         </div>
 
         <div className="container mx-auto px-6 relative z-10 pt-20">
@@ -76,118 +336,192 @@ export default function Home() {
             className="max-w-4xl"
           >
             <div className="inline-block mb-4 px-3 py-1 bg-red-600/20 border border-red-600/50 text-red-500 font-bold text-xs tracking-widest uppercase rounded-sm backdrop-blur-sm">
-              Endüstriyel Mükemmellik
+              {t('hero.badge')}
             </div>
             <h1 className="text-5xl md:text-7xl lg:text-8xl font-black text-white leading-[0.9] mb-8 tracking-tighter">
-              GÜÇLÜ <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-gray-100 to-gray-500">MÜHENDİSLİK</span> <br />
-              <span className="text-red-600">KUSURSUZ</span> GELECEK
+              {t('hero.title1')} <br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-gray-100 to-gray-500">{t('hero.title2')}</span> <br />
+              <span className="text-red-600">{t('hero.title3')}</span> {t('hero.title4')}
             </h1>
-            <p className="text-xl md:text-2xl text-slate-300 max-w-2xl mb-10 font-light leading-relaxed border-l-4 border-red-600 pl-6">
-              Burhan Topal liderliğinde; konveyör sistemlerinden tekstil makinelerine, endüstriyel geleceği inşa ediyoruz.
+            <p className="text-xl md:text-2xl text-zinc-300 max-w-2xl mb-10 font-light leading-relaxed border-l-4 border-red-600 pl-6">
+              {t('hero.description')}
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
-              <Button size="lg" className="bg-red-600 hover:bg-red-700 text-white font-bold text-lg px-8 py-6 rounded-none skew-x-[-10deg] border-2 border-red-600 hover:shadow-[0_0_30px_rgba(220,38,38,0.5)] transition-all">
-                <span className="skew-x-[10deg]">ÇÖZÜMLERİMİZ</span>
+              <Button 
+                size="lg" 
+                className="bg-red-600 hover:bg-red-700 text-white font-bold text-lg px-8 py-6 rounded-none skew-x-[-10deg] border-2 border-red-600 hover:shadow-[0_0_30px_rgba(220,38,38,0.5)] transition-all"
+                onClick={() => document.getElementById('products')?.scrollIntoView({ behavior: 'smooth' })}
+              >
+                <span className="skew-x-[10deg]">{t('hero.solutions')}</span>
               </Button>
-              <Button size="lg" variant="outline" className="border-slate-500 text-slate-200 hover:bg-slate-800 hover:text-white font-bold text-lg px-8 py-6 rounded-none skew-x-[-10deg] backdrop-blur-sm">
-                <span className="skew-x-[10deg]">PROJELERİMİZ</span>
+              <Button 
+                size="lg" 
+                variant="outline" 
+                className="border-zinc-400 text-zinc-200 hover:bg-zinc-700 hover:text-white font-bold text-lg px-8 py-6 rounded-none skew-x-[-10deg] backdrop-blur-sm"
+                onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })}
+              >
+                <span className="skew-x-[10deg]">{t('hero.projects')}</span>
               </Button>
             </div>
           </motion.div>
         </div>
 
-        {/* Scroll Indicator */}
         <motion.div 
           animate={{ y: [0, 10, 0] }}
           transition={{ repeat: Infinity, duration: 2 }}
           className="absolute bottom-10 left-1/2 -translate-x-1/2 text-white/50 flex flex-col items-center gap-2"
         >
-          <span className="text-[10px] uppercase tracking-[0.3em]">Kaydır</span>
+          <span className="text-[10px] uppercase tracking-[0.3em]">{t('hero.scroll')}</span>
           <div className="w-[1px] h-12 bg-gradient-to-b from-red-600 to-transparent"></div>
         </motion.div>
       </section>
 
-      {/* PRODUCTS SECTION */}
-      <section id="products" className="py-24 bg-slate-950 relative">
+      {/* PRODUCTS SECTION - 4 Ürün Grubu */}
+      <section id="products" className="py-24 bg-zinc-900 relative">
         <div className="container mx-auto px-6">
           <motion.div 
             {...fadeIn}
             className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6"
           >
             <div>
-              <h3 className="text-red-500 font-bold tracking-widest uppercase mb-2">Ürün Gruplarımız</h3>
-              <h2 className="text-4xl md:text-5xl font-black text-white">ÜRETİM ALANLARI</h2>
+              <h3 className="text-red-500 font-bold tracking-widest uppercase mb-2">{t('products.subtitle')}</h3>
+              <h2 className="text-4xl md:text-5xl font-black text-white">{t('products.title')}</h2>
             </div>
-            <p className="text-slate-400 max-w-md text-right md:text-left leading-relaxed">
-              Yüksek kapasiteli tesisler için özel olarak tasarlanmış, dayanıklı ve verimli endüstriyel çözümler.
+            <p className="text-zinc-400 max-w-md text-right md:text-left leading-relaxed">
+              {t('products.description')}
             </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-3 gap-8">
-            {/* Card 1 */}
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {/* Konveyör Sistemleri */}
             <motion.div 
+              id="product-card-konveyor"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.1 }}
-              className="group relative h-[500px] overflow-hidden bg-slate-900 border border-slate-800"
+              onClick={() => openProductModal('konveyor')}
+              className="group relative h-[450px] overflow-hidden bg-zinc-800 border border-zinc-700 hover:border-red-600/50 transition-colors cursor-pointer"
             >
-              <div className="absolute inset-0 bg-slate-900/20 group-hover:bg-transparent transition-colors duration-500 z-10" />
-              <img src={conveyorImg} alt="Lojistik & Taşıma" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 grayscale group-hover:grayscale-0" />
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/50 to-transparent opacity-90 z-20" />
+              <div className="absolute inset-0 bg-zinc-800/20 group-hover:bg-transparent transition-colors duration-500 z-10" />
+              <img 
+                src="/media/WhatsApp Image 2026-01-16 at 14.32.03.jpeg" 
+                alt={t('productItems.konveyor.title')} 
+                loading="lazy"
+                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 grayscale group-hover:grayscale-0" 
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-zinc-900 via-zinc-900/60 to-transparent opacity-90 z-20" />
               
-              <div className="absolute bottom-0 left-0 p-8 z-30 w-full">
-                <div className="w-12 h-1 bg-red-600 mb-4 transition-all duration-300 group-hover:w-24"></div>
-                <h3 className="text-2xl font-bold text-white mb-2 group-hover:text-red-500 transition-colors">Lojistik & Taşıma</h3>
-                <p className="text-slate-400 mb-6 line-clamp-2 group-hover:line-clamp-none transition-all">Ağır hizmet tipi konveyör bant ve yükleme sistemleri.</p>
-                <a href="#" className="inline-flex items-center text-white font-semibold text-sm uppercase tracking-wider group-hover:translate-x-2 transition-transform">
-                  Detayları İncele <ChevronRight className="ml-1 w-4 h-4 text-red-500" />
-                </a>
+              <div className="absolute bottom-0 left-0 p-6 z-30 w-full pointer-events-none">
+                <div className="flex items-center gap-2 mb-3">
+                  <Truck className="w-5 h-5 text-red-500" />
+                  <span className="text-xs text-red-400 uppercase tracking-wider font-semibold">{t('productItems.konveyor.subtitle')}</span>
+                </div>
+                <div className="w-10 h-1 bg-red-600 mb-3 transition-all duration-300 group-hover:w-16"></div>
+                <h3 className="text-xl font-bold text-white mb-2 group-hover:text-red-500 transition-colors">{t('productItems.konveyor.title')}</h3>
+                <p className="text-zinc-400 text-sm mb-4 line-clamp-2">{t('productItems.konveyor.shortDesc')}</p>
+                <span className="inline-flex items-center text-white font-semibold text-sm uppercase tracking-wider group-hover:translate-x-2 transition-transform">
+                  {t('products.viewDetails')} <ChevronRight className="ml-1 w-4 h-4 text-red-500" />
+                </span>
               </div>
             </motion.div>
 
-            {/* Card 2 */}
+            {/* Tekstil Makinaları */}
             <motion.div 
+              id="product-card-tekstil"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.2 }}
-              className="group relative h-[500px] overflow-hidden bg-slate-900 border-t-4 border-red-600"
+              onClick={() => openProductModal('tekstil')}
+              className="group relative h-[450px] overflow-hidden bg-zinc-800 border-t-4 border-red-600 cursor-pointer"
             >
-              <div className="absolute inset-0 bg-slate-900/20 group-hover:bg-transparent transition-colors duration-500 z-10" />
-              <img src={textileImg} alt="Tekstil Mekatroniği" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 grayscale group-hover:grayscale-0" />
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/50 to-transparent opacity-90 z-20" />
+              <div className="absolute inset-0 bg-zinc-800/20 group-hover:bg-transparent transition-colors duration-500 z-10" />
+              <img 
+                src="/media/WhatsApp Image 2026-01-16 at 14.32.04 (3).jpeg" 
+                alt={t('productItems.tekstil.title')} 
+                loading="lazy"
+                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 grayscale group-hover:grayscale-0" 
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-zinc-900 via-zinc-900/60 to-transparent opacity-90 z-20" />
               
-              <div className="absolute bottom-0 left-0 p-8 z-30 w-full">
-                <div className="w-12 h-1 bg-red-600 mb-4 transition-all duration-300 group-hover:w-24"></div>
-                <h3 className="text-2xl font-bold text-white mb-2 group-hover:text-red-500 transition-colors">Tekstil Mekatroniği</h3>
-                <p className="text-slate-400 mb-6 line-clamp-2 group-hover:line-clamp-none transition-all">Denim dok silindirleri ve yüksek verimli kumaş açma makineleri.</p>
-                <a href="#" className="inline-flex items-center text-white font-semibold text-sm uppercase tracking-wider group-hover:translate-x-2 transition-transform">
-                  Detayları İncele <ChevronRight className="ml-1 w-4 h-4 text-red-500" />
-                </a>
+              <div className="absolute bottom-0 left-0 p-6 z-30 w-full pointer-events-none">
+                <div className="flex items-center gap-2 mb-3">
+                  <Factory className="w-5 h-5 text-red-500" />
+                  <span className="text-xs text-red-400 uppercase tracking-wider font-semibold">{t('productItems.tekstil.subtitle')}</span>
+                </div>
+                <div className="w-10 h-1 bg-red-600 mb-3 transition-all duration-300 group-hover:w-16"></div>
+                <h3 className="text-xl font-bold text-white mb-2 group-hover:text-red-500 transition-colors">{t('productItems.tekstil.title')}</h3>
+                <p className="text-zinc-400 text-sm mb-4 line-clamp-2">{t('productItems.tekstil.shortDesc')}</p>
+                <span className="inline-flex items-center text-white font-semibold text-sm uppercase tracking-wider group-hover:translate-x-2 transition-transform">
+                  {t('products.viewDetails')} <ChevronRight className="ml-1 w-4 h-4 text-red-500" />
+                </span>
               </div>
             </motion.div>
 
-            {/* Card 3 */}
+            {/* Çelik Konstrüksiyon */}
             <motion.div 
+              id="product-card-celik"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.3 }}
-              className="group relative h-[500px] overflow-hidden bg-slate-900 border border-slate-800"
+              onClick={() => openProductModal('celik')}
+              className="group relative h-[450px] overflow-hidden bg-zinc-800 border border-zinc-700 hover:border-red-600/50 transition-colors cursor-pointer"
             >
-              <div className="absolute inset-0 bg-slate-900/20 group-hover:bg-transparent transition-colors duration-500 z-10" />
-              <img src={steelImg} alt="Çelik Konstrüksiyon" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 grayscale group-hover:grayscale-0" />
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/50 to-transparent opacity-90 z-20" />
+              <div className="absolute inset-0 bg-zinc-800/20 group-hover:bg-transparent transition-colors duration-500 z-10" />
+              <img 
+                src="/media/WhatsApp Image 2026-01-16 at 14.32.05 (3).jpeg" 
+                alt={t('productItems.celik.title')} 
+                loading="lazy"
+                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 grayscale group-hover:grayscale-0" 
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-zinc-900 via-zinc-900/60 to-transparent opacity-90 z-20" />
               
-              <div className="absolute bottom-0 left-0 p-8 z-30 w-full">
-                <div className="w-12 h-1 bg-red-600 mb-4 transition-all duration-300 group-hover:w-24"></div>
-                <h3 className="text-2xl font-bold text-white mb-2 group-hover:text-red-500 transition-colors">Çelik Konstrüksiyon</h3>
-                <p className="text-slate-400 mb-6 line-clamp-2 group-hover:line-clamp-none transition-all">Fabrika içi ağır metal yapılar ve özel şase üretimleri.</p>
-                <a href="#" className="inline-flex items-center text-white font-semibold text-sm uppercase tracking-wider group-hover:translate-x-2 transition-transform">
-                  Detayları İncele <ChevronRight className="ml-1 w-4 h-4 text-red-500" />
-                </a>
+              <div className="absolute bottom-0 left-0 p-6 z-30 w-full pointer-events-none">
+                <div className="flex items-center gap-2 mb-3">
+                  <Layers className="w-5 h-5 text-red-500" />
+                  <span className="text-xs text-red-400 uppercase tracking-wider font-semibold">{t('productItems.celik.subtitle')}</span>
+                </div>
+                <div className="w-10 h-1 bg-red-600 mb-3 transition-all duration-300 group-hover:w-16"></div>
+                <h3 className="text-xl font-bold text-white mb-2 group-hover:text-red-500 transition-colors">{t('productItems.celik.title')}</h3>
+                <p className="text-zinc-400 text-sm mb-4 line-clamp-2">{t('productItems.celik.shortDesc')}</p>
+                <span className="inline-flex items-center text-white font-semibold text-sm uppercase tracking-wider group-hover:translate-x-2 transition-transform">
+                  {t('products.viewDetails')} <ChevronRight className="ml-1 w-4 h-4 text-red-500" />
+                </span>
+              </div>
+            </motion.div>
+
+            {/* Özel Makine Tasarımı */}
+            <motion.div 
+              id="product-card-ozelMakine"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.4 }}
+              onClick={() => openProductModal('ozelMakine')}
+              className="group relative h-[450px] overflow-hidden bg-zinc-800 border border-zinc-700 hover:border-red-600/50 transition-colors cursor-pointer"
+            >
+              <div className="absolute inset-0 bg-zinc-800/20 group-hover:bg-transparent transition-colors duration-500 z-10" />
+              <img 
+                src="/media/WhatsApp Image 2026-01-16 at 14.32.06 (5).jpeg" 
+                alt={t('productItems.ozelMakine.title')} 
+                loading="lazy"
+                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 grayscale group-hover:grayscale-0" 
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-zinc-900 via-zinc-900/60 to-transparent opacity-90 z-20" />
+              
+              <div className="absolute bottom-0 left-0 p-6 z-30 w-full pointer-events-none">
+                <div className="flex items-center gap-2 mb-3">
+                  <Wrench className="w-5 h-5 text-red-500" />
+                  <span className="text-xs text-red-400 uppercase tracking-wider font-semibold">{t('productItems.ozelMakine.subtitle')}</span>
+                </div>
+                <div className="w-10 h-1 bg-red-600 mb-3 transition-all duration-300 group-hover:w-16"></div>
+                <h3 className="text-xl font-bold text-white mb-2 group-hover:text-red-500 transition-colors">{t('productItems.ozelMakine.title')}</h3>
+                <p className="text-zinc-400 text-sm mb-4 line-clamp-2">{t('productItems.ozelMakine.shortDesc')}</p>
+                <span className="inline-flex items-center text-white font-semibold text-sm uppercase tracking-wider group-hover:translate-x-2 transition-transform">
+                  {t('products.viewDetails')} <ChevronRight className="ml-1 w-4 h-4 text-red-500" />
+                </span>
               </div>
             </motion.div>
           </div>
@@ -195,16 +529,15 @@ export default function Home() {
       </section>
 
       {/* ENGINEERING / ABOUT SECTION */}
-      <section id="engineering" className="py-24 bg-slate-900 relative overflow-hidden">
-        {/* Decorative background elements */}
-        <div className="absolute top-0 right-0 w-1/3 h-full bg-slate-800/20 skew-x-12 transform translate-x-20"></div>
-        <div className="absolute bottom-0 left-0 w-64 h-64 border border-slate-700 rounded-full opacity-20 -translate-x-1/2 translate-y-1/2"></div>
+      <section id="engineering" className="py-24 bg-zinc-800 relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-1/3 h-full bg-zinc-700/20 skew-x-12 transform translate-x-20"></div>
+        <div className="absolute bottom-0 left-0 w-64 h-64 border border-zinc-600 rounded-full opacity-20 -translate-x-1/2 translate-y-1/2"></div>
         
         <div className="container mx-auto px-6 relative z-10">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <motion.div {...fadeIn}>
-              <h3 className="text-red-500 font-bold tracking-widest uppercase mb-4">Mühendislik Vizyonu</h3>
-              <h2 className="text-4xl md:text-5xl font-black text-white mb-8">ÖZEL MAKİNE TASARIMI & <br />MEKATRONİK ENTEGRASYON</h2>
+              <h3 className="text-red-500 font-bold tracking-widest uppercase mb-4">{t('engineering.subtitle')}</h3>
+              <h2 className="text-4xl md:text-5xl font-black text-white mb-8">{t('engineering.title')} <br />{t('engineering.title2')}</h2>
               
               <div className="space-y-8">
                 <div className="flex gap-4">
@@ -212,9 +545,9 @@ export default function Home() {
                     <Settings className="text-red-500" />
                   </div>
                   <div>
-                    <h4 className="text-xl font-bold text-white mb-2">Özel Tasarım Çözümler</h4>
-                    <p className="text-slate-400 leading-relaxed">
-                      İhtiyaca yönelik projelendirme ve üretim süreçlerinde tam özelleştirme. Standart dışı problemlere mühendislik çözümleri.
+                    <h4 className="text-xl font-bold text-white mb-2">{t('engineering.customDesign')}</h4>
+                    <p className="text-zinc-400 leading-relaxed">
+                      {t('engineering.customDesignDesc')}
                     </p>
                   </div>
                 </div>
@@ -224,9 +557,9 @@ export default function Home() {
                     <Cog className="text-red-500" />
                   </div>
                   <div>
-                    <h4 className="text-xl font-bold text-white mb-2">Yüksek Hassasiyet</h4>
-                    <p className="text-slate-400 leading-relaxed">
-                      Mikron seviyesinde hassasiyet gerektiren mekanik parçalar ve montaj kalitesi.
+                    <h4 className="text-xl font-bold text-white mb-2">{t('engineering.precision')}</h4>
+                    <p className="text-zinc-400 leading-relaxed">
+                      {t('engineering.precisionDesc')}
                     </p>
                   </div>
                 </div>
@@ -236,9 +569,9 @@ export default function Home() {
                     <PenTool className="text-red-500" />
                   </div>
                   <div>
-                    <h4 className="text-xl font-bold text-white mb-2">Anahtar Teslim Projeler</h4>
-                    <p className="text-slate-400 leading-relaxed">
-                      Tasarım aşamasından montaj ve devreye almaya kadar uçtan uca proje yönetimi.
+                    <h4 className="text-xl font-bold text-white mb-2">{t('engineering.turnkey')}</h4>
+                    <p className="text-zinc-400 leading-relaxed">
+                      {t('engineering.turnkeyDesc')}
                     </p>
                   </div>
                 </div>
@@ -252,12 +585,12 @@ export default function Home() {
                  transition={{ duration: 0.5 }}
                  className="space-y-4 mt-8"
                >
-                 <div className="bg-slate-800 p-2 rounded-lg border border-slate-700">
-                    <img src={siteImg1} alt="Engineering Site" className="w-full h-48 object-cover rounded shadow-lg opacity-80 hover:opacity-100 transition-opacity" />
+                 <div className="bg-zinc-700 p-2 rounded-lg border border-zinc-600">
+                    <img src="/media/WhatsApp Image 2026-01-16 at 14.32.07 (3).jpeg" alt="Engineering Site" className="w-full h-48 object-cover rounded shadow-lg opacity-80 hover:opacity-100 transition-opacity" />
                  </div>
-                 <div className="bg-slate-800 p-4 rounded-lg border border-slate-700 text-center">
+                 <div className="bg-zinc-700 p-4 rounded-lg border border-zinc-600 text-center">
                     <span className="block text-3xl font-black text-white">15+</span>
-                    <span className="text-xs uppercase tracking-wider text-slate-400">Yıllık Tecrübe</span>
+                    <span className="text-xs uppercase tracking-wider text-zinc-400">{t('engineering.experience')}</span>
                  </div>
                </motion.div>
                <motion.div 
@@ -268,10 +601,10 @@ export default function Home() {
                >
                  <div className="bg-red-600 p-4 rounded-lg text-center shadow-[0_0_30px_rgba(220,38,38,0.3)]">
                     <span className="block text-3xl font-black text-white">200+</span>
-                    <span className="text-xs uppercase tracking-wider text-white/80">Tamamlanan Proje</span>
+                    <span className="text-xs uppercase tracking-wider text-white/80">{t('engineering.completedProjects')}</span>
                  </div>
-                 <div className="bg-slate-800 p-2 rounded-lg border border-slate-700">
-                    <img src={automationImg} alt="Automation Detail" className="w-full h-64 object-cover rounded shadow-lg opacity-80 hover:opacity-100 transition-opacity" />
+                 <div className="bg-zinc-700 p-2 rounded-lg border border-zinc-600">
+                    <img src="/media/WhatsApp Image 2026-01-16 at 14.32.08.jpeg" alt="Automation Detail" className="w-full h-64 object-cover rounded shadow-lg opacity-80 hover:opacity-100 transition-opacity" />
                  </div>
                </motion.div>
             </div>
@@ -279,23 +612,101 @@ export default function Home() {
         </div>
       </section>
 
+      {/* PROJECTS / GALLERY SECTION */}
+      <section id="projects" className="py-24 bg-zinc-900">
+        <div className="container mx-auto px-6">
+          <motion.div 
+            {...fadeIn}
+            className="text-center mb-16"
+          >
+            <h3 className="text-red-500 font-bold tracking-widest uppercase mb-2">{t('projectsSection.subtitle')}</h3>
+            <h2 className="text-4xl md:text-5xl font-black text-white">{t('projectsSection.title')}</h2>
+          </motion.div>
+
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+            {[
+              "WhatsApp Image 2026-01-16 at 14.32.03 (3).jpeg",
+              "WhatsApp Image 2026-01-16 at 14.32.03 (4).jpeg",
+              "WhatsApp Image 2026-01-16 at 14.32.04 (1).jpeg",
+              "WhatsApp Image 2026-01-16 at 14.32.04 (2).jpeg",
+              "WhatsApp Image 2026-01-16 at 14.32.05 (1).jpeg",
+              "WhatsApp Image 2026-01-16 at 14.32.05 (2).jpeg",
+              "WhatsApp Image 2026-01-16 at 14.32.06 (2).jpeg",
+              "WhatsApp Image 2026-01-16 at 14.32.06 (3).jpeg",
+              "WhatsApp Image 2026-01-16 at 14.32.06 (4).jpeg",
+              "WhatsApp Image 2026-01-16 at 14.32.07 (4).jpeg",
+              "WhatsApp Image 2026-01-16 at 14.32.07 (5).jpeg",
+              "WhatsApp Image 2026-01-16 at 14.32.08 (1).jpeg",
+            ].map((img, index) => (
+              <motion.div
+                key={img}
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.05 }}
+                className="group relative aspect-square overflow-hidden bg-zinc-800 border border-zinc-700"
+              >
+                <img 
+                  src={`/media/${img}`} 
+                  alt="ABT Mekatronik Proje" 
+                  loading="lazy"
+                  className="w-full h-full object-cover transition-all duration-500 group-hover:scale-110 grayscale-[30%] group-hover:grayscale-0"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-zinc-900/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              </motion.div>
+            ))}
+          </div>
+
+          {/* Video Showcase */}
+          <motion.div 
+            {...fadeIn}
+            className="mt-16"
+          >
+            <h3 className="text-2xl font-bold text-white mb-8 text-center">{t('projectsSection.videoGallery')}</h3>
+            <div className="grid md:grid-cols-2 gap-6">
+              {[
+                "WhatsApp Video 2026-01-16 at 14.32.04.mp4",
+                "WhatsApp Video 2026-01-16 at 14.32.05.mp4",
+                "WhatsApp Video 2026-01-16 at 14.32.07.mp4",
+                "WhatsApp Video 2026-01-16 at 14.32.08.mp4",
+              ].map((video, idx) => (
+                <div key={video} className="relative aspect-video bg-zinc-800 border border-zinc-700 rounded-lg overflow-hidden group">
+                  <video 
+                    className="w-full h-full object-cover"
+                    controls
+                    muted
+                    preload="metadata"
+                    poster={`/media/WhatsApp Image 2026-01-16 at 14.32.0${4 + idx}.jpeg`}
+                  >
+                    <source src={`/media/${video}`} type="video/mp4" />
+                  </video>
+                </div>
+              ))}
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
       {/* CONTACT SECTION */}
-      <section id="contact" className="py-24 bg-slate-950">
+      <section id="contact" className="py-24 bg-zinc-900">
         <div className="container mx-auto px-6">
           <div className="grid lg:grid-cols-2 gap-16">
             <motion.div {...fadeIn}>
-              <h3 className="text-red-500 font-bold tracking-widest uppercase mb-4">Bize Ulaşın</h3>
-              <h2 className="text-4xl md:text-5xl font-black text-white mb-8">PROJENİZİ <br />BİRLİKTE TASARLAYALIM</h2>
-              <p className="text-slate-400 mb-8 max-w-lg">
-                Endüstriyel ihtiyaçlarınız için profesyonel çözümler sunuyoruz. Teklif almak veya detaylı bilgi için formu doldurun.
+              <h3 className="text-red-500 font-bold tracking-widest uppercase mb-4">{t('contact.subtitle')}</h3>
+              <h2 className="text-4xl md:text-5xl font-black text-white mb-8">{t('contact.title')} <br />{t('contact.title2')}</h2>
+              <p className="text-zinc-400 mb-8 max-w-lg">
+                {t('contact.description')}
               </p>
               
-              <div className="bg-slate-900 border border-slate-800 p-8 rounded-lg relative overflow-hidden">
+              <div className="bg-zinc-800 border border-zinc-700 p-8 rounded-lg relative overflow-hidden">
                 <div className="absolute top-0 right-0 w-24 h-24 bg-red-600/10 rounded-bl-full -mr-4 -mt-4"></div>
                 <div className="relative z-10">
-                    <h4 className="text-xl font-bold text-white mb-4">WhatsApp Destek Hattı</h4>
-                    <Button className="bg-[#25D366] hover:bg-[#20bd5a] text-white w-full py-6 font-bold text-lg">
-                        WhatsApp ile Hızlı İletişim
+                    <h4 className="text-xl font-bold text-white mb-4">{t('contact.whatsappTitle')}</h4>
+                    <Button 
+                      className="bg-[#25D366] hover:bg-[#20bd5a] text-white w-full py-6 font-bold text-lg"
+                      onClick={() => window.open('https://wa.me/905373197281', '_blank')}
+                    >
+                        {t('contact.whatsappButton')}
                     </Button>
                 </div>
               </div>
@@ -306,9 +717,9 @@ export default function Home() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
-              className="bg-slate-900 p-8 md:p-10 border border-slate-800 shadow-2xl"
+              className="bg-zinc-800 p-8 md:p-10 border border-zinc-700 shadow-2xl"
             >
-              <h3 className="text-2xl font-bold text-white mb-6 border-b border-slate-800 pb-4">Teklif Formu</h3>
+              <h3 className="text-2xl font-bold text-white mb-6 border-b border-zinc-700 pb-4">{t('contact.formTitle')}</h3>
               <Form {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
                   <FormField
@@ -316,9 +727,15 @@ export default function Home() {
                     name="name"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="text-slate-400">Ad Soyad</FormLabel>
+                        <FormLabel className="text-zinc-400">{t('contact.name')}</FormLabel>
                         <FormControl>
-                          <Input placeholder="Adınız Soyadınız" {...field} className="bg-slate-950 border-slate-800 focus:border-red-600 h-12" />
+                          <Input 
+                            placeholder={t('contact.namePlaceholder')} 
+                            {...field} 
+                            className="bg-zinc-900 border-zinc-700 focus:border-red-600 h-12"
+                            maxLength={100}
+                            autoComplete="name"
+                          />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -329,9 +746,16 @@ export default function Home() {
                     name="email"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="text-slate-400">E-Posta</FormLabel>
+                        <FormLabel className="text-zinc-400">{t('contact.email')}</FormLabel>
                         <FormControl>
-                          <Input placeholder="ornek@sirket.com" {...field} className="bg-slate-950 border-slate-800 focus:border-red-600 h-12" />
+                          <Input 
+                            placeholder={t('contact.emailPlaceholder')} 
+                            type="email"
+                            {...field} 
+                            className="bg-zinc-900 border-zinc-700 focus:border-red-600 h-12"
+                            maxLength={254}
+                            autoComplete="email"
+                          />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -342,16 +766,25 @@ export default function Home() {
                     name="message"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="text-slate-400">Mesajınız</FormLabel>
+                        <FormLabel className="text-zinc-400">{t('contact.message')}</FormLabel>
                         <FormControl>
-                          <Textarea placeholder="Proje detayları veya talebiniz..." {...field} className="bg-slate-950 border-slate-800 focus:border-red-600 min-h-[120px]" />
+                          <Textarea 
+                            placeholder={t('contact.messagePlaceholder')} 
+                            {...field} 
+                            className="bg-zinc-900 border-zinc-700 focus:border-red-600 min-h-[120px]"
+                            maxLength={2000}
+                          />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
                     )}
                   />
-                  <Button type="submit" className="w-full bg-red-600 hover:bg-red-700 text-white font-bold h-12 uppercase tracking-wide">
-                    GÖNDER
+                  <Button 
+                    type="submit" 
+                    className="w-full bg-red-600 hover:bg-red-700 text-white font-bold h-12 uppercase tracking-wide disabled:opacity-50 disabled:cursor-not-allowed"
+                    disabled={isSubmitting}
+                  >
+                    {isSubmitting ? t('contact.submitting') : t('contact.submit')}
                   </Button>
                 </form>
               </Form>
@@ -360,7 +793,26 @@ export default function Home() {
         </div>
       </section>
 
-      <Footer />
+      {/* TESTIMONIALS SECTION */}
+      <section id="testimonials">
+        <Testimonials />
+      </section>
+
+      {/* CERTIFICATIONS SECTION */}
+      <Certifications />
+
+      {/* FAQ SECTION */}
+      <section id="faq">
+        <FAQ />
+      </section>
+
+      {/* NEWSLETTER SECTION */}
+      <Newsletter />
+
+      {/* CLIENT LOGOS SECTION */}
+      <ClientLogos />
+
+      <Footer onOpenProduct={openProductModal} />
     </div>
   );
 }

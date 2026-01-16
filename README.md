@@ -1,6 +1,6 @@
 # 🏭 ABT MEKATRONİK - Endüstriyel Mühendislik Web Sitesi
 
-![ABT Mekatronik](./screenshots/hero.png)
+![ABT Mekatronik](./screenshots/loading.png)
 
 **Burhan Topal İnşaat Mekatronik** şirketinin modern, responsive ve çok dilli kurumsal web sitesi.
 
@@ -10,11 +10,16 @@
 
 ## 📸 Ekran Görüntüleri
 
-### Ana Sayfa - Loading Screen
+### Loading Screen
 ![Loading Screen](./screenshots/loading.png)
+
+### Ana Sayfa - Hero
+![Hero](./screenshots/hero.png)
 
 ### Projeler Galerisi
 ![Projeler](./screenshots/projects.png)
+
+![Projeler 2](./screenshots/projects2.png)
 
 ### İletişim Formu
 ![İletişim](./screenshots/contact.png)
@@ -22,8 +27,11 @@
 ### SSS (FAQ) Bölümü
 ![SSS](./screenshots/faq.png)
 
-### Referanslar & Sertifikalar
+### Referanslar
 ![Referanslar](./screenshots/testimonials.png)
+
+### Sertifikalar
+![Sertifikalar](./screenshots/certifications.png)
 
 ## ✨ Özellikler
 

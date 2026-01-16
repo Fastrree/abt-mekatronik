@@ -131,13 +131,13 @@ export function Navbar({ onOpenProduct }: NavbarProps) {
           </button>
         </div>
 
-        {/* Desktop Nav */}
-        <div className="hidden md:flex items-center space-x-8">
-          {navLinks.map((link) => (
+        {/* Desktop Nav - Only main links */}
+        <div className="hidden lg:flex items-center space-x-6">
+          {navLinks.slice(0, 5).map((link) => (
             <a
               key={link.name}
               href={link.href}
-              className="text-sm font-semibold uppercase tracking-wider text-zinc-300 hover:text-primary transition-colors relative group"
+              className="text-xs font-semibold uppercase tracking-wider text-zinc-300 hover:text-primary transition-colors relative group whitespace-nowrap"
             >
               {link.name}
               <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all group-hover:w-full"></span>
@@ -145,7 +145,7 @@ export function Navbar({ onOpenProduct }: NavbarProps) {
           ))}
           <LanguageSelector />
           <a href="#contact">
-            <Button variant="default" className="bg-primary hover:bg-primary/90 text-white font-bold rounded-none skew-x-[-10deg]">
+            <Button variant="default" className="bg-primary hover:bg-primary/90 text-white font-bold rounded-none skew-x-[-10deg] text-sm px-4 py-2">
               <span className="skew-x-[10deg]">{t('products.getQuote')}</span>
             </Button>
           </a>
@@ -153,8 +153,9 @@ export function Navbar({ onOpenProduct }: NavbarProps) {
 
         {/* Mobile Toggle */}
         <button
-          className="md:hidden text-white"
+          className="lg:hidden text-white p-2"
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          aria-label="Menu"
         >
           {isMobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
         </button>
@@ -162,7 +163,7 @@ export function Navbar({ onOpenProduct }: NavbarProps) {
 
       {/* Mobile Menu */}
       {isMobileMenuOpen && (
-        <div className="md:hidden absolute top-full left-0 right-0 bg-zinc-900 border-b border-zinc-700 p-6 animate-in slide-in-from-top-5">
+        <div className="lg:hidden absolute top-full left-0 right-0 bg-zinc-900 border-b border-zinc-700 p-6 animate-in slide-in-from-top-5">
           <div className="flex flex-col space-y-2">
             <div className="text-xs font-semibold text-zinc-400 uppercase tracking-wider py-2">
               {t('footer.productGroups')}

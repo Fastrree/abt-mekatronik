@@ -99,3 +99,68 @@
     background: linear-gradient(135deg, #3f3f46 0%, #52525b 25%, #3f3f46 50%, #52525b 75%, #3f3f46 100%);
   }
 }
+
+/* Mobile Touch Optimization */
+@layer base {
+  /* Ensure touch targets are at least 44px */
+  button, a, [role="button"] {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  /* Remove tap highlight on mobile */
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
+  
+  /* Smooth scrolling */
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  /* Touch-friendly hover states */
+  @media (hover: none) {
+    .group:active .group-hover\:scale-110 {
+      transform: scale(1.05);
+    }
+    .group:active .group-hover\:grayscale-0 {
+      filter: grayscale(0);
+    }
+    .group:active .group-hover\:text-red-500 {
+      color: rgb(239 68 68);
+    }
+    .group:active .group-hover\:w-16 {
+      width: 4rem;
+    }
+  }
+  
+  /* Prevent text selection on buttons */
+  button {
+    user-select: none;
+    -webkit-user-select: none;
+  }
+  
+  /* Better touch scrolling */
+  .overflow-y-auto, .overflow-x-auto {
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+/* Mobile-specific adjustments */
+@media (max-width: 768px) {
+  /* Smaller nav text on mobile */
+  nav a {
+    font-size: 0.75rem;
+  }
+  
+  /* Better spacing for mobile cards */
+  .grid {
+    gap: 1rem;
+  }
+  
+  /* Ensure modals are scrollable */
+  .fixed.inset-0 {
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+}

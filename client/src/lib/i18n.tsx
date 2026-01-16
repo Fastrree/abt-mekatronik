@@ -139,7 +139,7 @@ const tr = {
     projects: 'Projeler',
     contact: 'İletişim',
     quickAccess: 'Hızlı Erişim',
-    selectLanguage: 'Dil Seçin',
+    selectLanguage: 'Dil',
     faq: 'SSS',
     testimonials: 'Referanslar',
     partners: 'Ortaklarımız',
@@ -431,7 +431,7 @@ const en = {
     projects: 'Projects',
     contact: 'Contact',
     quickAccess: 'Quick Access',
-    selectLanguage: 'Select Language',
+    selectLanguage: 'Language',
     faq: 'FAQ',
     testimonials: 'Testimonials',
     partners: 'Partners',
@@ -723,7 +723,7 @@ const de = {
     projects: 'Projekte',
     contact: 'Kontakt',
     quickAccess: 'Schnellzugriff',
-    selectLanguage: 'Sprache wählen',
+    selectLanguage: 'Sprache',
     faq: 'FAQ',
     testimonials: 'Referenzen',
     partners: 'Partner',
@@ -959,7 +959,7 @@ Löst spezielle Produktionsanforderungen, die auf dem Markt nicht verfügbar sin
 
 
 const fr = {
-  nav: { home: 'Accueil', products: 'Produits', engineering: 'Ingénierie', projects: 'Projets', contact: 'Contact', quickAccess: 'Accès rapide', selectLanguage: 'Choisir la langue', faq: 'FAQ', testimonials: 'Témoignages', partners: 'Partenaires' },
+  nav: { home: 'Accueil', products: 'Produits', engineering: 'Ingénierie', projects: 'Projets', contact: 'Contact', quickAccess: 'Accès rapide', selectLanguage: 'Langue', faq: 'FAQ', testimonials: 'Avis', partners: 'Partenaires' },
   hero: {
     badge: 'Excellence Industrielle',
     title1: 'INGÉNIERIE',
@@ -1174,7 +1174,7 @@ Résout les besoins de production spéciaux non disponibles sur le marché.
 
 
 const es = {
-  nav: { home: 'Inicio', products: 'Productos', engineering: 'Ingeniería', projects: 'Proyectos', contact: 'Contacto', quickAccess: 'Acceso Rápido', selectLanguage: 'Seleccionar Idioma', faq: 'FAQ', testimonials: 'Testimonios', partners: 'Socios' },
+  nav: { home: 'Inicio', products: 'Productos', engineering: 'Ingeniería', projects: 'Proyectos', contact: 'Contacto', quickAccess: 'Acceso Rápido', selectLanguage: 'Idioma', faq: 'FAQ', testimonials: 'Referencias', partners: 'Socios' },
   hero: {
     badge: 'Excelencia Industrial',
     title1: 'INGENIERÍA',

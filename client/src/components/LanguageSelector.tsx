@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useI18n, languages, Language } from '@/lib/i18n';
-import { ChevronDown, Globe } from 'lucide-react';
+import { ChevronDown } from 'lucide-react';
 
 export function LanguageSelector() {
   const { language, setLanguage, t } = useI18n();
@@ -15,14 +15,14 @@ export function LanguageSelector() {
 
   return (
     <div className="relative">
-      {/* Desktop: Full style with Globe icon and language name */}
+      {/* Desktop: Full style with flag and language name */}
       <button
         onClick={() => setIsOpen(!isOpen)}
         className="hidden lg:flex items-center gap-2 px-3 py-2 bg-zinc-800 border border-zinc-700 rounded-lg hover:border-red-600/50 transition-colors"
         aria-label={t('nav.selectLanguage')}
       >
-        <Globe size={16} className="text-zinc-400" />
-        <span className="text-sm font-medium">{currentLang?.flag} {currentLang?.code.toUpperCase()}</span>
+        <span className="text-lg">{currentLang?.flag}</span>
+        <span className="text-sm font-medium">{currentLang?.code.toUpperCase()}</span>
         <ChevronDown size={14} className={`text-zinc-400 transition-transform ${isOpen ? 'rotate-180' : ''}`} />
       </button>
 

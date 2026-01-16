@@ -54,6 +54,7 @@ export function Footer({ onOpenProduct }: FooterProps) {
               <li><a href="#projects" className="hover:text-primary transition-colors">{t('nav.projects')}</a></li>
               <li><a href="#testimonials" className="hover:text-primary transition-colors">{t('nav.testimonials')}</a></li>
               <li><a href="#faq" className="hover:text-primary transition-colors">{t('nav.faq')}</a></li>
+              <li><a href="#partners" className="hover:text-primary transition-colors">{t('nav.partners')}</a></li>
               <li><a href="#contact" className="hover:text-primary transition-colors">{t('nav.contact')}</a></li>
             </ul>
           </div>

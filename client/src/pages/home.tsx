@@ -809,8 +809,10 @@ export default function Home() {
       {/* NEWSLETTER SECTION */}
       <Newsletter />
 
-      {/* CLIENT LOGOS SECTION */}
-      <ClientLogos />
+      {/* CLIENT LOGOS / PARTNERS SECTION */}
+      <section id="partners">
+        <ClientLogos />
+      </section>
 
       <Footer onOpenProduct={openProductModal} />
     </div>

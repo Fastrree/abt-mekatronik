@@ -36,6 +36,7 @@ export function Navbar({ onOpenProduct }: NavbarProps) {
     { name: t('nav.contact'), href: "#contact" },
     { name: t('nav.faq'), href: "#faq" },
     { name: t('nav.testimonials'), href: "#testimonials" },
+    { name: t('nav.partners'), href: "#partners" },
   ];
 
   const productLinks: { name: string; key: ProductKey; icon: typeof Truck }[] = [

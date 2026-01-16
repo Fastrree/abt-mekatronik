@@ -142,6 +142,7 @@ const tr = {
     selectLanguage: 'Dil Seçin',
     faq: 'SSS',
     testimonials: 'Referanslar',
+    partners: 'Ortaklarımız',
   },
   hero: {
     badge: 'Endüstriyel Mükemmellik',
@@ -433,6 +434,7 @@ const en = {
     selectLanguage: 'Select Language',
     faq: 'FAQ',
     testimonials: 'Testimonials',
+    partners: 'Partners',
   },
   hero: {
     badge: 'Industrial Excellence',
@@ -724,6 +726,7 @@ const de = {
     selectLanguage: 'Sprache wählen',
     faq: 'FAQ',
     testimonials: 'Referenzen',
+    partners: 'Partner',
   },
   hero: {
     badge: 'Industrielle Exzellenz',
@@ -956,7 +959,7 @@ Löst spezielle Produktionsanforderungen, die auf dem Markt nicht verfügbar sin
 
 
 const fr = {
-  nav: { home: 'Accueil', products: 'Produits', engineering: 'Ingénierie', projects: 'Projets', contact: 'Contact', quickAccess: 'Accès rapide', selectLanguage: 'Choisir la langue', faq: 'FAQ', testimonials: 'Témoignages' },
+  nav: { home: 'Accueil', products: 'Produits', engineering: 'Ingénierie', projects: 'Projets', contact: 'Contact', quickAccess: 'Accès rapide', selectLanguage: 'Choisir la langue', faq: 'FAQ', testimonials: 'Témoignages', partners: 'Partenaires' },
   hero: {
     badge: 'Excellence Industrielle',
     title1: 'INGÉNIERIE',
@@ -1171,7 +1174,7 @@ Résout les besoins de production spéciaux non disponibles sur le marché.
 
 
 const es = {
-  nav: { home: 'Inicio', products: 'Productos', engineering: 'Ingeniería', projects: 'Proyectos', contact: 'Contacto', quickAccess: 'Acceso Rápido', selectLanguage: 'Seleccionar Idioma', faq: 'FAQ', testimonials: 'Testimonios' },
+  nav: { home: 'Inicio', products: 'Productos', engineering: 'Ingeniería', projects: 'Proyectos', contact: 'Contacto', quickAccess: 'Acceso Rápido', selectLanguage: 'Seleccionar Idioma', faq: 'FAQ', testimonials: 'Testimonios', partners: 'Socios' },
   hero: {
     badge: 'Excelencia Industrial',
     title1: 'INGENIERÍA',

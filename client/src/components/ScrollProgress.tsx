@@ -11,9 +11,20 @@ export function ScrollProgress() {
       setProgress(scrollPercent);
     };
 
+    // Initial calculation
+    updateProgress();
+
     window.addEventListener('scroll', updateProgress);
-    return () => window.removeEventListener('scroll', updateProgress);
+    window.addEventListener('resize', updateProgress);
+    
+    return () => {
+      window.removeEventListener('scroll', updateProgress);
+      window.removeEventListener('resize', updateProgress);
+    };
   }, []);
+
+  // Don't show bar if at top (0%)
+  if (progress < 0.5) return null;
 
   return (
     <div className="fixed top-0 left-0 right-0 z-[60] h-1 bg-zinc-800">

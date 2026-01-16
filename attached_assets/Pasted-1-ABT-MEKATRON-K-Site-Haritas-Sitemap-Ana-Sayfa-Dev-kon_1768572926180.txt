@@ -1,0 +1,105 @@
+1. ABT MEKATRONİK Site Haritası (Sitemap)
+Ana Sayfa: Dev konveyör görseliyle açılış, öne çıkan 3 ürün kategorisi ve Burhan Topal'ın vizyon mottosu.
+
+Kurumsal: Hakkımızda, Vizyon & Misyon, Burhan Topal (Kurucu Mesajı).
+
+Ürünler (Kategorize Edilmiş):
+
+Taşıma & Lojistik: Konveyör Bantlar, Yükleme Bantları.
+
+Tekstil Makinaları: Kumaş Açma Makinesi, Denim Dok Silindirleri.
+
+Çelik Yapılar: Endüstriyel Çelik Kondisyon, Özel Makine Şaseleri.
+
+Proje Galerisi: Gerçek saha fotoğrafları (yolladığın o çelik yapı inşaatı gibi).
+
+İletişim: Form, Google Harita, WhatsApp hızlı erişim.
+
+2. Replit İçin Başlangıç Kodu (HTML & CSS)
+Aşağıdaki kodu Replit'te bir index.html dosyasına yapıştırarak Burhan Bey'e gösterebileceğin profesyonel, "dark mode" ağırlıklı ağır sanayi temasını görebilirsin.
+
+HTML
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ABT MEKATRONİK | Endüstriyel Çözümler</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .hero-bg {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), 
+                        url('https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 font-sans">
+
+    <nav class="bg-slate-900 text-white p-4 sticky top-0 z-50 shadow-xl">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-2xl font-bold tracking-tighter">ABT <span class="text-red-600">MEKATRONİK</span></h1>
+            <div class="space-x-6 hidden md:block uppercase text-sm font-semibold">
+                <a href="#" class="hover:text-red-500 transition">Ana Sayfa</a>
+                <a href="#" class="hover:text-red-500 transition">Ürünler</a>
+                <a href="#" class="hover:text-red-500 transition">Projeler</a>
+                <a href="#" class="hover:text-red-500 transition">İletişim</a>
+            </div>
+        </div>
+    </nav>
+
+    <header class="hero-bg h-[70vh] flex items-center justify-center text-center text-white px-4">
+        <div>
+            <h2 class="text-5xl md:text-6xl font-extrabold mb-4">GÜÇLÜ MÜHENDİSLİK,<br>KUSURSUZ MEKATRONİK</h2>
+            <p class="text-xl text-gray-300 max-w-2xl mx-auto mb-8">Burhan Topal liderliğinde; konveyör sistemlerinden tekstil makinelerine, endüstriyel geleceği inşa ediyoruz.</p>
+            <button class="bg-red-600 hover:bg-red-700 text-white px-8 py-3 rounded-full font-bold transition">ÇÖZÜMLERİMİZİ İNCELEYİN</button>
+        </div>
+    </header>
+
+    <section class="py-20 container mx-auto px-4">
+        <div class="text-center mb-16">
+            <h3 class="text-3xl font-bold text-slate-800">ÜRETİM ALANLARIMIZ</h3>
+            <div class="w-24 h-1 bg-red-600 mx-auto mt-4"></div>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-8">
+            <div class="bg-white rounded-lg shadow-lg overflow-hidden hover:-translate-y-2 transition duration-300">
+                <div class="h-48 bg-gray-300 flex items-center justify-center text-gray-500 text-xs italic">Konveyör Fotoğrafı Buraya</div>
+                <div class="p-6">
+                    <h4 class="font-bold text-xl mb-2 italic">Lojistik & Taşıma</h4>
+                    <p class="text-gray-600 text-sm">Ağır hizmet tipi konveyör bant ve yükleme sistemleri.</p>
+                </div>
+            </div>
+            <div class="bg-white rounded-lg shadow-lg overflow-hidden hover:-translate-y-2 transition duration-300 border-b-4 border-red-600">
+                <div class="h-48 bg-gray-300 flex items-center justify-center text-gray-500 text-xs italic">Tekstil Makinası Fotoğrafı Buraya</div>
+                <div class="p-6">
+                    <h4 class="font-bold text-xl mb-2 italic">Tekstil Mekatroniği</h4>
+                    <p class="text-gray-600 text-sm">Denim dok silindirleri ve yüksek verimli kumaş açma makineleri.</p>
+                </div>
+            </div>
+            <div class="bg-white rounded-lg shadow-lg overflow-hidden hover:-translate-y-2 transition duration-300">
+                <div class="h-48 bg-gray-300 flex items-center justify-center text-gray-500 text-xs italic">Çelik Yapı Fotoğrafı Buraya</div>
+                <div class="p-6">
+                    <h4 class="font-bold text-xl mb-2 italic">Çelik Konstrüksiyon</h4>
+                    <p class="text-gray-600 text-sm">Fabrika içi ağır metal yapılar ve özel şase üretimleri.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-slate-900 text-gray-400 py-10 border-t border-gray-800">
+        <div class="container mx-auto px-4 text-center">
+            <p class="text-white font-bold mb-2 uppercase">ABT MEKATRONİK SAN. TİC. LTD. ŞTİ.</p>
+            <p>© 2026 - Mühendislik ile Şekillenen Gelecek</p>
+        </div>
+    </footer>
+
+</body>
+</html>
+Burhan Bey'e Bunu Sunarken Şunları Söyleyebilirsin:
+"Kurumsal Renkler:" Sitede kullandığın koyu tonlar ciddiyeti, kırmızı ise dinamizmi temsil ediyor.
+
+"Ürün Odaklılık:" Tekstil ve Ağır Sanayi (Konveyör/Çelik) olarak iki ana damara ayırdık, böylece her iki müşteri kitlesi de aradığını hemen bulacak.
+
+"Mobil Uyum:" Sitenin telefonlarda da kusursuz görüneceğini (Responsive) belirtebilirsin.

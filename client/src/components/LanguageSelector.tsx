@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useI18n, languages, Language } from '@/lib/i18n';
+import { useI18n, languages, Language, getFlagSrc } from '@/lib/i18n';
 import { ChevronDown } from 'lucide-react';
 
 export function LanguageSelector() {
@@ -21,7 +21,7 @@ export function LanguageSelector() {
         className="hidden lg:flex items-center gap-2 px-3 py-2 bg-zinc-800 border border-zinc-700 rounded-lg hover:border-red-600/50 transition-colors"
         aria-label={t('nav.selectLanguage')}
       >
-        <span className="text-lg">{currentLang?.flag}</span>
+        <img src={getFlagSrc(language)} alt={currentLang?.name} className="w-5 h-4 object-cover rounded-sm" />
         <span className="text-sm font-medium">{currentLang?.code.toUpperCase()}</span>
         <ChevronDown size={14} className={`text-zinc-400 transition-transform ${isOpen ? 'rotate-180' : ''}`} />
       </button>
@@ -32,7 +32,7 @@ export function LanguageSelector() {
         className="lg:hidden flex items-center gap-1 px-2 py-1.5 bg-zinc-800/80 border border-zinc-700 rounded hover:border-red-600/50 transition-colors"
         aria-label={t('nav.selectLanguage')}
       >
-        <span className="text-sm">{currentLang?.flag}</span>
+        <img src={getFlagSrc(language)} alt={currentLang?.name} className="w-5 h-3.5 object-cover rounded-sm" />
         <ChevronDown size={12} className={`text-zinc-400 transition-transform ${isOpen ? 'rotate-180' : ''}`} />
       </button>
 
@@ -48,7 +48,7 @@ export function LanguageSelector() {
                   language === lang.code ? 'bg-red-600/20 text-red-400' : 'text-zinc-300'
                 }`}
               >
-                <span className="text-lg">{lang.flag}</span>
+                <img src={getFlagSrc(lang.code)} alt={lang.name} className="w-6 h-4 object-cover rounded-sm" />
                 <span className="text-sm font-medium">{lang.name}</span>
               </button>
             ))}

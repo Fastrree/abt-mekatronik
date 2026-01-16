@@ -2,6 +2,15 @@ import { createContext, useContext, useState, ReactNode, useEffect } from 'react
 
 export type Language = 'tr' | 'en' | 'de' | 'fr' | 'es';
 
+// Flag images as small inline SVGs for Windows compatibility
+const flagSvgs: Record<Language, string> = {
+  tr: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800"><rect fill="#E30A17" width="1200" height="800"/><circle fill="#fff" cx="425" cy="400" r="200"/><circle fill="#E30A17" cx="475" cy="400" r="160"/><polygon fill="#fff" points="583,400 764,458 656,340 656,460 764,342"/></svg>`,
+  en: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 30"><clipPath id="a"><path d="M0 0v30h60V0z"/></clipPath><clipPath id="b"><path d="M30 15h30v15zv15H0zH0V0zV0h30z"/></clipPath><g clip-path="url(#a)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" clip-path="url(#b)" stroke="#C8102E" stroke-width="4"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#C8102E" stroke-width="6"/></g></svg>`,
+  de: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 5 3"><rect fill="#000" width="5" height="3"/><rect fill="#D00" y="1" width="5" height="2"/><rect fill="#FFCE00" y="2" width="5" height="1"/></svg>`,
+  fr: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3 2"><rect fill="#002395" width="1" height="2"/><rect fill="#fff" x="1" width="1" height="2"/><rect fill="#ED2939" x="2" width="1" height="2"/></svg>`,
+  es: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 750 500"><rect fill="#c60b1e" width="750" height="500"/><rect fill="#ffc400" y="125" width="750" height="250"/></svg>`,
+};
+
 export const languages: { code: Language; name: string; flag: string }[] = [
   { code: 'tr', name: 'Türkçe', flag: '🇹🇷' },
   { code: 'en', name: 'English', flag: '🇬🇧' },
@@ -9,6 +18,11 @@ export const languages: { code: Language; name: string; flag: string }[] = [
   { code: 'fr', name: 'Français', flag: '🇫🇷' },
   { code: 'es', name: 'Español', flag: '🇪🇸' },
 ];
+
+// Get flag as data URL for img src
+export const getFlagSrc = (code: Language): string => {
+  return `data:image/svg+xml,${encodeURIComponent(flagSvgs[code])}`;
+};
 
 // SEO Meta data for each language
 const seoMeta: Record<Language, { title: string; description: string; keywords: string; ogTitle: string; ogDescription: string }> = {

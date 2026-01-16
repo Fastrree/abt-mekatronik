@@ -151,14 +151,17 @@ export function Navbar({ onOpenProduct }: NavbarProps) {
           </a>
         </div>
 
-        {/* Mobile Toggle */}
-        <button
-          className="lg:hidden text-white p-2"
-          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          aria-label="Menu"
-        >
-          {isMobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
-        </button>
+        {/* Mobile: Language Selector + Menu Toggle */}
+        <div className="lg:hidden flex items-center gap-2">
+          <LanguageSelector />
+          <button
+            className="text-white p-2"
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            aria-label="Menu"
+          >
+            {isMobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
+          </button>
+        </div>
       </div>
 
       {/* Mobile Menu */}
@@ -196,11 +199,8 @@ export function Navbar({ onOpenProduct }: NavbarProps) {
                 </a>
               ))}
             </div>
-            <div className="border-t border-zinc-700 my-2 pt-4">
-              <LanguageSelector />
-            </div>
             <a href="#contact" onClick={() => setIsMobileMenuOpen(false)}>
-              <Button className="w-full bg-primary hover:bg-primary/90 mt-2">{t('products.getQuote')}</Button>
+              <Button className="w-full bg-primary hover:bg-primary/90 mt-4">{t('products.getQuote')}</Button>
             </a>
           </div>
         </div>

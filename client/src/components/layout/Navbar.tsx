@@ -196,6 +196,9 @@ export function Navbar({ onOpenProduct }: NavbarProps) {
                 </a>
               ))}
             </div>
+            <div className="border-t border-zinc-700 my-2 pt-4">
+              <LanguageSelector />
+            </div>
             <a href="#contact" onClick={() => setIsMobileMenuOpen(false)}>
               <Button className="w-full bg-primary hover:bg-primary/90 mt-2">{t('products.getQuote')}</Button>
             </a>

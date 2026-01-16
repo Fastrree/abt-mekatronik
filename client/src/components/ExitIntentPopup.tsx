@@ -10,21 +10,34 @@ export function ExitIntentPopup() {
   useEffect(() => {
     // Check if already shown in this session
     const hasShown = sessionStorage.getItem('exit-intent-shown');
-    if (hasShown) return;
+    if (hasShown === 'true') return;
+
+    let triggered = false;
 
     const handleMouseLeave = (e: MouseEvent) => {
-      if (e.clientY <= 0) {
+      // Only trigger once, when mouse leaves from top of page
+      if (triggered) return;
+      if (e.clientY <= 0 && e.relatedTarget === null) {
+        triggered = true;
         setIsVisible(true);
         sessionStorage.setItem('exit-intent-shown', 'true');
+        document.removeEventListener('mouseout', handleMouseLeave);
       }
     };
 
-    // Only trigger on desktop
+    // Only trigger on desktop, with delay to avoid immediate trigger
     if (window.innerWidth > 768) {
-      document.addEventListener('mouseleave', handleMouseLeave);
+      const timer = setTimeout(() => {
+        document.addEventListener('mouseout', handleMouseLeave);
+      }, 3000); // 3 saniye bekle
+
+      return () => {
+        clearTimeout(timer);
+        document.removeEventListener('mouseout', handleMouseLeave);
+      };
     }
 
-    return () => document.removeEventListener('mouseleave', handleMouseLeave);
+    return () => {};
   }, []);
 
   if (!isVisible) return null;

@@ -793,6 +793,11 @@ export default function Home() {
         </div>
       </section>
 
+      {/* FAQ SECTION */}
+      <section id="faq">
+        <FAQ />
+      </section>
+
       {/* TESTIMONIALS SECTION */}
       <section id="testimonials">
         <Testimonials />
@@ -800,11 +805,6 @@ export default function Home() {
 
       {/* CERTIFICATIONS SECTION */}
       <Certifications />
-
-      {/* FAQ SECTION */}
-      <section id="faq">
-        <FAQ />
-      </section>
 
       {/* NEWSLETTER SECTION */}
       <Newsletter />

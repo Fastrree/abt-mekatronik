@@ -60,8 +60,8 @@ export function Navbar({ onOpenProduct }: NavbarProps) {
         isScrolled ? "bg-zinc-900/95 shadow-lg py-4 border-b border-zinc-700" : "bg-transparent py-6"
       }`}
     >
-      <div className="container mx-auto px-6 flex justify-between items-center">
-        <div className="flex items-center gap-4">
+      <div className="container mx-auto px-4 flex justify-between items-center">
+        <div className="flex items-center gap-2 lg:gap-4">
           {/* Quick Access Menu */}
           <div className="relative">
             <button
@@ -70,7 +70,7 @@ export function Navbar({ onOpenProduct }: NavbarProps) {
               aria-label={t('nav.quickAccess')}
             >
               <Menu size={20} />
-              <ChevronDown size={14} className={`transition-transform ${isQuickMenuOpen ? 'rotate-180' : ''}`} />
+              <ChevronDown size={14} className={`transition-transform hidden sm:block ${isQuickMenuOpen ? 'rotate-180' : ''}`} />
             </button>
             
             {/* Quick Menu Dropdown */}
@@ -125,7 +125,7 @@ export function Navbar({ onOpenProduct }: NavbarProps) {
           {/* Logo */}
           <button 
             onClick={scrollToTop}
-            className="text-2xl font-black tracking-tighter text-white flex items-center gap-2 cursor-pointer hover:opacity-80 transition-opacity"
+            className="text-lg sm:text-2xl font-black tracking-tighter text-white flex items-center gap-1 sm:gap-2 cursor-pointer hover:opacity-80 transition-opacity"
           >
             ABT <span className="text-primary">MEKATRONİK</span>
           </button>

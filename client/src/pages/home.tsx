@@ -450,7 +450,7 @@ export default function Home() {
                   {t('products.viewDetails')} <ChevronRight className="ml-1 w-4 h-4 text-red-600 dark:text-red-500" />
                 </span>
               </div>
-            </motion.div>
+            </motion.article>
 
             {/* Tekstil Makinaları */}
             <motion.article 

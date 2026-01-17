@@ -36,12 +36,6 @@ export function Navbar({ onOpenProduct }: NavbarProps) {
     { name: t('productItems.ozelMakine.title'), key: "ozelMakine", icon: Wrench },
   ];
 
-  const aboutLinks = [
-    { name: t('nav.engineering'), href: "#engineering", icon: Building2 },
-    { name: t('nav.testimonials'), href: "#testimonials", icon: Award },
-    { name: t('nav.partners'), href: "#partners", icon: Users },
-  ];
-
   const corporateLinks = [
     { name: t('nav.engineering'), href: "#engineering" },
     { name: t('nav.testimonials'), href: "#testimonials" },
@@ -51,7 +45,6 @@ export function Navbar({ onOpenProduct }: NavbarProps) {
 
   const handleProductClick = (key: ProductKey) => {
     setIsQuickMenuOpen(false);
-    setIsProductsOpen(false);
     if (onOpenProduct) {
       onOpenProduct(key);
     }
@@ -68,9 +61,10 @@ export function Navbar({ onOpenProduct }: NavbarProps) {
       }`}
       dir={isRTL ? 'rtl' : 'ltr'}
     >
-      <div className="container mx-auto px-4 flex items-center relative">
-        {/* Quick Access Menu - Mobile & Tablet (LEFT SIDE) */}
-        <div className="lg:hidden">
+      <div className="container mx-auto px-4 flex justify-between items-center">
+        {/* LEFT SIDE: Hamburger Menu + Logo */}
+        <div className="flex items-center gap-2 lg:gap-4">
+          {/* Hamburger Menu - Mobile & Desktop */}
           <div className="relative">
             <button
               onClick={() => setIsQuickMenuOpen(!isQuickMenuOpen)}
@@ -81,7 +75,7 @@ export function Navbar({ onOpenProduct }: NavbarProps) {
               <ChevronDown size={14} className={`transition-transform hidden sm:block ${isQuickMenuOpen ? 'rotate-180' : ''}`} />
             </button>
             
-            {/* Mobile Quick Menu Dropdown */}
+            {/* Quick Menu Dropdown - Same for Mobile & Desktop */}
             {isQuickMenuOpen && (
               <div className="absolute top-full left-0 mt-2 w-64 bg-zinc-800 border border-zinc-600 rounded-lg shadow-xl overflow-hidden animate-in fade-in slide-in-from-top-2 z-50">
                 <div className="p-2 max-h-[70vh] overflow-y-auto scrollbar-thin scrollbar-thumb-zinc-600 scrollbar-track-zinc-800 hover:scrollbar-thumb-zinc-500">
@@ -152,100 +146,27 @@ export function Navbar({ onOpenProduct }: NavbarProps) {
               </div>
             )}
           </div>
+
+          {/* Logo - Next to Hamburger on Desktop, Centered on Mobile */}
+          <button 
+            onClick={scrollToTop}
+            className="text-lg sm:text-2xl font-black tracking-tighter text-white flex items-center gap-1 sm:gap-2 cursor-pointer hover:opacity-80 transition-opacity lg:static absolute left-1/2 lg:left-auto lg:transform-none -translate-x-1/2 lg:translate-x-0"
+          >
+            ABT <span className="text-primary">MEKATRONİK</span>
+          </button>
         </div>
 
-        {/* Logo - CENTER on mobile, LEFT on desktop */}
-        <button 
-          onClick={scrollToTop}
-          className="absolute left-1/2 -translate-x-1/2 lg:static lg:translate-x-0 text-lg sm:text-2xl font-black tracking-tighter text-white flex items-center gap-1 sm:gap-2 cursor-pointer hover:opacity-80 transition-opacity"
-        >
-          ABT <span className="text-primary">MEKATRONİK</span>
-        </button>
-
-        {/* Desktop Nav */}
+        {/* RIGHT SIDE: Desktop Nav Items + Language + CTA */}
         <div className="hidden lg:flex items-center space-x-6">
-          {/* Quick Access Menu - Desktop (First Item) */}
-          <div className="relative">
-            <button
-              onClick={() => setIsQuickMenuOpen(!isQuickMenuOpen)}
-              className="flex items-center gap-1 text-xs font-semibold uppercase tracking-wider text-zinc-300 hover:text-primary transition-colors relative group whitespace-nowrap"
-            >
-              {t('nav.quickAccess')}
-              <ChevronDown size={12} className={`transition-transform ${isQuickMenuOpen ? 'rotate-180' : ''}`} />
-              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all group-hover:w-full"></span>
-            </button>
-            
-            {isQuickMenuOpen && (
-              <div className="absolute top-full left-0 mt-2 w-64 bg-zinc-800 border border-zinc-600 rounded-lg shadow-xl overflow-hidden animate-in fade-in slide-in-from-top-2">
-                <div className="p-2 max-h-[70vh] overflow-y-auto scrollbar-thin scrollbar-thumb-zinc-600 scrollbar-track-zinc-800 hover:scrollbar-thumb-zinc-500">
-                  {/* Products Section */}
-                  <div className="text-xs font-semibold text-zinc-400 uppercase tracking-wider px-3 py-2">
-                    {t('nav.products')}
-                  </div>
-                  {productLinks.map((product) => {
-                    const IconComponent = product.icon;
-                    return (
-                      <button
-                        key={product.key}
-                        onClick={() => handleProductClick(product.key)}
-                        className="w-full flex items-center gap-3 px-3 py-2.5 text-sm text-zinc-300 hover:text-white hover:bg-zinc-700 rounded-md transition-colors text-left"
-                      >
-                        <IconComponent size={16} className="text-red-500" />
-                        {product.name}
-                      </button>
-                    );
-                  })}
-                  
-                  {/* Corporate Section */}
-                  <div className="border-t border-zinc-600 mt-2 pt-2">
-                    <div className="text-xs font-semibold text-zinc-400 uppercase tracking-wider px-3 py-2">
-                      {t('nav.engineering')}
-                    </div>
-                    {corporateLinks.map((link) => (
-                      <a
-                        key={link.name}
-                        href={link.href}
-                        onClick={() => setIsQuickMenuOpen(false)}
-                        className="block px-3 py-2 text-sm text-zinc-300 hover:text-white hover:bg-zinc-700 rounded-md transition-colors"
-                      >
-                        {link.name}
-                      </a>
-                    ))}
-                  </div>
-                  
-                  {/* Projects & Contact */}
-                  <div className="border-t border-zinc-600 mt-2 pt-2">
-                    <a
-                      href="#projects"
-                      onClick={() => setIsQuickMenuOpen(false)}
-                      className="block px-3 py-2 text-sm text-zinc-300 hover:text-white hover:bg-zinc-700 rounded-md transition-colors"
-                    >
-                      {t('nav.projects')}
-                    </a>
-                    <a
-                      href="#contact"
-                      onClick={() => setIsQuickMenuOpen(false)}
-                      className="block px-3 py-2 text-sm text-zinc-300 hover:text-white hover:bg-zinc-700 rounded-md transition-colors"
-                    >
-                      {t('nav.contact')}
-                    </a>
-                  </div>
-                  
-                  {/* CTA */}
-                  <div className="border-t border-zinc-600 mt-2 pt-2">
-                    <a
-                      href="#contact"
-                      onClick={() => setIsQuickMenuOpen(false)}
-                      className="block px-3 py-2.5 text-sm font-semibold text-red-500 hover:text-red-400 hover:bg-red-600/10 rounded-md transition-colors"
-                    >
-                      🚀 {t('products.getQuote')}
-                    </a>
-                  </div>
-                </div>
-              </div>
-            )}
-          </div>
-
+          {/* Ana Sayfa */}
+          <a
+            href="#hero"
+            onClick={closeAllDropdowns}
+            className="text-xs font-semibold uppercase tracking-wider text-zinc-300 hover:text-primary transition-colors relative group whitespace-nowrap"
+          >
+            {t('nav.home')}
+            <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all group-hover:w-full"></span>
+          </a>
           {/* Ana Sayfa */}
           <a
             href="#hero"
@@ -256,7 +177,7 @@ export function Navbar({ onOpenProduct }: NavbarProps) {
             <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all group-hover:w-full"></span>
           </a>
 
-          {/* Ürünler - Direct Link */}
+          {/* Ürünler */}
           <a
             href="#products"
             onClick={closeAllDropdowns}
@@ -266,7 +187,7 @@ export function Navbar({ onOpenProduct }: NavbarProps) {
             <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all group-hover:w-full"></span>
           </a>
 
-          {/* Mühendislik - Direct Link */}
+          {/* Mühendislik */}
           <a
             href="#engineering"
             onClick={closeAllDropdowns}
@@ -307,8 +228,8 @@ export function Navbar({ onOpenProduct }: NavbarProps) {
           </a>
         </div>
 
-        {/* Mobile: Language Selector (RIGHT SIDE) */}
-        <div className="lg:hidden ml-auto">
+        {/* Mobile: Only Language Selector (RIGHT SIDE) */}
+        <div className="lg:hidden">
           <LanguageSelector />
         </div>
       </div>

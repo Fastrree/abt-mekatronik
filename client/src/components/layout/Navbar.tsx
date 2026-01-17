@@ -15,7 +15,7 @@ export function Navbar({ onOpenProduct }: NavbarProps) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isQuickMenuOpen, setIsQuickMenuOpen] = useState(false);
   const [isProductsOpen, setIsProductsOpen] = useState(false);
-  const [isAboutOpen, setIsAboutOpen] = useState(false);
+  const [isEngineeringOpen, setIsEngineeringOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -59,7 +59,8 @@ export function Navbar({ onOpenProduct }: NavbarProps) {
 
   const closeAllDropdowns = () => {
     setIsProductsOpen(false);
-    setIsAboutOpen(false);
+    setIsEngineeringOpen(false);
+    setIsQuickMenuOpen(false);
   };
 
   return (
@@ -162,9 +163,91 @@ export function Navbar({ onOpenProduct }: NavbarProps) {
           </button>
         </div>
 
-        {/* Desktop Nav - Hierarchical Structure */}
+        {/* Desktop Nav */}
         <div className="hidden lg:flex items-center space-x-6">
-          {/* Home */}
+          {/* Quick Access Menu - Desktop */}
+          <div className="relative">
+            <button
+              onClick={() => setIsQuickMenuOpen(!isQuickMenuOpen)}
+              className="flex items-center gap-1 text-xs font-semibold uppercase tracking-wider text-zinc-300 hover:text-primary transition-colors relative group whitespace-nowrap"
+            >
+              {t('nav.quickAccess')}
+              <ChevronDown size={12} className={`transition-transform ${isQuickMenuOpen ? 'rotate-180' : ''}`} />
+              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all group-hover:w-full"></span>
+            </button>
+            
+            {isQuickMenuOpen && (
+              <div className="absolute top-full left-0 mt-2 w-64 bg-zinc-800 border border-zinc-600 rounded-lg shadow-xl overflow-hidden animate-in fade-in slide-in-from-top-2">
+                <div className="p-2 max-h-[70vh] overflow-y-auto scrollbar-thin scrollbar-thumb-zinc-600 scrollbar-track-zinc-800 hover:scrollbar-thumb-zinc-500">
+                  {/* Products Section */}
+                  <div className="text-xs font-semibold text-zinc-400 uppercase tracking-wider px-3 py-2">
+                    {t('nav.products')}
+                  </div>
+                  {productLinks.map((product) => {
+                    const IconComponent = product.icon;
+                    return (
+                      <button
+                        key={product.key}
+                        onClick={() => handleProductClick(product.key)}
+                        className="w-full flex items-center gap-3 px-3 py-2.5 text-sm text-zinc-300 hover:text-white hover:bg-zinc-700 rounded-md transition-colors text-left"
+                      >
+                        <IconComponent size={16} className="text-red-500" />
+                        {product.name}
+                      </button>
+                    );
+                  })}
+                  
+                  {/* Corporate Section */}
+                  <div className="border-t border-zinc-600 mt-2 pt-2">
+                    <div className="text-xs font-semibold text-zinc-400 uppercase tracking-wider px-3 py-2">
+                      {t('nav.engineering')}
+                    </div>
+                    {corporateLinks.map((link) => (
+                      <a
+                        key={link.name}
+                        href={link.href}
+                        onClick={() => setIsQuickMenuOpen(false)}
+                        className="block px-3 py-2 text-sm text-zinc-300 hover:text-white hover:bg-zinc-700 rounded-md transition-colors"
+                      >
+                        {link.name}
+                      </a>
+                    ))}
+                  </div>
+                  
+                  {/* Projects & Contact */}
+                  <div className="border-t border-zinc-600 mt-2 pt-2">
+                    <a
+                      href="#projects"
+                      onClick={() => setIsQuickMenuOpen(false)}
+                      className="block px-3 py-2 text-sm text-zinc-300 hover:text-white hover:bg-zinc-700 rounded-md transition-colors"
+                    >
+                      {t('nav.projects')}
+                    </a>
+                    <a
+                      href="#contact"
+                      onClick={() => setIsQuickMenuOpen(false)}
+                      className="block px-3 py-2 text-sm text-zinc-300 hover:text-white hover:bg-zinc-700 rounded-md transition-colors"
+                    >
+                      {t('nav.contact')}
+                    </a>
+                  </div>
+                  
+                  {/* CTA */}
+                  <div className="border-t border-zinc-600 mt-2 pt-2">
+                    <a
+                      href="#contact"
+                      onClick={() => setIsQuickMenuOpen(false)}
+                      className="block px-3 py-2.5 text-sm font-semibold text-red-500 hover:text-red-400 hover:bg-red-600/10 rounded-md transition-colors"
+                    >
+                      🚀 {t('products.getQuote')}
+                    </a>
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
+
+          {/* Ana Sayfa */}
           <a
             href="#hero"
             onClick={closeAllDropdowns}
@@ -174,7 +257,7 @@ export function Navbar({ onOpenProduct }: NavbarProps) {
             <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all group-hover:w-full"></span>
           </a>
 
-          {/* Products Dropdown */}
+          {/* Ürünler Dropdown */}
           <div 
             className="relative"
             onMouseEnter={() => setIsProductsOpen(true)}
@@ -210,7 +293,7 @@ export function Navbar({ onOpenProduct }: NavbarProps) {
                       onClick={closeAllDropdowns}
                       className="block px-3 py-2 text-sm text-zinc-400 hover:text-white hover:bg-zinc-700 rounded-md transition-colors"
                     >
-                      → {t('nav.products')}
+                      → {t('nav.viewAll')}
                     </a>
                   </div>
                 </div>
@@ -218,21 +301,21 @@ export function Navbar({ onOpenProduct }: NavbarProps) {
             )}
           </div>
 
-          {/* About Dropdown */}
+          {/* Mühendislik Dropdown */}
           <div 
             className="relative"
-            onMouseEnter={() => setIsAboutOpen(true)}
-            onMouseLeave={() => setIsAboutOpen(false)}
+            onMouseEnter={() => setIsEngineeringOpen(true)}
+            onMouseLeave={() => setIsEngineeringOpen(false)}
           >
             <button
               className="flex items-center gap-1 text-xs font-semibold uppercase tracking-wider text-zinc-300 hover:text-primary transition-colors relative group whitespace-nowrap"
             >
               {t('nav.engineering')}
-              <ChevronDown size={12} className={`transition-transform ${isAboutOpen ? 'rotate-180' : ''}`} />
+              <ChevronDown size={12} className={`transition-transform ${isEngineeringOpen ? 'rotate-180' : ''}`} />
               <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all group-hover:w-full"></span>
             </button>
             
-            {isAboutOpen && (
+            {isEngineeringOpen && (
               <div className="absolute top-full left-0 mt-2 w-56 bg-zinc-800 border border-zinc-600 rounded-lg shadow-xl overflow-hidden animate-in fade-in slide-in-from-top-2">
                 <div className="p-2">
                   {aboutLinks.map((link) => {
@@ -263,7 +346,7 @@ export function Navbar({ onOpenProduct }: NavbarProps) {
             )}
           </div>
 
-          {/* Projects */}
+          {/* Projeler */}
           <a
             href="#projects"
             onClick={closeAllDropdowns}
@@ -273,7 +356,7 @@ export function Navbar({ onOpenProduct }: NavbarProps) {
             <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all group-hover:w-full"></span>
           </a>
 
-          {/* Contact */}
+          {/* İletişim */}
           <a
             href="#contact"
             onClick={closeAllDropdowns}
@@ -301,7 +384,7 @@ export function Navbar({ onOpenProduct }: NavbarProps) {
       </div>
 
       {/* Click outside to close menus */}
-      {(isQuickMenuOpen || isProductsOpen || isAboutOpen) && (
+      {(isQuickMenuOpen || isProductsOpen || isEngineeringOpen) && (
         <div 
           className="fixed inset-0 z-[-1]" 
           onClick={() => {

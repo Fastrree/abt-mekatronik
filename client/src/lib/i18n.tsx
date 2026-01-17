@@ -166,6 +166,7 @@ const tr = {
     faq: 'SSS',
     testimonials: 'Referanslar',
     partners: 'Ortaklarımız',
+    viewAll: 'Tümünü Gör',
   },
   hero: {
     badge: 'Endüstriyel Mükemmellik',
@@ -458,6 +459,7 @@ const en = {
     faq: 'FAQ',
     testimonials: 'Testimonials',
     partners: 'Partners',
+    viewAll: 'View All',
   },
   hero: {
     badge: 'Industrial Excellence',
@@ -750,6 +752,7 @@ const de = {
     faq: 'FAQ',
     testimonials: 'Referenzen',
     partners: 'Partner',
+    viewAll: 'Alle Anzeigen',
   },
   hero: {
     badge: 'Industrielle Exzellenz',
@@ -982,7 +985,7 @@ Löst spezielle Produktionsanforderungen, die auf dem Markt nicht verfügbar sin
 
 
 const fr = {
-  nav: { home: 'Accueil', products: 'Produits', engineering: 'Ingénierie', projects: 'Projets', contact: 'Contact', quickAccess: 'Accès rapide', selectLanguage: 'Langue', faq: 'FAQ', testimonials: 'Avis', partners: 'Partenaires' },
+  nav: { home: 'Accueil', products: 'Produits', engineering: 'Ingénierie', projects: 'Projets', contact: 'Contact', quickAccess: 'Accès rapide', selectLanguage: 'Langue', faq: 'FAQ', testimonials: 'Avis', partners: 'Partenaires', viewAll: 'Voir Tout' },
   hero: {
     badge: 'Excellence Industrielle',
     title1: 'INGÉNIERIE',
@@ -1197,7 +1200,7 @@ Résout les besoins de production spéciaux non disponibles sur le marché.
 
 
 const es = {
-  nav: { home: 'Inicio', products: 'Productos', engineering: 'Ingeniería', projects: 'Proyectos', contact: 'Contacto', quickAccess: 'Acceso Rápido', selectLanguage: 'Idioma', faq: 'FAQ', testimonials: 'Referencias', partners: 'Socios' },
+  nav: { home: 'Inicio', products: 'Productos', engineering: 'Ingeniería', projects: 'Proyectos', contact: 'Contacto', quickAccess: 'Acceso Rápido', selectLanguage: 'Idioma', faq: 'FAQ', testimonials: 'Referencias', partners: 'Socios', viewAll: 'Ver Todo' },
   hero: {
     badge: 'Excelencia Industrial',
     title1: 'INGENIERÍA',
@@ -1423,6 +1426,7 @@ const ar = {
     faq: 'الأسئلة الشائعة',
     testimonials: 'المراجع',
     partners: 'الشركاء',
+    viewAll: 'عرض الكل',
   },
   hero: {
     badge: 'التميز الصناعي',

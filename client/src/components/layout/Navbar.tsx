@@ -83,7 +83,7 @@ export function Navbar({ onOpenProduct }: NavbarProps) {
             
             {/* Mobile Quick Menu Dropdown */}
             {isQuickMenuOpen && (
-              <div className="absolute top-full left-0 mt-2 w-64 bg-zinc-800 border border-zinc-600 rounded-lg shadow-xl overflow-hidden animate-in fade-in slide-in-from-top-2 duration-200">
+              <div className="absolute top-full left-0 mt-2 w-64 bg-zinc-800 border border-zinc-600 rounded-lg shadow-xl overflow-hidden animate-in fade-in slide-in-from-top-2">
                 <div className="p-2 max-h-[70vh] overflow-y-auto scrollbar-thin scrollbar-thumb-zinc-600 scrollbar-track-zinc-800 hover:scrollbar-thumb-zinc-500">
                   {/* Products Section */}
                   <div className="text-xs font-semibold text-zinc-400 uppercase tracking-wider px-3 py-2">
@@ -189,7 +189,7 @@ export function Navbar({ onOpenProduct }: NavbarProps) {
             </button>
             
             {isProductsOpen && (
-              <div className="absolute top-full left-0 mt-2 w-64 bg-zinc-800 border border-zinc-600 rounded-lg shadow-xl overflow-hidden animate-in fade-in slide-in-from-top-2 duration-200">
+              <div className="absolute top-full left-0 mt-2 w-64 bg-zinc-800 border border-zinc-600 rounded-lg shadow-xl overflow-hidden animate-in fade-in slide-in-from-top-2">
                 <div className="p-2">
                   {productLinks.map((product) => {
                     const IconComponent = product.icon;
@@ -233,7 +233,7 @@ export function Navbar({ onOpenProduct }: NavbarProps) {
             </button>
             
             {isAboutOpen && (
-              <div className="absolute top-full left-0 mt-2 w-56 bg-zinc-800 border border-zinc-600 rounded-lg shadow-xl overflow-hidden animate-in fade-in slide-in-from-top-2 duration-200">
+              <div className="absolute top-full left-0 mt-2 w-56 bg-zinc-800 border border-zinc-600 rounded-lg shadow-xl overflow-hidden animate-in fade-in slide-in-from-top-2">
                 <div className="p-2">
                   {aboutLinks.map((link) => {
                     const IconComponent = link.icon;

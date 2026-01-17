@@ -188,3 +188,41 @@
 .scrollbar-thin::-webkit-scrollbar-thumb:hover {
   background: #71717a;
 }
+
+/* Animation Keyframes */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slide-in-from-top {
+  from {
+    transform: translateY(-0.5rem);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+/* Animation Utilities */
+@layer utilities {
+  .animate-in {
+    animation-fill-mode: both;
+  }
+  
+  .fade-in {
+    animation-name: fade-in;
+  }
+  
+  .slide-in-from-top-2 {
+    animation-name: slide-in-from-top;
+  }
+  
+  .duration-200 {
+    animation-duration: 200ms;
+  }
+}

@@ -369,10 +369,7 @@ export default function Home() {
         aria-labelledby="products-title"
       >
         <div className="container mx-auto px-6">
-          <motion.div 
-            {...fadeIn}
-            className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6"
-          >
+          <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6 animate-in fade-in duration-600">
             <div>
               <p className="text-red-600 dark:text-red-500 font-bold tracking-widest uppercase mb-2">{t('products.subtitle')}</p>
               <h2 id="products-title" className="text-4xl md:text-5xl font-black text-zinc-900 dark:text-white">{t('products.title')}</h2>
@@ -380,7 +377,7 @@ export default function Home() {
             <p className="text-zinc-600 dark:text-zinc-400 max-w-md text-right md:text-left leading-relaxed">
               {t('products.description')}
             </p>
-          </motion.div>
+          </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6" role="list" aria-label="Ürün kategorileri">
             {/* Konveyör Sistemleri */}

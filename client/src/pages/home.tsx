@@ -310,7 +310,6 @@ export default function Home() {
             muted 
             loop 
             playsInline
-            controls
             preload="auto"
             className="w-full h-full object-cover"
             poster="/media/img1.jpeg"

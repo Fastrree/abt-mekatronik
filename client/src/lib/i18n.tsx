@@ -1,6 +1,6 @@
 import { createContext, useContext, useState, ReactNode, useEffect } from 'react';
 
-export type Language = 'tr' | 'en' | 'de' | 'fr' | 'es';
+export type Language = 'tr' | 'en' | 'de' | 'fr' | 'es' | 'ar';
 
 // Flag images as small inline SVGs for Windows compatibility
 const flagSvgs: Record<Language, string> = {
@@ -9,6 +9,7 @@ const flagSvgs: Record<Language, string> = {
   de: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 5 3"><rect fill="#000" width="5" height="3"/><rect fill="#D00" y="1" width="5" height="2"/><rect fill="#FFCE00" y="2" width="5" height="1"/></svg>`,
   fr: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3 2"><rect fill="#002395" width="1" height="2"/><rect fill="#fff" x="1" width="1" height="2"/><rect fill="#ED2939" x="2" width="1" height="2"/></svg>`,
   es: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 750 500"><rect fill="#c60b1e" width="750" height="500"/><rect fill="#ffc400" y="125" width="750" height="250"/></svg>`,
+  ar: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 600"><rect fill="#007A3D" width="900" height="600"/><rect fill="#FFF" width="900" height="400"/><rect fill="#000" width="900" height="200"/><polygon fill="#CE1126" points="0,0 0,600 300,300"/></svg>`,
 };
 
 export const languages: { code: Language; name: string; flag: string }[] = [
@@ -17,6 +18,7 @@ export const languages: { code: Language; name: string; flag: string }[] = [
   { code: 'de', name: 'Deutsch', flag: '🇩🇪' },
   { code: 'fr', name: 'Français', flag: '🇫🇷' },
   { code: 'es', name: 'Español', flag: '🇪🇸' },
+  { code: 'ar', name: 'العربية', flag: '🇦🇪' },
 ];
 
 // Get flag as data URL for img src
@@ -60,6 +62,13 @@ const seoMeta: Record<Language, { title: string; description: string; keywords: 
     keywords: 'sistemas de transporte, maquinaria textil, construcción de acero, diseño de máquinas personalizadas, automatización industrial, Turquía',
     ogTitle: 'ABT MECHATRONICS | Soluciones de Producción Industrial',
     ogDescription: 'Sistemas de transporte, maquinaria textil, construcción de acero. Servicio en toda Turquía con 15+ años de experiencia.',
+  },
+  ar: {
+    title: 'ABT MECHATRONICS | أنظمة النقل، آلات النسيج، البناء الفولاذي',
+    description: 'ABT Mechatronics - الشريك الرائد للحلول الصناعية في تركيا. أنظمة النقل، آلات النسيج، البناء الفولاذي وتصميم الآلات المخصصة. خبرة أكثر من 15 عامًا.',
+    keywords: 'أنظمة النقل، آلات النسيج، البناء الفولاذي، تصميم الآلات المخصصة، الأتمتة الصناعية، تركيا',
+    ogTitle: 'ABT MECHATRONICS | حلول الإنتاج الصناعي',
+    ogDescription: 'أنظمة النقل، آلات النسيج، البناء الفولاذي. خدمة في جميع أنحاء تركيا مع خبرة أكثر من 15 عامًا.',
   },
 };
 

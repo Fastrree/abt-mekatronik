@@ -11,11 +11,11 @@ interface NavbarProps {
 }
 
 export function Navbar({ onOpenProduct }: NavbarProps) {
-  const { t } = useI18n();
+  const { t, language } = useI18n();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isQuickMenuOpen, setIsQuickMenuOpen] = useState(false);
-  const [isProductsOpen, setIsProductsOpen] = useState(false);
-  const [isEngineeringOpen, setIsEngineeringOpen] = useState(false);
+  
+  const isRTL = language === 'ar';
 
   useEffect(() => {
     const handleScroll = () => {
@@ -58,8 +58,6 @@ export function Navbar({ onOpenProduct }: NavbarProps) {
   };
 
   const closeAllDropdowns = () => {
-    setIsProductsOpen(false);
-    setIsEngineeringOpen(false);
     setIsQuickMenuOpen(false);
   };
 
@@ -68,6 +66,7 @@ export function Navbar({ onOpenProduct }: NavbarProps) {
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled ? "bg-zinc-900/95 backdrop-blur-sm shadow-lg py-3 border-b border-zinc-700" : "bg-transparent py-6"
       }`}
+      dir={isRTL ? 'rtl' : 'ltr'}
     >
       <div className="container mx-auto px-4 flex justify-between items-center">
         <div className="flex items-center gap-2 lg:gap-4">
@@ -165,7 +164,7 @@ export function Navbar({ onOpenProduct }: NavbarProps) {
 
         {/* Desktop Nav */}
         <div className="hidden lg:flex items-center space-x-6">
-          {/* Quick Access Menu - Desktop */}
+          {/* Quick Access Menu - Desktop (First Item) */}
           <div className="relative">
             <button
               onClick={() => setIsQuickMenuOpen(!isQuickMenuOpen)}
@@ -257,94 +256,25 @@ export function Navbar({ onOpenProduct }: NavbarProps) {
             <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all group-hover:w-full"></span>
           </a>
 
-          {/* Ürünler Dropdown */}
-          <div 
-            className="relative"
-            onMouseEnter={() => setIsProductsOpen(true)}
-            onMouseLeave={() => setIsProductsOpen(false)}
+          {/* Ürünler - Direct Link */}
+          <a
+            href="#products"
+            onClick={closeAllDropdowns}
+            className="text-xs font-semibold uppercase tracking-wider text-zinc-300 hover:text-primary transition-colors relative group whitespace-nowrap"
           >
-            <button
-              className="flex items-center gap-1 text-xs font-semibold uppercase tracking-wider text-zinc-300 hover:text-primary transition-colors relative group whitespace-nowrap"
-            >
-              {t('nav.products')}
-              <ChevronDown size={12} className={`transition-transform ${isProductsOpen ? 'rotate-180' : ''}`} />
-              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all group-hover:w-full"></span>
-            </button>
-            
-            {isProductsOpen && (
-              <div className="absolute top-full left-0 mt-2 w-64 bg-zinc-800 border border-zinc-600 rounded-lg shadow-xl overflow-hidden animate-in fade-in slide-in-from-top-2">
-                <div className="p-2">
-                  {productLinks.map((product) => {
-                    const IconComponent = product.icon;
-                    return (
-                      <button
-                        key={product.key}
-                        onClick={() => handleProductClick(product.key)}
-                        className="w-full flex items-center gap-3 px-3 py-2.5 text-sm text-zinc-300 hover:text-white hover:bg-zinc-700 rounded-md transition-colors text-left"
-                      >
-                        <IconComponent size={16} className="text-red-500" />
-                        {product.name}
-                      </button>
-                    );
-                  })}
-                  <div className="border-t border-zinc-600 mt-2 pt-2">
-                    <a
-                      href="#products"
-                      onClick={closeAllDropdowns}
-                      className="block px-3 py-2 text-sm text-zinc-400 hover:text-white hover:bg-zinc-700 rounded-md transition-colors"
-                    >
-                      → {t('nav.viewAll')}
-                    </a>
-                  </div>
-                </div>
-              </div>
-            )}
-          </div>
+            {t('nav.products')}
+            <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all group-hover:w-full"></span>
+          </a>
 
-          {/* Mühendislik Dropdown */}
-          <div 
-            className="relative"
-            onMouseEnter={() => setIsEngineeringOpen(true)}
-            onMouseLeave={() => setIsEngineeringOpen(false)}
+          {/* Mühendislik - Direct Link */}
+          <a
+            href="#engineering"
+            onClick={closeAllDropdowns}
+            className="text-xs font-semibold uppercase tracking-wider text-zinc-300 hover:text-primary transition-colors relative group whitespace-nowrap"
           >
-            <button
-              className="flex items-center gap-1 text-xs font-semibold uppercase tracking-wider text-zinc-300 hover:text-primary transition-colors relative group whitespace-nowrap"
-            >
-              {t('nav.engineering')}
-              <ChevronDown size={12} className={`transition-transform ${isEngineeringOpen ? 'rotate-180' : ''}`} />
-              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all group-hover:w-full"></span>
-            </button>
-            
-            {isEngineeringOpen && (
-              <div className="absolute top-full left-0 mt-2 w-56 bg-zinc-800 border border-zinc-600 rounded-lg shadow-xl overflow-hidden animate-in fade-in slide-in-from-top-2">
-                <div className="p-2">
-                  {aboutLinks.map((link) => {
-                    const IconComponent = link.icon;
-                    return (
-                      <a
-                        key={link.name}
-                        href={link.href}
-                        onClick={closeAllDropdowns}
-                        className="flex items-center gap-3 px-3 py-2.5 text-sm text-zinc-300 hover:text-white hover:bg-zinc-700 rounded-md transition-colors"
-                      >
-                        <IconComponent size={16} className="text-red-500" />
-                        {link.name}
-                      </a>
-                    );
-                  })}
-                  <div className="border-t border-zinc-600 mt-2 pt-2">
-                    <a
-                      href="#faq"
-                      onClick={closeAllDropdowns}
-                      className="block px-3 py-2 text-sm text-zinc-400 hover:text-white hover:bg-zinc-700 rounded-md transition-colors"
-                    >
-                      → {t('nav.faq')}
-                    </a>
-                  </div>
-                </div>
-              </div>
-            )}
-          </div>
+            {t('nav.engineering')}
+            <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all group-hover:w-full"></span>
+          </a>
 
           {/* Projeler */}
           <a
@@ -384,7 +314,7 @@ export function Navbar({ onOpenProduct }: NavbarProps) {
       </div>
 
       {/* Click outside to close menus */}
-      {(isQuickMenuOpen || isProductsOpen || isEngineeringOpen) && (
+      {isQuickMenuOpen && (
         <div 
           className="fixed inset-0 z-[-1]" 
           onClick={() => {

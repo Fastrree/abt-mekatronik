@@ -263,3 +263,52 @@
     animation-duration: 200ms;
   }
 }
+
+/* Theme Transition Effects */
+html.theme-transitioning,
+html.theme-transitioning * {
+  transition: background-color 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+              color 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+              border-color 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+              box-shadow 0.6s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+/* Disable transitions for elements that shouldn't animate */
+html.theme-transitioning img,
+html.theme-transitioning video,
+html.theme-transitioning iframe {
+  transition: none !important;
+}
+
+/* Page flash effect during theme change */
+@keyframes theme-flash {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.95;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+html.theme-transitioning::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(circle at center, transparent 0%, rgba(220, 38, 38, 0.03) 100%);
+  pointer-events: none;
+  z-index: 9999;
+  animation: theme-flash 0.6s ease-in-out;
+}
+
+/* Respect reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  html.theme-transitioning,
+  html.theme-transitioning *,
+  html.theme-transitioning::before {
+    transition: none !important;
+    animation: none !important;
+  }
+}

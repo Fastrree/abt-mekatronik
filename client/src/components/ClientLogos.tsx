@@ -9,6 +9,10 @@ const clientsRow1 = [
   { name: 'Fabrika Pro', industry: 'Üretim' },
   { name: 'Makine Sanayi', industry: 'Makine' },
   { name: 'Endüstri Grup', industry: 'Endüstri' },
+  { name: 'Otomasyon A.Ş.', industry: 'Otomasyon' },
+  { name: 'Konveyör Ltd.', industry: 'Konveyör' },
+  { name: 'Metal Sanayi', industry: 'Metal' },
+  { name: 'Tekstil Makine', industry: 'Tekstil' },
 ];
 
 // Client logos - Second row (right to left scroll)
@@ -19,6 +23,10 @@ const clientsRow2 = [
   { name: 'Tekstil Makine', industry: 'Tekstil' },
   { name: 'Endüstri Plus', industry: 'Endüstri' },
   { name: 'Üretim Grup', industry: 'Üretim' },
+  { name: 'Çelik Yapı', industry: 'Çelik' },
+  { name: 'Lojistik Pro', industry: 'Lojistik' },
+  { name: 'Fabrika Grup', industry: 'Üretim' },
+  { name: 'Makine Ltd.', industry: 'Makine' },
 ];
 
 interface LogoItemProps {
@@ -60,7 +68,7 @@ export function ClientLogos() {
 
         {/* First Row - Left to Right */}
         <div className="relative mb-6 group/row">
-          <div className="flex gap-6 animate-scroll-left group-hover/row:pause-animation">
+          <div className="flex gap-6 animate-scroll-left group-hover/row:pause-animation will-change-transform">
             {/* First set */}
             {clientsRow1.map((client, index) => (
               <LogoItem key={`row1-set1-${index}`} client={client} />
@@ -73,12 +81,16 @@ export function ClientLogos() {
             {clientsRow1.map((client, index) => (
               <LogoItem key={`row1-set3-${index}`} client={client} />
             ))}
+            {/* Fourth set for ultra-smooth loop */}
+            {clientsRow1.map((client, index) => (
+              <LogoItem key={`row1-set4-${index}`} client={client} />
+            ))}
           </div>
         </div>
 
         {/* Second Row - Right to Left */}
         <div className="relative group/row">
-          <div className="flex gap-6 animate-scroll-right group-hover/row:pause-animation">
+          <div className="flex gap-6 animate-scroll-right group-hover/row:pause-animation will-change-transform">
             {/* First set */}
             {clientsRow2.map((client, index) => (
               <LogoItem key={`row2-set1-${index}`} client={client} />
@@ -91,6 +103,10 @@ export function ClientLogos() {
             {clientsRow2.map((client, index) => (
               <LogoItem key={`row2-set3-${index}`} client={client} />
             ))}
+            {/* Fourth set for ultra-smooth loop */}
+            {clientsRow2.map((client, index) => (
+              <LogoItem key={`row2-set4-${index}`} client={client} />
+            ))}
           </div>
         </div>
       </div>
@@ -101,13 +117,13 @@ export function ClientLogos() {
             transform: translateX(0);
           }
           100% {
-            transform: translateX(-33.333%);
+            transform: translateX(-25%);
           }
         }
 
         @keyframes scroll-right {
           0% {
-            transform: translateX(-33.333%);
+            transform: translateX(-25%);
           }
           100% {
             transform: translateX(0);
@@ -115,11 +131,13 @@ export function ClientLogos() {
         }
 
         .animate-scroll-left {
-          animation: scroll-left 30s linear infinite;
+          animation: scroll-left 40s linear infinite;
+          will-change: transform;
         }
 
         .animate-scroll-right {
-          animation: scroll-right 30s linear infinite;
+          animation: scroll-right 40s linear infinite;
+          will-change: transform;
         }
 
         .pause-animation {

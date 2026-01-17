@@ -37,13 +37,6 @@ export function Navbar({ onOpenProduct }: NavbarProps) {
     { name: t('productItems.ozelMakine.title'), key: "ozelMakine", icon: Wrench },
   ];
 
-  const corporateLinks = [
-    { name: t('nav.engineering'), href: "#engineering" },
-    { name: t('nav.testimonials'), href: "#testimonials" },
-    { name: t('nav.partners'), href: "#partners" },
-    { name: t('nav.faq'), href: "#faq" },
-  ];
-
   const handleProductClick = (key: ProductKey) => {
     setIsQuickMenuOpen(false);
     if (onOpenProduct) {
@@ -89,43 +82,48 @@ export function Navbar({ onOpenProduct }: NavbarProps) {
                 style={{ [isRTL ? 'right' : 'left']: 0 }}
                 dir={isRTL ? 'rtl' : 'ltr'}
               >
-                <div className="p-2 max-h-[70vh] overflow-y-auto scrollbar-thin scrollbar-thumb-zinc-600 scrollbar-track-zinc-800 hover:scrollbar-thumb-zinc-500">
+                <div className="p-2 max-h-[70vh] overflow-y-auto scrollbar-thin scrollbar-thumb-zinc-300 dark:scrollbar-thumb-zinc-600 scrollbar-track-white dark:scrollbar-track-zinc-800 hover:scrollbar-thumb-zinc-400 dark:hover:scrollbar-thumb-zinc-500">
+                  {/* Ana Sayfa */}
+                  <a
+                    href="#hero"
+                    onClick={() => setIsQuickMenuOpen(false)}
+                    className="block px-3 py-2 text-sm text-zinc-700 dark:text-zinc-300 hover:text-zinc-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-zinc-700 rounded-md transition-colors"
+                  >
+                    {t('nav.home')}
+                  </a>
+
                   {/* Products Section */}
-                  <div className="text-xs font-semibold text-zinc-600 dark:text-zinc-400 uppercase tracking-wider px-3 py-2">
-                    {t('nav.products')}
-                  </div>
-                  {productLinks.map((product) => {
-                    const IconComponent = product.icon;
-                    return (
-                      <button
-                        key={product.key}
-                        onClick={() => handleProductClick(product.key)}
-                className="w-full flex items-center gap-3 px-3 py-2.5 text-sm text-zinc-700 dark:text-zinc-300 hover:text-zinc-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-zinc-700 rounded-md transition-colors text-left"
-                      >
-                        <IconComponent size={16} className="text-red-500" />
-                        {product.name}
-                      </button>
-                    );
-                  })}
-                  
-                  {/* Corporate Section */}
-                  <div className="border-t border-zinc-600 dark:border-zinc-600 border-slate-200 mt-2 pt-2">
+                  <div className="border-t border-slate-200 dark:border-zinc-600 mt-2 pt-2">
                     <div className="text-xs font-semibold text-zinc-600 dark:text-zinc-400 uppercase tracking-wider px-3 py-2">
-                      {t('nav.engineering')}
+                      {t('nav.products')}
                     </div>
-                    {corporateLinks.map((link) => (
-                      <a
-                        key={link.name}
-                        href={link.href}
-                        onClick={() => setIsQuickMenuOpen(false)}
-                        className="block px-3 py-2 text-sm text-zinc-700 dark:text-zinc-300 hover:text-zinc-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-zinc-700 rounded-md transition-colors"
-                      >
-                        {link.name}
-                      </a>
-                    ))}
+                    {productLinks.map((product) => {
+                      const IconComponent = product.icon;
+                      return (
+                        <button
+                          key={product.key}
+                          onClick={() => handleProductClick(product.key)}
+                          className="w-full flex items-center gap-3 px-3 py-2.5 text-sm text-zinc-700 dark:text-zinc-300 hover:text-zinc-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-zinc-700 rounded-md transition-colors text-left"
+                        >
+                          <IconComponent size={16} className="text-red-500" />
+                          {product.name}
+                        </button>
+                      );
+                    })}
                   </div>
                   
-                  {/* Projects & Contact */}
+                  {/* Mühendislik */}
+                  <div className="border-t border-slate-200 dark:border-zinc-600 mt-2 pt-2">
+                    <a
+                      href="#engineering"
+                      onClick={() => setIsQuickMenuOpen(false)}
+                      className="block px-3 py-2 text-sm text-zinc-700 dark:text-zinc-300 hover:text-zinc-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-zinc-700 rounded-md transition-colors"
+                    >
+                      {t('nav.engineering')}
+                    </a>
+                  </div>
+
+                  {/* Projeler */}
                   <div className="border-t border-slate-200 dark:border-zinc-600 mt-2 pt-2">
                     <a
                       href="#projects"
@@ -134,12 +132,49 @@ export function Navbar({ onOpenProduct }: NavbarProps) {
                     >
                       {t('nav.projects')}
                     </a>
+                  </div>
+
+                  {/* İletişim */}
+                  <div className="border-t border-slate-200 dark:border-zinc-600 mt-2 pt-2">
                     <a
                       href="#contact"
                       onClick={() => setIsQuickMenuOpen(false)}
                       className="block px-3 py-2 text-sm text-zinc-700 dark:text-zinc-300 hover:text-zinc-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-zinc-700 rounded-md transition-colors"
                     >
                       {t('nav.contact')}
+                    </a>
+                  </div>
+
+                  {/* SSS */}
+                  <div className="border-t border-slate-200 dark:border-zinc-600 mt-2 pt-2">
+                    <a
+                      href="#faq"
+                      onClick={() => setIsQuickMenuOpen(false)}
+                      className="block px-3 py-2 text-sm text-zinc-700 dark:text-zinc-300 hover:text-zinc-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-zinc-700 rounded-md transition-colors"
+                    >
+                      {t('nav.faq')}
+                    </a>
+                  </div>
+
+                  {/* Referanslar */}
+                  <div className="border-t border-slate-200 dark:border-zinc-600 mt-2 pt-2">
+                    <a
+                      href="#testimonials"
+                      onClick={() => setIsQuickMenuOpen(false)}
+                      className="block px-3 py-2 text-sm text-zinc-700 dark:text-zinc-300 hover:text-zinc-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-zinc-700 rounded-md transition-colors"
+                    >
+                      {t('nav.testimonials')}
+                    </a>
+                  </div>
+
+                  {/* Ortaklarımız */}
+                  <div className="border-t border-slate-200 dark:border-zinc-600 mt-2 pt-2">
+                    <a
+                      href="#partners"
+                      onClick={() => setIsQuickMenuOpen(false)}
+                      className="block px-3 py-2 text-sm text-zinc-700 dark:text-zinc-300 hover:text-zinc-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-zinc-700 rounded-md transition-colors"
+                    >
+                      {t('nav.partners')}
                     </a>
                   </div>
                   

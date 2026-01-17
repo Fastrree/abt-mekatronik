@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
-import { Menu, ChevronDown, Truck, Factory, Layers, Wrench, Building2, Award, Users } from "lucide-react";
+import { Menu, ChevronDown, Truck, Factory, Layers, Wrench } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { LanguageSelector } from "@/components/LanguageSelector";
+import { ThemeToggle } from "@/components/ThemeToggle";
 import { useI18n } from "@/lib/i18n";
 
 type ProductKey = 'konveyor' | 'tekstil' | 'celik' | 'ozelMakine';
@@ -221,6 +222,9 @@ export function Navbar({ onOpenProduct }: NavbarProps) {
             <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all group-hover:w-full"></span>
           </a>
 
+          {/* Theme Toggle */}
+          <ThemeToggle />
+
           {/* Language Selector */}
           <LanguageSelector />
           
@@ -232,8 +236,9 @@ export function Navbar({ onOpenProduct }: NavbarProps) {
           </a>
         </div>
 
-        {/* Mobile: Only Language Selector (RIGHT SIDE) */}
-        <div className="lg:hidden">
+        {/* Mobile: Theme Toggle + Language Selector (RIGHT SIDE) */}
+        <div className="lg:hidden flex items-center gap-2">
+          <ThemeToggle />
           <LanguageSelector />
         </div>
       </div>

@@ -1,6 +1,7 @@
 import { Switch, Route } from "wouter";
 import { queryClient } from "./lib/queryClient";
 import { QueryClientProvider } from "@tanstack/react-query";
+import { ThemeProvider } from "next-themes";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { I18nProvider, useI18n } from "@/lib/i18n";
@@ -47,9 +48,11 @@ function AppContent() {
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <I18nProvider>
-        <AppContent />
-      </I18nProvider>
+      <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
+        <I18nProvider>
+          <AppContent />
+        </I18nProvider>
+      </ThemeProvider>
     </QueryClientProvider>
   );
 }

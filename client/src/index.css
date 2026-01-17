@@ -72,6 +72,43 @@
   --radius: 0rem; /* Industrial look - sharp corners */
 }
 
+/* Light Theme - Slate-based Luxury */
+.light {
+  /* Slate-based luxury backgrounds - NO pure white */
+  --background: 210 20% 98%;  /* #f8fafc - Slate 50 */
+  --foreground: 222 47% 11%;  /* #0f172a - Slate 900 */
+
+  /* Enhanced cards with subtle gradients */
+  --card: 210 20% 98%;
+  --card-foreground: 222 47% 11%;
+
+  --popover: 0 0% 100%;
+  --popover-foreground: 222 47% 11%;
+
+  /* Action Red (same as dark for brand consistency) */
+  --primary: 0 72% 51%;
+  --primary-foreground: 0 0% 100%;
+
+  /* Light metallic silver */
+  --secondary: 215 20% 95%;  /* #f1f5f9 - Slate 100 */
+  --secondary-foreground: 222 47% 11%;
+
+  /* Muted slate */
+  --muted: 215 20% 95%;
+  --muted-foreground: 215 16% 47%;  /* #64748b - Slate 500 */
+
+  /* Hover accents */
+  --accent: 214 32% 91%;  /* #e2e8f0 - Slate 200 */
+  --accent-foreground: 222 47% 11%;
+
+  --destructive: 0 84% 60%;
+  --destructive-foreground: 0 0% 100%;
+
+  --border: 214 32% 91%;
+  --input: 214 32% 91%;
+  --ring: 0 72% 51%;
+}
+
 @layer base {
   * {
     @apply border-border;

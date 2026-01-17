@@ -68,10 +68,10 @@ export function Navbar({ onOpenProduct }: NavbarProps) {
       }`}
       dir={isRTL ? 'rtl' : 'ltr'}
     >
-      <div className="container mx-auto px-4 flex justify-between items-center">
+      <div className="container mx-auto px-4 flex items-center relative">
         {/* Quick Access Menu - Mobile & Tablet (LEFT SIDE) */}
-        <div className="flex items-center gap-2 lg:gap-4">
-          <div className="relative lg:hidden">
+        <div className="lg:hidden">
+          <div className="relative">
             <button
               onClick={() => setIsQuickMenuOpen(!isQuickMenuOpen)}
               className="flex items-center gap-1 text-zinc-300 hover:text-white transition-colors p-2 rounded-lg hover:bg-zinc-700/50"
@@ -83,7 +83,7 @@ export function Navbar({ onOpenProduct }: NavbarProps) {
             
             {/* Mobile Quick Menu Dropdown */}
             {isQuickMenuOpen && (
-              <div className="absolute top-full left-0 mt-2 w-64 bg-zinc-800 border border-zinc-600 rounded-lg shadow-xl overflow-hidden animate-in fade-in slide-in-from-top-2">
+              <div className="absolute top-full left-0 mt-2 w-64 bg-zinc-800 border border-zinc-600 rounded-lg shadow-xl overflow-hidden animate-in fade-in slide-in-from-top-2 z-50">
                 <div className="p-2 max-h-[70vh] overflow-y-auto scrollbar-thin scrollbar-thumb-zinc-600 scrollbar-track-zinc-800 hover:scrollbar-thumb-zinc-500">
                   {/* Products Section */}
                   <div className="text-xs font-semibold text-zinc-400 uppercase tracking-wider px-3 py-2">
@@ -152,15 +152,15 @@ export function Navbar({ onOpenProduct }: NavbarProps) {
               </div>
             )}
           </div>
-
-          {/* Logo */}
-          <button 
-            onClick={scrollToTop}
-            className="text-lg sm:text-2xl font-black tracking-tighter text-white flex items-center gap-1 sm:gap-2 cursor-pointer hover:opacity-80 transition-opacity"
-          >
-            ABT <span className="text-primary">MEKATRONİK</span>
-          </button>
         </div>
+
+        {/* Logo - CENTER on mobile, LEFT on desktop */}
+        <button 
+          onClick={scrollToTop}
+          className="absolute left-1/2 -translate-x-1/2 lg:static lg:translate-x-0 text-lg sm:text-2xl font-black tracking-tighter text-white flex items-center gap-1 sm:gap-2 cursor-pointer hover:opacity-80 transition-opacity"
+        >
+          ABT <span className="text-primary">MEKATRONİK</span>
+        </button>
 
         {/* Desktop Nav */}
         <div className="hidden lg:flex items-center space-x-6">
@@ -307,8 +307,8 @@ export function Navbar({ onOpenProduct }: NavbarProps) {
           </a>
         </div>
 
-        {/* Mobile: Only Language Selector */}
-        <div className="lg:hidden">
+        {/* Mobile: Language Selector (RIGHT SIDE) */}
+        <div className="lg:hidden ml-auto">
           <LanguageSelector />
         </div>
       </div>

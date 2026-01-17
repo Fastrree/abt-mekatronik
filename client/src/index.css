@@ -523,22 +523,25 @@ img {
 
 /* Optimize video performance */
 video {
-  object-fit: cover; /* Cover full container, responsive scaling */
+  object-fit: cover;
   will-change: transform;
 }
 
-/* Hero video specific - full screen responsive */
-#hero video {
-  object-fit: cover;
-  object-position: center;
-}
-
-/* Mobile optimization - prevent excessive zoom */
-@media (max-width: 768px) {
+/* Desktop-only optimization - responsive full-screen video */
+@media (min-width: 769px) {
   #hero video {
     object-fit: cover;
+    object-position: center;
     min-width: 100%;
     min-height: 100%;
+  }
+}
+
+/* Mobile - keep default behavior, no special optimization */
+@media (max-width: 768px) {
+  #hero video {
+    /* Mobile uses default video behavior for performance */
+    object-fit: cover;
   }
 }
 

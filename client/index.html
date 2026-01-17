@@ -155,7 +155,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <!-- Reduced font weights: Only load what we actually use -->
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Montserrat:wght@700;900&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Montserrat:wght@700;900&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
     <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Montserrat:wght@700;900&display=swap" rel="stylesheet"></noscript>
     
     <!-- Schema.org - FAQ -->
@@ -247,8 +247,9 @@
     }
     </script>
     
-    <!-- Splash Screen Styles -->
+    <!-- Critical CSS - Inline for Performance -->
     <style>
+      /* Splash Screen */
       #splash-screen {
         position: fixed;
         inset: 0;
@@ -294,6 +295,36 @@
       }
       @keyframes spin {
         to { transform: rotate(360deg); }
+      }
+      
+      /* Critical Above-the-Fold Styles */
+      body {
+        margin: 0;
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+      
+      /* Prevent layout shift */
+      #root {
+        min-height: 100vh;
+      }
+      
+      /* Hero section critical styles */
+      .hero-section {
+        position: relative;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+      }
+      
+      /* Reduce CLS (Cumulative Layout Shift) */
+      img, video {
+        max-width: 100%;
+        height: auto;
+        display: block;
       }
     </style>
     

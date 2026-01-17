@@ -45,7 +45,7 @@ export default defineConfig({
         manualChunks: {
           // Vendor splitting for better caching
           'react-vendor': ['react', 'react-dom'],
-          'ui-vendor': ['framer-motion', '@radix-ui/react-accordion', '@radix-ui/react-dialog'],
+          'ui-vendor': ['@radix-ui/react-accordion', '@radix-ui/react-dialog', '@radix-ui/react-toast'],
           'form-vendor': ['react-hook-form', '@hookform/resolvers', 'zod'],
         },
       },

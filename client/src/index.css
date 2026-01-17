@@ -203,46 +203,55 @@
 }
 
 /* Custom Scrollbar Styles */
-/* Dark theme scrollbar (default) */
+/* Dark theme scrollbar (default) - for both body and .scrollbar-thin */
+body,
 .scrollbar-thin {
   scrollbar-width: thin;
   scrollbar-color: #52525b #27272a;
 }
 
+body::-webkit-scrollbar,
 .scrollbar-thin::-webkit-scrollbar {
   width: 6px;
 }
 
+body::-webkit-scrollbar-track,
 .scrollbar-thin::-webkit-scrollbar-track {
   background: #27272a;
   border-radius: 3px;
 }
 
+body::-webkit-scrollbar-thumb,
 .scrollbar-thin::-webkit-scrollbar-thumb {
   background: #52525b;
   border-radius: 3px;
 }
 
+body::-webkit-scrollbar-thumb:hover,
 .scrollbar-thin::-webkit-scrollbar-thumb:hover {
   background: #71717a;
 }
 
 /* Light theme scrollbar - WHITE track with grey thumb */
+.light body,
 .light .scrollbar-thin {
   scrollbar-width: thin;
   scrollbar-color: #94a3b8 #ffffff;
 }
 
+.light body::-webkit-scrollbar-track,
 .light .scrollbar-thin::-webkit-scrollbar-track {
   background: #ffffff;
   border-radius: 3px;
 }
 
+.light body::-webkit-scrollbar-thumb,
 .light .scrollbar-thin::-webkit-scrollbar-thumb {
   background: #94a3b8;
   border-radius: 3px;
 }
 
+.light body::-webkit-scrollbar-thumb:hover,
 .light .scrollbar-thin::-webkit-scrollbar-thumb:hover {
   background: #64748b;
 }

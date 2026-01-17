@@ -523,8 +523,23 @@ img {
 
 /* Optimize video performance */
 video {
-  object-fit: cover;
+  object-fit: cover; /* Cover full container, responsive scaling */
   will-change: transform;
+}
+
+/* Hero video specific - full screen responsive */
+#hero video {
+  object-fit: cover;
+  object-position: center;
+}
+
+/* Mobile optimization - prevent excessive zoom */
+@media (max-width: 768px) {
+  #hero video {
+    object-fit: cover;
+    min-width: 100%;
+    min-height: 100%;
+  }
 }
 
 /* Optimize hover effects */

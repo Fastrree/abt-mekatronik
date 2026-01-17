@@ -62,7 +62,7 @@ export const OptimizedVideo = memo(function OptimizedVideo({
     <div className={`relative ${className}`} ref={videoRef}>
       {isInView && !hasError ? (
         <video
-          className="w-full h-full object-cover"
+          className="w-full h-full object-contain"
           controls={controls}
           muted={muted}
           autoPlay={autoPlay}
@@ -86,7 +86,7 @@ export const OptimizedVideo = memo(function OptimizedVideo({
           <img
             src={poster}
             alt=""
-            className="w-full h-full object-cover"
+            className="w-full h-full object-contain"
             aria-hidden="true"
           />
         )

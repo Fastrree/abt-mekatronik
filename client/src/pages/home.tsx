@@ -311,8 +311,7 @@ export default function Home() {
             loop 
             playsInline
             preload="auto"
-            className="w-full h-full object-cover object-center"
-            style={{ transform: 'scale(1.0)' }}
+            className="absolute top-1/2 left-1/2 min-w-full min-h-full w-auto h-auto -translate-x-1/2 -translate-y-1/2 object-cover"
             poster="/media/img1.jpeg"
             aria-label="ABT Mekatronik üretim tesisi video arka planı"
           >

@@ -50,7 +50,7 @@ export function ThemeToggle() {
       size="icon"
       onClick={handleThemeToggle}
       disabled={isFlipping}
-      className="w-10 h-10 rounded-lg relative overflow-hidden group hover:bg-zinc-700/50 dark:hover:bg-zinc-700/50 transition-all duration-300 hover:scale-110"
+      className="w-10 h-10 rounded-lg relative overflow-hidden group bg-zinc-800/80 dark:bg-zinc-800/80 hover:bg-zinc-700 dark:hover:bg-zinc-700 border border-zinc-700/50 dark:border-zinc-700/50 hover:border-zinc-600 dark:hover:border-zinc-600 transition-all duration-300 hover:scale-110 shadow-lg"
       aria-label="Toggle theme"
     >
       {/* Background glow effect */}

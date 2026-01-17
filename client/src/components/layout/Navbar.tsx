@@ -77,7 +77,11 @@ export function Navbar({ onOpenProduct }: NavbarProps) {
             
             {/* Quick Menu Dropdown - Same for Mobile & Desktop */}
             {isQuickMenuOpen && (
-              <div className="absolute top-full left-0 mt-2 w-64 bg-zinc-800 border border-zinc-600 rounded-lg shadow-xl overflow-hidden animate-in fade-in slide-in-from-top-2 z-50">
+              <div 
+                className="absolute top-full mt-2 w-64 bg-zinc-800 border border-zinc-600 rounded-lg shadow-xl overflow-hidden animate-in fade-in slide-in-from-top-2 z-50"
+                style={{ [isRTL ? 'right' : 'left']: 0 }}
+                dir={isRTL ? 'rtl' : 'ltr'}
+              >
                 <div className="p-2 max-h-[70vh] overflow-y-auto scrollbar-thin scrollbar-thumb-zinc-600 scrollbar-track-zinc-800 hover:scrollbar-thumb-zinc-500">
                   {/* Products Section */}
                   <div className="text-xs font-semibold text-zinc-400 uppercase tracking-wider px-3 py-2">

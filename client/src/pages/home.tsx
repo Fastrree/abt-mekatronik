@@ -155,7 +155,7 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-zinc-900 text-zinc-200 selection:bg-red-900 selection:text-white overflow-x-hidden">
+    <div className="min-h-screen bg-zinc-900 dark:bg-zinc-900 bg-slate-50 text-zinc-900 dark:text-zinc-200 selection:bg-red-900 selection:text-white overflow-x-hidden transition-colors duration-300">
       <Navbar onOpenProduct={openProductModal} />
 
       {/* PRODUCT DETAIL MODAL */}

@@ -24,29 +24,29 @@ export function Footer({ onOpenProduct }: FooterProps) {
   };
 
   return (
-    <footer className="bg-zinc-900 text-zinc-400 border-t border-zinc-800 pt-20 pb-10">
+    <footer className="bg-zinc-50 dark:bg-zinc-900 text-zinc-600 dark:text-zinc-400 border-t border-zinc-200 dark:border-zinc-800 pt-20 pb-10">
       <div className="container mx-auto px-6">
         <div className="grid md:grid-cols-4 gap-12 mb-16">
           <div className="col-span-1 md:col-span-1">
-            <h2 className="text-2xl font-black text-white mb-6">ABT <span className="text-primary">MEKATRONİK</span></h2>
+            <h2 className="text-2xl font-black text-zinc-900 dark:text-white mb-6">ABT <span className="text-primary">MEKATRONİK</span></h2>
             <p className="text-sm leading-relaxed mb-6">
               {t('footer.description')}
             </p>
             <div className="flex space-x-4">
-              <a href="#" className="w-10 h-10 rounded-full bg-zinc-800 flex items-center justify-center hover:bg-primary hover:text-white transition-colors">
+              <a href="#" className="w-10 h-10 rounded-full bg-white dark:bg-zinc-800 border border-zinc-300 dark:border-zinc-700 flex items-center justify-center hover:bg-primary hover:text-white transition-colors">
                 <Linkedin size={18} />
               </a>
-              <a href="#" className="w-10 h-10 rounded-full bg-zinc-800 flex items-center justify-center hover:bg-primary hover:text-white transition-colors">
+              <a href="#" className="w-10 h-10 rounded-full bg-white dark:bg-zinc-800 border border-zinc-300 dark:border-zinc-700 flex items-center justify-center hover:bg-primary hover:text-white transition-colors">
                 <Instagram size={18} />
               </a>
-              <a href="#" className="w-10 h-10 rounded-full bg-zinc-800 flex items-center justify-center hover:bg-primary hover:text-white transition-colors">
+              <a href="#" className="w-10 h-10 rounded-full bg-white dark:bg-zinc-800 border border-zinc-300 dark:border-zinc-700 flex items-center justify-center hover:bg-primary hover:text-white transition-colors">
                 <Facebook size={18} />
               </a>
             </div>
           </div>
 
           <div>
-            <h3 className="text-white font-bold uppercase tracking-wider mb-6">{t('footer.quickAccess')}</h3>
+            <h3 className="text-zinc-900 dark:text-white font-bold uppercase tracking-wider mb-6">{t('footer.quickAccess')}</h3>
             <ul className="space-y-3 text-sm">
               <li><a href="#hero" className="hover:text-primary transition-colors">{t('nav.home')}</a></li>
               <li><a href="#products" className="hover:text-primary transition-colors">{t('nav.products')}</a></li>
@@ -60,7 +60,7 @@ export function Footer({ onOpenProduct }: FooterProps) {
           </div>
 
           <div>
-            <h3 className="text-white font-bold uppercase tracking-wider mb-6">{t('footer.productGroups')}</h3>
+            <h3 className="text-zinc-900 dark:text-white font-bold uppercase tracking-wider mb-6">{t('footer.productGroups')}</h3>
             <ul className="space-y-3 text-sm">
               {productLinks.map((product) => {
                 const IconComponent = product.icon;
@@ -70,7 +70,7 @@ export function Footer({ onOpenProduct }: FooterProps) {
                       onClick={() => handleProductClick(product.key)}
                       className="flex items-center gap-2 hover:text-primary transition-colors text-left"
                     >
-                      <IconComponent size={14} className="text-red-500" />
+                      <IconComponent size={14} className="text-red-600 dark:text-red-500" />
                       {t(`productItems.${product.key}.title`)}
                     </button>
                   </li>
@@ -80,7 +80,7 @@ export function Footer({ onOpenProduct }: FooterProps) {
           </div>
 
           <div>
-            <h3 className="text-white font-bold uppercase tracking-wider mb-6">{t('footer.contactTitle')}</h3>
+            <h3 className="text-zinc-900 dark:text-white font-bold uppercase tracking-wider mb-6">{t('footer.contactTitle')}</h3>
             <ul className="space-y-4 text-sm">
               <li className="flex items-start gap-3">
                 <MapPin className="text-primary shrink-0 mt-1" size={18} />
@@ -98,7 +98,7 @@ export function Footer({ onOpenProduct }: FooterProps) {
           </div>
         </div>
 
-        <div className="border-t border-zinc-800 pt-8 text-center text-xs uppercase tracking-widest font-medium">
+        <div className="border-t border-zinc-200 dark:border-zinc-800 pt-8 text-center text-xs uppercase tracking-widest font-medium">
           <p>{t('footer.copyright')}</p>
         </div>
       </div>

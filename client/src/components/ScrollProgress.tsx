@@ -27,7 +27,7 @@ export function ScrollProgress() {
   if (progress < 0.5) return null;
 
   return (
-    <div className="fixed top-0 left-0 right-0 z-[60] h-1 bg-zinc-800">
+    <div className="fixed top-0 left-0 right-0 z-[60] h-1 bg-zinc-200 dark:bg-zinc-800">
       <div 
         className="h-full bg-gradient-to-r from-red-600 to-red-500 transition-all duration-150 ease-out"
         style={{ width: `${progress}%` }}

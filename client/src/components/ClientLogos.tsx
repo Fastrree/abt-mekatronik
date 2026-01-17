@@ -35,14 +35,14 @@ interface LogoItemProps {
 
 function LogoItem({ client }: LogoItemProps) {
   return (
-    <div className="flex-shrink-0 flex flex-col items-center justify-center px-8 py-6 bg-zinc-800/50 border border-zinc-700/50 rounded-lg hover:border-red-600/50 transition-all duration-300 group min-w-[180px]">
+    <div className="flex-shrink-0 flex flex-col items-center justify-center px-8 py-6 bg-white/80 dark:bg-zinc-800/50 border border-zinc-300 dark:border-zinc-700/50 rounded-lg hover:border-red-600/50 transition-all duration-300 group min-w-[180px] shadow-lg dark:shadow-none">
       {/* Placeholder logo - replace with actual images */}
-      <div className="w-20 h-20 bg-zinc-700/50 rounded-lg flex items-center justify-center mb-3 group-hover:bg-red-600/20 transition-all duration-300 group-hover:scale-110">
-        <span className="text-3xl font-black text-zinc-500 group-hover:text-red-500 transition-colors">
+      <div className="w-20 h-20 bg-zinc-100 dark:bg-zinc-700/50 rounded-lg flex items-center justify-center mb-3 group-hover:bg-red-600/20 transition-all duration-300 group-hover:scale-110">
+        <span className="text-3xl font-black text-zinc-700 dark:text-zinc-500 group-hover:text-red-600 dark:group-hover:text-red-500 transition-colors">
           {client.name.charAt(0)}
         </span>
       </div>
-      <span className="text-xs text-zinc-500 uppercase tracking-wider group-hover:text-zinc-400 transition-colors">
+      <span className="text-xs text-zinc-600 dark:text-zinc-500 uppercase tracking-wider group-hover:text-zinc-700 dark:group-hover:text-zinc-400 transition-colors">
         {client.industry}
       </span>
     </div>
@@ -53,7 +53,7 @@ export function ClientLogos() {
   const { t } = useI18n();
 
   return (
-    <section className="relative py-16 bg-zinc-800/50 border-y border-zinc-700 overflow-hidden">
+    <section className="relative py-16 bg-zinc-50 dark:bg-zinc-800/50 border-y border-zinc-200 dark:border-zinc-700 overflow-hidden">
       <div className="container mx-auto px-6 mb-12">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -61,7 +61,7 @@ export function ClientLogos() {
           viewport={{ once: true }}
           className="text-center"
         >
-          <h3 className="text-zinc-400 text-sm uppercase tracking-widest font-semibold">
+          <h3 className="text-zinc-600 dark:text-zinc-400 text-sm uppercase tracking-widest font-semibold">
             {t('clients.title')}
           </h3>
         </motion.div>
@@ -70,10 +70,10 @@ export function ClientLogos() {
       {/* First Row - Left to Right - Full Width */}
       <div className="relative mb-6 group/row">
         {/* Tunnel fade effect - Left */}
-        <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-zinc-800/50 via-zinc-800/30 to-transparent z-10 pointer-events-none" />
+        <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-zinc-50 via-zinc-50/50 to-transparent dark:from-zinc-800/50 dark:via-zinc-800/30 dark:to-transparent z-10 pointer-events-none" />
         
         {/* Tunnel fade effect - Right */}
-        <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-zinc-800/50 via-zinc-800/30 to-transparent z-10 pointer-events-none" />
+        <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-zinc-50 via-zinc-50/50 to-transparent dark:from-zinc-800/50 dark:via-zinc-800/30 dark:to-transparent z-10 pointer-events-none" />
         
         <div className="flex gap-4 animate-scroll-left group-hover/row:pause-animation will-change-transform">
           {/* First set */}
@@ -102,10 +102,10 @@ export function ClientLogos() {
       {/* Second Row - Right to Left - Full Width */}
       <div className="relative group/row">
         {/* Tunnel fade effect - Left */}
-        <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-zinc-800/50 via-zinc-800/30 to-transparent z-10 pointer-events-none" />
+        <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-zinc-50 via-zinc-50/50 to-transparent dark:from-zinc-800/50 dark:via-zinc-800/30 dark:to-transparent z-10 pointer-events-none" />
         
         {/* Tunnel fade effect - Right */}
-        <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-zinc-800/50 via-zinc-800/30 to-transparent z-10 pointer-events-none" />
+        <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-zinc-50 via-zinc-50/50 to-transparent dark:from-zinc-800/50 dark:via-zinc-800/30 dark:to-transparent z-10 pointer-events-none" />
         
         <div className="flex gap-4 animate-scroll-right group-hover/row:pause-animation will-change-transform">
           {/* First set */}

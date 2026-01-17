@@ -13,12 +13,12 @@ export function WhatsAppButton() {
     <div className="fixed bottom-6 right-6 z-50 flex items-center gap-3">
       {/* Tooltip */}
       <div 
-        className={`bg-zinc-800 text-white text-sm px-4 py-2 rounded-lg shadow-lg transition-all duration-300 ${
+        className={`bg-white dark:bg-zinc-800 text-zinc-900 dark:text-white text-sm px-4 py-2 rounded-lg shadow-lg border border-zinc-300 dark:border-zinc-700 transition-all duration-300 ${
           isHovered ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-4 pointer-events-none'
         }`}
       >
         {t('whatsapp.tooltip')}
-        <div className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1 w-2 h-2 bg-zinc-800 rotate-45" />
+        <div className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1 w-2 h-2 bg-white dark:bg-zinc-800 rotate-45 border-r border-b border-zinc-300 dark:border-zinc-700" />
       </div>
       
       {/* Button */}

@@ -2,7 +2,11 @@ import { useState } from 'react';
 import { useI18n, languages, Language, getFlagSrc } from '@/lib/i18n';
 import { ChevronDown } from 'lucide-react';
 
-export function LanguageSelector() {
+interface LanguageSelectorProps {
+  isScrolled?: boolean;
+}
+
+export function LanguageSelector({ isScrolled = false }: LanguageSelectorProps) {
   const { language, setLanguage, t } = useI18n();
   const [isOpen, setIsOpen] = useState(false);
 
@@ -18,34 +22,50 @@ export function LanguageSelector() {
       {/* Desktop: Full style with flag and language name */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="hidden lg:flex items-center gap-2 px-3 py-2 bg-zinc-800 border border-zinc-700 rounded-lg hover:border-red-600/50 transition-colors"
+        className={`hidden lg:flex items-center gap-2 px-3 py-2 hover:opacity-70 transition-opacity ${
+          isOpen ? 'opacity-100' : ''
+        }`}
         aria-label={t('nav.selectLanguage')}
       >
         <img src={getFlagSrc(language)} alt={currentLang?.name} className="w-5 h-4 object-cover rounded-sm" />
-        <span className="text-sm font-medium">{currentLang?.code.toUpperCase()}</span>
-        <ChevronDown size={14} className={`text-zinc-400 transition-transform ${isOpen ? 'rotate-180' : ''}`} />
+        <span className={`text-sm font-medium ${
+          isScrolled 
+            ? "text-zinc-900 dark:text-zinc-300" 
+            : "text-white dark:text-zinc-300"
+        }`}>{currentLang?.code.toUpperCase()}</span>
+        <ChevronDown size={14} className={`transition-transform ${
+          isScrolled 
+            ? "text-zinc-900 dark:text-zinc-400" 
+            : "text-white dark:text-zinc-400"
+        } ${isOpen ? 'rotate-180' : ''}`} />
       </button>
 
       {/* Mobile: Minimal style with just flag */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="lg:hidden flex items-center gap-1 px-2 py-1.5 bg-zinc-800/80 border border-zinc-700 rounded hover:border-red-600/50 transition-colors"
+        className={`lg:hidden flex items-center gap-1 px-2 py-1.5 hover:opacity-70 transition-opacity ${
+          isOpen ? 'opacity-100' : ''
+        }`}
         aria-label={t('nav.selectLanguage')}
       >
         <img src={getFlagSrc(language)} alt={currentLang?.name} className="w-5 h-3.5 object-cover rounded-sm" />
-        <ChevronDown size={12} className={`text-zinc-400 transition-transform ${isOpen ? 'rotate-180' : ''}`} />
+        <ChevronDown size={12} className={`transition-transform ${
+          isScrolled 
+            ? "text-zinc-900 dark:text-zinc-400" 
+            : "text-white dark:text-zinc-400"
+        } ${isOpen ? 'rotate-180' : ''}`} />
       </button>
 
       {isOpen && (
         <>
           <div className="fixed inset-0 z-40" onClick={() => setIsOpen(false)} />
-          <div className="absolute right-0 top-full mt-2 z-50 bg-zinc-800 border border-zinc-700 rounded-lg shadow-xl overflow-hidden min-w-[160px]">
+          <div className="absolute right-0 top-full mt-2 z-50 bg-white dark:bg-zinc-800 border border-slate-200 dark:border-zinc-700 rounded-lg shadow-xl overflow-hidden min-w-[160px]">
             {languages.map((lang) => (
               <button
                 key={lang.code}
                 onClick={() => handleSelect(lang.code)}
-                className={`w-full flex items-center gap-3 px-4 py-3 text-left hover:bg-zinc-700 transition-colors ${
-                  language === lang.code ? 'bg-red-600/20 text-red-400' : 'text-zinc-300'
+                className={`w-full flex items-center gap-3 px-4 py-3 text-left hover:bg-slate-100 dark:hover:bg-zinc-700 transition-colors ${
+                  language === lang.code ? 'bg-red-600/20 text-red-600 dark:text-red-400' : 'text-zinc-900 dark:text-zinc-300'
                 }`}
               >
                 <img src={getFlagSrc(lang.code)} alt={lang.name} className="w-6 h-4 object-cover rounded-sm" />

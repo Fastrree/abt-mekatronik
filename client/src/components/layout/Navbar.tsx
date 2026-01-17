@@ -59,7 +59,7 @@ export function Navbar({ onOpenProduct }: NavbarProps) {
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled 
-          ? "bg-zinc-900/95 dark:bg-zinc-900/95 bg-white/95 backdrop-blur-sm shadow-lg py-3 border-b border-zinc-700 dark:border-zinc-700 border-slate-200" 
+          ? "bg-white/95 dark:bg-zinc-900/95 backdrop-blur-sm shadow-lg py-3 border-b border-slate-200 dark:border-zinc-700" 
           : "bg-transparent py-6"
       }`}
       dir={isRTL ? 'rtl' : 'ltr'}
@@ -71,7 +71,11 @@ export function Navbar({ onOpenProduct }: NavbarProps) {
           <div className="relative">
             <button
               onClick={() => setIsQuickMenuOpen(!isQuickMenuOpen)}
-              className="flex items-center gap-1 text-zinc-300 dark:text-zinc-300 text-zinc-700 hover:text-white dark:hover:text-white hover:text-zinc-900 transition-colors p-2 rounded-lg hover:bg-zinc-700/50 dark:hover:bg-zinc-700/50 hover:bg-slate-200"
+              className={`flex items-center gap-1 p-2 rounded-lg transition-colors ${
+                isScrolled
+                  ? "text-zinc-900 dark:text-zinc-300 hover:bg-slate-200 dark:hover:bg-zinc-700/50"
+                  : "text-white dark:text-zinc-300 hover:bg-zinc-700/50 dark:hover:bg-zinc-700/50"
+              }`}
               aria-label={t('nav.quickAccess')}
             >
               <Menu size={20} />
@@ -81,13 +85,13 @@ export function Navbar({ onOpenProduct }: NavbarProps) {
             {/* Quick Menu Dropdown - Same for Mobile & Desktop */}
             {isQuickMenuOpen && (
               <div 
-                className="absolute top-full mt-2 w-64 bg-zinc-800 dark:bg-zinc-800 bg-white border border-zinc-600 dark:border-zinc-600 border-slate-200 rounded-lg shadow-xl overflow-hidden animate-in fade-in slide-in-from-top-2 z-50"
+                className="absolute top-full mt-2 w-64 bg-white dark:bg-zinc-800 border border-slate-200 dark:border-zinc-600 rounded-lg shadow-xl overflow-hidden animate-in fade-in slide-in-from-top-2 z-50"
                 style={{ [isRTL ? 'right' : 'left']: 0 }}
                 dir={isRTL ? 'rtl' : 'ltr'}
               >
                 <div className="p-2 max-h-[70vh] overflow-y-auto scrollbar-thin scrollbar-thumb-zinc-600 scrollbar-track-zinc-800 hover:scrollbar-thumb-zinc-500">
                   {/* Products Section */}
-                  <div className="text-xs font-semibold text-zinc-400 dark:text-zinc-400 text-zinc-600 uppercase tracking-wider px-3 py-2">
+                  <div className="text-xs font-semibold text-zinc-600 dark:text-zinc-400 uppercase tracking-wider px-3 py-2">
                     {t('nav.products')}
                   </div>
                   {productLinks.map((product) => {
@@ -96,7 +100,7 @@ export function Navbar({ onOpenProduct }: NavbarProps) {
                       <button
                         key={product.key}
                         onClick={() => handleProductClick(product.key)}
-                        className="w-full flex items-center gap-3 px-3 py-2.5 text-sm text-zinc-300 dark:text-zinc-300 text-zinc-700 hover:text-white dark:hover:text-white hover:text-zinc-900 hover:bg-zinc-700 dark:hover:bg-zinc-700 hover:bg-slate-100 rounded-md transition-colors text-left"
+                className="w-full flex items-center gap-3 px-3 py-2.5 text-sm text-zinc-700 dark:text-zinc-300 hover:text-zinc-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-zinc-700 rounded-md transition-colors text-left"
                       >
                         <IconComponent size={16} className="text-red-500" />
                         {product.name}
@@ -106,7 +110,7 @@ export function Navbar({ onOpenProduct }: NavbarProps) {
                   
                   {/* Corporate Section */}
                   <div className="border-t border-zinc-600 dark:border-zinc-600 border-slate-200 mt-2 pt-2">
-                    <div className="text-xs font-semibold text-zinc-400 dark:text-zinc-400 text-zinc-600 uppercase tracking-wider px-3 py-2">
+                    <div className="text-xs font-semibold text-zinc-600 dark:text-zinc-400 uppercase tracking-wider px-3 py-2">
                       {t('nav.engineering')}
                     </div>
                     {corporateLinks.map((link) => (
@@ -114,7 +118,7 @@ export function Navbar({ onOpenProduct }: NavbarProps) {
                         key={link.name}
                         href={link.href}
                         onClick={() => setIsQuickMenuOpen(false)}
-                        className="block px-3 py-2 text-sm text-zinc-300 dark:text-zinc-300 text-zinc-700 hover:text-white dark:hover:text-white hover:text-zinc-900 hover:bg-zinc-700 dark:hover:bg-zinc-700 hover:bg-slate-100 rounded-md transition-colors"
+                        className="block px-3 py-2 text-sm text-zinc-700 dark:text-zinc-300 hover:text-zinc-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-zinc-700 rounded-md transition-colors"
                       >
                         {link.name}
                       </a>
@@ -122,25 +126,25 @@ export function Navbar({ onOpenProduct }: NavbarProps) {
                   </div>
                   
                   {/* Projects & Contact */}
-                  <div className="border-t border-zinc-600 dark:border-zinc-600 border-slate-200 mt-2 pt-2">
+                  <div className="border-t border-slate-200 dark:border-zinc-600 mt-2 pt-2">
                     <a
                       href="#projects"
                       onClick={() => setIsQuickMenuOpen(false)}
-                      className="block px-3 py-2 text-sm text-zinc-300 dark:text-zinc-300 text-zinc-700 hover:text-white dark:hover:text-white hover:text-zinc-900 hover:bg-zinc-700 dark:hover:bg-zinc-700 hover:bg-slate-100 rounded-md transition-colors"
+                      className="block px-3 py-2 text-sm text-zinc-700 dark:text-zinc-300 hover:text-zinc-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-zinc-700 rounded-md transition-colors"
                     >
                       {t('nav.projects')}
                     </a>
                     <a
                       href="#contact"
                       onClick={() => setIsQuickMenuOpen(false)}
-                      className="block px-3 py-2 text-sm text-zinc-300 dark:text-zinc-300 text-zinc-700 hover:text-white dark:hover:text-white hover:text-zinc-900 hover:bg-zinc-700 dark:hover:bg-zinc-700 hover:bg-slate-100 rounded-md transition-colors"
+                      className="block px-3 py-2 text-sm text-zinc-700 dark:text-zinc-300 hover:text-zinc-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-zinc-700 rounded-md transition-colors"
                     >
                       {t('nav.contact')}
                     </a>
                   </div>
                   
                   {/* CTA */}
-                  <div className="border-t border-zinc-600 dark:border-zinc-600 border-slate-200 mt-2 pt-2">
+                  <div className="border-t border-slate-200 dark:border-zinc-600 mt-2 pt-2">
                     <a
                       href="#contact"
                       onClick={() => setIsQuickMenuOpen(false)}
@@ -157,7 +161,7 @@ export function Navbar({ onOpenProduct }: NavbarProps) {
           {/* Logo - Next to Hamburger on Desktop, Centered on Mobile */}
           <button 
             onClick={scrollToTop}
-            className="text-lg sm:text-2xl font-black tracking-tighter text-white dark:text-white text-zinc-900 flex items-center gap-1 sm:gap-2 cursor-pointer hover:opacity-80 transition-opacity lg:static absolute left-1/2 lg:left-auto lg:transform-none -translate-x-1/2 lg:translate-x-0"
+            className="text-lg sm:text-2xl font-black tracking-tighter text-zinc-900 dark:text-white flex items-center gap-1 sm:gap-2 cursor-pointer hover:opacity-80 transition-opacity lg:static absolute left-1/2 lg:left-auto lg:transform-none -translate-x-1/2 lg:translate-x-0"
           >
             ABT <span className="text-primary">MEKATRONİK</span>
           </button>
@@ -169,7 +173,11 @@ export function Navbar({ onOpenProduct }: NavbarProps) {
           <a
             href="#hero"
             onClick={closeAllDropdowns}
-            className="text-xs font-semibold uppercase tracking-wider text-zinc-300 dark:text-zinc-300 text-zinc-700 hover:text-primary transition-colors relative group whitespace-nowrap"
+            className={`text-xs font-semibold uppercase tracking-wider py-2.5 ${
+              isScrolled 
+                ? "text-zinc-900 dark:text-zinc-300" 
+                : "text-white dark:text-zinc-300"
+            } hover:text-primary transition-colors relative group whitespace-nowrap`}
           >
             {t('nav.home')}
             <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all group-hover:w-full"></span>
@@ -179,7 +187,11 @@ export function Navbar({ onOpenProduct }: NavbarProps) {
           <a
             href="#products"
             onClick={closeAllDropdowns}
-            className="text-xs font-semibold uppercase tracking-wider text-zinc-300 dark:text-zinc-300 text-zinc-700 hover:text-primary transition-colors relative group whitespace-nowrap"
+            className={`text-xs font-semibold uppercase tracking-wider py-2.5 ${
+              isScrolled 
+                ? "text-zinc-900 dark:text-zinc-300" 
+                : "text-white dark:text-zinc-300"
+            } hover:text-primary transition-colors relative group whitespace-nowrap`}
           >
             {t('nav.products')}
             <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all group-hover:w-full"></span>
@@ -189,7 +201,11 @@ export function Navbar({ onOpenProduct }: NavbarProps) {
           <a
             href="#engineering"
             onClick={closeAllDropdowns}
-            className="text-xs font-semibold uppercase tracking-wider text-zinc-300 dark:text-zinc-300 text-zinc-700 hover:text-primary transition-colors relative group whitespace-nowrap"
+            className={`text-xs font-semibold uppercase tracking-wider py-2.5 ${
+              isScrolled 
+                ? "text-zinc-900 dark:text-zinc-300" 
+                : "text-white dark:text-zinc-300"
+            } hover:text-primary transition-colors relative group whitespace-nowrap`}
           >
             {t('nav.engineering')}
             <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all group-hover:w-full"></span>
@@ -199,7 +215,11 @@ export function Navbar({ onOpenProduct }: NavbarProps) {
           <a
             href="#projects"
             onClick={closeAllDropdowns}
-            className="text-xs font-semibold uppercase tracking-wider text-zinc-300 dark:text-zinc-300 text-zinc-700 hover:text-primary transition-colors relative group whitespace-nowrap"
+            className={`text-xs font-semibold uppercase tracking-wider py-2.5 ${
+              isScrolled 
+                ? "text-zinc-900 dark:text-zinc-300" 
+                : "text-white dark:text-zinc-300"
+            } hover:text-primary transition-colors relative group whitespace-nowrap`}
           >
             {t('nav.projects')}
             <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all group-hover:w-full"></span>
@@ -209,7 +229,11 @@ export function Navbar({ onOpenProduct }: NavbarProps) {
           <a
             href="#contact"
             onClick={closeAllDropdowns}
-            className="text-xs font-semibold uppercase tracking-wider text-zinc-300 dark:text-zinc-300 text-zinc-700 hover:text-primary transition-colors relative group whitespace-nowrap"
+            className={`text-xs font-semibold uppercase tracking-wider py-2.5 ${
+              isScrolled 
+                ? "text-zinc-900 dark:text-zinc-300" 
+                : "text-white dark:text-zinc-300"
+            } hover:text-primary transition-colors relative group whitespace-nowrap`}
           >
             {t('nav.contact')}
             <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all group-hover:w-full"></span>
@@ -219,7 +243,7 @@ export function Navbar({ onOpenProduct }: NavbarProps) {
           <ThemeToggle />
 
           {/* Language Selector */}
-          <LanguageSelector />
+          <LanguageSelector isScrolled={isScrolled} />
           
           {/* CTA Button */}
           <a href="#contact">
@@ -232,7 +256,7 @@ export function Navbar({ onOpenProduct }: NavbarProps) {
         {/* Mobile: Theme Toggle + Language Selector (RIGHT SIDE) */}
         <div className="lg:hidden flex items-center gap-2">
           <ThemeToggle />
-          <LanguageSelector />
+          <LanguageSelector isScrolled={isScrolled} />
         </div>
       </div>
 

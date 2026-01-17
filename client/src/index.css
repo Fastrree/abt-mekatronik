@@ -72,40 +72,40 @@
   --radius: 0rem; /* Industrial look - sharp corners */
 }
 
-/* Light Theme - Slate-based Luxury */
+/* Light Theme - White + Grey Tones (Beneks Style) */
 .light {
-  /* Slate-based luxury backgrounds - NO pure white */
-  --background: 210 20% 98%;  /* #f8fafc - Slate 50 */
-  --foreground: 222 47% 11%;  /* #0f172a - Slate 900 */
+  /* Pure white and light grey backgrounds */
+  --background: 0 0% 100%;      /* #ffffff - Pure white */
+  --foreground: 0 0% 13%;       /* #212121 - Almost black text */
 
-  /* Enhanced cards with subtle gradients */
-  --card: 210 20% 98%;
-  --card-foreground: 222 47% 11%;
+  /* Light grey cards with subtle shadows */
+  --card: 0 0% 98%;             /* #fafafa - Very light grey */
+  --card-foreground: 0 0% 13%;
 
   --popover: 0 0% 100%;
-  --popover-foreground: 222 47% 11%;
+  --popover-foreground: 0 0% 13%;
 
   /* Action Red (same as dark for brand consistency) */
   --primary: 0 72% 51%;
   --primary-foreground: 0 0% 100%;
 
-  /* Light metallic silver */
-  --secondary: 215 20% 95%;  /* #f1f5f9 - Slate 100 */
-  --secondary-foreground: 222 47% 11%;
+  /* Light grey accents */
+  --secondary: 0 0% 96%;        /* #f5f5f5 - Light grey */
+  --secondary-foreground: 0 0% 13%;
 
-  /* Muted slate */
-  --muted: 215 20% 95%;
-  --muted-foreground: 215 16% 47%;  /* #64748b - Slate 500 */
+  /* Muted grey */
+  --muted: 0 0% 96%;
+  --muted-foreground: 0 0% 40%;  /* #666666 - Medium grey */
 
-  /* Hover accents */
-  --accent: 214 32% 91%;  /* #e2e8f0 - Slate 200 */
-  --accent-foreground: 222 47% 11%;
+  /* Hover accents - slightly darker grey */
+  --accent: 0 0% 93%;           /* #ededed - Soft grey */
+  --accent-foreground: 0 0% 13%;
 
   --destructive: 0 84% 60%;
   --destructive-foreground: 0 0% 100%;
 
-  --border: 214 32% 91%;
-  --input: 214 32% 91%;
+  --border: 0 0% 90%;           /* #e5e5e5 - Border grey */
+  --input: 0 0% 93%;
   --ring: 0 72% 51%;
 }
 

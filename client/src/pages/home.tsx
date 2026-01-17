@@ -155,7 +155,7 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-zinc-900 dark:bg-zinc-900 bg-slate-50 text-zinc-900 dark:text-zinc-200 selection:bg-red-900 selection:text-white overflow-x-hidden transition-colors duration-300">
+    <div className="min-h-screen bg-white dark:bg-zinc-900 text-zinc-900 dark:text-zinc-200 selection:bg-red-900 selection:text-white overflow-x-hidden transition-colors duration-300">
       <Navbar onOpenProduct={openProductModal} />
 
       {/* PRODUCT DETAIL MODAL */}
@@ -166,7 +166,7 @@ export default function Home() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.15 }}
-            className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/85"
+            className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/70 dark:bg-black/85"
             onClick={closeProductModal}
           >
             <motion.div
@@ -174,16 +174,16 @@ export default function Home() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: 20 }}
               transition={{ duration: 0.2, ease: "easeOut" }}
-              className="relative w-full max-w-5xl max-h-[90vh] overflow-y-auto bg-zinc-800 border border-zinc-600 rounded-lg shadow-2xl will-change-transform"
+              className="relative w-full max-w-5xl max-h-[90vh] overflow-y-auto bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-600 rounded-lg shadow-2xl will-change-transform"
               onClick={(e) => e.stopPropagation()}
             >
               {/* Close Button */}
               <button
                 onClick={closeProductModal}
-                className="absolute top-4 right-4 z-10 p-2 bg-zinc-700 hover:bg-red-600 rounded-full transition-colors"
+                className="absolute top-4 right-4 z-10 p-2 bg-zinc-100 dark:bg-zinc-700 hover:bg-red-600 rounded-full transition-colors"
                 aria-label={t('products.close')}
               >
-                <X size={24} />
+                <X size={24} className="text-zinc-900 dark:text-white" />
               </button>
 
               {(() => {
@@ -192,24 +192,24 @@ export default function Home() {
                 return (
                   <>
                     {/* Hero Image */}
-                    <div className="relative h-64 md:h-80 overflow-hidden bg-zinc-700">
+                    <div className="relative h-64 md:h-80 overflow-hidden bg-zinc-100 dark:bg-zinc-700">
                       <img 
                 src={`/media/${encodeURIComponent(product.heroImage)}`}
                 alt={t(`productItems.${selectedProduct}.title`)}
                 className="w-full h-full object-cover"
                 loading="eager"
               />
-                      <div className="absolute inset-0 bg-gradient-to-t from-zinc-800 via-zinc-800/50 to-transparent" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-white via-white/50 to-transparent dark:from-zinc-800 dark:via-zinc-800/50 dark:to-transparent" />
                       <div className="absolute bottom-6 left-6 right-6">
                         <div className="flex items-center gap-3 mb-2">
                           <div className="p-2 bg-red-600 rounded-lg">
                             <IconComponent className="w-6 h-6 text-white" />
                           </div>
-                          <span className="text-red-400 font-semibold uppercase tracking-wider text-sm">
+                          <span className="text-red-600 dark:text-red-400 font-semibold uppercase tracking-wider text-sm">
                             {t(`productItems.${selectedProduct}.modalSubtitle`)}
                           </span>
                         </div>
-                        <h2 className="text-3xl md:text-4xl font-black text-white">
+                        <h2 className="text-3xl md:text-4xl font-black text-zinc-900 dark:text-white">
                           {t(`productItems.${selectedProduct}.title`)}
                         </h2>
                       </div>
@@ -218,28 +218,28 @@ export default function Home() {
                     {/* Content */}
                     <div className="p-6 md:p-8">
                       {/* Description */}
-                      <div className="prose prose-invert max-w-none mb-8">
+                      <div className="prose prose-invert dark:prose-invert prose-slate max-w-none mb-8">
                         {t(`productItems.${selectedProduct}.description`).split('\n\n').map((paragraph, idx) => {
                           if (paragraph.startsWith('**')) {
                             const title = paragraph.match(/\*\*(.*?)\*\*/)?.[1];
                             const content = paragraph.replace(/\*\*.*?\*\*\n?/, '');
                             return (
                               <div key={idx} className="mb-4">
-                                <h3 className="text-lg font-bold text-red-500 mb-2">{title}</h3>
-                                <p className="text-zinc-300 leading-relaxed whitespace-pre-line">{content}</p>
+                                <h3 className="text-lg font-bold text-red-600 dark:text-red-500 mb-2">{title}</h3>
+                                <p className="text-zinc-700 dark:text-zinc-300 leading-relaxed whitespace-pre-line">{content}</p>
                               </div>
                             );
                           }
-                          return <p key={idx} className="text-zinc-300 leading-relaxed mb-4">{paragraph}</p>;
+                          return <p key={idx} className="text-zinc-700 dark:text-zinc-300 leading-relaxed mb-4">{paragraph}</p>;
                         })}
                       </div>
 
                       {/* Gallery */}
                       <div className="mb-8">
-                        <h3 className="text-xl font-bold text-white mb-4">{t('products.gallery')}</h3>
+                        <h3 className="text-xl font-bold text-zinc-900 dark:text-white mb-4">{t('products.gallery')}</h3>
                         <div className="grid grid-cols-3 gap-3">
                           {product.gallery.map((img, idx) => (
-                            <div key={idx} className="aspect-square overflow-hidden rounded-lg border border-zinc-600">
+                            <div key={idx} className="aspect-square overflow-hidden rounded-lg border border-zinc-200 dark:border-zinc-600">
                               <img
                                 src={`/media/${encodeURIComponent(img)}`}
                                 alt={`${t(`productItems.${selectedProduct}.title`)} ${idx + 1}`}
@@ -253,14 +253,14 @@ export default function Home() {
 
                       {/* Features & Why Us */}
                       <div className="grid md:grid-cols-2 gap-6 mb-8">
-                        <div className="bg-zinc-700/50 p-6 rounded-lg border border-zinc-600">
-                          <h3 className="text-lg font-bold text-white mb-4 flex items-center gap-2">
-                            <Settings className="w-5 h-5 text-red-500" />
+                        <div className="bg-zinc-50 dark:bg-zinc-700/50 p-6 rounded-lg border border-zinc-200 dark:border-zinc-600">
+                          <h3 className="text-lg font-bold text-zinc-900 dark:text-white mb-4 flex items-center gap-2">
+                            <Settings className="w-5 h-5 text-red-600 dark:text-red-500" />
                             {t('products.features')}
                           </h3>
                           <ul className="space-y-2">
                             {tArray(`productItems.${selectedProduct}.features`).map((feature, idx) => (
-                              <li key={idx} className="flex items-start gap-2 text-zinc-300">
+                              <li key={idx} className="flex items-start gap-2 text-zinc-700 dark:text-zinc-300">
                                 <CheckCircle className="w-4 h-4 text-green-500 mt-1 shrink-0" />
                                 <span>{feature}</span>
                               </li>
@@ -269,14 +269,14 @@ export default function Home() {
                         </div>
 
                         <div className="bg-red-600/10 p-6 rounded-lg border border-red-600/30">
-                          <h3 className="text-lg font-bold text-white mb-4 flex items-center gap-2">
-                            <CheckCircle className="w-5 h-5 text-red-500" />
+                          <h3 className="text-lg font-bold text-zinc-900 dark:text-white mb-4 flex items-center gap-2">
+                            <CheckCircle className="w-5 h-5 text-red-600 dark:text-red-500" />
                             {t('products.whyUs')}
                           </h3>
                           <ul className="space-y-2">
                             {tArray(`productItems.${selectedProduct}.whyUs`).map((reason, idx) => (
-                              <li key={idx} className="flex items-start gap-2 text-zinc-300">
-                                <ChevronRight className="w-4 h-4 text-red-500 mt-1 shrink-0" />
+                              <li key={idx} className="flex items-start gap-2 text-zinc-700 dark:text-zinc-300">
+                                <ChevronRight className="w-4 h-4 text-red-600 dark:text-red-500 mt-1 shrink-0" />
                                 <span>{reason}</span>
                               </li>
                             ))}
@@ -297,7 +297,7 @@ export default function Home() {
                         </Button>
                         <Button
                           variant="outline"
-                          className="flex-1 border-zinc-500 text-zinc-200 hover:bg-zinc-700 py-6"
+                          className="flex-1 border-zinc-400 dark:border-zinc-500 text-zinc-900 dark:text-zinc-200 hover:bg-zinc-200 dark:hover:bg-zinc-700 py-6"
                           onClick={() => window.open('https://wa.me/905373197281', '_blank')}
                         >
                           {t('products.whatsappContact')}
@@ -325,7 +325,8 @@ export default function Home() {
           >
             <source src="/media/video1.mp4" type="video/mp4" />
           </video>
-          <div className="absolute inset-0 bg-gradient-to-r from-zinc-900/90 via-zinc-900/70 to-zinc-900/40" />
+          {/* Light theme: NO blur, just subtle overlay. Dark theme: stronger overlay */}
+          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-transparent to-transparent dark:from-zinc-900/90 dark:via-zinc-900/70 dark:to-zinc-900/40" />
         </div>
 
         <div className="container mx-auto px-6 relative z-10 pt-20">
@@ -335,15 +336,15 @@ export default function Home() {
             transition={{ duration: 0.8 }}
             className="max-w-4xl"
           >
-            <div className="inline-block mb-4 px-3 py-1 bg-red-600/20 border border-red-600/50 text-red-500 font-bold text-xs tracking-widest uppercase rounded-sm backdrop-blur-sm">
+            <div className="inline-block mb-4 px-3 py-1 bg-red-600/20 border border-red-600/50 text-red-600 dark:text-red-500 font-bold text-xs tracking-widest uppercase rounded-sm backdrop-blur-sm">
               {t('hero.badge')}
             </div>
-            <h1 className="text-5xl md:text-7xl lg:text-8xl font-black text-white leading-[0.9] mb-8 tracking-tighter">
+            <h1 className="text-5xl md:text-7xl lg:text-8xl font-black text-zinc-900 dark:text-white leading-[0.9] mb-8 tracking-tighter">
               {t('hero.title1')} <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-gray-100 to-gray-500">{t('hero.title2')}</span> <br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-zinc-600 to-zinc-400 dark:from-gray-100 dark:to-gray-500">{t('hero.title2')}</span> <br />
               <span className="text-red-600">{t('hero.title3')}</span> {t('hero.title4')}
             </h1>
-            <p className="text-xl md:text-2xl text-zinc-300 max-w-2xl mb-10 font-light leading-relaxed border-l-4 border-red-600 pl-6">
+            <p className="text-xl md:text-2xl text-zinc-700 dark:text-zinc-300 max-w-2xl mb-10 font-light leading-relaxed border-l-4 border-red-600 pl-6">
               {t('hero.description')}
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
@@ -357,7 +358,7 @@ export default function Home() {
               <Button 
                 size="lg" 
                 variant="outline" 
-                className="border-zinc-400 text-zinc-200 hover:bg-zinc-700 hover:text-white font-bold text-lg px-8 py-6 rounded-none skew-x-[-10deg] backdrop-blur-sm"
+                className="border-zinc-400 dark:border-zinc-400 text-zinc-900 dark:text-zinc-200 hover:bg-zinc-100 hover:text-zinc-900 dark:hover:bg-zinc-700 dark:hover:text-white font-bold text-lg px-8 py-6 rounded-none skew-x-[-10deg] backdrop-blur-sm"
                 onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })}
               >
                 <span className="skew-x-[10deg]">{t('hero.projects')}</span>
@@ -369,7 +370,7 @@ export default function Home() {
         <motion.div 
           animate={{ y: [0, 10, 0] }}
           transition={{ repeat: Infinity, duration: 2 }}
-          className="absolute bottom-10 left-1/2 -translate-x-1/2 text-white/50 flex flex-col items-center gap-2"
+          className="absolute bottom-10 left-1/2 -translate-x-1/2 text-zinc-900/50 dark:text-white/50 flex flex-col items-center gap-2"
         >
           <span className="text-[10px] uppercase tracking-[0.3em]">{t('hero.scroll')}</span>
           <div className="w-[1px] h-12 bg-gradient-to-b from-red-600 to-transparent"></div>
@@ -377,17 +378,17 @@ export default function Home() {
       </section>
 
       {/* PRODUCTS SECTION - 4 Ürün Grubu */}
-      <section id="products" className="py-24 bg-zinc-900 relative">
+      <section id="products" className="py-24 bg-zinc-50 dark:bg-zinc-900 relative">
         <div className="container mx-auto px-6">
           <motion.div 
             {...fadeIn}
             className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6"
           >
             <div>
-              <h3 className="text-red-500 font-bold tracking-widest uppercase mb-2">{t('products.subtitle')}</h3>
-              <h2 className="text-4xl md:text-5xl font-black text-white">{t('products.title')}</h2>
+              <h3 className="text-red-600 dark:text-red-500 font-bold tracking-widest uppercase mb-2">{t('products.subtitle')}</h3>
+              <h2 className="text-4xl md:text-5xl font-black text-zinc-900 dark:text-white">{t('products.title')}</h2>
             </div>
-            <p className="text-zinc-400 max-w-md text-right md:text-left leading-relaxed">
+            <p className="text-zinc-600 dark:text-zinc-400 max-w-md text-right md:text-left leading-relaxed">
               {t('products.description')}
             </p>
           </motion.div>
@@ -401,27 +402,27 @@ export default function Home() {
               viewport={{ once: true }}
               transition={{ delay: 0.1 }}
               onClick={() => openProductModal('konveyor')}
-              className="group relative h-[450px] overflow-hidden bg-zinc-800 border border-zinc-700 hover:border-red-600/50 transition-colors cursor-pointer"
+              className="group relative h-[450px] overflow-hidden bg-white dark:bg-zinc-800 border border-zinc-300 dark:border-zinc-700 hover:border-red-600/50 transition-colors cursor-pointer shadow-lg dark:shadow-none"
             >
-              <div className="absolute inset-0 bg-zinc-800/20 group-hover:bg-transparent transition-colors duration-500 z-10" />
+              <div className="absolute inset-0 bg-white/20 dark:bg-zinc-800/20 group-hover:bg-transparent transition-colors duration-500 z-10" />
               <img 
                 src={`/media/${encodeURIComponent("WhatsApp Image 2026-01-16 at 14.32.03.jpeg")}`}
                 alt={t('productItems.konveyor.title')} 
                 loading="lazy"
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 grayscale group-hover:grayscale-0" 
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-zinc-900 via-zinc-900/60 to-transparent opacity-90 z-20" />
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-50 via-slate-50/60 to-transparent dark:from-zinc-900 dark:via-zinc-900/60 dark:to-transparent opacity-90 z-20" />
               
               <div className="absolute bottom-0 left-0 p-6 z-30 w-full pointer-events-none">
                 <div className="flex items-center gap-2 mb-3">
-                  <Truck className="w-5 h-5 text-red-500" />
-                  <span className="text-xs text-red-400 uppercase tracking-wider font-semibold">{t('productItems.konveyor.subtitle')}</span>
+                  <Truck className="w-5 h-5 text-red-600 dark:text-red-500" />
+                  <span className="text-xs text-red-600 dark:text-red-400 uppercase tracking-wider font-semibold">{t('productItems.konveyor.subtitle')}</span>
                 </div>
                 <div className="w-10 h-1 bg-red-600 mb-3 transition-all duration-300 group-hover:w-16"></div>
-                <h3 className="text-xl font-bold text-white mb-2 group-hover:text-red-500 transition-colors">{t('productItems.konveyor.title')}</h3>
-                <p className="text-zinc-400 text-sm mb-4 line-clamp-2">{t('productItems.konveyor.shortDesc')}</p>
-                <span className="inline-flex items-center text-white font-semibold text-sm uppercase tracking-wider group-hover:translate-x-2 transition-transform">
-                  {t('products.viewDetails')} <ChevronRight className="ml-1 w-4 h-4 text-red-500" />
+                <h3 className="text-xl font-bold text-zinc-900 dark:text-white mb-2 group-hover:text-red-600 dark:group-hover:text-red-500 transition-colors">{t('productItems.konveyor.title')}</h3>
+                <p className="text-zinc-700 dark:text-zinc-400 text-sm mb-4 line-clamp-2">{t('productItems.konveyor.shortDesc')}</p>
+                <span className="inline-flex items-center text-zinc-900 dark:text-white font-semibold text-sm uppercase tracking-wider group-hover:translate-x-2 transition-transform">
+                  {t('products.viewDetails')} <ChevronRight className="ml-1 w-4 h-4 text-red-600 dark:text-red-500" />
                 </span>
               </div>
             </motion.div>
@@ -434,27 +435,27 @@ export default function Home() {
               viewport={{ once: true }}
               transition={{ delay: 0.2 }}
               onClick={() => openProductModal('tekstil')}
-              className="group relative h-[450px] overflow-hidden bg-zinc-800 border-t-4 border-red-600 cursor-pointer"
+              className="group relative h-[450px] overflow-hidden bg-white dark:bg-zinc-800 border-t-4 border-red-600 cursor-pointer shadow-lg dark:shadow-none"
             >
-              <div className="absolute inset-0 bg-zinc-800/20 group-hover:bg-transparent transition-colors duration-500 z-10" />
+              <div className="absolute inset-0 bg-white/20 dark:bg-zinc-800/20 group-hover:bg-transparent transition-colors duration-500 z-10" />
               <img 
                 src={`/media/${encodeURIComponent("WhatsApp Image 2026-01-16 at 14.32.04 (3).jpeg")}`}
                 alt={t('productItems.tekstil.title')} 
                 loading="lazy"
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 grayscale group-hover:grayscale-0" 
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-zinc-900 via-zinc-900/60 to-transparent opacity-90 z-20" />
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-50 via-slate-50/60 to-transparent dark:from-zinc-900 dark:via-zinc-900/60 dark:to-transparent opacity-90 z-20" />
               
               <div className="absolute bottom-0 left-0 p-6 z-30 w-full pointer-events-none">
                 <div className="flex items-center gap-2 mb-3">
-                  <Factory className="w-5 h-5 text-red-500" />
-                  <span className="text-xs text-red-400 uppercase tracking-wider font-semibold">{t('productItems.tekstil.subtitle')}</span>
+                  <Factory className="w-5 h-5 text-red-600 dark:text-red-500" />
+                  <span className="text-xs text-red-600 dark:text-red-400 uppercase tracking-wider font-semibold">{t('productItems.tekstil.subtitle')}</span>
                 </div>
                 <div className="w-10 h-1 bg-red-600 mb-3 transition-all duration-300 group-hover:w-16"></div>
-                <h3 className="text-xl font-bold text-white mb-2 group-hover:text-red-500 transition-colors">{t('productItems.tekstil.title')}</h3>
-                <p className="text-zinc-400 text-sm mb-4 line-clamp-2">{t('productItems.tekstil.shortDesc')}</p>
-                <span className="inline-flex items-center text-white font-semibold text-sm uppercase tracking-wider group-hover:translate-x-2 transition-transform">
-                  {t('products.viewDetails')} <ChevronRight className="ml-1 w-4 h-4 text-red-500" />
+                <h3 className="text-xl font-bold text-zinc-900 dark:text-white mb-2 group-hover:text-red-600 dark:group-hover:text-red-500 transition-colors">{t('productItems.tekstil.title')}</h3>
+                <p className="text-zinc-700 dark:text-zinc-400 text-sm mb-4 line-clamp-2">{t('productItems.tekstil.shortDesc')}</p>
+                <span className="inline-flex items-center text-zinc-900 dark:text-white font-semibold text-sm uppercase tracking-wider group-hover:translate-x-2 transition-transform">
+                  {t('products.viewDetails')} <ChevronRight className="ml-1 w-4 h-4 text-red-600 dark:text-red-500" />
                 </span>
               </div>
             </motion.div>
@@ -467,27 +468,27 @@ export default function Home() {
               viewport={{ once: true }}
               transition={{ delay: 0.3 }}
               onClick={() => openProductModal('celik')}
-              className="group relative h-[450px] overflow-hidden bg-zinc-800 border border-zinc-700 hover:border-red-600/50 transition-colors cursor-pointer"
+              className="group relative h-[450px] overflow-hidden bg-white dark:bg-zinc-800 border border-zinc-300 dark:border-zinc-700 hover:border-red-600/50 transition-colors cursor-pointer shadow-lg dark:shadow-none"
             >
-              <div className="absolute inset-0 bg-zinc-800/20 group-hover:bg-transparent transition-colors duration-500 z-10" />
+              <div className="absolute inset-0 bg-white/20 dark:bg-zinc-800/20 group-hover:bg-transparent transition-colors duration-500 z-10" />
               <img 
                 src={`/media/${encodeURIComponent("WhatsApp Image 2026-01-16 at 14.32.05 (3).jpeg")}`}
                 alt={t('productItems.celik.title')} 
                 loading="lazy"
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 grayscale group-hover:grayscale-0" 
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-zinc-900 via-zinc-900/60 to-transparent opacity-90 z-20" />
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-50 via-slate-50/60 to-transparent dark:from-zinc-900 dark:via-zinc-900/60 dark:to-transparent opacity-90 z-20" />
               
               <div className="absolute bottom-0 left-0 p-6 z-30 w-full pointer-events-none">
                 <div className="flex items-center gap-2 mb-3">
-                  <Layers className="w-5 h-5 text-red-500" />
-                  <span className="text-xs text-red-400 uppercase tracking-wider font-semibold">{t('productItems.celik.subtitle')}</span>
+                  <Layers className="w-5 h-5 text-red-600 dark:text-red-500" />
+                  <span className="text-xs text-red-600 dark:text-red-400 uppercase tracking-wider font-semibold">{t('productItems.celik.subtitle')}</span>
                 </div>
                 <div className="w-10 h-1 bg-red-600 mb-3 transition-all duration-300 group-hover:w-16"></div>
-                <h3 className="text-xl font-bold text-white mb-2 group-hover:text-red-500 transition-colors">{t('productItems.celik.title')}</h3>
-                <p className="text-zinc-400 text-sm mb-4 line-clamp-2">{t('productItems.celik.shortDesc')}</p>
-                <span className="inline-flex items-center text-white font-semibold text-sm uppercase tracking-wider group-hover:translate-x-2 transition-transform">
-                  {t('products.viewDetails')} <ChevronRight className="ml-1 w-4 h-4 text-red-500" />
+                <h3 className="text-xl font-bold text-zinc-900 dark:text-white mb-2 group-hover:text-red-600 dark:group-hover:text-red-500 transition-colors">{t('productItems.celik.title')}</h3>
+                <p className="text-zinc-700 dark:text-zinc-400 text-sm mb-4 line-clamp-2">{t('productItems.celik.shortDesc')}</p>
+                <span className="inline-flex items-center text-zinc-900 dark:text-white font-semibold text-sm uppercase tracking-wider group-hover:translate-x-2 transition-transform">
+                  {t('products.viewDetails')} <ChevronRight className="ml-1 w-4 h-4 text-red-600 dark:text-red-500" />
                 </span>
               </div>
             </motion.div>
@@ -500,27 +501,27 @@ export default function Home() {
               viewport={{ once: true }}
               transition={{ delay: 0.4 }}
               onClick={() => openProductModal('ozelMakine')}
-              className="group relative h-[450px] overflow-hidden bg-zinc-800 border border-zinc-700 hover:border-red-600/50 transition-colors cursor-pointer"
+              className="group relative h-[450px] overflow-hidden bg-white dark:bg-zinc-800 border border-zinc-300 dark:border-zinc-700 hover:border-red-600/50 transition-colors cursor-pointer shadow-lg dark:shadow-none"
             >
-              <div className="absolute inset-0 bg-zinc-800/20 group-hover:bg-transparent transition-colors duration-500 z-10" />
+              <div className="absolute inset-0 bg-white/20 dark:bg-zinc-800/20 group-hover:bg-transparent transition-colors duration-500 z-10" />
               <img 
                 src={`/media/${encodeURIComponent("WhatsApp Image 2026-01-16 at 14.32.06 (5).jpeg")}`}
                 alt={t('productItems.ozelMakine.title')} 
                 loading="lazy"
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 grayscale group-hover:grayscale-0" 
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-zinc-900 via-zinc-900/60 to-transparent opacity-90 z-20" />
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-50 via-slate-50/60 to-transparent dark:from-zinc-900 dark:via-zinc-900/60 dark:to-transparent opacity-90 z-20" />
               
               <div className="absolute bottom-0 left-0 p-6 z-30 w-full pointer-events-none">
                 <div className="flex items-center gap-2 mb-3">
-                  <Wrench className="w-5 h-5 text-red-500" />
-                  <span className="text-xs text-red-400 uppercase tracking-wider font-semibold">{t('productItems.ozelMakine.subtitle')}</span>
+                  <Wrench className="w-5 h-5 text-red-600 dark:text-red-500" />
+                  <span className="text-xs text-red-600 dark:text-red-400 uppercase tracking-wider font-semibold">{t('productItems.ozelMakine.subtitle')}</span>
                 </div>
                 <div className="w-10 h-1 bg-red-600 mb-3 transition-all duration-300 group-hover:w-16"></div>
-                <h3 className="text-xl font-bold text-white mb-2 group-hover:text-red-500 transition-colors">{t('productItems.ozelMakine.title')}</h3>
-                <p className="text-zinc-400 text-sm mb-4 line-clamp-2">{t('productItems.ozelMakine.shortDesc')}</p>
-                <span className="inline-flex items-center text-white font-semibold text-sm uppercase tracking-wider group-hover:translate-x-2 transition-transform">
-                  {t('products.viewDetails')} <ChevronRight className="ml-1 w-4 h-4 text-red-500" />
+                <h3 className="text-xl font-bold text-zinc-900 dark:text-white mb-2 group-hover:text-red-600 dark:group-hover:text-red-500 transition-colors">{t('productItems.ozelMakine.title')}</h3>
+                <p className="text-zinc-700 dark:text-zinc-400 text-sm mb-4 line-clamp-2">{t('productItems.ozelMakine.shortDesc')}</p>
+                <span className="inline-flex items-center text-zinc-900 dark:text-white font-semibold text-sm uppercase tracking-wider group-hover:translate-x-2 transition-transform">
+                  {t('products.viewDetails')} <ChevronRight className="ml-1 w-4 h-4 text-red-600 dark:text-red-500" />
                 </span>
               </div>
             </motion.div>
@@ -529,24 +530,24 @@ export default function Home() {
       </section>
 
       {/* ENGINEERING / ABOUT SECTION */}
-      <section id="engineering" className="py-24 bg-zinc-800 relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-1/3 h-full bg-zinc-700/20 skew-x-12 transform translate-x-20"></div>
-        <div className="absolute bottom-0 left-0 w-64 h-64 border border-zinc-600 rounded-full opacity-20 -translate-x-1/2 translate-y-1/2"></div>
+      <section id="engineering" className="py-24 bg-zinc-50 dark:bg-zinc-800 relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-1/3 h-full bg-zinc-200/30 dark:bg-zinc-700/20 skew-x-12 transform translate-x-20"></div>
+        <div className="absolute bottom-0 left-0 w-64 h-64 border border-zinc-300 dark:border-zinc-600 rounded-full opacity-20 -translate-x-1/2 translate-y-1/2"></div>
         
         <div className="container mx-auto px-6 relative z-10">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <motion.div {...fadeIn}>
-              <h3 className="text-red-500 font-bold tracking-widest uppercase mb-4">{t('engineering.subtitle')}</h3>
-              <h2 className="text-4xl md:text-5xl font-black text-white mb-8">{t('engineering.title')} <br />{t('engineering.title2')}</h2>
+              <h3 className="text-red-600 dark:text-red-500 font-bold tracking-widest uppercase mb-4">{t('engineering.subtitle')}</h3>
+              <h2 className="text-4xl md:text-5xl font-black text-zinc-900 dark:text-white mb-8">{t('engineering.title')} <br />{t('engineering.title2')}</h2>
               
               <div className="space-y-8">
                 <div className="flex gap-4">
                   <div className="w-12 h-12 bg-red-600/10 border border-red-600/30 flex items-center justify-center shrink-0">
-                    <Settings className="text-red-500" />
+                    <Settings className="text-red-600 dark:text-red-500" />
                   </div>
                   <div>
-                    <h4 className="text-xl font-bold text-white mb-2">{t('engineering.customDesign')}</h4>
-                    <p className="text-zinc-400 leading-relaxed">
+                    <h4 className="text-xl font-bold text-zinc-900 dark:text-white mb-2">{t('engineering.customDesign')}</h4>
+                    <p className="text-zinc-600 dark:text-zinc-400 leading-relaxed">
                       {t('engineering.customDesignDesc')}
                     </p>
                   </div>
@@ -554,11 +555,11 @@ export default function Home() {
 
                 <div className="flex gap-4">
                   <div className="w-12 h-12 bg-red-600/10 border border-red-600/30 flex items-center justify-center shrink-0">
-                    <Cog className="text-red-500" />
+                    <Cog className="text-red-600 dark:text-red-500" />
                   </div>
                   <div>
-                    <h4 className="text-xl font-bold text-white mb-2">{t('engineering.precision')}</h4>
-                    <p className="text-zinc-400 leading-relaxed">
+                    <h4 className="text-xl font-bold text-zinc-900 dark:text-white mb-2">{t('engineering.precision')}</h4>
+                    <p className="text-zinc-600 dark:text-zinc-400 leading-relaxed">
                       {t('engineering.precisionDesc')}
                     </p>
                   </div>
@@ -566,11 +567,11 @@ export default function Home() {
 
                 <div className="flex gap-4">
                   <div className="w-12 h-12 bg-red-600/10 border border-red-600/30 flex items-center justify-center shrink-0">
-                    <PenTool className="text-red-500" />
+                    <PenTool className="text-red-600 dark:text-red-500" />
                   </div>
                   <div>
-                    <h4 className="text-xl font-bold text-white mb-2">{t('engineering.turnkey')}</h4>
-                    <p className="text-zinc-400 leading-relaxed">
+                    <h4 className="text-xl font-bold text-zinc-900 dark:text-white mb-2">{t('engineering.turnkey')}</h4>
+                    <p className="text-zinc-600 dark:text-zinc-400 leading-relaxed">
                       {t('engineering.turnkeyDesc')}
                     </p>
                   </div>
@@ -613,14 +614,14 @@ export default function Home() {
       </section>
 
       {/* PROJECTS / GALLERY SECTION */}
-      <section id="projects" className="py-24 bg-zinc-900">
+      <section id="projects" className="py-24 bg-white dark:bg-zinc-900">
         <div className="container mx-auto px-6">
           <motion.div 
             {...fadeIn}
             className="text-center mb-16"
           >
-            <h3 className="text-red-500 font-bold tracking-widest uppercase mb-2">{t('projectsSection.subtitle')}</h3>
-            <h2 className="text-4xl md:text-5xl font-black text-white">{t('projectsSection.title')}</h2>
+            <h3 className="text-red-600 dark:text-red-500 font-bold tracking-widest uppercase mb-2">{t('projectsSection.subtitle')}</h3>
+            <h2 className="text-4xl md:text-5xl font-black text-zinc-900 dark:text-white">{t('projectsSection.title')}</h2>
           </motion.div>
 
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
@@ -644,7 +645,7 @@ export default function Home() {
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.05 }}
-                className="group relative aspect-square overflow-hidden bg-zinc-800 border border-zinc-700"
+                className="group relative aspect-square overflow-hidden bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 shadow-lg dark:shadow-none"
               >
                 <img 
                   src={`/media/${encodeURIComponent(img)}`}
@@ -652,7 +653,7 @@ export default function Home() {
                   loading="lazy"
                   className="w-full h-full object-cover transition-all duration-500 group-hover:scale-110 grayscale-[30%] group-hover:grayscale-0"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-zinc-900/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                <div className="absolute inset-0 bg-gradient-to-t from-white/60 via-transparent to-transparent dark:from-zinc-900/60 dark:via-transparent dark:to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               </motion.div>
             ))}
           </div>
@@ -662,7 +663,7 @@ export default function Home() {
             {...fadeIn}
             className="mt-16"
           >
-            <h3 className="text-2xl font-bold text-white mb-8 text-center">{t('projectsSection.videoGallery')}</h3>
+            <h3 className="text-2xl font-bold text-zinc-900 dark:text-white mb-8 text-center">{t('projectsSection.videoGallery')}</h3>
             <div className="grid md:grid-cols-2 gap-6">
               {[
                 "WhatsApp Video 2026-01-16 at 14.32.04.mp4",
@@ -670,7 +671,7 @@ export default function Home() {
                 "WhatsApp Video 2026-01-16 at 14.32.07.mp4",
                 "WhatsApp Video 2026-01-16 at 14.32.08.mp4",
               ].map((video, idx) => (
-                <div key={video} className="relative aspect-video bg-zinc-800 border border-zinc-700 rounded-lg overflow-hidden group">
+                <div key={video} className="relative aspect-video bg-white dark:bg-zinc-800 border border-zinc-300 dark:border-zinc-700 rounded-lg overflow-hidden group shadow-lg dark:shadow-none">
                   <video 
                     className="w-full h-full object-cover"
                     controls

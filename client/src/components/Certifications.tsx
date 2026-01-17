@@ -13,7 +13,7 @@ export function Certifications() {
   const { t } = useI18n();
 
   return (
-    <section className="py-12 bg-zinc-800 border-y border-zinc-700">
+    <section className="py-12 bg-zinc-50 dark:bg-zinc-800 border-y border-zinc-200 dark:border-zinc-700">
       <div className="container mx-auto px-6">
         <div className="flex flex-wrap justify-center items-center gap-8 md:gap-16">
           {certifications.map((cert, index) => {
@@ -27,10 +27,10 @@ export function Certifications() {
                 transition={{ delay: index * 0.1 }}
                 className="flex flex-col items-center gap-2 group"
               >
-                <div className="w-16 h-16 bg-zinc-700 border border-zinc-600 rounded-lg flex items-center justify-center group-hover:border-red-600/50 group-hover:bg-red-600/10 transition-all">
-                  <IconComponent className="w-8 h-8 text-zinc-400 group-hover:text-red-500 transition-colors" />
+                <div className="w-16 h-16 bg-white dark:bg-zinc-700 border border-zinc-300 dark:border-zinc-600 rounded-lg flex items-center justify-center group-hover:border-red-600/50 group-hover:bg-red-600/10 transition-all shadow-lg dark:shadow-none">
+                  <IconComponent className="w-8 h-8 text-zinc-600 dark:text-zinc-400 group-hover:text-red-600 dark:group-hover:text-red-500 transition-colors" />
                 </div>
-                <span className="text-xs text-zinc-500 uppercase tracking-wider font-semibold">
+                <span className="text-xs text-zinc-600 dark:text-zinc-500 uppercase tracking-wider font-semibold">
                   {t(`certifications.${cert.key}`)}
                 </span>
               </motion.div>

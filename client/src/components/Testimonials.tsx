@@ -7,7 +7,7 @@ export function Testimonials() {
   const testimonials = tArray('testimonials.items');
 
   return (
-    <section className="py-20 bg-zinc-900">
+    <section className="py-20 bg-white dark:bg-zinc-900">
       <div className="container mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -15,10 +15,10 @@ export function Testimonials() {
           viewport={{ once: true }}
           className="text-center mb-12"
         >
-          <h3 className="text-red-500 font-bold tracking-widest uppercase mb-2">
+          <h3 className="text-red-600 dark:text-red-500 font-bold tracking-widest uppercase mb-2">
             {t('testimonials.subtitle')}
           </h3>
-          <h2 className="text-3xl md:text-4xl font-black text-white">
+          <h2 className="text-3xl md:text-4xl font-black text-zinc-900 dark:text-white">
             {t('testimonials.title')}
           </h2>
         </motion.div>
@@ -31,7 +31,7 @@ export function Testimonials() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.15 }}
-              className="bg-zinc-800 border border-zinc-700 p-6 rounded-lg relative"
+              className="bg-white dark:bg-zinc-800 border border-zinc-300 dark:border-zinc-700 p-6 rounded-lg relative shadow-lg dark:shadow-none"
             >
               <Quote className="absolute top-4 right-4 w-8 h-8 text-red-600/20" />
               
@@ -43,22 +43,22 @@ export function Testimonials() {
               </div>
 
               {/* Quote */}
-              <p className="text-zinc-300 mb-6 leading-relaxed">
+              <p className="text-zinc-700 dark:text-zinc-300 mb-6 leading-relaxed">
                 "{t(`testimonials.items.${index}.quote`)}"
               </p>
 
               {/* Author */}
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 bg-red-600/20 rounded-full flex items-center justify-center">
-                  <span className="text-red-500 font-bold">
+                  <span className="text-red-600 dark:text-red-500 font-bold">
                     {t(`testimonials.items.${index}.name`).charAt(0)}
                   </span>
                 </div>
                 <div>
-                  <p className="text-white font-semibold text-sm">
+                  <p className="text-zinc-900 dark:text-white font-semibold text-sm">
                     {t(`testimonials.items.${index}.name`)}
                   </p>
-                  <p className="text-zinc-500 text-xs">
+                  <p className="text-zinc-600 dark:text-zinc-500 text-xs">
                     {t(`testimonials.items.${index}.company`)}
                   </p>
                 </div>

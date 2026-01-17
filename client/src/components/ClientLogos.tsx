@@ -53,61 +53,81 @@ export function ClientLogos() {
   const { t } = useI18n();
 
   return (
-    <section className="py-16 bg-zinc-800/50 border-y border-zinc-700 overflow-hidden">
-      <div className="container mx-auto px-6">
+    <section className="relative py-16 bg-zinc-800/50 border-y border-zinc-700 overflow-hidden">
+      <div className="container mx-auto px-6 mb-12">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-12"
+          className="text-center"
         >
           <h3 className="text-zinc-400 text-sm uppercase tracking-widest font-semibold">
             {t('clients.title')}
           </h3>
         </motion.div>
+      </div>
 
-        {/* First Row - Left to Right */}
-        <div className="relative mb-6 group/row">
-          <div className="flex gap-6 animate-scroll-left group-hover/row:pause-animation will-change-transform">
-            {/* First set */}
-            {clientsRow1.map((client, index) => (
-              <LogoItem key={`row1-set1-${index}`} client={client} />
-            ))}
-            {/* Duplicate for seamless loop */}
-            {clientsRow1.map((client, index) => (
-              <LogoItem key={`row1-set2-${index}`} client={client} />
-            ))}
-            {/* Triple for extra smoothness */}
-            {clientsRow1.map((client, index) => (
-              <LogoItem key={`row1-set3-${index}`} client={client} />
-            ))}
-            {/* Fourth set for ultra-smooth loop */}
-            {clientsRow1.map((client, index) => (
-              <LogoItem key={`row1-set4-${index}`} client={client} />
-            ))}
-          </div>
+      {/* First Row - Left to Right - Full Width */}
+      <div className="relative mb-6 group/row">
+        {/* Tunnel fade effect - Left */}
+        <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-zinc-800/50 via-zinc-800/30 to-transparent z-10 pointer-events-none" />
+        
+        {/* Tunnel fade effect - Right */}
+        <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-zinc-800/50 via-zinc-800/30 to-transparent z-10 pointer-events-none" />
+        
+        <div className="flex gap-4 animate-scroll-left group-hover/row:pause-animation will-change-transform">
+          {/* First set */}
+          {clientsRow1.map((client, index) => (
+            <LogoItem key={`row1-set1-${index}`} client={client} />
+          ))}
+          {/* Duplicate for seamless loop */}
+          {clientsRow1.map((client, index) => (
+            <LogoItem key={`row1-set2-${index}`} client={client} />
+          ))}
+          {/* Triple for extra smoothness */}
+          {clientsRow1.map((client, index) => (
+            <LogoItem key={`row1-set3-${index}`} client={client} />
+          ))}
+          {/* Fourth set for ultra-smooth loop */}
+          {clientsRow1.map((client, index) => (
+            <LogoItem key={`row1-set4-${index}`} client={client} />
+          ))}
+          {/* Fifth set for no gaps */}
+          {clientsRow1.map((client, index) => (
+            <LogoItem key={`row1-set5-${index}`} client={client} />
+          ))}
         </div>
+      </div>
 
-        {/* Second Row - Right to Left */}
-        <div className="relative group/row">
-          <div className="flex gap-6 animate-scroll-right group-hover/row:pause-animation will-change-transform">
-            {/* First set */}
-            {clientsRow2.map((client, index) => (
-              <LogoItem key={`row2-set1-${index}`} client={client} />
-            ))}
-            {/* Duplicate for seamless loop */}
-            {clientsRow2.map((client, index) => (
-              <LogoItem key={`row2-set2-${index}`} client={client} />
-            ))}
-            {/* Triple for extra smoothness */}
-            {clientsRow2.map((client, index) => (
-              <LogoItem key={`row2-set3-${index}`} client={client} />
-            ))}
-            {/* Fourth set for ultra-smooth loop */}
-            {clientsRow2.map((client, index) => (
-              <LogoItem key={`row2-set4-${index}`} client={client} />
-            ))}
-          </div>
+      {/* Second Row - Right to Left - Full Width */}
+      <div className="relative group/row">
+        {/* Tunnel fade effect - Left */}
+        <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-zinc-800/50 via-zinc-800/30 to-transparent z-10 pointer-events-none" />
+        
+        {/* Tunnel fade effect - Right */}
+        <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-zinc-800/50 via-zinc-800/30 to-transparent z-10 pointer-events-none" />
+        
+        <div className="flex gap-4 animate-scroll-right group-hover/row:pause-animation will-change-transform">
+          {/* First set */}
+          {clientsRow2.map((client, index) => (
+            <LogoItem key={`row2-set1-${index}`} client={client} />
+          ))}
+          {/* Duplicate for seamless loop */}
+          {clientsRow2.map((client, index) => (
+            <LogoItem key={`row2-set2-${index}`} client={client} />
+          ))}
+          {/* Triple for extra smoothness */}
+          {clientsRow2.map((client, index) => (
+            <LogoItem key={`row2-set3-${index}`} client={client} />
+          ))}
+          {/* Fourth set for ultra-smooth loop */}
+          {clientsRow2.map((client, index) => (
+            <LogoItem key={`row2-set4-${index}`} client={client} />
+          ))}
+          {/* Fifth set for no gaps */}
+          {clientsRow2.map((client, index) => (
+            <LogoItem key={`row2-set5-${index}`} client={client} />
+          ))}
         </div>
       </div>
 
@@ -117,13 +137,13 @@ export function ClientLogos() {
             transform: translateX(0);
           }
           100% {
-            transform: translateX(-25%);
+            transform: translateX(-20%);
           }
         }
 
         @keyframes scroll-right {
           0% {
-            transform: translateX(-25%);
+            transform: translateX(-20%);
           }
           100% {
             transform: translateX(0);
@@ -131,12 +151,12 @@ export function ClientLogos() {
         }
 
         .animate-scroll-left {
-          animation: scroll-left 40s linear infinite;
+          animation: scroll-left 50s linear infinite;
           will-change: transform;
         }
 
         .animate-scroll-right {
-          animation: scroll-right 40s linear infinite;
+          animation: scroll-right 50s linear infinite;
           will-change: transform;
         }
 

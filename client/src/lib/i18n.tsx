@@ -1679,7 +1679,7 @@ const ar = {
     ],
   },
   certifications: {
-    iso9001: 'ISO 9001',
+    iso9001: 'ISO 9001 معتمد',
     tse: 'معتمد TSE',
     ce: 'متوافق CE',
     quality: 'ضمان الجودة',

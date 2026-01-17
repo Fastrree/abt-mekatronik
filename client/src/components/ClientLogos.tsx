@@ -151,12 +151,12 @@ export function ClientLogos() {
         }
 
         .animate-scroll-left {
-          animation: scroll-left 25s linear infinite;
+          animation: scroll-left 10s linear infinite;
           will-change: transform;
         }
 
         .animate-scroll-right {
-          animation: scroll-right 25s linear infinite;
+          animation: scroll-right 10s linear infinite;
           will-change: transform;
         }
 

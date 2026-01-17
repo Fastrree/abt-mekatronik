@@ -1,11 +1,19 @@
-import { MapPin, Phone, Mail, Linkedin, Instagram, Facebook, Truck, Factory, Layers, Wrench } from "lucide-react";
+import { MapPin, Phone, Mail, Linkedin, Instagram, Facebook, Truck, Factory, Layers, Wrench, Shield, Award, CheckCircle, BadgeCheck } from "lucide-react";
 import { useI18n } from "@/lib/i18n";
+import { motion } from 'framer-motion';
 
 type ProductKey = 'konveyor' | 'tekstil' | 'celik' | 'ozelMakine';
 
 interface FooterProps {
   onOpenProduct?: (productKey: ProductKey) => void;
 }
+
+const certifications = [
+  { icon: Shield, key: 'iso9001' },
+  { icon: Award, key: 'tse' },
+  { icon: CheckCircle, key: 'ce' },
+  { icon: BadgeCheck, key: 'quality' },
+];
 
 export function Footer({ onOpenProduct }: FooterProps) {
   const { t } = useI18n();
@@ -24,8 +32,37 @@ export function Footer({ onOpenProduct }: FooterProps) {
   };
 
   return (
-    <footer className="bg-zinc-50 dark:bg-zinc-900 text-zinc-600 dark:text-zinc-400 border-t border-zinc-200 dark:border-zinc-800 pt-20 pb-10">
-      <div className="container mx-auto px-6">
+    <footer className="bg-zinc-50 dark:bg-zinc-900 text-zinc-600 dark:text-zinc-400">
+      {/* CERTIFICATIONS SECTION - Integrated into Footer */}
+      <div className="py-12 bg-zinc-100 dark:bg-zinc-800 border-y border-zinc-200 dark:border-zinc-700">
+        <div className="container mx-auto px-6">
+          <div className="flex flex-wrap justify-center items-center gap-8 md:gap-16">
+            {certifications.map((cert, index) => {
+              const IconComponent = cert.icon;
+              return (
+                <motion.div
+                  key={cert.key}
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.1 }}
+                  className="flex flex-col items-center gap-2 group"
+                >
+                  <div className="w-16 h-16 bg-white dark:bg-zinc-700 border border-zinc-300 dark:border-zinc-600 rounded-lg flex items-center justify-center group-hover:border-red-600/50 group-hover:bg-red-600/10 transition-all shadow-lg dark:shadow-none">
+                    <IconComponent className="w-8 h-8 text-zinc-600 dark:text-zinc-400 group-hover:text-red-600 dark:group-hover:text-red-500 transition-colors" />
+                  </div>
+                  <span className="text-xs text-zinc-600 dark:text-zinc-500 uppercase tracking-wider font-semibold">
+                    {t(`certifications.${cert.key}`)}
+                  </span>
+                </motion.div>
+              );
+            })}
+          </div>
+        </div>
+      </div>
+
+      {/* FOOTER CONTENT */}
+      <div className="container mx-auto px-6 pt-20 pb-10">
         <div className="grid md:grid-cols-4 gap-12 mb-16">
           <div className="col-span-1 md:col-span-1">
             <h2 className="text-2xl font-black text-zinc-900 dark:text-white mb-6">ABT <span className="text-primary">MEKATRONİK</span></h2>

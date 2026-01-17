@@ -13,9 +13,7 @@ import { useToast } from "@/hooks/use-toast";
 import { useState } from "react";
 import { useI18n } from "@/lib/i18n";
 import { Testimonials } from "@/components/Testimonials";
-import { Certifications } from "@/components/Certifications";
 import { ClientLogos } from "@/components/ClientLogos";
-
 import { FAQ } from "@/components/FAQ";
 
 // Security: Input sanitization - XSS koruması
@@ -803,9 +801,6 @@ export default function Home() {
       <section id="testimonials">
         <Testimonials />
       </section>
-
-      {/* CERTIFICATIONS SECTION */}
-      <Certifications />
 
       {/* CLIENT LOGOS / PARTNERS SECTION */}
       <section id="partners" className="scroll-mt-24">

@@ -193,12 +193,12 @@ export default function Home() {
                   <>
                     {/* Hero Image */}
                     <div className="relative h-64 md:h-80 overflow-hidden bg-zinc-700">
-                      <img
-                        src={`/media/${product.heroImage}`}
-                        alt={t(`productItems.${selectedProduct}.title`)}
-                        className="w-full h-full object-cover"
-                        loading="eager"
-                      />
+                      <img 
+                src={`/media/${encodeURIComponent(product.heroImage)}`}
+                alt={t(`productItems.${selectedProduct}.title`)}
+                className="w-full h-full object-cover"
+                loading="eager"
+              />
                       <div className="absolute inset-0 bg-gradient-to-t from-zinc-800 via-zinc-800/50 to-transparent" />
                       <div className="absolute bottom-6 left-6 right-6">
                         <div className="flex items-center gap-3 mb-2">
@@ -241,7 +241,7 @@ export default function Home() {
                           {product.gallery.map((img, idx) => (
                             <div key={idx} className="aspect-square overflow-hidden rounded-lg border border-zinc-600">
                               <img
-                                src={`/media/${img}`}
+                                src={`/media/${encodeURIComponent(img)}`}
                                 alt={`${t(`productItems.${selectedProduct}.title`)} ${idx + 1}`}
                                 className="w-full h-full object-cover transition-transform duration-200 hover:scale-105"
                                 loading="lazy"
@@ -405,7 +405,7 @@ export default function Home() {
             >
               <div className="absolute inset-0 bg-zinc-800/20 group-hover:bg-transparent transition-colors duration-500 z-10" />
               <img 
-                src="/media/WhatsApp Image 2026-01-16 at 14.32.03.jpeg" 
+                src={`/media/${encodeURIComponent("WhatsApp Image 2026-01-16 at 14.32.03.jpeg")}`}
                 alt={t('productItems.konveyor.title')} 
                 loading="lazy"
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 grayscale group-hover:grayscale-0" 
@@ -438,7 +438,7 @@ export default function Home() {
             >
               <div className="absolute inset-0 bg-zinc-800/20 group-hover:bg-transparent transition-colors duration-500 z-10" />
               <img 
-                src="/media/WhatsApp Image 2026-01-16 at 14.32.04 (3).jpeg" 
+                src={`/media/${encodeURIComponent("WhatsApp Image 2026-01-16 at 14.32.04 (3).jpeg")}`}
                 alt={t('productItems.tekstil.title')} 
                 loading="lazy"
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 grayscale group-hover:grayscale-0" 
@@ -471,7 +471,7 @@ export default function Home() {
             >
               <div className="absolute inset-0 bg-zinc-800/20 group-hover:bg-transparent transition-colors duration-500 z-10" />
               <img 
-                src="/media/WhatsApp Image 2026-01-16 at 14.32.05 (3).jpeg" 
+                src={`/media/${encodeURIComponent("WhatsApp Image 2026-01-16 at 14.32.05 (3).jpeg")}`}
                 alt={t('productItems.celik.title')} 
                 loading="lazy"
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 grayscale group-hover:grayscale-0" 
@@ -504,7 +504,7 @@ export default function Home() {
             >
               <div className="absolute inset-0 bg-zinc-800/20 group-hover:bg-transparent transition-colors duration-500 z-10" />
               <img 
-                src="/media/WhatsApp Image 2026-01-16 at 14.32.06 (5).jpeg" 
+                src={`/media/${encodeURIComponent("WhatsApp Image 2026-01-16 at 14.32.06 (5).jpeg")}`}
                 alt={t('productItems.ozelMakine.title')} 
                 loading="lazy"
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 grayscale group-hover:grayscale-0" 
@@ -586,7 +586,7 @@ export default function Home() {
                  className="space-y-4 mt-8"
                >
                  <div className="bg-zinc-700 p-2 rounded-lg border border-zinc-600">
-                    <img src="/media/WhatsApp Image 2026-01-16 at 14.32.07 (3).jpeg" alt="Engineering Site" className="w-full h-48 object-cover rounded shadow-lg opacity-80 hover:opacity-100 transition-opacity" />
+                    <img src={`/media/${encodeURIComponent("WhatsApp Image 2026-01-16 at 14.32.07 (3).jpeg")}`} alt="Engineering Site" className="w-full h-48 object-cover rounded shadow-lg opacity-80 hover:opacity-100 transition-opacity" />
                  </div>
                  <div className="bg-zinc-700 p-4 rounded-lg border border-zinc-600 text-center">
                     <span className="block text-3xl font-black text-white">15+</span>
@@ -604,7 +604,7 @@ export default function Home() {
                     <span className="text-xs uppercase tracking-wider text-white/80">{t('engineering.completedProjects')}</span>
                  </div>
                  <div className="bg-zinc-700 p-2 rounded-lg border border-zinc-600">
-                    <img src="/media/WhatsApp Image 2026-01-16 at 14.32.08.jpeg" alt="Automation Detail" className="w-full h-64 object-cover rounded shadow-lg opacity-80 hover:opacity-100 transition-opacity" />
+                    <img src={`/media/${encodeURIComponent("WhatsApp Image 2026-01-16 at 14.32.08.jpeg")}`} alt="Automation Detail" className="w-full h-64 object-cover rounded shadow-lg opacity-80 hover:opacity-100 transition-opacity" />
                  </div>
                </motion.div>
             </div>
@@ -647,7 +647,7 @@ export default function Home() {
                 className="group relative aspect-square overflow-hidden bg-zinc-800 border border-zinc-700"
               >
                 <img 
-                  src={`/media/${img}`} 
+                  src={`/media/${encodeURIComponent(img)}`}
                   alt="ABT Mekatronik Proje" 
                   loading="lazy"
                   className="w-full h-full object-cover transition-all duration-500 group-hover:scale-110 grayscale-[30%] group-hover:grayscale-0"
@@ -676,9 +676,9 @@ export default function Home() {
                     controls
                     muted
                     preload="metadata"
-                    poster={`/media/WhatsApp Image 2026-01-16 at 14.32.0${4 + idx}.jpeg`}
+                    poster={`/media/${encodeURIComponent(`WhatsApp Image 2026-01-16 at 14.32.0${4 + idx}.jpeg`)}`}
                   >
-                    <source src={`/media/${video}`} type="video/mp4" />
+                    <source src={`/media/${encodeURIComponent(video)}`} type="video/mp4" />
                   </video>
                 </div>
               ))}

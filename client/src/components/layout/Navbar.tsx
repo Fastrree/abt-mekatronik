@@ -69,8 +69,8 @@ export function Navbar({ onOpenProduct }: NavbarProps) {
       dir={isRTL ? 'rtl' : 'ltr'}
     >
       <div className="container mx-auto px-4 flex justify-between items-center">
+        {/* Quick Access Menu - Mobile & Tablet (LEFT SIDE) */}
         <div className="flex items-center gap-2 lg:gap-4">
-          {/* Quick Access Menu - Mobile & Tablet */}
           <div className="relative lg:hidden">
             <button
               onClick={() => setIsQuickMenuOpen(!isQuickMenuOpen)}

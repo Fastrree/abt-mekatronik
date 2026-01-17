@@ -305,19 +305,12 @@ export default function Home() {
         aria-labelledby="hero-title"
       >
         <div className="absolute inset-0 z-0">
-          <video 
-            autoPlay 
-            muted 
-            loop 
-            playsInline
-            preload="auto"
+          <img 
+            src="/media/img1.jpeg" 
+            alt="ABT Mekatronik üretim tesisi"
             className="w-full h-full object-cover"
-            poster="/media/img1.jpeg"
-            aria-label="ABT Mekatronik üretim tesisi video arka planı"
-          >
-            <source src="/media/video1.mp4" type="video/mp4" />
-            Tarayıcınız video etiketini desteklemiyor.
-          </video>
+            loading="eager"
+          />
           {/* Light theme: NO blur, just subtle overlay. Dark theme: stronger overlay */}
           <div className="absolute inset-0 bg-gradient-to-r from-transparent via-transparent to-transparent dark:from-zinc-900/90 dark:via-zinc-900/70 dark:to-zinc-900/40" aria-hidden="true" />
         </div>

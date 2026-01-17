@@ -203,6 +203,7 @@
 }
 
 /* Custom Scrollbar Styles */
+/* Dark theme scrollbar (default) */
 .scrollbar-thin {
   scrollbar-width: thin;
   scrollbar-color: #52525b #27272a;
@@ -224,6 +225,26 @@
 
 .scrollbar-thin::-webkit-scrollbar-thumb:hover {
   background: #71717a;
+}
+
+/* Light theme scrollbar - WHITE track with grey thumb */
+.light .scrollbar-thin {
+  scrollbar-width: thin;
+  scrollbar-color: #94a3b8 #ffffff;
+}
+
+.light .scrollbar-thin::-webkit-scrollbar-track {
+  background: #ffffff;
+  border-radius: 3px;
+}
+
+.light .scrollbar-thin::-webkit-scrollbar-thumb {
+  background: #94a3b8;
+  border-radius: 3px;
+}
+
+.light .scrollbar-thin::-webkit-scrollbar-thumb:hover {
+  background: #64748b;
 }
 
 /* Animation Keyframes */

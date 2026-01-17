@@ -13,9 +13,10 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { useToast } from "@/hooks/use-toast";
 import { useState } from "react";
 import { useI18n } from "@/lib/i18n";
-import { Testimonials } from "@/components/Testimonials";
-import { ClientLogos } from "@/components/ClientLogos";
-import { FAQ } from "@/components/FAQ";
+import { OptimizedImage } from "@/components/OptimizedImage";
+import { OptimizedVideo } from "@/components/OptimizedVideo";
+import { FAQ, Testimonials, ClientLogos, ComponentLoader } from "@/components/LazyComponents";
+import { Suspense } from "react";
 
 // Security: Input sanitization - XSS koruması
 const sanitizeInput = (input: string): string => {
@@ -196,7 +197,7 @@ export default function Home() {
                   <>
                     {/* Hero Image */}
                     <div className="relative h-64 md:h-80 overflow-hidden bg-zinc-100 dark:bg-zinc-700">
-                      <img 
+                      <OptimizedImage 
                         src={`/media/${encodeURIComponent(product.heroImage)}`}
                         alt={t(`productItems.${selectedProduct}.title`)}
                         className="w-full h-full object-cover"
@@ -243,7 +244,7 @@ export default function Home() {
                         <div className="grid grid-cols-3 gap-3">
                           {product.gallery.map((img, idx) => (
                             <div key={idx} className="aspect-square overflow-hidden rounded-lg border border-zinc-200 dark:border-zinc-600">
-                              <img
+                              <OptimizedImage
                                 src={`/media/${encodeURIComponent(img)}`}
                                 alt={`${t(`productItems.${selectedProduct}.title`)} ${idx + 1}`}
                                 className="w-full h-full object-cover transition-transform duration-200 hover:scale-105"
@@ -430,7 +431,7 @@ export default function Home() {
               aria-label={`${t('productItems.konveyor.title')} - Detayları görüntülemek için tıklayın`}
             >
               <div className="absolute inset-0 bg-white/20 dark:bg-zinc-800/20 group-hover:bg-transparent transition-colors duration-500 z-10" />
-              <img 
+              <OptimizedImage 
                 src={`/media/${encodeURIComponent("WhatsApp Image 2026-01-16 at 14.32.03.jpeg")}`}
                 alt={t('productItems.konveyor.title')} 
                 loading="lazy"
@@ -472,7 +473,7 @@ export default function Home() {
               aria-label={`${t('productItems.tekstil.title')} - Detayları görüntülemek için tıklayın`}
             >
               <div className="absolute inset-0 bg-white/20 dark:bg-zinc-800/20 group-hover:bg-transparent transition-colors duration-500 z-10" aria-hidden="true" />
-              <img 
+              <OptimizedImage 
                 src={`/media/${encodeURIComponent("WhatsApp Image 2026-01-16 at 14.32.04 (3).jpeg")}`}
                 alt={`${t('productItems.tekstil.title')} - ${t('productItems.tekstil.shortDesc')}`} 
                 loading="lazy"
@@ -514,7 +515,7 @@ export default function Home() {
               aria-label={`${t('productItems.celik.title')} - Detayları görüntülemek için tıklayın`}
             >
               <div className="absolute inset-0 bg-white/20 dark:bg-zinc-800/20 group-hover:bg-transparent transition-colors duration-500 z-10" aria-hidden="true" />
-              <img 
+              <OptimizedImage 
                 src={`/media/${encodeURIComponent("WhatsApp Image 2026-01-16 at 14.32.05 (3).jpeg")}`}
                 alt={`${t('productItems.celik.title')} - ${t('productItems.celik.shortDesc')}`} 
                 loading="lazy"
@@ -556,7 +557,7 @@ export default function Home() {
               aria-label={`${t('productItems.ozelMakine.title')} - Detayları görüntülemek için tıklayın`}
             >
               <div className="absolute inset-0 bg-white/20 dark:bg-zinc-800/20 group-hover:bg-transparent transition-colors duration-500 z-10" aria-hidden="true" />
-              <img 
+              <OptimizedImage 
                 src={`/media/${encodeURIComponent("WhatsApp Image 2026-01-16 at 14.32.06 (5).jpeg")}`}
                 alt={`${t('productItems.ozelMakine.title')} - ${t('productItems.ozelMakine.shortDesc')}`} 
                 loading="lazy"
@@ -639,7 +640,7 @@ export default function Home() {
                  className="space-y-4 mt-8"
                >
                  <div className="bg-zinc-700 p-2 rounded-lg border border-zinc-600">
-                    <img src={`/media/${encodeURIComponent("WhatsApp Image 2026-01-16 at 14.32.07 (3).jpeg")}`} alt="Engineering Site" className="w-full h-48 object-cover rounded shadow-lg opacity-80 hover:opacity-100 transition-opacity" />
+                    <OptimizedImage src={`/media/${encodeURIComponent("WhatsApp Image 2026-01-16 at 14.32.07 (3).jpeg")}`} alt="Engineering Site" className="w-full h-48 object-cover rounded shadow-lg opacity-80 hover:opacity-100 transition-opacity" loading="lazy" />
                  </div>
                  <div className="bg-zinc-700 p-4 rounded-lg border border-zinc-600 text-center">
                     <span className="block text-3xl font-black text-white">15+</span>
@@ -657,7 +658,7 @@ export default function Home() {
                     <span className="text-xs uppercase tracking-wider text-white/80">{t('engineering.completedProjects')}</span>
                  </div>
                  <div className="bg-zinc-700 p-2 rounded-lg border border-zinc-600">
-                    <img src={`/media/${encodeURIComponent("WhatsApp Image 2026-01-16 at 14.32.08.jpeg")}`} alt="Automation Detail" className="w-full h-64 object-cover rounded shadow-lg opacity-80 hover:opacity-100 transition-opacity" />
+                    <OptimizedImage src={`/media/${encodeURIComponent("WhatsApp Image 2026-01-16 at 14.32.08.jpeg")}`} alt="Automation Detail" className="w-full h-64 object-cover rounded shadow-lg opacity-80 hover:opacity-100 transition-opacity" loading="lazy" />
                  </div>
                </motion.div>
             </div>
@@ -699,7 +700,7 @@ export default function Home() {
                 transition={{ delay: index * 0.05 }}
                 className="group relative aspect-square overflow-hidden bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 shadow-lg dark:shadow-none"
               >
-                <img 
+                <OptimizedImage 
                   src={`/media/${encodeURIComponent(img)}`}
                   alt="ABT Mekatronik Proje" 
                   loading="lazy"
@@ -724,15 +725,14 @@ export default function Home() {
                 "WhatsApp Video 2026-01-16 at 14.32.08.mp4",
               ].map((video, idx) => (
                 <div key={video} className="relative aspect-video bg-white dark:bg-zinc-800 border border-zinc-300 dark:border-zinc-700 rounded-lg overflow-hidden group shadow-lg dark:shadow-none">
-                  <video 
-                    className="w-full h-full object-cover"
+                  <OptimizedVideo 
+                    src={`/media/${encodeURIComponent(video)}`}
+                    poster={`/media/${encodeURIComponent(`WhatsApp Image 2026-01-16 at 14.32.0${4 + idx}.jpeg`)}`}
+                    className="w-full h-full"
                     controls
                     muted
-                    preload="metadata"
-                    poster={`/media/${encodeURIComponent(`WhatsApp Image 2026-01-16 at 14.32.0${4 + idx}.jpeg`)}`}
-                  >
-                    <source src={`/media/${encodeURIComponent(video)}`} type="video/mp4" />
-                  </video>
+                    aria-label={`ABT Mekatronik proje videosu ${idx + 1}`}
+                  />
                 </div>
               ))}
             </div>
@@ -848,17 +848,23 @@ export default function Home() {
 
       {/* FAQ SECTION */}
       <section id="faq">
-        <FAQ />
+        <Suspense fallback={<ComponentLoader />}>
+          <FAQ />
+        </Suspense>
       </section>
 
       {/* TESTIMONIALS SECTION */}
       <section id="testimonials">
-        <Testimonials />
+        <Suspense fallback={<ComponentLoader />}>
+          <Testimonials />
+        </Suspense>
       </section>
 
       {/* CLIENT LOGOS / PARTNERS SECTION */}
       <section id="partners" className="scroll-mt-24">
-        <ClientLogos />
+        <Suspense fallback={<ComponentLoader />}>
+          <ClientLogos />
+        </Suspense>
       </section>
 
       <Footer onOpenProduct={openProductModal} />

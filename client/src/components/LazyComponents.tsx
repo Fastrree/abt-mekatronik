@@ -5,10 +5,10 @@
 
 import { lazy, Suspense, ComponentType } from 'react';
 
-// Lazy load heavy components
-export const FAQ = lazy(() => import('@/components/FAQ'));
-export const Testimonials = lazy(() => import('@/components/Testimonials'));
-export const ClientLogos = lazy(() => import('@/components/ClientLogos'));
+// Lazy load heavy components with default exports
+export const FAQ = lazy(() => import('@/components/FAQ').then(module => ({ default: module.FAQ })));
+export const Testimonials = lazy(() => import('@/components/Testimonials').then(module => ({ default: module.Testimonials })));
+export const ClientLogos = lazy(() => import('@/components/ClientLogos').then(module => ({ default: module.ClientLogos })));
 
 // Loading fallback component
 export function ComponentLoader() {

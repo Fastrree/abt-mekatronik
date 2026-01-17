@@ -305,17 +305,14 @@ export default function Home() {
         aria-labelledby="hero-title"
       >
         <div className="absolute inset-0 z-0">
-          {/* Mobile: Static image only, Desktop: Video */}
-          <picture>
-            <source media="(min-width: 768px)" srcSet="/media/img1.jpeg" />
-            <img 
-              src="/media/img1.jpeg" 
-              alt="ABT Mekatronik üretim tesisi"
-              className="w-full h-full object-cover md:hidden"
-              loading="eager"
-              fetchpriority="high"
-            />
-          </picture>
+          {/* Mobile: Static image only (performance), Desktop: Video */}
+          <img 
+            src="/media/img1.jpeg" 
+            alt="ABT Mekatronik üretim tesisi"
+            className="md:hidden w-full h-full object-cover"
+            loading="eager"
+            fetchPriority="high"
+          />
           <video 
             autoPlay 
             muted 

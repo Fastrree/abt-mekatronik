@@ -741,20 +741,20 @@ export default function Home() {
       </section>
 
       {/* CONTACT SECTION */}
-      <section id="contact" className="py-24 bg-zinc-900">
+      <section id="contact" className="py-24 bg-white dark:bg-zinc-900">
         <div className="container mx-auto px-6">
           <div className="grid lg:grid-cols-2 gap-16">
             <motion.div {...fadeIn}>
-              <h3 className="text-red-500 font-bold tracking-widest uppercase mb-4">{t('contact.subtitle')}</h3>
-              <h2 className="text-4xl md:text-5xl font-black text-white mb-8">{t('contact.title')} <br />{t('contact.title2')}</h2>
-              <p className="text-zinc-400 mb-8 max-w-lg">
+              <h3 className="text-red-500 dark:text-red-500 font-bold tracking-widest uppercase mb-4">{t('contact.subtitle')}</h3>
+              <h2 className="text-4xl md:text-5xl font-black text-zinc-900 dark:text-white mb-8">{t('contact.title')} <br />{t('contact.title2')}</h2>
+              <p className="text-zinc-600 dark:text-zinc-400 mb-8 max-w-lg">
                 {t('contact.description')}
               </p>
               
-              <div className="bg-zinc-800 border border-zinc-700 p-8 rounded-lg relative overflow-hidden">
+              <div className="bg-slate-100 dark:bg-zinc-800 border border-slate-200 dark:border-zinc-700 p-8 rounded-lg relative overflow-hidden shadow-lg dark:shadow-none">
                 <div className="absolute top-0 right-0 w-24 h-24 bg-red-600/10 rounded-bl-full -mr-4 -mt-4"></div>
                 <div className="relative z-10">
-                    <h4 className="text-xl font-bold text-white mb-4">{t('contact.whatsappTitle')}</h4>
+                    <h4 className="text-xl font-bold text-zinc-900 dark:text-white mb-4">{t('contact.whatsappTitle')}</h4>
                     <Button 
                       className="bg-[#25D366] hover:bg-[#20bd5a] text-white w-full py-6 font-bold text-lg"
                       onClick={() => window.open('https://wa.me/905373197281', '_blank')}
@@ -770,9 +770,9 @@ export default function Home() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
-              className="bg-zinc-800 p-8 md:p-10 border border-zinc-700 shadow-2xl"
+              className="bg-slate-50 dark:bg-zinc-800 p-8 md:p-10 border border-slate-200 dark:border-zinc-700 shadow-xl dark:shadow-2xl"
             >
-              <h3 className="text-2xl font-bold text-white mb-6 border-b border-zinc-700 pb-4">{t('contact.formTitle')}</h3>
+              <h3 className="text-2xl font-bold text-zinc-900 dark:text-white mb-6 border-b border-slate-200 dark:border-zinc-700 pb-4">{t('contact.formTitle')}</h3>
               <Form {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
                   <FormField
@@ -780,12 +780,12 @@ export default function Home() {
                     name="name"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="text-zinc-400">{t('contact.name')}</FormLabel>
+                        <FormLabel className="text-zinc-700 dark:text-zinc-400">{t('contact.name')}</FormLabel>
                         <FormControl>
                           <Input 
                             placeholder={t('contact.namePlaceholder')} 
                             {...field} 
-                            className="bg-zinc-900 border-zinc-700 focus:border-red-600 h-12"
+                            className="bg-white dark:bg-zinc-900 border-slate-300 dark:border-zinc-700 focus:border-red-600 h-12"
                             maxLength={100}
                             autoComplete="name"
                           />
@@ -799,13 +799,13 @@ export default function Home() {
                     name="email"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="text-zinc-400">{t('contact.email')}</FormLabel>
+                        <FormLabel className="text-zinc-700 dark:text-zinc-400">{t('contact.email')}</FormLabel>
                         <FormControl>
                           <Input 
                             placeholder={t('contact.emailPlaceholder')} 
                             type="email"
                             {...field} 
-                            className="bg-zinc-900 border-zinc-700 focus:border-red-600 h-12"
+                            className="bg-white dark:bg-zinc-900 border-slate-300 dark:border-zinc-700 focus:border-red-600 h-12"
                             maxLength={254}
                             autoComplete="email"
                           />
@@ -819,12 +819,12 @@ export default function Home() {
                     name="message"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="text-zinc-400">{t('contact.message')}</FormLabel>
+                        <FormLabel className="text-zinc-700 dark:text-zinc-400">{t('contact.message')}</FormLabel>
                         <FormControl>
                           <Textarea 
                             placeholder={t('contact.messagePlaceholder')} 
                             {...field} 
-                            className="bg-zinc-900 border-zinc-700 focus:border-red-600 min-h-[120px]"
+                            className="bg-white dark:bg-zinc-900 border-slate-300 dark:border-zinc-700 focus:border-red-600 min-h-[120px]"
                             maxLength={2000}
                           />
                         </FormControl>

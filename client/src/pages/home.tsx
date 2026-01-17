@@ -305,14 +305,7 @@ export default function Home() {
         aria-labelledby="hero-title"
       >
         <div className="absolute inset-0 z-0">
-          {/* Mobile: Static image only (performance), Desktop: Video */}
-          <img 
-            src="/media/img1.jpeg" 
-            alt="ABT Mekatronik üretim tesisi"
-            className="md:hidden w-full h-full object-cover"
-            loading="eager"
-            fetchPriority="high"
-          />
+          {/* Desktop: Video plays (autoplay, muted, loop), Mobile: Static image for performance */}
           <video 
             autoPlay 
             muted 
@@ -325,6 +318,13 @@ export default function Home() {
             <source src="/media/video1.mp4" type="video/mp4" />
             Tarayıcınız video etiketini desteklemiyor.
           </video>
+          <img 
+            src="/media/img1.jpeg" 
+            alt="ABT Mekatronik üretim tesisi"
+            className="block md:hidden w-full h-full object-cover"
+            loading="eager"
+            fetchPriority="high"
+          />
           {/* Light theme: NO blur, just subtle overlay. Dark theme: stronger overlay */}
           <div className="absolute inset-0 bg-gradient-to-r from-transparent via-transparent to-transparent dark:from-zinc-900/90 dark:via-zinc-900/70 dark:to-zinc-900/40" aria-hidden="true" />
         </div>

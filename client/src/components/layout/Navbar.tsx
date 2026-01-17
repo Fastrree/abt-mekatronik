@@ -82,7 +82,7 @@ export function Navbar({ onOpenProduct }: NavbarProps) {
                 style={{ [isRTL ? 'right' : 'left']: 0 }}
                 dir={isRTL ? 'rtl' : 'ltr'}
               >
-                <div className="p-2 max-h-[70vh] overflow-y-auto scrollbar-thin scrollbar-thumb-zinc-300 dark:scrollbar-thumb-zinc-600 scrollbar-track-white dark:scrollbar-track-zinc-800 hover:scrollbar-thumb-zinc-400 dark:hover:scrollbar-thumb-zinc-500">
+                <div className="p-2 max-h-[70vh] overflow-y-auto scrollbar-thin scrollbar-thumb-slate-300 dark:scrollbar-thumb-zinc-600 scrollbar-track-slate-100 dark:scrollbar-track-zinc-800 hover:scrollbar-thumb-slate-400 dark:hover:scrollbar-thumb-zinc-500">
                   {/* Ana Sayfa */}
                   <a
                     href="#hero"

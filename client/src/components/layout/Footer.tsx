@@ -1,6 +1,5 @@
 import { MapPin, Phone, Mail, Linkedin, Instagram, Facebook, Truck, Factory, Layers, Wrench, Shield, Award, CheckCircle, BadgeCheck } from "lucide-react";
 import { useI18n } from "@/lib/i18n";
-import { motion } from 'framer-motion';
 
 type ProductKey = 'konveyor' | 'tekstil' | 'celik' | 'ozelMakine';
 
@@ -40,13 +39,10 @@ export function Footer({ onOpenProduct }: FooterProps) {
             {certifications.map((cert, index) => {
               const IconComponent = cert.icon;
               return (
-                <motion.div
+                <div
                   key={cert.key}
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.1 }}
-                  className="flex flex-col items-center gap-2 group"
+                  className="flex flex-col items-center gap-2 group animate-in scale-in duration-500"
+                  style={{ animationDelay: `${index * 100}ms` }}
                 >
                   <div className="w-16 h-16 bg-white dark:bg-zinc-700 border border-zinc-300 dark:border-zinc-600 rounded-lg flex items-center justify-center group-hover:border-red-600/50 group-hover:bg-red-600/10 transition-all shadow-lg dark:shadow-none">
                     <IconComponent className="w-8 h-8 text-zinc-600 dark:text-zinc-400 group-hover:text-red-600 dark:group-hover:text-red-500 transition-colors" />
@@ -54,7 +50,7 @@ export function Footer({ onOpenProduct }: FooterProps) {
                   <span className="text-xs text-zinc-600 dark:text-zinc-500 uppercase tracking-wider font-semibold">
                     {t(`certifications.${cert.key}`)}
                   </span>
-                </motion.div>
+                </div>
               );
             })}
           </div>

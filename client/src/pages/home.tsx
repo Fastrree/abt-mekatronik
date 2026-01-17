@@ -4,7 +4,6 @@ import { SkipLink } from "@/components/SkipLink";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { motion, AnimatePresence } from "framer-motion";
 import { Settings, Cog, PenTool, ChevronRight, X, CheckCircle, Truck, Factory, Wrench, Layers } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -117,13 +116,6 @@ export default function Home() {
     }, 500);
   }
 
-  const fadeIn = {
-    initial: { opacity: 0, y: 20 },
-    whileInView: { opacity: 1, y: 0 },
-    viewport: { once: true },
-    transition: { duration: 0.6 }
-  };
-
   const openProductModal = (productKey: ProductKey) => {
     const cardElement = document.getElementById(`product-card-${productKey}`);
     
@@ -160,27 +152,18 @@ export default function Home() {
       <Navbar onOpenProduct={openProductModal} />
 
       {/* PRODUCT DETAIL MODAL */}
-      <AnimatePresence mode="wait">
-        {selectedProduct && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.15 }}
-            className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/70 dark:bg-black/85"
-            onClick={closeProductModal}
-            role="dialog"
-            aria-modal="true"
-            aria-labelledby="product-modal-title"
+      {selectedProduct && (
+        <div
+          className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/70 dark:bg-black/85 animate-in fade-in duration-200"
+          onClick={closeProductModal}
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="product-modal-title"
+        >
+          <div
+            className="relative w-full max-w-5xl max-h-[90vh] overflow-y-auto bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-600 rounded-lg shadow-2xl will-change-transform animate-in fade-in slide-up duration-300"
+            onClick={(e) => e.stopPropagation()}
           >
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: 20 }}
-              transition={{ duration: 0.2, ease: "easeOut" }}
-              className="relative w-full max-w-5xl max-h-[90vh] overflow-y-auto bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-600 rounded-lg shadow-2xl will-change-transform"
-              onClick={(e) => e.stopPropagation()}
-            >
               {/* Close Button */}
               <button
                 onClick={closeProductModal}
@@ -311,10 +294,9 @@ export default function Home() {
                   </>
                 );
               })()}
-            </motion.div>
-          </motion.div>
+            </div>
+          </div>
         )}
-      </AnimatePresence>
 
       {/* HERO SECTION */}
       <section 
@@ -340,12 +322,7 @@ export default function Home() {
         </div>
 
         <div className="container mx-auto px-6 relative z-10 pt-20">
-          <motion.div 
-            initial={{ opacity: 0, x: -50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
-            className="max-w-4xl"
-          >
+          <div className="max-w-4xl animate-in fade-in-left duration-800">
             <div className="inline-block mb-4 px-3 py-1 bg-red-600/20 border border-red-600/50 text-red-600 dark:text-red-500 font-bold text-xs tracking-widest uppercase rounded-sm backdrop-blur-sm">
               {t('hero.badge')}
             </div>
@@ -376,18 +353,13 @@ export default function Home() {
                 <span className="skew-x-[10deg]">{t('hero.projects')}</span>
               </Button>
             </div>
-          </motion.div>
+          </div>
         </div>
 
-        <motion.div 
-          animate={{ y: [0, 10, 0] }}
-          transition={{ repeat: Infinity, duration: 2 }}
-          className="absolute bottom-10 left-1/2 -translate-x-1/2 text-zinc-900/50 dark:text-white/50 flex flex-col items-center gap-2"
-          aria-hidden="true"
-        >
+        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 text-zinc-900/50 dark:text-white/50 flex flex-col items-center gap-2 animate-bounce" aria-hidden="true">
           <span className="text-[10px] uppercase tracking-[0.3em]">{t('hero.scroll')}</span>
           <div className="w-[1px] h-12 bg-gradient-to-b from-red-600 to-transparent"></div>
-        </motion.div>
+        </div>
       </section>
 
       {/* PRODUCTS SECTION - 4 Ürün Grubu */}
@@ -412,14 +384,10 @@ export default function Home() {
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6" role="list" aria-label="Ürün kategorileri">
             {/* Konveyör Sistemleri */}
-            <motion.article 
+            <article 
               id="product-card-konveyor"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.1 }}
               onClick={() => openProductModal('konveyor')}
-              className="group relative h-[450px] overflow-hidden bg-white dark:bg-zinc-800 border border-zinc-300 dark:border-zinc-700 hover:border-red-600/50 transition-colors cursor-pointer shadow-lg dark:shadow-none"
+              className="group relative h-[450px] overflow-hidden bg-white dark:bg-zinc-800 border border-zinc-300 dark:border-zinc-700 hover:border-red-600/50 transition-colors cursor-pointer shadow-lg dark:shadow-none animate-in slide-up duration-600"
               role="listitem"
               tabIndex={0}
               onKeyDown={(e) => {
@@ -451,17 +419,13 @@ export default function Home() {
                   {t('products.viewDetails')} <ChevronRight className="ml-1 w-4 h-4 text-red-600 dark:text-red-500" />
                 </span>
               </div>
-            </motion.article>
+            </article>
 
             {/* Tekstil Makinaları */}
-            <motion.article 
+            <article 
               id="product-card-tekstil"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.2 }}
               onClick={() => openProductModal('tekstil')}
-              className="group relative h-[450px] overflow-hidden bg-white dark:bg-zinc-800 border-t-4 border-red-600 cursor-pointer shadow-lg dark:shadow-none"
+              className="group relative h-[450px] overflow-hidden bg-white dark:bg-zinc-800 border-t-4 border-red-600 cursor-pointer shadow-lg dark:shadow-none animate-in slide-up duration-600 delay-100"
               role="listitem"
               tabIndex={0}
               onKeyDown={(e) => {
@@ -493,17 +457,13 @@ export default function Home() {
                   {t('products.viewDetails')} <ChevronRight className="ml-1 w-4 h-4 text-red-600 dark:text-red-500" aria-hidden="true" />
                 </span>
               </div>
-            </motion.article>
+            </article>
 
             {/* Çelik Konstrüksiyon */}
-            <motion.article 
+            <article 
               id="product-card-celik"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.3 }}
               onClick={() => openProductModal('celik')}
-              className="group relative h-[450px] overflow-hidden bg-white dark:bg-zinc-800 border border-zinc-300 dark:border-zinc-700 hover:border-red-600/50 transition-colors cursor-pointer shadow-lg dark:shadow-none"
+              className="group relative h-[450px] overflow-hidden bg-white dark:bg-zinc-800 border border-zinc-300 dark:border-zinc-700 hover:border-red-600/50 transition-colors cursor-pointer shadow-lg dark:shadow-none animate-in slide-up duration-600 delay-200"
               role="listitem"
               tabIndex={0}
               onKeyDown={(e) => {
@@ -535,17 +495,13 @@ export default function Home() {
                   {t('products.viewDetails')} <ChevronRight className="ml-1 w-4 h-4 text-red-600 dark:text-red-500" aria-hidden="true" />
                 </span>
               </div>
-            </motion.article>
+            </article>
 
             {/* Özel Makine Tasarımı */}
-            <motion.article 
+            <article 
               id="product-card-ozelMakine"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.4 }}
               onClick={() => openProductModal('ozelMakine')}
-              className="group relative h-[450px] overflow-hidden bg-white dark:bg-zinc-800 border border-zinc-300 dark:border-zinc-700 hover:border-red-600/50 transition-colors cursor-pointer shadow-lg dark:shadow-none"
+              className="group relative h-[450px] overflow-hidden bg-white dark:bg-zinc-800 border border-zinc-300 dark:border-zinc-700 hover:border-red-600/50 transition-colors cursor-pointer shadow-lg dark:shadow-none animate-in slide-up duration-600 delay-300"
               role="listitem"
               tabIndex={0}
               onKeyDown={(e) => {
@@ -577,7 +533,7 @@ export default function Home() {
                   {t('products.viewDetails')} <ChevronRight className="ml-1 w-4 h-4 text-red-600 dark:text-red-500" aria-hidden="true" />
                 </span>
               </div>
-            </motion.article>
+            </article>
           </div>
         </div>
       </section>
@@ -589,7 +545,7 @@ export default function Home() {
         
         <div className="container mx-auto px-6 relative z-10">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
-            <motion.div {...fadeIn}>
+            <div className="animate-in fade-in duration-600">
               <h3 className="text-red-600 dark:text-red-500 font-bold tracking-widest uppercase mb-4">{t('engineering.subtitle')}</h3>
               <h2 className="text-4xl md:text-5xl font-black text-zinc-900 dark:text-white mb-8">{t('engineering.title')} <br />{t('engineering.title2')}</h2>
               
@@ -630,15 +586,10 @@ export default function Home() {
                   </div>
                 </div>
               </div>
-            </motion.div>
+            </div>
 
             <div className="grid grid-cols-2 gap-4">
-               <motion.div 
-                 initial={{ opacity: 0, scale: 0.9 }}
-                 whileInView={{ opacity: 1, scale: 1 }}
-                 transition={{ duration: 0.5 }}
-                 className="space-y-4 mt-8"
-               >
+               <div className="space-y-4 mt-8 animate-in scale-in duration-500">
                  <div className="bg-zinc-700 p-2 rounded-lg border border-zinc-600">
                     <OptimizedImage src={`/media/${encodeURIComponent("WhatsApp Image 2026-01-16 at 14.32.07 (3).jpeg")}`} alt="Engineering Site" className="w-full h-48 object-cover rounded shadow-lg opacity-80 hover:opacity-100 transition-opacity" loading="lazy" />
                  </div>
@@ -646,13 +597,8 @@ export default function Home() {
                     <span className="block text-3xl font-black text-white">15+</span>
                     <span className="text-xs uppercase tracking-wider text-zinc-400">{t('engineering.experience')}</span>
                  </div>
-               </motion.div>
-               <motion.div 
-                 initial={{ opacity: 0, scale: 0.9 }}
-                 whileInView={{ opacity: 1, scale: 1 }}
-                 transition={{ duration: 0.5, delay: 0.2 }}
-                 className="space-y-4"
-               >
+               </div>
+               <div className="space-y-4 animate-in scale-in duration-500 delay-200">
                  <div className="bg-red-600 p-4 rounded-lg text-center shadow-[0_0_30px_rgba(220,38,38,0.3)]">
                     <span className="block text-3xl font-black text-white">200+</span>
                     <span className="text-xs uppercase tracking-wider text-white/80">{t('engineering.completedProjects')}</span>
@@ -660,7 +606,7 @@ export default function Home() {
                  <div className="bg-zinc-700 p-2 rounded-lg border border-zinc-600">
                     <OptimizedImage src={`/media/${encodeURIComponent("WhatsApp Image 2026-01-16 at 14.32.08.jpeg")}`} alt="Automation Detail" className="w-full h-64 object-cover rounded shadow-lg opacity-80 hover:opacity-100 transition-opacity" loading="lazy" />
                  </div>
-               </motion.div>
+               </div>
             </div>
           </div>
         </div>
@@ -669,13 +615,10 @@ export default function Home() {
       {/* PROJECTS / GALLERY SECTION */}
       <section id="projects" className="py-24 bg-white dark:bg-zinc-900">
         <div className="container mx-auto px-6">
-          <motion.div 
-            {...fadeIn}
-            className="text-center mb-16"
-          >
+          <div className="text-center mb-16 animate-in fade-in duration-600">
             <h3 className="text-red-600 dark:text-red-500 font-bold tracking-widest uppercase mb-2">{t('projectsSection.subtitle')}</h3>
             <h2 className="text-4xl md:text-5xl font-black text-zinc-900 dark:text-white">{t('projectsSection.title')}</h2>
-          </motion.div>
+          </div>
 
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
             {[
@@ -692,13 +635,10 @@ export default function Home() {
               "WhatsApp Image 2026-01-16 at 14.32.07 (5).jpeg",
               "WhatsApp Image 2026-01-16 at 14.32.08 (1).jpeg",
             ].map((img, index) => (
-              <motion.div
+              <div
                 key={img}
-                initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.05 }}
-                className="group relative aspect-square overflow-hidden bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 shadow-lg dark:shadow-none"
+                className="group relative aspect-square overflow-hidden bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 shadow-lg dark:shadow-none animate-in scale-in duration-500"
+                style={{ animationDelay: `${index * 50}ms` }}
               >
                 <OptimizedImage 
                   src={`/media/${encodeURIComponent(img)}`}
@@ -707,15 +647,12 @@ export default function Home() {
                   className="w-full h-full object-cover transition-all duration-500 group-hover:scale-110 grayscale-[30%] group-hover:grayscale-0"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-white/60 via-transparent to-transparent dark:from-zinc-900/60 dark:via-transparent dark:to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-              </motion.div>
+              </div>
             ))}
           </div>
 
           {/* Video Showcase */}
-          <motion.div 
-            {...fadeIn}
-            className="mt-16"
-          >
+          <div className="mt-16 animate-in fade-in duration-600">
             <h3 className="text-2xl font-bold text-zinc-900 dark:text-white mb-8 text-center">{t('projectsSection.videoGallery')}</h3>
             <div className="grid md:grid-cols-2 gap-6">
               {[
@@ -736,7 +673,7 @@ export default function Home() {
                 </div>
               ))}
             </div>
-          </motion.div>
+          </div>
         </div>
       </section>
 
@@ -744,7 +681,7 @@ export default function Home() {
       <section id="contact" className="py-24 bg-white dark:bg-zinc-900">
         <div className="container mx-auto px-6">
           <div className="grid lg:grid-cols-2 gap-16">
-            <motion.div {...fadeIn}>
+            <div className="animate-in fade-in duration-600">
               <h3 className="text-red-500 dark:text-red-500 font-bold tracking-widest uppercase mb-4">{t('contact.subtitle')}</h3>
               <h2 className="text-4xl md:text-5xl font-black text-zinc-900 dark:text-white mb-8">{t('contact.title')} <br />{t('contact.title2')}</h2>
               <p className="text-zinc-600 dark:text-zinc-400 mb-8 max-w-lg">
@@ -763,15 +700,9 @@ export default function Home() {
                     </Button>
                 </div>
               </div>
-            </motion.div>
+            </div>
 
-            <motion.div 
-              initial={{ opacity: 0, x: 50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8 }}
-              className="bg-slate-50 dark:bg-zinc-800 p-8 md:p-10 border border-slate-200 dark:border-zinc-700 shadow-xl dark:shadow-2xl"
-            >
+            <div className="bg-slate-50 dark:bg-zinc-800 p-8 md:p-10 border border-slate-200 dark:border-zinc-700 shadow-xl dark:shadow-2xl animate-in fade-in-right duration-800">
               <h3 className="text-2xl font-bold text-zinc-900 dark:text-white mb-6 border-b border-slate-200 dark:border-zinc-700 pb-4">{t('contact.formTitle')}</h3>
               <Form {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
@@ -841,7 +772,7 @@ export default function Home() {
                   </Button>
                 </form>
               </Form>
-            </motion.div>
+            </div>
           </div>
         </div>
       </section>

@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronDown, HelpCircle } from 'lucide-react';
 import { useI18n } from '@/lib/i18n';
 
@@ -11,29 +10,21 @@ export function FAQ() {
   return (
     <section className="py-20 bg-zinc-50 dark:bg-zinc-800">
       <div className="container mx-auto px-6 max-w-4xl">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-center mb-12"
-        >
+        <div className="text-center mb-12 animate-in fade-in duration-600">
           <h3 className="text-red-600 dark:text-red-500 font-bold tracking-widest uppercase mb-2">
             {t('faq.subtitle')}
           </h3>
           <h2 className="text-3xl md:text-4xl font-black text-zinc-900 dark:text-white">
             {t('faq.title')}
           </h2>
-        </motion.div>
+        </div>
 
         <div className="space-y-4">
           {faqItems.map((_, index) => (
-            <motion.div
+            <div
               key={index}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.1 }}
-              className="bg-white dark:bg-zinc-900 border border-zinc-300 dark:border-zinc-700 rounded-lg overflow-hidden shadow-lg dark:shadow-none"
+              className="bg-white dark:bg-zinc-900 border border-zinc-300 dark:border-zinc-700 rounded-lg overflow-hidden shadow-lg dark:shadow-none animate-in slide-up duration-500"
+              style={{ animationDelay: `${index * 100}ms` }}
             >
               <button
                 onClick={() => setOpenIndex(openIndex === index ? null : index)}
@@ -52,22 +43,14 @@ export function FAQ() {
                 />
               </button>
               
-              <AnimatePresence>
-                {openIndex === index && (
-                  <motion.div
-                    initial={{ height: 0, opacity: 0 }}
-                    animate={{ height: 'auto', opacity: 1 }}
-                    exit={{ height: 0, opacity: 0 }}
-                    transition={{ duration: 0.3 }}
-                    className="overflow-hidden"
-                  >
-                    <div className="px-5 pb-5 pt-0 text-zinc-600 dark:text-zinc-400 leading-relaxed border-t border-zinc-300 dark:border-zinc-700 mt-0 pt-4">
-                      {t(`faq.items.${index}.answer`)}
-                    </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </motion.div>
+              {openIndex === index && (
+                <div className="overflow-hidden animate-in slide-up duration-300">
+                  <div className="px-5 pb-5 pt-0 text-zinc-600 dark:text-zinc-400 leading-relaxed border-t border-zinc-300 dark:border-zinc-700 mt-0 pt-4">
+                    {t(`faq.items.${index}.answer`)}
+                  </div>
+                </div>
+              )}
+            </div>
           ))}
         </div>
       </div>

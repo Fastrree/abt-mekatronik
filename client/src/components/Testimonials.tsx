@@ -1,4 +1,3 @@
-import { motion } from 'framer-motion';
 import { Star, Quote } from 'lucide-react';
 import { useI18n } from '@/lib/i18n';
 
@@ -9,29 +8,21 @@ export function Testimonials() {
   return (
     <section className="py-20 bg-white dark:bg-zinc-900">
       <div className="container mx-auto px-6">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-center mb-12"
-        >
+        <div className="text-center mb-12 animate-in fade-in duration-600">
           <h3 className="text-red-600 dark:text-red-500 font-bold tracking-widest uppercase mb-2">
             {t('testimonials.subtitle')}
           </h3>
           <h2 className="text-3xl md:text-4xl font-black text-zinc-900 dark:text-white">
             {t('testimonials.title')}
           </h2>
-        </motion.div>
+        </div>
 
         <div className="grid md:grid-cols-3 gap-6">
           {testimonials.map((_, index) => (
-            <motion.div
+            <div
               key={index}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.15 }}
-              className="bg-white dark:bg-zinc-800 border border-zinc-300 dark:border-zinc-700 p-6 rounded-lg relative shadow-lg dark:shadow-none"
+              className="bg-white dark:bg-zinc-800 border border-zinc-300 dark:border-zinc-700 p-6 rounded-lg relative shadow-lg dark:shadow-none animate-in slide-up duration-600"
+              style={{ animationDelay: `${index * 150}ms` }}
             >
               <Quote className="absolute top-4 right-4 w-8 h-8 text-red-600/20" />
               
@@ -63,7 +54,7 @@ export function Testimonials() {
                   </p>
                 </div>
               </div>
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>

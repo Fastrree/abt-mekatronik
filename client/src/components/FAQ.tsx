@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import { ChevronDown, HelpCircle } from 'lucide-react';
 import { useI18n } from '@/lib/i18n';
+import { memo } from 'react';
 
-export function FAQ() {
+export const FAQ = memo(function FAQ() {
   const { t, tArray } = useI18n();
   const [openIndex, setOpenIndex] = useState<number | null>(0);
   const faqItems = tArray('faq.items');
@@ -56,4 +57,4 @@ export function FAQ() {
       </div>
     </section>
   );
-}
+});

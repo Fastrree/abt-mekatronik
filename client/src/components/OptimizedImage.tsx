@@ -8,7 +8,7 @@
  * - Loading state
  */
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, memo } from 'react';
 
 interface OptimizedImageProps {
   src: string;
@@ -20,7 +20,7 @@ interface OptimizedImageProps {
   blurDataURL?: string;
 }
 
-export function OptimizedImage({
+export const OptimizedImage = memo(function OptimizedImage({
   src,
   alt,
   className = '',
@@ -102,4 +102,4 @@ export function OptimizedImage({
       )}
     </div>
   );
-}
+});

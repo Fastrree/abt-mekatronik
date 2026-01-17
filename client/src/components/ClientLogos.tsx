@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion';
+import { memo } from 'react';
 import { useI18n } from '@/lib/i18n';
 
 // Client logos - First row (left to right scroll)
@@ -49,22 +49,17 @@ function LogoItem({ client }: LogoItemProps) {
   );
 }
 
-export function ClientLogos() {
+export const ClientLogos = memo(function ClientLogos() {
   const { t } = useI18n();
 
   return (
     <section className="relative py-16 bg-zinc-50 dark:bg-zinc-800/50 border-y border-zinc-200 dark:border-zinc-700 overflow-hidden">
       <div className="container mx-auto px-6 mb-12">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-center"
-        >
+        <div className="text-center animate-in slide-in-from-bottom duration-500">
           <h3 className="text-zinc-600 dark:text-zinc-400 text-sm uppercase tracking-widest font-semibold">
             {t('clients.title')}
           </h3>
-        </motion.div>
+        </div>
       </div>
 
       {/* First Row - Left to Right - Full Width */}
@@ -174,4 +169,4 @@ export function ClientLogos() {
       `}</style>
     </section>
   );
-}
+});

@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import { MapPin, Phone, Mail, Linkedin, Instagram, Facebook, Truck, Factory, Layers, Wrench, Shield, Award, CheckCircle, BadgeCheck } from "lucide-react";
 import { useI18n } from "@/lib/i18n";
 
@@ -14,7 +15,7 @@ const certifications = [
   { icon: BadgeCheck, key: 'quality' },
 ];
 
-export function Footer({ onOpenProduct }: FooterProps) {
+export const Footer = memo(function Footer({ onOpenProduct }: FooterProps) {
   const { t } = useI18n();
   
   const productLinks: { key: ProductKey; icon: typeof Truck }[] = [
@@ -137,4 +138,4 @@ export function Footer({ onOpenProduct }: FooterProps) {
       </div>
     </footer>
   );
-}
+});

@@ -1,7 +1,8 @@
 import { Star, Quote } from 'lucide-react';
 import { useI18n } from '@/lib/i18n';
+import { memo } from 'react';
 
-export function Testimonials() {
+export const Testimonials = memo(function Testimonials() {
   const { t, tArray } = useI18n();
   const testimonials = tArray('testimonials.items');
 
@@ -60,4 +61,4 @@ export function Testimonials() {
       </div>
     </section>
   );
-}
+});

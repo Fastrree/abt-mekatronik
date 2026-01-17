@@ -146,20 +146,17 @@
     <meta name="theme-color" content="#18181b">
     <meta name="msapplication-TileColor" content="#dc2626">
     
-    <!-- Preload Critical Resources for Performance -->
-    <link rel="preload" href="/media/video1.mp4" as="video" type="video/mp4">
+    <!-- Preload Critical Resources for Performance - Mobile Optimized -->
     <link rel="preload" href="/media/img1.jpeg" as="image">
     <link rel="dns-prefetch" href="https://fonts.googleapis.com">
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
     
-    <!-- Fonts: Montserrat (Headers) & Inter (Body) - Optimized -->
+    <!-- Fonts: Montserrat (Headers) & Inter (Body) - Optimized for Performance -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <!-- Font preload for critical fonts -->
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Montserrat:wght@400;500;600;700;800;900&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"></noscript>
-    <!-- Fallback for browsers without JS -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <!-- Reduced font weights: Only load what we actually use -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Montserrat:wght@700;900&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Montserrat:wght@700;900&display=swap" rel="stylesheet"></noscript>
     
     <!-- Schema.org - FAQ -->
     <script type="application/ld+json">
@@ -300,15 +297,7 @@
       }
     </style>
     
-    <!-- Google Analytics (GA4) - Replace G-XXXXXXXXXX with your ID -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-XXXXXXXXXX');
-    </script>
-  </head>
+    <!-- Splash Screen Styles -->
   <body>
     <!-- Splash Screen -->
     <div id="splash-screen">

@@ -3,8 +3,9 @@ import { Mail, Send, CheckCircle } from 'lucide-react';
 import { useI18n } from '@/lib/i18n';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import { memo } from 'react';
 
-export function Newsletter() {
+export const Newsletter = memo(function Newsletter() {
   const { t } = useI18n();
   const [email, setEmail] = useState('');
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -70,4 +71,4 @@ export function Newsletter() {
       </div>
     </section>
   );
-}
+});

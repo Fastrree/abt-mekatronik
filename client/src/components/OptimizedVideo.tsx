@@ -7,7 +7,7 @@
  * - Error handling
  */
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, memo } from 'react';
 
 interface OptimizedVideoProps {
   src: string;
@@ -21,7 +21,7 @@ interface OptimizedVideoProps {
   'aria-label'?: string;
 }
 
-export function OptimizedVideo({
+export const OptimizedVideo = memo(function OptimizedVideo({
   src,
   poster,
   className = '',
@@ -93,4 +93,4 @@ export function OptimizedVideo({
       )}
     </div>
   );
-}
+});

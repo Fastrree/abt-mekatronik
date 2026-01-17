@@ -44,7 +44,7 @@ export default defineConfig({
       output: {
         manualChunks: {
           // Vendor splitting for better caching
-          'react-vendor': ['react', 'react-dom', 'react-router-dom'],
+          'react-vendor': ['react', 'react-dom'],
           'ui-vendor': ['framer-motion', '@radix-ui/react-accordion', '@radix-ui/react-dialog'],
           'form-vendor': ['react-hook-form', '@hookform/resolvers', 'zod'],
         },
@@ -52,14 +52,8 @@ export default defineConfig({
     },
     // Chunk size warnings
     chunkSizeWarningLimit: 1000,
-    // Minification
-    minify: 'terser',
-    terserOptions: {
-      compress: {
-        drop_console: true, // Remove console.logs in production
-        drop_debugger: true,
-      },
-    },
+    // Minification with esbuild (faster than terser)
+    minify: 'esbuild',
     // Source maps (disable in production for smaller bundle)
     sourcemap: false,
   },

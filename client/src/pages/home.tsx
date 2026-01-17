@@ -1,5 +1,6 @@
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
+import { SkipLink } from "@/components/SkipLink";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -154,6 +155,7 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-white dark:bg-zinc-900 text-zinc-900 dark:text-zinc-200 selection:bg-red-900 selection:text-white overflow-x-hidden transition-colors duration-300">
+      <SkipLink />
       <Navbar onOpenProduct={openProductModal} />
 
       {/* PRODUCT DETAIL MODAL */}
@@ -166,6 +168,9 @@ export default function Home() {
             transition={{ duration: 0.15 }}
             className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/70 dark:bg-black/85"
             onClick={closeProductModal}
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="product-modal-title"
           >
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -192,22 +197,22 @@ export default function Home() {
                     {/* Hero Image */}
                     <div className="relative h-64 md:h-80 overflow-hidden bg-zinc-100 dark:bg-zinc-700">
                       <img 
-                src={`/media/${encodeURIComponent(product.heroImage)}`}
-                alt={t(`productItems.${selectedProduct}.title`)}
-                className="w-full h-full object-cover"
-                loading="eager"
-              />
+                        src={`/media/${encodeURIComponent(product.heroImage)}`}
+                        alt={t(`productItems.${selectedProduct}.title`)}
+                        className="w-full h-full object-cover"
+                        loading="eager"
+                      />
                       <div className="absolute inset-0 bg-gradient-to-t from-white via-white/50 to-transparent dark:from-zinc-800 dark:via-zinc-800/50 dark:to-transparent" />
                       <div className="absolute bottom-6 left-6 right-6">
                         <div className="flex items-center gap-3 mb-2">
-                          <div className="p-2 bg-red-600 rounded-lg">
+                          <div className="p-2 bg-red-600 rounded-lg" aria-hidden="true">
                             <IconComponent className="w-6 h-6 text-white" />
                           </div>
                           <span className="text-red-600 dark:text-red-400 font-semibold uppercase tracking-wider text-sm">
                             {t(`productItems.${selectedProduct}.modalSubtitle`)}
                           </span>
                         </div>
-                        <h2 className="text-3xl md:text-4xl font-black text-zinc-900 dark:text-white">
+                        <h2 id="product-modal-title" className="text-3xl md:text-4xl font-black text-zinc-900 dark:text-white">
                           {t(`productItems.${selectedProduct}.title`)}
                         </h2>
                       </div>
@@ -311,7 +316,11 @@ export default function Home() {
       </AnimatePresence>
 
       {/* HERO SECTION */}
-      <section id="hero" className="relative h-screen flex items-center justify-center overflow-hidden">
+      <section 
+        id="hero" 
+        className="relative h-screen flex items-center justify-center overflow-hidden"
+        aria-labelledby="hero-title"
+      >
         <div className="absolute inset-0 z-0">
           <video 
             autoPlay 
@@ -320,11 +329,13 @@ export default function Home() {
             playsInline
             className="w-full h-full object-cover"
             poster="/media/img1.jpeg"
+            aria-label="ABT Mekatronik üretim tesisi video arka planı"
           >
             <source src="/media/video1.mp4" type="video/mp4" />
+            Tarayıcınız video etiketini desteklemiyor.
           </video>
           {/* Light theme: NO blur, just subtle overlay. Dark theme: stronger overlay */}
-          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-transparent to-transparent dark:from-zinc-900/90 dark:via-zinc-900/70 dark:to-zinc-900/40" />
+          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-transparent to-transparent dark:from-zinc-900/90 dark:via-zinc-900/70 dark:to-zinc-900/40" aria-hidden="true" />
         </div>
 
         <div className="container mx-auto px-6 relative z-10 pt-20">
@@ -337,7 +348,7 @@ export default function Home() {
             <div className="inline-block mb-4 px-3 py-1 bg-red-600/20 border border-red-600/50 text-red-600 dark:text-red-500 font-bold text-xs tracking-widest uppercase rounded-sm backdrop-blur-sm">
               {t('hero.badge')}
             </div>
-            <h1 className="text-5xl md:text-7xl lg:text-8xl font-black text-zinc-900 dark:text-white leading-[0.9] mb-8 tracking-tighter">
+            <h1 id="hero-title" className="text-5xl md:text-7xl lg:text-8xl font-black text-zinc-900 dark:text-white leading-[0.9] mb-8 tracking-tighter">
               {t('hero.title1')} <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-zinc-600 to-zinc-400 dark:from-gray-100 dark:to-gray-500">{t('hero.title2')}</span> <br />
               <span className="text-red-600">{t('hero.title3')}</span> {t('hero.title4')}
@@ -345,11 +356,12 @@ export default function Home() {
             <p className="text-xl md:text-2xl text-zinc-700 dark:text-zinc-300 max-w-2xl mb-10 font-light leading-relaxed border-l-4 border-red-600 pl-6">
               {t('hero.description')}
             </p>
-            <div className="flex flex-col sm:flex-row gap-4">
+            <div className="flex flex-col sm:flex-row gap-4" role="group" aria-label="Ana eylem butonları">
               <Button 
                 size="lg" 
                 className="bg-red-600 hover:bg-red-700 text-white font-bold text-lg px-8 py-6 rounded-none skew-x-[-10deg] border-2 border-red-600 hover:shadow-[0_0_30px_rgba(220,38,38,0.5)] transition-all"
                 onClick={() => document.getElementById('products')?.scrollIntoView({ behavior: 'smooth' })}
+                aria-label="Çözümlerimizi keşfedin"
               >
                 <span className="skew-x-[10deg]">{t('hero.solutions')}</span>
               </Button>
@@ -358,6 +370,7 @@ export default function Home() {
                 variant="outline" 
                 className="border-zinc-400 dark:border-zinc-400 text-zinc-900 dark:text-zinc-200 hover:bg-zinc-100 hover:text-zinc-900 dark:hover:bg-zinc-700 dark:hover:text-white font-bold text-lg px-8 py-6 rounded-none skew-x-[-10deg] backdrop-blur-sm"
                 onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })}
+                aria-label="Projelerimizi görüntüleyin"
               >
                 <span className="skew-x-[10deg]">{t('hero.projects')}</span>
               </Button>
@@ -369,6 +382,7 @@ export default function Home() {
           animate={{ y: [0, 10, 0] }}
           transition={{ repeat: Infinity, duration: 2 }}
           className="absolute bottom-10 left-1/2 -translate-x-1/2 text-zinc-900/50 dark:text-white/50 flex flex-col items-center gap-2"
+          aria-hidden="true"
         >
           <span className="text-[10px] uppercase tracking-[0.3em]">{t('hero.scroll')}</span>
           <div className="w-[1px] h-12 bg-gradient-to-b from-red-600 to-transparent"></div>
@@ -376,24 +390,28 @@ export default function Home() {
       </section>
 
       {/* PRODUCTS SECTION - 4 Ürün Grubu */}
-      <section id="products" className="py-24 bg-zinc-50 dark:bg-zinc-900 relative">
+      <section 
+        id="products" 
+        className="py-24 bg-zinc-50 dark:bg-zinc-900 relative"
+        aria-labelledby="products-title"
+      >
         <div className="container mx-auto px-6">
           <motion.div 
             {...fadeIn}
             className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6"
           >
             <div>
-              <h3 className="text-red-600 dark:text-red-500 font-bold tracking-widest uppercase mb-2">{t('products.subtitle')}</h3>
-              <h2 className="text-4xl md:text-5xl font-black text-zinc-900 dark:text-white">{t('products.title')}</h2>
+              <p className="text-red-600 dark:text-red-500 font-bold tracking-widest uppercase mb-2">{t('products.subtitle')}</p>
+              <h2 id="products-title" className="text-4xl md:text-5xl font-black text-zinc-900 dark:text-white">{t('products.title')}</h2>
             </div>
             <p className="text-zinc-600 dark:text-zinc-400 max-w-md text-right md:text-left leading-relaxed">
               {t('products.description')}
             </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6" role="list" aria-label="Ürün kategorileri">
             {/* Konveyör Sistemleri */}
-            <motion.div 
+            <motion.article 
               id="product-card-konveyor"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -401,6 +419,15 @@ export default function Home() {
               transition={{ delay: 0.1 }}
               onClick={() => openProductModal('konveyor')}
               className="group relative h-[450px] overflow-hidden bg-white dark:bg-zinc-800 border border-zinc-300 dark:border-zinc-700 hover:border-red-600/50 transition-colors cursor-pointer shadow-lg dark:shadow-none"
+              role="listitem"
+              tabIndex={0}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  e.preventDefault();
+                  openProductModal('konveyor');
+                }
+              }}
+              aria-label={`${t('productItems.konveyor.title')} - Detayları görüntülemek için tıklayın`}
             >
               <div className="absolute inset-0 bg-white/20 dark:bg-zinc-800/20 group-hover:bg-transparent transition-colors duration-500 z-10" />
               <img 
@@ -426,7 +453,7 @@ export default function Home() {
             </motion.div>
 
             {/* Tekstil Makinaları */}
-            <motion.div 
+            <motion.article 
               id="product-card-tekstil"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -434,32 +461,41 @@ export default function Home() {
               transition={{ delay: 0.2 }}
               onClick={() => openProductModal('tekstil')}
               className="group relative h-[450px] overflow-hidden bg-white dark:bg-zinc-800 border-t-4 border-red-600 cursor-pointer shadow-lg dark:shadow-none"
+              role="listitem"
+              tabIndex={0}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  e.preventDefault();
+                  openProductModal('tekstil');
+                }
+              }}
+              aria-label={`${t('productItems.tekstil.title')} - Detayları görüntülemek için tıklayın`}
             >
-              <div className="absolute inset-0 bg-white/20 dark:bg-zinc-800/20 group-hover:bg-transparent transition-colors duration-500 z-10" />
+              <div className="absolute inset-0 bg-white/20 dark:bg-zinc-800/20 group-hover:bg-transparent transition-colors duration-500 z-10" aria-hidden="true" />
               <img 
                 src={`/media/${encodeURIComponent("WhatsApp Image 2026-01-16 at 14.32.04 (3).jpeg")}`}
-                alt={t('productItems.tekstil.title')} 
+                alt={`${t('productItems.tekstil.title')} - ${t('productItems.tekstil.shortDesc')}`} 
                 loading="lazy"
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 grayscale group-hover:grayscale-0" 
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-50 via-slate-50/60 to-transparent dark:from-zinc-900 dark:via-zinc-900/60 dark:to-transparent opacity-90 z-20" />
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-50 via-slate-50/60 to-transparent dark:from-zinc-900 dark:via-zinc-900/60 dark:to-transparent opacity-90 z-20" aria-hidden="true" />
               
               <div className="absolute bottom-0 left-0 p-6 z-30 w-full pointer-events-none">
                 <div className="flex items-center gap-2 mb-3">
-                  <Factory className="w-5 h-5 text-red-600 dark:text-red-500" />
+                  <Factory className="w-5 h-5 text-red-600 dark:text-red-500" aria-hidden="true" />
                   <span className="text-xs text-red-600 dark:text-red-400 uppercase tracking-wider font-semibold">{t('productItems.tekstil.subtitle')}</span>
                 </div>
-                <div className="w-10 h-1 bg-red-600 mb-3 transition-all duration-300 group-hover:w-16"></div>
+                <div className="w-10 h-1 bg-red-600 mb-3 transition-all duration-300 group-hover:w-16" aria-hidden="true"></div>
                 <h3 className="text-xl font-bold text-zinc-900 dark:text-white mb-2 group-hover:text-red-600 dark:group-hover:text-red-500 transition-colors">{t('productItems.tekstil.title')}</h3>
                 <p className="text-zinc-700 dark:text-zinc-400 text-sm mb-4 line-clamp-2">{t('productItems.tekstil.shortDesc')}</p>
                 <span className="inline-flex items-center text-zinc-900 dark:text-white font-semibold text-sm uppercase tracking-wider group-hover:translate-x-2 transition-transform">
-                  {t('products.viewDetails')} <ChevronRight className="ml-1 w-4 h-4 text-red-600 dark:text-red-500" />
+                  {t('products.viewDetails')} <ChevronRight className="ml-1 w-4 h-4 text-red-600 dark:text-red-500" aria-hidden="true" />
                 </span>
               </div>
-            </motion.div>
+            </motion.article>
 
             {/* Çelik Konstrüksiyon */}
-            <motion.div 
+            <motion.article 
               id="product-card-celik"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -467,32 +503,41 @@ export default function Home() {
               transition={{ delay: 0.3 }}
               onClick={() => openProductModal('celik')}
               className="group relative h-[450px] overflow-hidden bg-white dark:bg-zinc-800 border border-zinc-300 dark:border-zinc-700 hover:border-red-600/50 transition-colors cursor-pointer shadow-lg dark:shadow-none"
+              role="listitem"
+              tabIndex={0}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  e.preventDefault();
+                  openProductModal('celik');
+                }
+              }}
+              aria-label={`${t('productItems.celik.title')} - Detayları görüntülemek için tıklayın`}
             >
-              <div className="absolute inset-0 bg-white/20 dark:bg-zinc-800/20 group-hover:bg-transparent transition-colors duration-500 z-10" />
+              <div className="absolute inset-0 bg-white/20 dark:bg-zinc-800/20 group-hover:bg-transparent transition-colors duration-500 z-10" aria-hidden="true" />
               <img 
                 src={`/media/${encodeURIComponent("WhatsApp Image 2026-01-16 at 14.32.05 (3).jpeg")}`}
-                alt={t('productItems.celik.title')} 
+                alt={`${t('productItems.celik.title')} - ${t('productItems.celik.shortDesc')}`} 
                 loading="lazy"
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 grayscale group-hover:grayscale-0" 
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-50 via-slate-50/60 to-transparent dark:from-zinc-900 dark:via-zinc-900/60 dark:to-transparent opacity-90 z-20" />
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-50 via-slate-50/60 to-transparent dark:from-zinc-900 dark:via-zinc-900/60 dark:to-transparent opacity-90 z-20" aria-hidden="true" />
               
               <div className="absolute bottom-0 left-0 p-6 z-30 w-full pointer-events-none">
                 <div className="flex items-center gap-2 mb-3">
-                  <Layers className="w-5 h-5 text-red-600 dark:text-red-500" />
+                  <Layers className="w-5 h-5 text-red-600 dark:text-red-500" aria-hidden="true" />
                   <span className="text-xs text-red-600 dark:text-red-400 uppercase tracking-wider font-semibold">{t('productItems.celik.subtitle')}</span>
                 </div>
-                <div className="w-10 h-1 bg-red-600 mb-3 transition-all duration-300 group-hover:w-16"></div>
+                <div className="w-10 h-1 bg-red-600 mb-3 transition-all duration-300 group-hover:w-16" aria-hidden="true"></div>
                 <h3 className="text-xl font-bold text-zinc-900 dark:text-white mb-2 group-hover:text-red-600 dark:group-hover:text-red-500 transition-colors">{t('productItems.celik.title')}</h3>
                 <p className="text-zinc-700 dark:text-zinc-400 text-sm mb-4 line-clamp-2">{t('productItems.celik.shortDesc')}</p>
                 <span className="inline-flex items-center text-zinc-900 dark:text-white font-semibold text-sm uppercase tracking-wider group-hover:translate-x-2 transition-transform">
-                  {t('products.viewDetails')} <ChevronRight className="ml-1 w-4 h-4 text-red-600 dark:text-red-500" />
+                  {t('products.viewDetails')} <ChevronRight className="ml-1 w-4 h-4 text-red-600 dark:text-red-500" aria-hidden="true" />
                 </span>
               </div>
-            </motion.div>
+            </motion.article>
 
             {/* Özel Makine Tasarımı */}
-            <motion.div 
+            <motion.article 
               id="product-card-ozelMakine"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -500,29 +545,38 @@ export default function Home() {
               transition={{ delay: 0.4 }}
               onClick={() => openProductModal('ozelMakine')}
               className="group relative h-[450px] overflow-hidden bg-white dark:bg-zinc-800 border border-zinc-300 dark:border-zinc-700 hover:border-red-600/50 transition-colors cursor-pointer shadow-lg dark:shadow-none"
+              role="listitem"
+              tabIndex={0}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  e.preventDefault();
+                  openProductModal('ozelMakine');
+                }
+              }}
+              aria-label={`${t('productItems.ozelMakine.title')} - Detayları görüntülemek için tıklayın`}
             >
-              <div className="absolute inset-0 bg-white/20 dark:bg-zinc-800/20 group-hover:bg-transparent transition-colors duration-500 z-10" />
+              <div className="absolute inset-0 bg-white/20 dark:bg-zinc-800/20 group-hover:bg-transparent transition-colors duration-500 z-10" aria-hidden="true" />
               <img 
                 src={`/media/${encodeURIComponent("WhatsApp Image 2026-01-16 at 14.32.06 (5).jpeg")}`}
-                alt={t('productItems.ozelMakine.title')} 
+                alt={`${t('productItems.ozelMakine.title')} - ${t('productItems.ozelMakine.shortDesc')}`} 
                 loading="lazy"
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 grayscale group-hover:grayscale-0" 
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-50 via-slate-50/60 to-transparent dark:from-zinc-900 dark:via-zinc-900/60 dark:to-transparent opacity-90 z-20" />
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-50 via-slate-50/60 to-transparent dark:from-zinc-900 dark:via-zinc-900/60 dark:to-transparent opacity-90 z-20" aria-hidden="true" />
               
               <div className="absolute bottom-0 left-0 p-6 z-30 w-full pointer-events-none">
                 <div className="flex items-center gap-2 mb-3">
-                  <Wrench className="w-5 h-5 text-red-600 dark:text-red-500" />
+                  <Wrench className="w-5 h-5 text-red-600 dark:text-red-500" aria-hidden="true" />
                   <span className="text-xs text-red-600 dark:text-red-400 uppercase tracking-wider font-semibold">{t('productItems.ozelMakine.subtitle')}</span>
                 </div>
-                <div className="w-10 h-1 bg-red-600 mb-3 transition-all duration-300 group-hover:w-16"></div>
+                <div className="w-10 h-1 bg-red-600 mb-3 transition-all duration-300 group-hover:w-16" aria-hidden="true"></div>
                 <h3 className="text-xl font-bold text-zinc-900 dark:text-white mb-2 group-hover:text-red-600 dark:group-hover:text-red-500 transition-colors">{t('productItems.ozelMakine.title')}</h3>
                 <p className="text-zinc-700 dark:text-zinc-400 text-sm mb-4 line-clamp-2">{t('productItems.ozelMakine.shortDesc')}</p>
                 <span className="inline-flex items-center text-zinc-900 dark:text-white font-semibold text-sm uppercase tracking-wider group-hover:translate-x-2 transition-transform">
-                  {t('products.viewDetails')} <ChevronRight className="ml-1 w-4 h-4 text-red-600 dark:text-red-500" />
+                  {t('products.viewDetails')} <ChevronRight className="ml-1 w-4 h-4 text-red-600 dark:text-red-500" aria-hidden="true" />
                 </span>
               </div>
-            </motion.div>
+            </motion.article>
           </div>
         </div>
       </section>

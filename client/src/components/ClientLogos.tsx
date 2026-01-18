@@ -50,7 +50,8 @@ function LogoItem({ client }: LogoItemProps) {
 }
 
 export const ClientLogos = memo(function ClientLogos() {
-  const { t } = useI18n();
+  const { t, language } = useI18n();
+  const isRTL = language === 'ar';
 
   return (
     <section className="relative py-16 bg-zinc-50 dark:bg-zinc-800/50 border-y border-zinc-200 dark:border-zinc-700 overflow-hidden">
@@ -70,7 +71,7 @@ export const ClientLogos = memo(function ClientLogos() {
         {/* Tunnel fade effect - Right */}
         <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-zinc-50 via-zinc-50/50 to-transparent dark:from-zinc-800/50 dark:via-zinc-800/30 dark:to-transparent z-10 pointer-events-none" />
         
-        <div className="flex gap-4 animate-scroll-left group-hover/row:pause-animation will-change-transform">
+        <div className={`flex gap-4 group-hover/row:pause-animation will-change-transform ${isRTL ? 'animate-scroll-right' : 'animate-scroll-left'}`}>
           {/* First set */}
           {clientsRow1.map((client, index) => (
             <LogoItem key={`row1-set1-${index}`} client={client} />
@@ -102,7 +103,7 @@ export const ClientLogos = memo(function ClientLogos() {
         {/* Tunnel fade effect - Right */}
         <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-zinc-50 via-zinc-50/50 to-transparent dark:from-zinc-800/50 dark:via-zinc-800/30 dark:to-transparent z-10 pointer-events-none" />
         
-        <div className="flex gap-4 animate-scroll-right group-hover/row:pause-animation will-change-transform">
+        <div className={`flex gap-4 group-hover/row:pause-animation will-change-transform ${isRTL ? 'animate-scroll-left' : 'animate-scroll-right'}`}>
           {/* First set */}
           {clientsRow2.map((client, index) => (
             <LogoItem key={`row2-set1-${index}`} client={client} />

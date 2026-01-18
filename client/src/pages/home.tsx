@@ -377,6 +377,8 @@ export default function Home() {
               const video = e.currentTarget;
               console.log('📹 Video loaded - readyState:', video.readyState);
               video.muted = true;
+              // Remove poster after video loads
+              video.removeAttribute('poster');
               video.play().catch((error) => {
                 console.warn('⚠️ onLoadedData play failed:', error.name, error.message);
               });

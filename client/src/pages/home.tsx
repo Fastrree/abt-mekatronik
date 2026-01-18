@@ -100,15 +100,26 @@ export default function Home() {
       // Ensure muted is set
       video.muted = true;
       video.defaultMuted = true;
+      video.volume = 0;
       
-      // Try to play
+      // Try to play immediately
       const playPromise = video.play();
       if (playPromise !== undefined) {
-        playPromise.catch((error) => {
-          console.warn('Video autoplay prevented:', error);
-          // Fallback: show poster image
-          video.style.display = 'none';
-        });
+        playPromise
+          .then(() => {
+            console.log('Video playing successfully');
+          })
+          .catch((error) => {
+            console.warn('Video autoplay prevented:', error);
+            
+            // Try again after a short delay
+            setTimeout(() => {
+              video.play().catch(() => {
+                console.warn('Second attempt failed, hiding video');
+                video.style.display = 'none';
+              });
+            }, 100);
+          });
       }
     }
   }, []);
@@ -354,7 +365,7 @@ export default function Home() {
               console.warn('Video yükleme hatası, poster görseli gösteriliyor');
             }}
           >
-            <source src="/media/video1.mp4" type="video/mp4" />
+            <source src="/media/video1.mp4?v=2" type="video/mp4" />
             {/* Fallback image */}
             <img 
               src="/media/img1.jpeg" 

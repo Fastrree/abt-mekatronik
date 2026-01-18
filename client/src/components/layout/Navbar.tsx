@@ -270,7 +270,7 @@ export const Navbar = memo(function Navbar({ onOpenProduct }: NavbarProps) {
         </div>
 
         {/* Mobile: Theme Toggle + Language Selector (RIGHT SIDE) */}
-        <div className={`lg:hidden flex items-center gap-0.5 sm:gap-1 ${isRTL ? 'mr-8' : ''}`}>
+        <div className={`lg:hidden flex items-center gap-0.5 sm:gap-1 ${isRTL ? 'mr-1' : ''}`}>
           <ThemeToggle />
           <LanguageSelector isScrolled={isScrolled} />
         </div>

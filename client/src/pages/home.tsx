@@ -365,7 +365,7 @@ export default function Home() {
             <p className="text-base xs:text-sm sm:text-xl md:text-2xl text-gray-200 max-w-2xl mb-8 xs:mb-6 sm:mb-10 font-light leading-relaxed border-l-4 border-red-500 pl-4 xs:pl-3 sm:pl-6">
               {t('hero.description')}
             </p>
-            <div className="flex flex-col sm:flex-row gap-3 xs:gap-2 sm:gap-4 w-full xs:w-full sm:w-auto" role="group" aria-label="Ana eylem butonları">
+            <div className="flex flex-col sm:flex-row gap-4 xs:gap-3 sm:gap-4 w-full xs:w-full sm:w-auto" role="group" aria-label="Ana eylem butonları">
               <Button 
                 size="lg" 
                 className="w-full xs:w-full sm:w-auto bg-red-600 hover:bg-red-700 text-white font-bold text-base xs:text-sm sm:text-lg px-6 xs:px-4 sm:px-8 py-5 xs:py-4 sm:py-6 rounded-none skew-x-[-10deg] border-2 border-red-600 hover:shadow-[0_0_30px_rgba(220,38,38,0.5)] transition-all"

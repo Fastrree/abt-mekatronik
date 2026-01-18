@@ -47,7 +47,7 @@ export const LanguageSelector = memo(function LanguageSelector({ isScrolled = fa
       {isOpen && (
         <>
           <div className="fixed inset-0 z-40" onClick={() => setIsOpen(false)} />
-          <div className="absolute right-0 top-full mt-2 z-50 bg-zinc-800 border border-zinc-700 rounded-lg shadow-xl overflow-hidden min-w-[160px]">
+          <div className="absolute right-0 top-full mt-2 z-50 bg-zinc-800 border border-zinc-700 rounded-lg shadow-xl overflow-hidden min-w-[160px] lg:min-w-[160px] max-w-[140px] lg:max-w-none">
             {languages.map((lang) => (
               <button
                 key={lang.code}
@@ -56,8 +56,8 @@ export const LanguageSelector = memo(function LanguageSelector({ isScrolled = fa
                   language === lang.code ? 'bg-red-600/20 text-red-400' : 'text-white'
                 }`}
               >
-                <img src={getFlagSrc(lang.code)} alt={lang.name} className="w-6 h-4 object-cover rounded-sm" />
-                <span className="text-sm font-medium">{lang.name}</span>
+                <img src={getFlagSrc(lang.code)} alt={lang.name} className="w-6 h-4 object-cover rounded-sm shrink-0" />
+                <span className="text-sm font-medium truncate">{lang.name}</span>
               </button>
             ))}
           </div>

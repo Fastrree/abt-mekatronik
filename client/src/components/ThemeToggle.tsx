@@ -19,10 +19,10 @@ export const ThemeToggle = memo(function ThemeToggle() {
   if (!mounted) {
     return (
       <button
-        className="w-10 h-10 flex items-center justify-center"
+        className="w-8 h-8 lg:w-10 lg:h-10 flex items-center justify-center"
         disabled
       >
-        <Sun className="h-5 w-5 text-zinc-400" />
+        <Sun className="h-4 w-4 lg:h-5 lg:w-5 text-zinc-400" />
       </button>
     );
   }
@@ -30,13 +30,13 @@ export const ThemeToggle = memo(function ThemeToggle() {
   return (
     <button
       onClick={handleThemeToggle}
-      className="w-10 h-10 flex items-center justify-center hover:opacity-70 transition-opacity"
+      className="w-8 h-8 lg:w-10 lg:h-10 flex items-center justify-center hover:opacity-70 transition-opacity"
       aria-label="Toggle theme"
     >
       {theme === "dark" ? (
-        <Sun className="h-5 w-5 text-amber-400" />
+        <Sun className="h-4 w-4 lg:h-5 lg:w-5 text-amber-400" />
       ) : (
-        <Moon className="h-5 w-5 text-indigo-600" />
+        <Moon className="h-4 w-4 lg:h-5 lg:w-5 text-indigo-600" />
       )}
     </button>
   );

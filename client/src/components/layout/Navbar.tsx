@@ -57,22 +57,22 @@ export const Navbar = memo(function Navbar({ onOpenProduct }: NavbarProps) {
       }`}
       dir={isRTL ? 'rtl' : 'ltr'}
     >
-      <div className="container mx-auto px-4 xs:px-3 flex justify-between items-center gap-1 xs:gap-0.5">
+      <div className="container mx-auto px-4 xs:px-2 flex justify-between items-center gap-1">
         {/* LEFT SIDE: Hamburger Menu + Logo */}
         <div className="flex items-center gap-2 xs:gap-1 lg:gap-4">
           {/* Hamburger Menu - Mobile & Desktop */}
           <div className="relative">
             <button
               onClick={() => setIsQuickMenuOpen(!isQuickMenuOpen)}
-              className={`flex items-center gap-1 xs:gap-0.5 p-2 xs:p-1.5 rounded-lg transition-colors ${
+              className={`flex items-center gap-1 xs:gap-0.5 p-2 xs:p-1 rounded-lg transition-colors ${
                 isScrolled
                   ? "text-white hover:bg-zinc-700/50"
                   : "text-white hover:bg-zinc-700/50"
               }`}
               aria-label={t('nav.quickAccess')}
             >
-              <Menu size={20} className="xs:w-[18px] xs:h-[18px]" />
-              <ChevronDown size={14} className={`transition-transform hidden sm:block xs:w-[12px] xs:h-[12px] ${isQuickMenuOpen ? 'rotate-180' : ''}`} />
+              <Menu size={20} className="xs:w-4 xs:h-4" />
+              <ChevronDown size={14} className={`transition-transform hidden sm:block xs:w-3 xs:h-3 ${isQuickMenuOpen ? 'rotate-180' : ''}`} />
             </button>
             
             {/* Quick Menu Dropdown - Same for Mobile & Desktop */}
@@ -198,8 +198,8 @@ export const Navbar = memo(function Navbar({ onOpenProduct }: NavbarProps) {
             onClick={scrollToTop}
             className="text-base xs:text-sm sm:text-2xl font-black tracking-tighter text-white flex items-center gap-1 xs:gap-0.5 sm:gap-2 cursor-pointer hover:opacity-80 transition-opacity lg:static absolute left-1/2 lg:left-auto lg:transform-none -translate-x-1/2 lg:translate-x-0"
           >
-            <span className="text-2xl xs:text-xl sm:text-3xl">ABT</span>
-            <span className="text-primary text-sm xs:text-xs sm:text-base font-semibold">MEKATRONİK</span>
+            <span className="text-2xl xs:text-lg sm:text-3xl">ABT</span>
+            <span className="text-primary text-sm xs:text-[10px] sm:text-base font-semibold">MEKATRONİK</span>
           </button>
         </div>
 
@@ -270,7 +270,7 @@ export const Navbar = memo(function Navbar({ onOpenProduct }: NavbarProps) {
         </div>
 
         {/* Mobile: Theme Toggle + Language Selector (RIGHT SIDE) */}
-        <div className="lg:hidden flex items-center gap-2 xs:gap-1">
+        <div className="lg:hidden flex items-center gap-1">
           <ThemeToggle />
           <LanguageSelector isScrolled={isScrolled} />
         </div>

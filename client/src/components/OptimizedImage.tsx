@@ -1,6 +1,7 @@
 /**
  * Optimized Image Component
  * Features:
+ * - WebP format with JPEG/PNG fallback
  * - Lazy loading with Intersection Observer
  * - Blur placeholder (LQIP)
  * - Responsive images support
@@ -19,6 +20,7 @@ interface OptimizedImageProps {
   height?: number;
   blurDataURL?: string;
   aspectRatio?: string; // e.g., "16/9", "4/3", "1/1"
+  useWebP?: boolean; // Enable WebP format (default: true)
 }
 
 export const OptimizedImage = memo(function OptimizedImage({
@@ -30,6 +32,7 @@ export const OptimizedImage = memo(function OptimizedImage({
   height,
   blurDataURL,
   aspectRatio,
+  useWebP = true,
 }: OptimizedImageProps) {
   const [isLoaded, setIsLoaded] = useState(false);
   const [isInView, setIsInView] = useState(false);
@@ -39,6 +42,14 @@ export const OptimizedImage = memo(function OptimizedImage({
   // Calculate aspect ratio style for CLS prevention
   const aspectRatioStyle = aspectRatio ? { aspectRatio } : 
     (width && height) ? { aspectRatio: `${width}/${height}` } : undefined;
+
+  // Generate WebP source path
+  const getWebPSrc = (originalSrc: string) => {
+    if (!useWebP) return originalSrc;
+    return originalSrc.replace(/\.(jpg|jpeg|png)$/i, '.webp');
+  };
+
+  const webpSrc = getWebPSrc(src);
 
   useEffect(() => {
     if (loading === 'eager') {
@@ -80,22 +91,30 @@ export const OptimizedImage = memo(function OptimizedImage({
         />
       )}
 
-      {/* Main image */}
+      {/* Main image with WebP support */}
       {isInView && !hasError && (
-        <img
-          src={src}
-          alt={alt}
-          width={width}
-          height={height}
-          style={aspectRatioStyle}
-          className={`${className} transition-opacity duration-300 ${
-            isLoaded ? 'opacity-100' : 'opacity-0'
-          }`}
-          onLoad={() => setIsLoaded(true)}
-          onError={() => setHasError(true)}
-          loading={loading}
-          decoding="async"
-        />
+        <picture>
+          {/* WebP source */}
+          {useWebP && (
+            <source srcSet={webpSrc} type="image/webp" />
+          )}
+          
+          {/* Fallback to original format */}
+          <img
+            src={src}
+            alt={alt}
+            width={width}
+            height={height}
+            style={aspectRatioStyle}
+            className={`${className} transition-opacity duration-300 ${
+              isLoaded ? 'opacity-100' : 'opacity-0'
+            }`}
+            onLoad={() => setIsLoaded(true)}
+            onError={() => setHasError(true)}
+            loading={loading}
+            decoding="async"
+          />
+        </picture>
       )}
 
       {/* Error fallback */}

@@ -198,10 +198,8 @@ export const Navbar = memo(function Navbar({ onOpenProduct }: NavbarProps) {
             onClick={scrollToTop}
             className="text-base xs:text-sm sm:text-2xl font-black tracking-tighter text-white flex items-center gap-1 xs:gap-0.5 sm:gap-2 cursor-pointer hover:opacity-80 transition-opacity lg:static absolute left-1/2 lg:left-auto lg:transform-none -translate-x-1/2 lg:translate-x-0"
           >
-            <span className="hidden xs:inline">ABT</span>
-            <span className="xs:hidden">ABT</span>
-            <span className="text-primary hidden xs:inline">MEKATRONİK</span>
-            <span className="text-primary xs:hidden text-xs">MKT</span>
+            <span className="text-2xl xs:text-xl sm:text-3xl">ABT</span>
+            <span className="text-primary text-sm xs:text-xs sm:text-base font-semibold">MEKATRONİK</span>
           </button>
         </div>
 

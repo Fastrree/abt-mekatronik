@@ -102,46 +102,22 @@ export default function Home() {
       video.defaultMuted = true;
       video.volume = 0;
       
-      // Try to play immediately
-      const playPromise = video.play();
-      if (playPromise !== undefined) {
-        playPromise
-          .then(() => {
-            console.log('✅ Video playing successfully');
-          })
-          .catch((error) => {
-            console.warn('⚠️ Video autoplay prevented:', error.name, error.message);
-            
-            // STRATEGY 1: Retry after delay
-            setTimeout(() => {
-              video.play().catch((retryError) => {
-                console.warn('⚠️ Retry failed:', retryError.name);
-                
-                // STRATEGY 2: Wait for user interaction
-                const playOnInteraction = () => {
-                  video.play()
-                    .then(() => {
-                      console.log('✅ Video playing after user interaction');
-                      // Remove listeners after successful play
-                      document.removeEventListener('click', playOnInteraction);
-                      document.removeEventListener('scroll', playOnInteraction);
-                      document.removeEventListener('touchstart', playOnInteraction);
-                    })
-                    .catch(() => {
-                      console.warn('❌ Video play failed even after interaction');
-                    });
-                };
-                
-                // Listen for ANY user interaction
-                document.addEventListener('click', playOnInteraction, { once: true });
-                document.addEventListener('scroll', playOnInteraction, { once: true });
-                document.addEventListener('touchstart', playOnInteraction, { once: true });
-                
-                console.log('🎯 Waiting for user interaction to play video...');
-              });
-            }, 100);
-          });
-      }
+      // Simple play attempt
+      const playVideo = () => {
+        const playPromise = video.play();
+        if (playPromise !== undefined) {
+          playPromise
+            .then(() => {
+              console.log('✅ Video playing successfully');
+            })
+            .catch((error) => {
+              console.warn('⚠️ Video autoplay prevented:', error.name);
+            });
+        }
+      };
+      
+      // Try to play after a short delay to ensure DOM is ready
+      setTimeout(playVideo, 100);
     }
   }, []);
 
@@ -373,15 +349,10 @@ export default function Home() {
             poster="/media/img1.jpeg"
             aria-label="ABT Mekatronik üretim tesisi video arka planı"
             onLoadedData={(e) => {
-              // Force play on load for Edge compatibility
               const video = e.currentTarget;
               console.log('📹 Video loaded - readyState:', video.readyState);
-              video.muted = true;
               // Remove poster after video loads
               video.removeAttribute('poster');
-              video.play().catch((error) => {
-                console.warn('⚠️ onLoadedData play failed:', error.name, error.message);
-              });
             }}
             onCanPlay={(e) => {
               console.log('📹 Video can play - readyState:', e.currentTarget.readyState);

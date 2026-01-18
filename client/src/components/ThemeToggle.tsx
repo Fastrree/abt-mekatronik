@@ -1,8 +1,8 @@
 import { Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
-import { useEffect, useState } from "react";
+import { useEffect, useState, memo, useCallback } from "react";
 
-export function ThemeToggle() {
+export const ThemeToggle = memo(function ThemeToggle() {
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
 
@@ -11,10 +11,10 @@ export function ThemeToggle() {
     setMounted(true);
   }, []);
 
-  const handleThemeToggle = () => {
+  const handleThemeToggle = useCallback(() => {
     // Instant theme change - no animation
     setTheme(theme === "dark" ? "light" : "dark");
-  };
+  }, [theme, setTheme]);
 
   if (!mounted) {
     return (
@@ -40,4 +40,4 @@ export function ThemeToggle() {
       )}
     </button>
   );
-}
+});

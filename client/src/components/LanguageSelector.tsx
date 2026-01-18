@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, memo } from 'react';
 import { useI18n, languages, Language, getFlagSrc } from '@/lib/i18n';
 import { ChevronDown } from 'lucide-react';
 
@@ -6,7 +6,7 @@ interface LanguageSelectorProps {
   isScrolled?: boolean;
 }
 
-export function LanguageSelector({ isScrolled = false }: LanguageSelectorProps) {
+export const LanguageSelector = memo(function LanguageSelector({ isScrolled = false }: LanguageSelectorProps) {
   const { language, setLanguage, t } = useI18n();
   const [isOpen, setIsOpen] = useState(false);
 
@@ -77,4 +77,4 @@ export function LanguageSelector({ isScrolled = false }: LanguageSelectorProps) 
       )}
     </div>
   );
-}
+});

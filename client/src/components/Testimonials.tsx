@@ -25,7 +25,7 @@ export const Testimonials = memo(function Testimonials() {
               className="bg-white dark:bg-zinc-800 border border-zinc-300 dark:border-zinc-700 p-6 rounded-lg relative shadow-lg dark:shadow-none animate-in slide-up duration-600"
               style={{ animationDelay: `${index * 150}ms` }}
             >
-              <Quote className="absolute top-4 right-4 w-8 h-8 text-red-600/20" />
+              <Quote className="absolute -top-2 right-4 w-8 h-8 text-red-600/20" />
               
               {/* Stars */}
               <div className="flex gap-1 mb-4">

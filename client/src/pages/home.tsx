@@ -369,6 +369,7 @@ export default function Home() {
             playsInline
             preload="auto"
             className="absolute inset-0 w-full h-full object-cover"
+            style={{ zIndex: 1 }}
             poster="/media/img1.jpeg"
             aria-label="ABT Mekatronik üretim tesisi video arka planı"
             onLoadedData={(e) => {
@@ -397,7 +398,7 @@ export default function Home() {
             }}
           />
           {/* Light theme: NO blur, just subtle overlay. Dark theme: stronger overlay */}
-          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-transparent to-transparent dark:from-zinc-900/90 dark:via-zinc-900/70 dark:to-zinc-900/40" aria-hidden="true" />
+          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-transparent to-transparent dark:from-zinc-900/90 dark:via-zinc-900/70 dark:to-zinc-900/40" style={{ zIndex: 2 }} aria-hidden="true" />
         </div>
 
         <div className="container mx-auto px-6 relative z-10 pt-20">

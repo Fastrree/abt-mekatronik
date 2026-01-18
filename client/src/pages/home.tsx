@@ -313,12 +313,25 @@ export default function Home() {
             loop 
             playsInline
             preload="auto"
+            crossOrigin="anonymous"
             className="absolute top-1/2 left-1/2 min-w-full min-h-full w-auto h-auto -translate-x-1/2 -translate-y-1/2 object-cover"
             poster="/media/img1.jpeg"
             aria-label="ABT Mekatronik üretim tesisi video arka planı"
+            onError={(e) => {
+              // Fallback to poster image if video fails
+              const video = e.currentTarget;
+              video.style.display = 'none';
+              console.warn('Video yükleme hatası, poster görseli gösteriliyor');
+            }}
           >
+            <source src="/media/video1.mp4" type="video/mp4; codecs=avc1.42E01E,mp4a.40.2" />
             <source src="/media/video1.mp4" type="video/mp4" />
-            Tarayıcınız video etiketini desteklemiyor.
+            {/* Fallback image */}
+            <img 
+              src="/media/img1.jpeg" 
+              alt="ABT Mekatronik üretim tesisi" 
+              className="absolute top-1/2 left-1/2 min-w-full min-h-full w-auto h-auto -translate-x-1/2 -translate-y-1/2 object-cover"
+            />
           </video>
           {/* Light theme: NO blur, just subtle overlay. Dark theme: stronger overlay */}
           <div className="absolute inset-0 bg-gradient-to-r from-transparent via-transparent to-transparent dark:from-zinc-900/90 dark:via-zinc-900/70 dark:to-zinc-900/40" aria-hidden="true" />

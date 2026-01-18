@@ -366,11 +366,11 @@ export default function Home() {
             }}
           >
             <source src="/media/video1.mp4?v=2" type="video/mp4" />
-            {/* Fallback image */}
+            {/* Fallback image - same CSS as video */}
             <img 
               src="/media/img1.jpeg" 
               alt="ABT Mekatronik üretim tesisi" 
-              className="absolute top-1/2 left-1/2 min-w-full min-h-full w-auto h-auto -translate-x-1/2 -translate-y-1/2 object-cover"
+              className="absolute inset-0 w-full h-full object-cover"
             />
           </video>
           {/* Light theme: NO blur, just subtle overlay. Dark theme: stronger overlay */}

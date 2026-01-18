@@ -347,7 +347,7 @@ export default function Home() {
             playsInline
             preload="auto"
             fetchpriority="high"
-            className="absolute top-1/2 left-1/2 min-w-full min-h-full w-auto h-auto -translate-x-1/2 -translate-y-1/2 object-cover"
+            className="absolute inset-0 w-full h-full object-cover"
             poster="/media/img1.jpeg"
             aria-label="ABT Mekatronik üretim tesisi video arka planı"
             onLoadedData={(e) => {

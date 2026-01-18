@@ -54,7 +54,7 @@ export const ClientLogos = memo(function ClientLogos() {
   const isRTL = language === 'ar';
 
   return (
-    <section className="relative py-16 bg-zinc-50 dark:bg-zinc-800/50 border-y border-zinc-200 dark:border-zinc-700 overflow-hidden">
+    <section className="relative py-16 bg-zinc-50 dark:bg-zinc-800/50 border-y border-zinc-200 dark:border-zinc-700 overflow-hidden" dir={isRTL ? 'rtl' : 'ltr'}>
       <div className="container mx-auto px-6 mb-12">
         <div className="text-center animate-in slide-in-from-bottom duration-500">
           <h3 className="text-zinc-600 dark:text-zinc-400 text-sm uppercase tracking-widest font-semibold">
@@ -146,6 +146,25 @@ export const ClientLogos = memo(function ClientLogos() {
           }
         }
 
+        /* RTL-specific animations - start from right side */
+        @keyframes scroll-left-rtl {
+          0% {
+            transform: translateX(0);
+          }
+          100% {
+            transform: translateX(-20%);
+          }
+        }
+
+        @keyframes scroll-right-rtl {
+          0% {
+            transform: translateX(-20%);
+          }
+          100% {
+            transform: translateX(0);
+          }
+        }
+
         .animate-scroll-left {
           animation: scroll-left 10s linear infinite;
           will-change: transform;
@@ -154,6 +173,15 @@ export const ClientLogos = memo(function ClientLogos() {
         .animate-scroll-right {
           animation: scroll-right 10s linear infinite;
           will-change: transform;
+        }
+
+        /* RTL animations */
+        [dir="rtl"] .animate-scroll-left {
+          animation: scroll-left-rtl 10s linear infinite;
+        }
+
+        [dir="rtl"] .animate-scroll-right {
+          animation: scroll-right-rtl 10s linear infinite;
         }
 
         .pause-animation {

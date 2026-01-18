@@ -426,6 +426,17 @@ Piyasada bulunmayan veya mevcut makinelerin karşılayamadığı özel üretim i
   },
   clients: {
     title: 'Güvenilir İş Ortaklarımız',
+    industries: {
+      tekstil: 'TEKSTİL',
+      celik: 'ÇELİK',
+      lojistik: 'LOJİSTİK',
+      uretim: 'ÜRETİM',
+      makine: 'MAKİNE',
+      endustri: 'ENDÜSTRİ',
+      otomasyon: 'OTOMASYON',
+      konveyor: 'KONVEYÖR',
+      metal: 'METAL',
+    },
   },
   newsletter: {
     title: 'Bültenimize Abone Olun',
@@ -719,6 +730,17 @@ Needs analysis → Concept design → 3D modeling → Prototype → Test → Ser
   },
   clients: {
     title: 'Our Trusted Partners',
+    industries: {
+      tekstil: 'TEXTILE',
+      celik: 'STEEL',
+      lojistik: 'LOGISTICS',
+      uretim: 'PRODUCTION',
+      makine: 'MACHINE',
+      endustri: 'INDUSTRY',
+      otomasyon: 'AUTOMATION',
+      konveyor: 'CONVEYOR',
+      metal: 'METAL',
+    },
   },
   newsletter: {
     title: 'Subscribe to Our Newsletter',
@@ -963,6 +985,17 @@ Löst spezielle Produktionsanforderungen, die auf dem Markt nicht verfügbar sin
   },
   clients: {
     title: 'Unsere vertrauenswürdigen Partner',
+    industries: {
+      tekstil: 'TEXTIL',
+      celik: 'STAHL',
+      lojistik: 'LOGISTIK',
+      uretim: 'PRODUKTION',
+      makine: 'MASCHINE',
+      endustri: 'INDUSTRIE',
+      otomasyon: 'AUTOMATISIERUNG',
+      konveyor: 'FÖRDERER',
+      metal: 'METALL',
+    },
   },
   newsletter: {
     title: 'Newsletter abonnieren',
@@ -1178,6 +1211,17 @@ Résout les besoins de production spéciaux non disponibles sur le marché.
   },
   clients: {
     title: 'Nos partenaires de confiance',
+    industries: {
+      tekstil: 'TEXTILE',
+      celik: 'ACIER',
+      lojistik: 'LOGISTIQUE',
+      uretim: 'PRODUCTION',
+      makine: 'MACHINE',
+      endustri: 'INDUSTRIE',
+      otomasyon: 'AUTOMATISATION',
+      konveyor: 'CONVOYEUR',
+      metal: 'MÉTAL',
+    },
   },
   newsletter: {
     title: 'Abonnez-vous à notre newsletter',
@@ -1393,6 +1437,17 @@ Resuelve necesidades de producción especiales no disponibles en el mercado.
   },
   clients: {
     title: 'Nuestros socios de confianza',
+    industries: {
+      tekstil: 'TEXTIL',
+      celik: 'ACERO',
+      lojistik: 'LOGÍSTICA',
+      uretim: 'PRODUCCIÓN',
+      makine: 'MÁQUINA',
+      endustri: 'INDUSTRIA',
+      otomasyon: 'AUTOMATIZACIÓN',
+      konveyor: 'TRANSPORTADOR',
+      metal: 'METAL',
+    },
   },
   newsletter: {
     title: 'Suscríbase a nuestro boletín',
@@ -1686,6 +1741,17 @@ const ar = {
   },
   clients: {
     title: 'شركاؤنا الموثوقون',
+    industries: {
+      tekstil: 'النسيج',
+      celik: 'الصلب',
+      lojistik: 'اللوجستيات',
+      uretim: 'الإنتاج',
+      makine: 'الآلات',
+      endustri: 'الصناعة',
+      otomasyon: 'الأتمتة',
+      konveyor: 'الناقل',
+      metal: 'المعادن',
+    },
   },
   newsletter: {
     title: 'اشترك في نشرتنا الإخبارية',

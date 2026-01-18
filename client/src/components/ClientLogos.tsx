@@ -3,37 +3,39 @@ import { useI18n } from '@/lib/i18n';
 
 // Client logos - First row (left to right scroll)
 const clientsRow1 = [
-  { name: 'Tekstil A.Ş.', industry: 'Tekstil' },
-  { name: 'Demir Çelik Ltd.', industry: 'Çelik' },
-  { name: 'Lojistik Plus', industry: 'Lojistik' },
-  { name: 'Fabrika Pro', industry: 'Üretim' },
-  { name: 'Makine Sanayi', industry: 'Makine' },
-  { name: 'Endüstri Grup', industry: 'Endüstri' },
-  { name: 'Otomasyon A.Ş.', industry: 'Otomasyon' },
-  { name: 'Konveyör Ltd.', industry: 'Konveyör' },
-  { name: 'Metal Sanayi', industry: 'Metal' },
-  { name: 'Tekstil Makine', industry: 'Tekstil' },
+  { name: 'Tekstil A.Ş.', industryKey: 'tekstil' },
+  { name: 'Demir Çelik Ltd.', industryKey: 'celik' },
+  { name: 'Lojistik Plus', industryKey: 'lojistik' },
+  { name: 'Fabrika Pro', industryKey: 'uretim' },
+  { name: 'Makine Sanayi', industryKey: 'makine' },
+  { name: 'Endüstri Grup', industryKey: 'endustri' },
+  { name: 'Otomasyon A.Ş.', industryKey: 'otomasyon' },
+  { name: 'Konveyör Ltd.', industryKey: 'konveyor' },
+  { name: 'Metal Sanayi', industryKey: 'metal' },
+  { name: 'Tekstil Makine', industryKey: 'tekstil' },
 ];
 
 // Client logos - Second row (right to left scroll)
 const clientsRow2 = [
-  { name: 'Otomasyon Ltd.', industry: 'Otomasyon' },
-  { name: 'Konveyör Pro', industry: 'Konveyör' },
-  { name: 'Metal İşleme', industry: 'Metal' },
-  { name: 'Tekstil Makine', industry: 'Tekstil' },
-  { name: 'Endüstri Plus', industry: 'Endüstri' },
-  { name: 'Üretim Grup', industry: 'Üretim' },
-  { name: 'Çelik Yapı', industry: 'Çelik' },
-  { name: 'Lojistik Pro', industry: 'Lojistik' },
-  { name: 'Fabrika Grup', industry: 'Üretim' },
-  { name: 'Makine Ltd.', industry: 'Makine' },
+  { name: 'Otomasyon Ltd.', industryKey: 'otomasyon' },
+  { name: 'Konveyör Pro', industryKey: 'konveyor' },
+  { name: 'Metal İşleme', industryKey: 'metal' },
+  { name: 'Tekstil Makine', industryKey: 'tekstil' },
+  { name: 'Endüstri Plus', industryKey: 'endustri' },
+  { name: 'Üretim Grup', industryKey: 'uretim' },
+  { name: 'Çelik Yapı', industryKey: 'celik' },
+  { name: 'Lojistik Pro', industryKey: 'lojistik' },
+  { name: 'Fabrika Grup', industryKey: 'uretim' },
+  { name: 'Makine Ltd.', industryKey: 'makine' },
 ];
 
 interface LogoItemProps {
-  client: { name: string; industry: string };
+  client: { name: string; industryKey: string };
 }
 
 function LogoItem({ client }: LogoItemProps) {
+  const { t } = useI18n();
+  
   return (
     <div className="flex-shrink-0 flex flex-col items-center justify-center px-8 py-6 bg-white/80 dark:bg-zinc-800/50 border border-zinc-300 dark:border-zinc-700/50 rounded-lg hover:border-red-600/50 transition-all duration-300 group min-w-[180px] shadow-lg dark:shadow-none">
       {/* Placeholder logo - replace with actual images */}
@@ -43,18 +45,17 @@ function LogoItem({ client }: LogoItemProps) {
         </span>
       </div>
       <span className="text-xs text-zinc-600 dark:text-zinc-500 uppercase tracking-wider group-hover:text-zinc-700 dark:group-hover:text-zinc-400 transition-colors">
-        {client.industry}
+        {t(`clients.industries.${client.industryKey}`)}
       </span>
     </div>
   );
 }
 
 export const ClientLogos = memo(function ClientLogos() {
-  const { t, language } = useI18n();
-  const isRTL = language === 'ar';
+  const { t } = useI18n();
 
   return (
-    <section className="relative py-16 bg-zinc-50 dark:bg-zinc-800/50 border-y border-zinc-200 dark:border-zinc-700 overflow-hidden" dir={isRTL ? 'rtl' : 'ltr'}>
+    <section className="relative py-16 bg-zinc-50 dark:bg-zinc-800/50 border-y border-zinc-200 dark:border-zinc-700 overflow-hidden" dir="ltr">
       <div className="container mx-auto px-6 mb-12">
         <div className="text-center animate-in slide-in-from-bottom duration-500">
           <h3 className="text-zinc-600 dark:text-zinc-400 text-sm uppercase tracking-widest font-semibold">
@@ -71,7 +72,7 @@ export const ClientLogos = memo(function ClientLogos() {
         {/* Tunnel fade effect - Right */}
         <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-zinc-50 via-zinc-50/50 to-transparent dark:from-zinc-800/50 dark:via-zinc-800/30 dark:to-transparent z-10 pointer-events-none" />
         
-        <div className={`flex gap-4 group-hover/row:pause-animation will-change-transform ${isRTL ? 'animate-scroll-right' : 'animate-scroll-left'}`}>
+        <div className="flex gap-4 group-hover/row:pause-animation will-change-transform animate-scroll-left">
           {/* First set */}
           {clientsRow1.map((client, index) => (
             <LogoItem key={`row1-set1-${index}`} client={client} />
@@ -103,7 +104,7 @@ export const ClientLogos = memo(function ClientLogos() {
         {/* Tunnel fade effect - Right */}
         <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-zinc-50 via-zinc-50/50 to-transparent dark:from-zinc-800/50 dark:via-zinc-800/30 dark:to-transparent z-10 pointer-events-none" />
         
-        <div className={`flex gap-4 group-hover/row:pause-animation will-change-transform ${isRTL ? 'animate-scroll-left' : 'animate-scroll-right'}`}>
+        <div className="flex gap-4 group-hover/row:pause-animation will-change-transform animate-scroll-right">
           {/* First set */}
           {clientsRow2.map((client, index) => (
             <LogoItem key={`row2-set1-${index}`} client={client} />
@@ -146,25 +147,6 @@ export const ClientLogos = memo(function ClientLogos() {
           }
         }
 
-        /* RTL-specific animations - start from right side */
-        @keyframes scroll-left-rtl {
-          0% {
-            transform: translateX(0);
-          }
-          100% {
-            transform: translateX(-20%);
-          }
-        }
-
-        @keyframes scroll-right-rtl {
-          0% {
-            transform: translateX(-20%);
-          }
-          100% {
-            transform: translateX(0);
-          }
-        }
-
         .animate-scroll-left {
           animation: scroll-left 10s linear infinite;
           will-change: transform;
@@ -173,15 +155,6 @@ export const ClientLogos = memo(function ClientLogos() {
         .animate-scroll-right {
           animation: scroll-right 10s linear infinite;
           will-change: transform;
-        }
-
-        /* RTL animations */
-        [dir="rtl"] .animate-scroll-left {
-          animation: scroll-left-rtl 10s linear infinite;
-        }
-
-        [dir="rtl"] .animate-scroll-right {
-          animation: scroll-right-rtl 10s linear infinite;
         }
 
         .pause-animation {

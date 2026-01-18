@@ -57,9 +57,9 @@ export const Navbar = memo(function Navbar({ onOpenProduct }: NavbarProps) {
       }`}
       dir={isRTL ? 'rtl' : 'ltr'}
     >
-      <div className="container mx-auto px-4 xs:px-2 flex justify-between items-center gap-1">
+      <div className="container mx-auto px-3 sm:px-4 flex justify-between items-center gap-2 sm:gap-4">
         {/* LEFT SIDE: Hamburger Menu + Logo */}
-        <div className="flex items-center gap-2 xs:gap-1 lg:gap-4">
+        <div className="flex items-center gap-1.5 sm:gap-2 lg:gap-4">
           {/* Hamburger Menu - Mobile & Desktop */}
           <div className="relative">
             <button
@@ -193,13 +193,13 @@ export const Navbar = memo(function Navbar({ onOpenProduct }: NavbarProps) {
             )}
           </div>
 
-          {/* Logo - Next to Hamburger on Desktop, Centered on Mobile */}
+          {/* Logo - Mobile: Next to hamburger (not centered), Desktop: Next to hamburger */}
           <button 
             onClick={scrollToTop}
-            className="text-base xs:text-sm sm:text-2xl font-black tracking-tighter text-white flex items-center gap-1 xs:gap-0.5 sm:gap-2 cursor-pointer hover:opacity-80 transition-opacity lg:static absolute left-1/2 lg:left-auto lg:transform-none -translate-x-1/2 lg:translate-x-0"
+            className="text-base sm:text-2xl font-black tracking-tighter text-white flex items-center gap-0.5 sm:gap-2 cursor-pointer hover:opacity-80 transition-opacity"
           >
-            <span className="text-2xl xs:text-lg sm:text-3xl">ABT</span>
-            <span className="text-primary text-sm xs:text-[10px] sm:text-base font-semibold">MEKATRONİK</span>
+            <span className="text-lg sm:text-3xl">ABT</span>
+            <span className="text-primary text-[9px] sm:text-base font-semibold">MEKATRONİK</span>
           </button>
         </div>
 
@@ -270,7 +270,7 @@ export const Navbar = memo(function Navbar({ onOpenProduct }: NavbarProps) {
         </div>
 
         {/* Mobile: Theme Toggle + Language Selector (RIGHT SIDE) */}
-        <div className="lg:hidden flex items-center gap-1">
+        <div className="lg:hidden flex items-center gap-0.5 sm:gap-1">
           <ThemeToggle />
           <LanguageSelector isScrolled={isScrolled} />
         </div>

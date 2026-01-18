@@ -44,18 +44,38 @@ export default defineConfig({
       output: {
         manualChunks: {
           // Vendor splitting for better caching
-          'react-vendor': ['react', 'react-dom'],
-          'ui-vendor': ['@radix-ui/react-accordion', '@radix-ui/react-dialog', '@radix-ui/react-toast'],
+          'react-vendor': ['react', 'react-dom', 'react/jsx-runtime'],
+          'router-vendor': ['wouter'],
+          'ui-vendor': [
+            '@radix-ui/react-accordion', 
+            '@radix-ui/react-dialog', 
+            '@radix-ui/react-toast',
+            '@radix-ui/react-slot',
+            '@radix-ui/react-label',
+          ],
           'form-vendor': ['react-hook-form', '@hookform/resolvers', 'zod'],
+          'utils-vendor': ['clsx', 'tailwind-merge', 'class-variance-authority'],
         },
+        // Optimize chunk names for better caching
+        chunkFileNames: 'assets/[name]-[hash].js',
+        entryFileNames: 'assets/[name]-[hash].js',
+        assetFileNames: 'assets/[name]-[hash].[ext]',
       },
     },
     // Chunk size warnings
-    chunkSizeWarningLimit: 1000,
+    chunkSizeWarningLimit: 500, // Stricter limit for better performance
     // Minification with esbuild (faster than terser)
     minify: 'esbuild',
+    // Target modern browsers for smaller bundle
+    target: 'es2020',
     // Source maps (disable in production for smaller bundle)
     sourcemap: false,
+    // CSS code splitting
+    cssCodeSplit: true,
+    // Optimize dependencies
+    commonjsOptions: {
+      transformMixedEsModules: true,
+    },
   },
   server: {
     host: "0.0.0.0",

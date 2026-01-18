@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback, useMemo, memo } from "react";
 import { Menu, ChevronDown, Truck, Factory, Layers, Wrench } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { LanguageSelector } from "@/components/LanguageSelector";
@@ -11,7 +11,7 @@ interface NavbarProps {
   onOpenProduct?: (productKey: ProductKey) => void;
 }
 
-export function Navbar({ onOpenProduct }: NavbarProps) {
+export const Navbar = memo(function Navbar({ onOpenProduct }: NavbarProps) {
   const { t, language } = useI18n();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isQuickMenuOpen, setIsQuickMenuOpen] = useState(false);
@@ -22,31 +22,31 @@ export function Navbar({ onOpenProduct }: NavbarProps) {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
     };
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const scrollToTop = () => {
+  const scrollToTop = useCallback(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
+  }, []);
 
-  const productLinks: { name: string; key: ProductKey; icon: typeof Truck }[] = [
+  const productLinks: { name: string; key: ProductKey; icon: typeof Truck }[] = useMemo(() => [
     { name: t('productItems.konveyor.title'), key: "konveyor", icon: Truck },
     { name: t('productItems.tekstil.title'), key: "tekstil", icon: Factory },
     { name: t('productItems.celik.title'), key: "celik", icon: Layers },
     { name: t('productItems.ozelMakine.title'), key: "ozelMakine", icon: Wrench },
-  ];
+  ], [t]);
 
-  const handleProductClick = (key: ProductKey) => {
+  const handleProductClick = useCallback((key: ProductKey) => {
     setIsQuickMenuOpen(false);
     if (onOpenProduct) {
       onOpenProduct(key);
     }
-  };
+  }, [onOpenProduct]);
 
-  const closeAllDropdowns = () => {
+  const closeAllDropdowns = useCallback(() => {
     setIsQuickMenuOpen(false);
-  };
+  }, []);
 
   return (
     <nav
@@ -307,4 +307,4 @@ export function Navbar({ onOpenProduct }: NavbarProps) {
       )}
     </nav>
   );
-}
+});

@@ -10,7 +10,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { useToast } from "@/hooks/use-toast";
-import { useState } from "react";
+import { useState, useCallback, useMemo } from "react";
 import { useI18n } from "@/lib/i18n";
 import { OptimizedImage } from "@/components/OptimizedImage";
 import { OptimizedVideo } from "@/components/OptimizedVideo";
@@ -92,8 +92,8 @@ export default function Home() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState<ProductKey | null>(null);
 
-  // Create schema with translated messages
-  const contactSchema = createContactSchema(t);
+  // Create schema with translated messages - memoized to prevent recreation
+  const contactSchema = useMemo(() => createContactSchema(t), [t]);
 
   const form = useForm<z.infer<typeof contactSchema>>({
     resolver: zodResolver(contactSchema),
@@ -104,7 +104,8 @@ export default function Home() {
     },
   });
 
-  function onSubmit(_data: z.infer<typeof contactSchema>) {
+  // Memoized submit handler
+  const onSubmit = useCallback((_data: z.infer<typeof contactSchema>) => {
     setIsSubmitting(true);
     setTimeout(() => {
       toast({
@@ -114,9 +115,10 @@ export default function Home() {
       form.reset();
       setIsSubmitting(false);
     }, 500);
-  }
+  }, [toast, t, form]);
 
-  const openProductModal = (productKey: ProductKey) => {
+  // Memoized modal handlers
+  const openProductModal = useCallback((productKey: ProductKey) => {
     const cardElement = document.getElementById(`product-card-${productKey}`);
     
     if (cardElement) {
@@ -139,12 +141,12 @@ export default function Home() {
       setSelectedProduct(productKey);
       document.body.style.overflow = 'hidden';
     }
-  };
+  }, []);
 
-  const closeProductModal = () => {
+  const closeProductModal = useCallback(() => {
     setSelectedProduct(null);
     document.body.style.overflow = 'auto';
-  };
+  }, []);
 
   return (
     <div className="min-h-screen bg-white dark:bg-zinc-900 text-zinc-900 dark:text-zinc-200 selection:bg-red-900 selection:text-white overflow-x-hidden transition-colors duration-300">

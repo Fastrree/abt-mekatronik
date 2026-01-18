@@ -3,8 +3,9 @@ import { useI18n } from '@/lib/i18n';
 import { memo } from 'react';
 
 export const Testimonials = memo(function Testimonials() {
-  const { t, tArray } = useI18n();
+  const { t, tArray, language } = useI18n();
   const testimonials = tArray('testimonials.items');
+  const isRTL = language === 'ar';
 
   return (
     <section className="py-20 bg-white dark:bg-zinc-900">
@@ -25,7 +26,7 @@ export const Testimonials = memo(function Testimonials() {
               className="bg-white dark:bg-zinc-800 border border-zinc-300 dark:border-zinc-700 p-6 rounded-lg relative shadow-lg dark:shadow-none animate-in slide-up duration-600"
               style={{ animationDelay: `${index * 150}ms` }}
             >
-              <Quote className="absolute -top-6 right-4 w-8 h-8 text-red-600/20" />
+              <Quote className={`absolute top-0 w-8 h-8 text-red-600/20 ${isRTL ? 'left-4' : 'right-4'}`} />
               
               {/* Stars */}
               <div className="flex gap-1 mb-4">

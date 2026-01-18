@@ -327,9 +327,30 @@
         display: block;
       }
       
-      /* Video specific - prevent auto height */
+      /* Video specific - prevent auto height, maintain aspect ratio */
       video {
         display: block;
+        max-width: 100%;
+      }
+      
+      /* Prevent layout shift for images */
+      img[width][height] {
+        height: auto;
+      }
+      
+      /* Aspect ratio boxes to prevent CLS */
+      .aspect-ratio-box {
+        position: relative;
+        width: 100%;
+        padding-bottom: 56.25%; /* 16:9 */
+      }
+      
+      .aspect-ratio-box > * {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
       }
     </style>
     

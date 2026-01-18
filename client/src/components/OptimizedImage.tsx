@@ -18,6 +18,7 @@ interface OptimizedImageProps {
   width?: number;
   height?: number;
   blurDataURL?: string;
+  aspectRatio?: string; // e.g., "16/9", "4/3", "1/1"
 }
 
 export const OptimizedImage = memo(function OptimizedImage({
@@ -28,11 +29,16 @@ export const OptimizedImage = memo(function OptimizedImage({
   width,
   height,
   blurDataURL,
+  aspectRatio,
 }: OptimizedImageProps) {
   const [isLoaded, setIsLoaded] = useState(false);
   const [isInView, setIsInView] = useState(false);
   const [hasError, setHasError] = useState(false);
   const imgRef = useRef<HTMLImageElement>(null);
+
+  // Calculate aspect ratio style for CLS prevention
+  const aspectRatioStyle = aspectRatio ? { aspectRatio } : 
+    (width && height) ? { aspectRatio: `${width}/${height}` } : undefined;
 
   useEffect(() => {
     if (loading === 'eager') {
@@ -80,12 +86,14 @@ export const OptimizedImage = memo(function OptimizedImage({
           alt={alt}
           width={width}
           height={height}
+          style={aspectRatioStyle}
           className={`${className} transition-opacity duration-300 ${
             isLoaded ? 'opacity-100' : 'opacity-0'
           }`}
           onLoad={() => setIsLoaded(true)}
           onError={() => setHasError(true)}
           loading={loading}
+          decoding="async"
         />
       )}
 

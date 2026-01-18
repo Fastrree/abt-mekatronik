@@ -28,16 +28,8 @@ export const LanguageSelector = memo(function LanguageSelector({ isScrolled = fa
         aria-label={t('nav.selectLanguage')}
       >
         <img src={getFlagSrc(language)} alt={currentLang?.name} className="w-5 h-4 object-cover rounded-sm" />
-        <span className={`text-sm font-medium ${
-          isScrolled 
-            ? "text-zinc-900 dark:text-zinc-300" 
-            : "text-white dark:text-zinc-300"
-        }`}>{currentLang?.code.toUpperCase()}</span>
-        <ChevronDown size={14} className={`transition-transform ${
-          isScrolled 
-            ? "text-zinc-900 dark:text-zinc-400" 
-            : "text-white dark:text-zinc-400"
-        } ${isOpen ? 'rotate-180' : ''}`} />
+        <span className="text-sm font-medium text-white">{currentLang?.code.toUpperCase()}</span>
+        <ChevronDown size={14} className={`transition-transform text-white ${isOpen ? 'rotate-180' : ''}`} />
       </button>
 
       {/* Mobile: Minimal style with just flag */}
@@ -49,23 +41,19 @@ export const LanguageSelector = memo(function LanguageSelector({ isScrolled = fa
         aria-label={t('nav.selectLanguage')}
       >
         <img src={getFlagSrc(language)} alt={currentLang?.name} className="w-5 h-3.5 object-cover rounded-sm" />
-        <ChevronDown size={12} className={`transition-transform ${
-          isScrolled 
-            ? "text-zinc-900 dark:text-zinc-400" 
-            : "text-white dark:text-zinc-400"
-        } ${isOpen ? 'rotate-180' : ''}`} />
+        <ChevronDown size={12} className={`transition-transform text-white ${isOpen ? 'rotate-180' : ''}`} />
       </button>
 
       {isOpen && (
         <>
           <div className="fixed inset-0 z-40" onClick={() => setIsOpen(false)} />
-          <div className="absolute right-0 top-full mt-2 z-50 bg-white dark:bg-zinc-800 border border-slate-200 dark:border-zinc-700 rounded-lg shadow-xl overflow-hidden min-w-[160px]">
+          <div className="absolute right-0 top-full mt-2 z-50 bg-zinc-800 border border-zinc-700 rounded-lg shadow-xl overflow-hidden min-w-[160px]">
             {languages.map((lang) => (
               <button
                 key={lang.code}
                 onClick={() => handleSelect(lang.code)}
-                className={`w-full flex items-center gap-3 px-4 py-3 text-left hover:bg-slate-100 dark:hover:bg-zinc-700 transition-colors ${
-                  language === lang.code ? 'bg-red-600/20 text-red-600 dark:text-red-400' : 'text-zinc-900 dark:text-zinc-300'
+                className={`w-full flex items-center gap-3 px-4 py-3 text-left hover:bg-zinc-700 transition-colors ${
+                  language === lang.code ? 'bg-red-600/20 text-red-400' : 'text-white'
                 }`}
               >
                 <img src={getFlagSrc(lang.code)} alt={lang.name} className="w-6 h-4 object-cover rounded-sm" />

@@ -10,7 +10,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { useToast } from "@/hooks/use-toast";
-import { useState, useCallback, useMemo, useEffect, useRef } from "react";
+import { useState, useCallback, useMemo } from "react";
 import { useI18n } from "@/lib/i18n";
 import { OptimizedImage } from "@/components/OptimizedImage";
 import { OptimizedVideo } from "@/components/OptimizedVideo";
@@ -91,35 +91,12 @@ export default function Home() {
   const { t, tArray } = useI18n();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState<ProductKey | null>(null);
-  const videoRef = useRef<HTMLVideoElement>(null);
-
-  // Force video play on mount for Edge compatibility
-  useEffect(() => {
-    const video = videoRef.current;
-    if (video) {
-      // Ensure muted is set
-      video.muted = true;
-      video.defaultMuted = true;
-      video.volume = 0;
-      
-      // Simple play attempt
-      const playVideo = () => {
-        const playPromise = video.play();
-        if (playPromise !== undefined) {
-          playPromise
-            .then(() => {
-              console.log('✅ Video playing successfully');
-            })
-            .catch((error) => {
-              console.warn('⚠️ Video autoplay prevented:', error.name);
-            });
-        }
-      };
-      
-      // Try to play after a short delay to ensure DOM is ready
-      setTimeout(playVideo, 100);
-    }
-  }, []);
+  
+  // Detect Edge browser
+  const isEdge = /Edg/.test(navigator.userAgent);
+  
+  // For Edge: use static image instead of video (autoplay issues)
+  // For other browsers: use video with autoplay
 
   // Create schema with translated messages - memoized to prevent recreation
   const contactSchema = useMemo(() => createContactSchema(t), [t]);
@@ -336,55 +313,56 @@ export default function Home() {
         aria-labelledby="hero-title"
       >
         <div className="absolute inset-0 z-0">
-          <video 
-            ref={videoRef}
-            src="/media/video1.mp4?v=4"
-            autoPlay
-            muted
-            loop
-            playsInline
-            preload="auto"
-            className="absolute inset-0 w-full h-full object-cover"
-            style={{ zIndex: 1 }}
-            poster="/media/img1.jpeg"
-            aria-label="ABT Mekatronik üretim tesisi video arka planı"
-            onLoadedData={(e) => {
-              const video = e.currentTarget;
-              console.log('📹 Video loaded - readyState:', video.readyState);
-              // Remove poster after video loads
-              video.removeAttribute('poster');
-            }}
-            onCanPlay={(e) => {
-              console.log('📹 Video can play - readyState:', e.currentTarget.readyState);
-            }}
-            onPlay={() => {
-              console.log('✅ Video PLAYING event fired');
-            }}
-            onPause={() => {
-              console.log('⏸️ Video PAUSED event fired');
-            }}
-            onError={(e) => {
-              // Fallback to poster image if video fails
-              const video = e.currentTarget;
-              video.style.display = 'none';
-              console.warn('❌ Video loading error');
-            }}
-          />
-          {/* Light theme: NO blur, just subtle overlay. Dark theme: stronger overlay */}
-          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-transparent to-transparent dark:from-zinc-900/90 dark:via-zinc-900/70 dark:to-zinc-900/40" style={{ zIndex: 2 }} aria-hidden="true" />
+          {/* 
+            EDGE BROWSER DETECTION:
+            - Edge has strict autoplay policy that blocks video
+            - Show static image for Edge users
+            - Show video for other browsers (Chrome, Firefox, Safari, etc.)
+          */}
+          {isEdge ? (
+            // Edge: Static hero image - full coverage, no white space
+            <OptimizedImage 
+              src="/media/img1.jpeg"
+              alt="ABT Mekatronik üretim tesisi"
+              className="absolute inset-0 w-full h-full object-cover"
+              style={{ 
+                zIndex: 1,
+                objectPosition: 'center 40%' // Slightly adjust vertical position
+              }}
+              loading="eager"
+            />
+          ) : (
+            // Other browsers: Video with autoplay - full coverage, no white space
+            <video 
+              src="/media/video1.mp4"
+              autoPlay
+              muted
+              loop
+              playsInline
+              preload="auto"
+              className="absolute inset-0 w-full h-full object-cover"
+              style={{ 
+                zIndex: 1,
+                objectPosition: 'center 40%' // Slightly adjust vertical position
+              }}
+              aria-label="ABT Mekatronik üretim tesisi video arka planı"
+            />
+          )}
+          {/* Overlay - Light theme: medium dark, Dark theme: very dark */}
+          <div className="absolute inset-0 bg-gradient-to-r from-zinc-900/70 via-zinc-900/50 to-zinc-900/30 dark:from-zinc-900/90 dark:via-zinc-900/80 dark:to-zinc-900/60" style={{ zIndex: 2 }} aria-hidden="true" />
         </div>
 
         <div className="container mx-auto px-6 relative z-10 pt-20">
           <div className="max-w-4xl animate-in fade-in-left duration-800">
-            <div className="inline-block mb-4 px-3 py-1 bg-red-600/20 border border-red-600/50 text-red-600 dark:text-red-500 font-bold text-xs tracking-widest uppercase rounded-sm backdrop-blur-sm">
+            <div className="inline-block mb-4 px-3 py-1 bg-red-600/20 border border-red-600/50 text-red-500 font-bold text-xs tracking-widest uppercase rounded-sm backdrop-blur-sm">
               {t('hero.badge')}
             </div>
-            <h1 id="hero-title" className="text-3xl xs:text-2xl sm:text-5xl md:text-7xl lg:text-8xl font-black text-zinc-900 dark:text-white leading-[0.9] mb-6 xs:mb-4 sm:mb-8 tracking-tighter">
+            <h1 id="hero-title" className="text-3xl xs:text-2xl sm:text-5xl md:text-7xl lg:text-8xl font-black text-white leading-[0.9] mb-6 xs:mb-4 sm:mb-8 tracking-tighter">
               {t('hero.title1')} <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-zinc-600 to-zinc-400 dark:from-gray-100 dark:to-gray-500">{t('hero.title2')}</span> <br />
-              <span className="text-red-600">{t('hero.title3')}</span> {t('hero.title4')}
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-gray-100 to-gray-400">{t('hero.title2')}</span> <br />
+              <span className="text-red-500">{t('hero.title3')}</span> {t('hero.title4')}
             </h1>
-            <p className="text-base xs:text-sm sm:text-xl md:text-2xl text-zinc-700 dark:text-zinc-300 max-w-2xl mb-8 xs:mb-6 sm:mb-10 font-light leading-relaxed border-l-4 border-red-600 pl-4 xs:pl-3 sm:pl-6">
+            <p className="text-base xs:text-sm sm:text-xl md:text-2xl text-gray-200 max-w-2xl mb-8 xs:mb-6 sm:mb-10 font-light leading-relaxed border-l-4 border-red-500 pl-4 xs:pl-3 sm:pl-6">
               {t('hero.description')}
             </p>
             <div className="flex flex-col sm:flex-row gap-3 xs:gap-2 sm:gap-4 w-full xs:w-full sm:w-auto" role="group" aria-label="Ana eylem butonları">
@@ -399,7 +377,7 @@ export default function Home() {
               <Button 
                 size="lg" 
                 variant="outline" 
-                className="w-full xs:w-full sm:w-auto border-zinc-400 dark:border-zinc-400 text-zinc-900 dark:text-zinc-200 hover:bg-zinc-100 hover:text-zinc-900 dark:hover:bg-zinc-700 dark:hover:text-white font-bold text-base xs:text-sm sm:text-lg px-6 xs:px-4 sm:px-8 py-5 xs:py-4 sm:py-6 rounded-none skew-x-[-10deg] backdrop-blur-sm"
+                className="w-full xs:w-full sm:w-auto border-gray-300 text-white hover:bg-white/10 hover:text-white font-bold text-base xs:text-sm sm:text-lg px-6 xs:px-4 sm:px-8 py-5 xs:py-4 sm:py-6 rounded-none skew-x-[-10deg] backdrop-blur-sm"
                 onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })}
                 aria-label="Projelerimizi görüntüleyin"
               >
@@ -409,7 +387,7 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 text-zinc-900/50 dark:text-white/50 flex flex-col items-center gap-2 animate-bounce" aria-hidden="true">
+        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 text-white/70 flex flex-col items-center gap-2 animate-bounce" aria-hidden="true">
           <span className="text-[10px] uppercase tracking-[0.3em]">{t('hero.scroll')}</span>
           <div className="w-[1px] h-12 bg-gradient-to-b from-red-600 to-transparent"></div>
         </div>
@@ -702,7 +680,8 @@ export default function Home() {
             ))}
           </div>
 
-          {/* Video Showcase */}
+          {/* Video Showcase - TEMPORARILY DISABLED FOR TESTING */}
+          {/* 
           <div className="mt-16 xs:mt-8 animate-in fade-in duration-600">
             <h3 className="text-2xl xs:text-xl font-bold text-zinc-900 dark:text-white mb-8 xs:mb-4 text-center">{t('projectsSection.videoGallery')}</h3>
             <div className="grid md:grid-cols-2 gap-6 xs:gap-3">
@@ -725,6 +704,7 @@ export default function Home() {
               ))}
             </div>
           </div>
+          */}
         </div>
       </section>
 

@@ -415,7 +415,7 @@ export default function Home() {
             <article 
               id="product-card-konveyor"
               onClick={() => openProductModal('konveyor')}
-              className="group relative h-[450px] xs:h-[350px] overflow-hidden bg-white dark:bg-zinc-800 border border-zinc-300 dark:border-zinc-700 border-t-0 hover:border-t-4 hover:border-t-red-600 transition-all cursor-pointer shadow-lg dark:shadow-none animate-in slide-up duration-600"
+              className="group relative h-[450px] xs:h-[350px] overflow-hidden bg-white dark:bg-zinc-800 border border-zinc-300 dark:border-red-600/30 border-t-0 hover:border-t-4 hover:border-t-red-600 dark:hover:border-t-red-500 transition-all cursor-pointer shadow-lg dark:shadow-none animate-in slide-up duration-600"
               role="listitem"
               tabIndex={0}
               onKeyDown={(e) => {
@@ -453,7 +453,7 @@ export default function Home() {
             <article 
               id="product-card-tekstil"
               onClick={() => openProductModal('tekstil')}
-              className="group relative h-[450px] xs:h-[350px] overflow-hidden bg-white dark:bg-zinc-800 border border-zinc-300 dark:border-zinc-700 border-t-0 hover:border-t-4 hover:border-t-red-600 transition-all cursor-pointer shadow-lg dark:shadow-none animate-in slide-up duration-600 delay-100"
+              className="group relative h-[450px] xs:h-[350px] overflow-hidden bg-white dark:bg-zinc-800 border border-zinc-300 dark:border-red-600/30 border-t-0 hover:border-t-4 hover:border-t-red-600 dark:hover:border-t-red-500 transition-all cursor-pointer shadow-lg dark:shadow-none animate-in slide-up duration-600 delay-100"
               role="listitem"
               tabIndex={0}
               onKeyDown={(e) => {
@@ -491,7 +491,7 @@ export default function Home() {
             <article 
               id="product-card-celik"
               onClick={() => openProductModal('celik')}
-              className="group relative h-[450px] xs:h-[350px] overflow-hidden bg-white dark:bg-zinc-800 border border-zinc-300 dark:border-zinc-700 border-t-0 hover:border-t-4 hover:border-t-red-600 transition-all cursor-pointer shadow-lg dark:shadow-none animate-in slide-up duration-600 delay-200"
+              className="group relative h-[450px] xs:h-[350px] overflow-hidden bg-white dark:bg-zinc-800 border border-zinc-300 dark:border-red-600/30 border-t-0 hover:border-t-4 hover:border-t-red-600 dark:hover:border-t-red-500 transition-all cursor-pointer shadow-lg dark:shadow-none animate-in slide-up duration-600 delay-200"
               role="listitem"
               tabIndex={0}
               onKeyDown={(e) => {
@@ -529,7 +529,7 @@ export default function Home() {
             <article 
               id="product-card-ozelMakine"
               onClick={() => openProductModal('ozelMakine')}
-              className="group relative h-[450px] xs:h-[350px] overflow-hidden bg-white dark:bg-zinc-800 border border-zinc-300 dark:border-zinc-700 border-t-0 hover:border-t-4 hover:border-t-red-600 transition-all cursor-pointer shadow-lg dark:shadow-none animate-in slide-up duration-600 delay-300"
+              className="group relative h-[450px] xs:h-[350px] overflow-hidden bg-white dark:bg-zinc-800 border border-zinc-300 dark:border-red-600/30 border-t-0 hover:border-t-4 hover:border-t-red-600 dark:hover:border-t-red-500 transition-all cursor-pointer shadow-lg dark:shadow-none animate-in slide-up duration-600 delay-300"
               role="listitem"
               tabIndex={0}
               onKeyDown={(e) => {

@@ -107,16 +107,37 @@ export default function Home() {
       if (playPromise !== undefined) {
         playPromise
           .then(() => {
-            console.log('Video playing successfully');
+            console.log('✅ Video playing successfully');
           })
           .catch((error) => {
-            console.warn('Video autoplay prevented:', error);
+            console.warn('⚠️ Video autoplay prevented:', error.name, error.message);
             
-            // Try again after a short delay
+            // STRATEGY 1: Retry after delay
             setTimeout(() => {
-              video.play().catch(() => {
-                console.warn('Second attempt failed, hiding video');
-                video.style.display = 'none';
+              video.play().catch((retryError) => {
+                console.warn('⚠️ Retry failed:', retryError.name);
+                
+                // STRATEGY 2: Wait for user interaction
+                const playOnInteraction = () => {
+                  video.play()
+                    .then(() => {
+                      console.log('✅ Video playing after user interaction');
+                      // Remove listeners after successful play
+                      document.removeEventListener('click', playOnInteraction);
+                      document.removeEventListener('scroll', playOnInteraction);
+                      document.removeEventListener('touchstart', playOnInteraction);
+                    })
+                    .catch(() => {
+                      console.warn('❌ Video play failed even after interaction');
+                    });
+                };
+                
+                // Listen for ANY user interaction
+                document.addEventListener('click', playOnInteraction, { once: true });
+                document.addEventListener('scroll', playOnInteraction, { once: true });
+                document.addEventListener('touchstart', playOnInteraction, { once: true });
+                
+                console.log('🎯 Waiting for user interaction to play video...');
               });
             }, 100);
           });
@@ -341,38 +362,40 @@ export default function Home() {
         <div className="absolute inset-0 z-0">
           <video 
             ref={videoRef}
-            autoPlay 
-            muted 
-            loop 
+            src="/media/video1.mp4?v=4"
+            autoPlay
+            muted
+            loop
             playsInline
             preload="auto"
-            fetchpriority="high"
             className="absolute inset-0 w-full h-full object-cover"
             poster="/media/img1.jpeg"
             aria-label="ABT Mekatronik üretim tesisi video arka planı"
             onLoadedData={(e) => {
               // Force play on load for Edge compatibility
               const video = e.currentTarget;
+              console.log('📹 Video loaded - readyState:', video.readyState);
               video.muted = true;
               video.play().catch((error) => {
-                console.warn('Video autoplay engellendi:', error);
+                console.warn('⚠️ onLoadedData play failed:', error.name, error.message);
               });
+            }}
+            onCanPlay={(e) => {
+              console.log('📹 Video can play - readyState:', e.currentTarget.readyState);
+            }}
+            onPlay={() => {
+              console.log('✅ Video PLAYING event fired');
+            }}
+            onPause={() => {
+              console.log('⏸️ Video PAUSED event fired');
             }}
             onError={(e) => {
               // Fallback to poster image if video fails
               const video = e.currentTarget;
               video.style.display = 'none';
-              console.warn('Video yükleme hatası, poster görseli gösteriliyor');
+              console.warn('❌ Video loading error');
             }}
-          >
-            <source src="/media/video1.mp4?v=2" type="video/mp4" />
-            {/* Fallback image - same CSS as video */}
-            <img 
-              src="/media/img1.jpeg" 
-              alt="ABT Mekatronik üretim tesisi" 
-              className="absolute inset-0 w-full h-full object-cover"
-            />
-          </video>
+          />
           {/* Light theme: NO blur, just subtle overlay. Dark theme: stronger overlay */}
           <div className="absolute inset-0 bg-gradient-to-r from-transparent via-transparent to-transparent dark:from-zinc-900/90 dark:via-zinc-900/70 dark:to-zinc-900/40" aria-hidden="true" />
         </div>

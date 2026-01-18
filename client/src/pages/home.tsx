@@ -637,14 +637,15 @@ export default function Home() {
             ].map((img, index) => (
               <div
                 key={img}
-                className="group relative aspect-square overflow-hidden bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 shadow-lg dark:shadow-none animate-in scale-in duration-500"
+                className="group relative aspect-square overflow-hidden bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 shadow-lg dark:shadow-none animate-in scale-in duration-500"
                 style={{ animationDelay: `${index * 50}ms` }}
               >
                 <OptimizedImage 
                   src={`/media/${encodeURIComponent(img)}`}
-                  alt="ABT Mekatronik Proje" 
-                  loading="lazy"
+                  alt={`ABT Mekatronik Proje ${index + 1}`}
+                  loading={index < 4 ? "eager" : "lazy"}
                   className="w-full h-full object-cover transition-all duration-500 group-hover:scale-110 grayscale-[30%] group-hover:grayscale-0"
+                  aspectRatio="1/1"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-white/60 via-transparent to-transparent dark:from-zinc-900/60 dark:via-transparent dark:to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               </div>

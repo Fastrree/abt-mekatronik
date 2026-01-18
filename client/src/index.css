@@ -673,6 +673,15 @@ img {
   }
 }
 
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
 .skeleton {
   background: linear-gradient(
     90deg,
@@ -683,6 +692,10 @@ img {
   background-size: 200% 100%;
   animation: skeleton-loading 1.5s ease-in-out infinite;
   will-change: background-position;
+}
+
+.animate-shimmer {
+  animation: shimmer 2s ease-in-out infinite;
 }
 
 /* Optimize video performance */

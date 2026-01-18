@@ -56,7 +56,8 @@ export const OptimizedImage = memo(function OptimizedImage({
         });
       },
       {
-        rootMargin: '50px', // Start loading 50px before image enters viewport
+        rootMargin: '200px', // Start loading 200px before image enters viewport (was 50px)
+        threshold: 0.01, // Trigger as soon as 1% is visible
       }
     );
 
@@ -104,9 +105,9 @@ export const OptimizedImage = memo(function OptimizedImage({
         </div>
       )}
 
-      {/* Loading skeleton */}
+      {/* Loading skeleton - shimmer effect */}
       {!isLoaded && !hasError && isInView && (
-        <div className="absolute inset-0 bg-zinc-200 dark:bg-zinc-700 animate-pulse" />
+        <div className="absolute inset-0 bg-gradient-to-r from-zinc-200 via-zinc-300 to-zinc-200 dark:from-zinc-700 dark:via-zinc-600 dark:to-zinc-700 animate-shimmer bg-[length:200%_100%]" />
       )}
     </div>
   );

@@ -47,7 +47,8 @@ export const OptimizedVideo = memo(function OptimizedVideo({
         });
       },
       {
-        rootMargin: '100px', // Start loading 100px before video enters viewport
+        rootMargin: '300px', // Start loading 300px before video enters viewport (was 100px)
+        threshold: 0.01,
       }
     );
 

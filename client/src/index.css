@@ -145,6 +145,14 @@
     min-width: 44px;
   }
   
+  /* 320px screens - smaller touch targets acceptable */
+  @media (max-width: 360px) {
+    button, a, [role="button"] {
+      min-height: 40px;
+      min-width: 40px;
+    }
+  }
+  
   /* Remove tap highlight on mobile */
   * {
     -webkit-tap-highlight-color: transparent;
@@ -199,6 +207,162 @@
   .fixed.inset-0 {
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
+  }
+}
+
+/* 320px Ultra-Small Screen Optimization */
+@media (max-width: 360px) {
+  /* Reduce container padding */
+  .container {
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+  }
+  
+  /* Smaller typography */
+  h1 {
+    font-size: 2rem !important;
+    line-height: 1.1 !important;
+  }
+  
+  h2 {
+    font-size: 1.5rem !important;
+    line-height: 1.2 !important;
+  }
+  
+  h3 {
+    font-size: 1.25rem !important;
+  }
+  
+  /* Compact buttons */
+  button, .btn {
+    padding: 0.5rem 0.75rem !important;
+    font-size: 0.875rem !important;
+  }
+  
+  /* Navbar optimization */
+  nav {
+    padding-top: 0.5rem !important;
+    padding-bottom: 0.5rem !important;
+  }
+  
+  nav .container {
+    gap: 0.25rem;
+  }
+  
+  /* Logo smaller */
+  nav h1, nav .text-2xl {
+    font-size: 1.25rem !important;
+  }
+  
+  /* Icon buttons smaller */
+  nav button {
+    padding: 0.375rem !important;
+  }
+  
+  nav button svg {
+    width: 18px !important;
+    height: 18px !important;
+  }
+  
+  /* Hero section optimization */
+  #hero h1 {
+    font-size: 2.5rem !important;
+    line-height: 1 !important;
+  }
+  
+  #hero p {
+    font-size: 0.875rem !important;
+    line-height: 1.4 !important;
+  }
+  
+  /* Full width buttons on tiny screens */
+  #hero .flex-col button,
+  #hero button {
+    width: 100% !important;
+    margin-bottom: 0.5rem;
+  }
+  
+  /* Reduce grid gaps */
+  .grid {
+    gap: 0.5rem !important;
+  }
+  
+  /* Compact cards */
+  .card, article {
+    padding: 0.75rem !important;
+  }
+  
+  /* Product cards - smaller height on tiny screens */
+  #products article {
+    height: 350px !important;
+  }
+  
+  /* Engineering section - compact stats */
+  #engineering .space-y-4 {
+    gap: 0.5rem !important;
+  }
+  
+  #engineering .text-3xl {
+    font-size: 1.75rem !important;
+  }
+  
+  /* Projects gallery - 2 columns only */
+  #projects .grid-cols-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+  
+  /* Contact form - compact inputs */
+  #contact input,
+  #contact textarea {
+    font-size: 0.875rem !important;
+    padding: 0.5rem !important;
+  }
+  
+  #contact .h-12 {
+    height: 2.5rem !important;
+  }
+  
+  /* Footer - compact layout */
+  footer {
+    padding-top: 2rem !important;
+    padding-bottom: 2rem !important;
+  }
+  
+  footer h3 {
+    font-size: 1rem !important;
+    margin-bottom: 0.5rem !important;
+  }
+  
+  footer a, footer p {
+    font-size: 0.75rem !important;
+  }
+  
+  /* WhatsApp button smaller */
+  .fixed.bottom-6.right-6 {
+    bottom: 1rem !important;
+    right: 1rem !important;
+  }
+  
+  .fixed.bottom-6.right-6 button {
+    width: 48px !important;
+    height: 48px !important;
+  }
+  
+  .fixed.bottom-6.right-6 svg {
+    width: 24px !important;
+    height: 24px !important;
+  }
+  
+  /* Modal optimization */
+  .fixed.inset-0 > div {
+    max-width: 95vw !important;
+    margin: 0.5rem !important;
+  }
+  
+  /* Prose content smaller */
+  .prose p, .prose li {
+    font-size: 0.875rem !important;
+    line-height: 1.4 !important;
   }
 }
 

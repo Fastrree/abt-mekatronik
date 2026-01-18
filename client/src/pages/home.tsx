@@ -156,23 +156,23 @@ export default function Home() {
       {/* PRODUCT DETAIL MODAL */}
       {selectedProduct && (
         <div
-          className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/70 dark:bg-black/85 animate-in fade-in duration-200"
+          className="fixed inset-0 z-[100] flex items-center justify-center p-4 xs:p-2 bg-black/70 dark:bg-black/85 animate-in fade-in duration-200"
           onClick={closeProductModal}
           role="dialog"
           aria-modal="true"
           aria-labelledby="product-modal-title"
         >
           <div
-            className="relative w-full max-w-5xl max-h-[90vh] overflow-y-auto bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-600 rounded-lg shadow-2xl will-change-transform animate-in fade-in slide-up duration-300"
+            className="relative w-full max-w-5xl xs:max-w-[95vw] max-h-[90vh] overflow-y-auto bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-600 rounded-lg shadow-2xl will-change-transform animate-in fade-in slide-up duration-300"
             onClick={(e) => e.stopPropagation()}
           >
               {/* Close Button */}
               <button
                 onClick={closeProductModal}
-                className="absolute top-4 right-4 z-10 p-2 bg-zinc-100 dark:bg-zinc-700 hover:bg-red-600 rounded-full transition-colors"
+                className="absolute top-4 xs:top-2 right-4 xs:right-2 z-10 p-2 xs:p-1.5 bg-zinc-100 dark:bg-zinc-700 hover:bg-red-600 rounded-full transition-colors"
                 aria-label={t('products.close')}
               >
-                <X size={24} className="text-zinc-900 dark:text-white" />
+                <X size={24} className="xs:w-5 xs:h-5 text-zinc-900 dark:text-white" />
               </button>
 
               {(() => {
@@ -181,7 +181,7 @@ export default function Home() {
                 return (
                   <>
                     {/* Hero Image */}
-                    <div className="relative h-64 md:h-80 overflow-hidden bg-zinc-100 dark:bg-zinc-700">
+                    <div className="relative h-64 xs:h-48 md:h-80 overflow-hidden bg-zinc-100 dark:bg-zinc-700">
                       <OptimizedImage 
                         src={`/media/${encodeURIComponent(product.heroImage)}`}
                         alt={t(`productItems.${selectedProduct}.title`)}
@@ -189,44 +189,44 @@ export default function Home() {
                         loading="eager"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-white via-white/50 to-transparent dark:from-zinc-800 dark:via-zinc-800/50 dark:to-transparent" />
-                      <div className="absolute bottom-6 left-6 right-6">
-                        <div className="flex items-center gap-3 mb-2">
-                          <div className="p-2 bg-red-600 rounded-lg" aria-hidden="true">
-                            <IconComponent className="w-6 h-6 text-white" />
+                      <div className="absolute bottom-6 xs:bottom-3 left-6 xs:left-3 right-6 xs:right-3">
+                        <div className="flex items-center gap-3 xs:gap-2 mb-2 xs:mb-1">
+                          <div className="p-2 xs:p-1.5 bg-red-600 rounded-lg" aria-hidden="true">
+                            <IconComponent className="w-6 h-6 xs:w-5 xs:h-5 text-white" />
                           </div>
-                          <span className="text-red-600 dark:text-red-400 font-semibold uppercase tracking-wider text-sm">
+                          <span className="text-red-600 dark:text-red-400 font-semibold uppercase tracking-wider text-sm xs:text-xs">
                             {t(`productItems.${selectedProduct}.modalSubtitle`)}
                           </span>
                         </div>
-                        <h2 id="product-modal-title" className="text-3xl md:text-4xl font-black text-zinc-900 dark:text-white">
+                        <h2 id="product-modal-title" className="text-3xl xs:text-xl md:text-4xl font-black text-zinc-900 dark:text-white">
                           {t(`productItems.${selectedProduct}.title`)}
                         </h2>
                       </div>
                     </div>
 
                     {/* Content */}
-                    <div className="p-6 md:p-8">
+                    <div className="p-6 xs:p-3 md:p-8">
                       {/* Description */}
-                      <div className="prose prose-invert dark:prose-invert prose-slate max-w-none mb-8">
+                      <div className="prose prose-invert dark:prose-invert prose-slate max-w-none mb-8 xs:mb-4">
                         {t(`productItems.${selectedProduct}.description`).split('\n\n').map((paragraph, idx) => {
                           if (paragraph.startsWith('**')) {
                             const title = paragraph.match(/\*\*(.*?)\*\*/)?.[1];
                             const content = paragraph.replace(/\*\*.*?\*\*\n?/, '');
                             return (
-                              <div key={idx} className="mb-4">
-                                <h3 className="text-lg font-bold text-red-600 dark:text-red-500 mb-2">{title}</h3>
-                                <p className="text-zinc-700 dark:text-zinc-300 leading-relaxed whitespace-pre-line">{content}</p>
+                              <div key={idx} className="mb-4 xs:mb-2">
+                                <h3 className="text-lg xs:text-base font-bold text-red-600 dark:text-red-500 mb-2 xs:mb-1">{title}</h3>
+                                <p className="text-zinc-700 dark:text-zinc-300 leading-relaxed xs:text-sm xs:leading-snug whitespace-pre-line">{content}</p>
                               </div>
                             );
                           }
-                          return <p key={idx} className="text-zinc-700 dark:text-zinc-300 leading-relaxed mb-4">{paragraph}</p>;
+                          return <p key={idx} className="text-zinc-700 dark:text-zinc-300 leading-relaxed xs:text-sm xs:leading-snug mb-4 xs:mb-2">{paragraph}</p>;
                         })}
                       </div>
 
                       {/* Gallery */}
-                      <div className="mb-8">
-                        <h3 className="text-xl font-bold text-zinc-900 dark:text-white mb-4">{t('products.gallery')}</h3>
-                        <div className="grid grid-cols-3 gap-3">
+                      <div className="mb-8 xs:mb-4">
+                        <h3 className="text-xl xs:text-lg font-bold text-zinc-900 dark:text-white mb-4 xs:mb-2">{t('products.gallery')}</h3>
+                        <div className="grid grid-cols-3 gap-3 xs:gap-2">
                           {product.gallery.map((img, idx) => (
                             <div key={idx} className="aspect-square overflow-hidden rounded-lg border border-zinc-200 dark:border-zinc-600">
                               <OptimizedImage
@@ -241,31 +241,31 @@ export default function Home() {
                       </div>
 
                       {/* Features & Why Us */}
-                      <div className="grid md:grid-cols-2 gap-6 mb-8">
-                        <div className="bg-zinc-50 dark:bg-zinc-700/50 p-6 rounded-lg border border-zinc-200 dark:border-zinc-600">
-                          <h3 className="text-lg font-bold text-zinc-900 dark:text-white mb-4 flex items-center gap-2">
-                            <Settings className="w-5 h-5 text-red-600 dark:text-red-500" />
+                      <div className="grid md:grid-cols-2 gap-6 xs:gap-3 mb-8 xs:mb-4">
+                        <div className="bg-zinc-50 dark:bg-zinc-700/50 p-6 xs:p-3 rounded-lg border border-zinc-200 dark:border-zinc-600">
+                          <h3 className="text-lg xs:text-base font-bold text-zinc-900 dark:text-white mb-4 xs:mb-2 flex items-center gap-2">
+                            <Settings className="w-5 h-5 xs:w-4 xs:h-4 text-red-600 dark:text-red-500" />
                             {t('products.features')}
                           </h3>
-                          <ul className="space-y-2">
+                          <ul className="space-y-2 xs:space-y-1">
                             {tArray(`productItems.${selectedProduct}.features`).map((feature, idx) => (
-                              <li key={idx} className="flex items-start gap-2 text-zinc-700 dark:text-zinc-300">
-                                <CheckCircle className="w-4 h-4 text-green-500 mt-1 shrink-0" />
+                              <li key={idx} className="flex items-start gap-2 xs:gap-1 text-zinc-700 dark:text-zinc-300 xs:text-sm">
+                                <CheckCircle className="w-4 h-4 xs:w-3 xs:h-3 text-green-500 mt-1 shrink-0" />
                                 <span>{feature}</span>
                               </li>
                             ))}
                           </ul>
                         </div>
 
-                        <div className="bg-red-600/10 p-6 rounded-lg border border-red-600/30">
-                          <h3 className="text-lg font-bold text-zinc-900 dark:text-white mb-4 flex items-center gap-2">
-                            <CheckCircle className="w-5 h-5 text-red-600 dark:text-red-500" />
+                        <div className="bg-red-600/10 p-6 xs:p-3 rounded-lg border border-red-600/30">
+                          <h3 className="text-lg xs:text-base font-bold text-zinc-900 dark:text-white mb-4 xs:mb-2 flex items-center gap-2">
+                            <CheckCircle className="w-5 h-5 xs:w-4 xs:h-4 text-red-600 dark:text-red-500" />
                             {t('products.whyUs')}
                           </h3>
-                          <ul className="space-y-2">
+                          <ul className="space-y-2 xs:space-y-1">
                             {tArray(`productItems.${selectedProduct}.whyUs`).map((reason, idx) => (
-                              <li key={idx} className="flex items-start gap-2 text-zinc-700 dark:text-zinc-300">
-                                <ChevronRight className="w-4 h-4 text-red-600 dark:text-red-500 mt-1 shrink-0" />
+                              <li key={idx} className="flex items-start gap-2 xs:gap-1 text-zinc-700 dark:text-zinc-300 xs:text-sm">
+                                <ChevronRight className="w-4 h-4 xs:w-3 xs:h-3 text-red-600 dark:text-red-500 mt-1 shrink-0" />
                                 <span>{reason}</span>
                               </li>
                             ))}
@@ -274,19 +274,19 @@ export default function Home() {
                       </div>
 
                       {/* CTA */}
-                      <div className="flex flex-col sm:flex-row gap-4">
+                      <div className="flex flex-col sm:flex-row gap-4 xs:gap-2">
                         <Button
                           onClick={() => {
                             closeProductModal();
                             document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
                           }}
-                          className="flex-1 bg-red-600 hover:bg-red-700 text-white font-bold py-6"
+                          className="flex-1 bg-red-600 hover:bg-red-700 text-white font-bold py-6 xs:py-4 xs:text-sm"
                         >
                           {t('products.getQuote')}
                         </Button>
                         <Button
                           variant="outline"
-                          className="flex-1 border-zinc-400 dark:border-zinc-500 text-zinc-900 dark:text-zinc-200 hover:bg-zinc-200 dark:hover:bg-zinc-700 py-6"
+                          className="flex-1 border-zinc-400 dark:border-zinc-500 text-zinc-900 dark:text-zinc-200 hover:bg-zinc-200 dark:hover:bg-zinc-700 py-6 xs:py-4 xs:text-sm"
                           onClick={() => window.open('https://wa.me/905373197281', '_blank')}
                         >
                           {t('products.whatsappContact')}
@@ -329,18 +329,18 @@ export default function Home() {
             <div className="inline-block mb-4 px-3 py-1 bg-red-600/20 border border-red-600/50 text-red-600 dark:text-red-500 font-bold text-xs tracking-widest uppercase rounded-sm backdrop-blur-sm">
               {t('hero.badge')}
             </div>
-            <h1 id="hero-title" className="text-5xl md:text-7xl lg:text-8xl font-black text-zinc-900 dark:text-white leading-[0.9] mb-8 tracking-tighter">
+            <h1 id="hero-title" className="text-3xl xs:text-2xl sm:text-5xl md:text-7xl lg:text-8xl font-black text-zinc-900 dark:text-white leading-[0.9] mb-6 xs:mb-4 sm:mb-8 tracking-tighter">
               {t('hero.title1')} <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-zinc-600 to-zinc-400 dark:from-gray-100 dark:to-gray-500">{t('hero.title2')}</span> <br />
               <span className="text-red-600">{t('hero.title3')}</span> {t('hero.title4')}
             </h1>
-            <p className="text-xl md:text-2xl text-zinc-700 dark:text-zinc-300 max-w-2xl mb-10 font-light leading-relaxed border-l-4 border-red-600 pl-6">
+            <p className="text-base xs:text-sm sm:text-xl md:text-2xl text-zinc-700 dark:text-zinc-300 max-w-2xl mb-8 xs:mb-6 sm:mb-10 font-light leading-relaxed border-l-4 border-red-600 pl-4 xs:pl-3 sm:pl-6">
               {t('hero.description')}
             </p>
-            <div className="flex flex-col sm:flex-row gap-4" role="group" aria-label="Ana eylem butonları">
+            <div className="flex flex-col sm:flex-row gap-3 xs:gap-2 sm:gap-4 w-full xs:w-full sm:w-auto" role="group" aria-label="Ana eylem butonları">
               <Button 
                 size="lg" 
-                className="bg-red-600 hover:bg-red-700 text-white font-bold text-lg px-8 py-6 rounded-none skew-x-[-10deg] border-2 border-red-600 hover:shadow-[0_0_30px_rgba(220,38,38,0.5)] transition-all"
+                className="w-full xs:w-full sm:w-auto bg-red-600 hover:bg-red-700 text-white font-bold text-base xs:text-sm sm:text-lg px-6 xs:px-4 sm:px-8 py-5 xs:py-4 sm:py-6 rounded-none skew-x-[-10deg] border-2 border-red-600 hover:shadow-[0_0_30px_rgba(220,38,38,0.5)] transition-all"
                 onClick={() => document.getElementById('products')?.scrollIntoView({ behavior: 'smooth' })}
                 aria-label="Çözümlerimizi keşfedin"
               >
@@ -349,7 +349,7 @@ export default function Home() {
               <Button 
                 size="lg" 
                 variant="outline" 
-                className="border-zinc-400 dark:border-zinc-400 text-zinc-900 dark:text-zinc-200 hover:bg-zinc-100 hover:text-zinc-900 dark:hover:bg-zinc-700 dark:hover:text-white font-bold text-lg px-8 py-6 rounded-none skew-x-[-10deg] backdrop-blur-sm"
+                className="w-full xs:w-full sm:w-auto border-zinc-400 dark:border-zinc-400 text-zinc-900 dark:text-zinc-200 hover:bg-zinc-100 hover:text-zinc-900 dark:hover:bg-zinc-700 dark:hover:text-white font-bold text-base xs:text-sm sm:text-lg px-6 xs:px-4 sm:px-8 py-5 xs:py-4 sm:py-6 rounded-none skew-x-[-10deg] backdrop-blur-sm"
                 onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })}
                 aria-label="Projelerimizi görüntüleyin"
               >
@@ -382,12 +382,12 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6" role="list" aria-label="Ürün kategorileri">
+          <div className="grid grid-cols-1 xs:grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 xs:gap-3" role="list" aria-label="Ürün kategorileri">
             {/* Konveyör Sistemleri */}
             <article 
               id="product-card-konveyor"
               onClick={() => openProductModal('konveyor')}
-              className="group relative h-[450px] overflow-hidden bg-white dark:bg-zinc-800 border border-zinc-300 dark:border-zinc-700 hover:border-red-600/50 transition-colors cursor-pointer shadow-lg dark:shadow-none animate-in slide-up duration-600"
+              className="group relative h-[450px] xs:h-[350px] overflow-hidden bg-white dark:bg-zinc-800 border border-zinc-300 dark:border-zinc-700 hover:border-red-600/50 transition-colors cursor-pointer shadow-lg dark:shadow-none animate-in slide-up duration-600"
               role="listitem"
               tabIndex={0}
               onKeyDown={(e) => {
@@ -407,16 +407,16 @@ export default function Home() {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-slate-50 via-slate-50/60 to-transparent dark:from-zinc-900 dark:via-zinc-900/60 dark:to-transparent opacity-90 z-20" />
               
-              <div className="absolute bottom-0 left-0 p-6 z-30 w-full pointer-events-none">
-                <div className="flex items-center gap-2 mb-3">
-                  <Truck className="w-5 h-5 text-red-600 dark:text-red-500" />
-                  <span className="text-xs text-red-600 dark:text-red-400 uppercase tracking-wider font-semibold">{t('productItems.konveyor.subtitle')}</span>
+              <div className="absolute bottom-0 left-0 p-6 xs:p-4 z-30 w-full pointer-events-none">
+                <div className="flex items-center gap-2 xs:gap-1 mb-3 xs:mb-2">
+                  <Truck className="w-5 h-5 xs:w-4 xs:h-4 text-red-600 dark:text-red-500" />
+                  <span className="text-xs xs:text-[10px] text-red-600 dark:text-red-400 uppercase tracking-wider font-semibold">{t('productItems.konveyor.subtitle')}</span>
                 </div>
-                <div className="w-10 h-1 bg-red-600 mb-3 transition-all duration-300 group-hover:w-16"></div>
-                <h3 className="text-xl font-bold text-zinc-900 dark:text-white mb-2 group-hover:text-red-600 dark:group-hover:text-red-500 transition-colors">{t('productItems.konveyor.title')}</h3>
-                <p className="text-zinc-700 dark:text-zinc-400 text-sm mb-4 line-clamp-2">{t('productItems.konveyor.shortDesc')}</p>
-                <span className="inline-flex items-center text-zinc-900 dark:text-white font-semibold text-sm uppercase tracking-wider group-hover:translate-x-2 transition-transform">
-                  {t('products.viewDetails')} <ChevronRight className="ml-1 w-4 h-4 text-red-600 dark:text-red-500" />
+                <div className="w-10 xs:w-8 h-1 bg-red-600 mb-3 xs:mb-2 transition-all duration-300 group-hover:w-16"></div>
+                <h3 className="text-xl xs:text-base font-bold text-zinc-900 dark:text-white mb-2 xs:mb-1 group-hover:text-red-600 dark:group-hover:text-red-500 transition-colors">{t('productItems.konveyor.title')}</h3>
+                <p className="text-zinc-700 dark:text-zinc-400 text-sm xs:text-xs mb-4 xs:mb-2 line-clamp-2">{t('productItems.konveyor.shortDesc')}</p>
+                <span className="inline-flex items-center text-zinc-900 dark:text-white font-semibold text-sm xs:text-xs uppercase tracking-wider group-hover:translate-x-2 transition-transform">
+                  {t('products.viewDetails')} <ChevronRight className="ml-1 w-4 h-4 xs:w-3 xs:h-3 text-red-600 dark:text-red-500" />
                 </span>
               </div>
             </article>
@@ -425,7 +425,7 @@ export default function Home() {
             <article 
               id="product-card-tekstil"
               onClick={() => openProductModal('tekstil')}
-              className="group relative h-[450px] overflow-hidden bg-white dark:bg-zinc-800 border-t-4 border-red-600 cursor-pointer shadow-lg dark:shadow-none animate-in slide-up duration-600 delay-100"
+              className="group relative h-[450px] xs:h-[350px] overflow-hidden bg-white dark:bg-zinc-800 border-t-4 border-red-600 cursor-pointer shadow-lg dark:shadow-none animate-in slide-up duration-600 delay-100"
               role="listitem"
               tabIndex={0}
               onKeyDown={(e) => {
@@ -445,16 +445,16 @@ export default function Home() {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-slate-50 via-slate-50/60 to-transparent dark:from-zinc-900 dark:via-zinc-900/60 dark:to-transparent opacity-90 z-20" aria-hidden="true" />
               
-              <div className="absolute bottom-0 left-0 p-6 z-30 w-full pointer-events-none">
-                <div className="flex items-center gap-2 mb-3">
-                  <Factory className="w-5 h-5 text-red-600 dark:text-red-500" aria-hidden="true" />
-                  <span className="text-xs text-red-600 dark:text-red-400 uppercase tracking-wider font-semibold">{t('productItems.tekstil.subtitle')}</span>
+              <div className="absolute bottom-0 left-0 p-6 xs:p-4 z-30 w-full pointer-events-none">
+                <div className="flex items-center gap-2 xs:gap-1 mb-3 xs:mb-2">
+                  <Factory className="w-5 h-5 xs:w-4 xs:h-4 text-red-600 dark:text-red-500" aria-hidden="true" />
+                  <span className="text-xs xs:text-[10px] text-red-600 dark:text-red-400 uppercase tracking-wider font-semibold">{t('productItems.tekstil.subtitle')}</span>
                 </div>
-                <div className="w-10 h-1 bg-red-600 mb-3 transition-all duration-300 group-hover:w-16" aria-hidden="true"></div>
-                <h3 className="text-xl font-bold text-zinc-900 dark:text-white mb-2 group-hover:text-red-600 dark:group-hover:text-red-500 transition-colors">{t('productItems.tekstil.title')}</h3>
-                <p className="text-zinc-700 dark:text-zinc-400 text-sm mb-4 line-clamp-2">{t('productItems.tekstil.shortDesc')}</p>
-                <span className="inline-flex items-center text-zinc-900 dark:text-white font-semibold text-sm uppercase tracking-wider group-hover:translate-x-2 transition-transform">
-                  {t('products.viewDetails')} <ChevronRight className="ml-1 w-4 h-4 text-red-600 dark:text-red-500" aria-hidden="true" />
+                <div className="w-10 xs:w-8 h-1 bg-red-600 mb-3 xs:mb-2 transition-all duration-300 group-hover:w-16" aria-hidden="true"></div>
+                <h3 className="text-xl xs:text-base font-bold text-zinc-900 dark:text-white mb-2 xs:mb-1 group-hover:text-red-600 dark:group-hover:text-red-500 transition-colors">{t('productItems.tekstil.title')}</h3>
+                <p className="text-zinc-700 dark:text-zinc-400 text-sm xs:text-xs mb-4 xs:mb-2 line-clamp-2">{t('productItems.tekstil.shortDesc')}</p>
+                <span className="inline-flex items-center text-zinc-900 dark:text-white font-semibold text-sm xs:text-xs uppercase tracking-wider group-hover:translate-x-2 transition-transform">
+                  {t('products.viewDetails')} <ChevronRight className="ml-1 w-4 h-4 xs:w-3 xs:h-3 text-red-600 dark:text-red-500" aria-hidden="true" />
                 </span>
               </div>
             </article>
@@ -463,7 +463,7 @@ export default function Home() {
             <article 
               id="product-card-celik"
               onClick={() => openProductModal('celik')}
-              className="group relative h-[450px] overflow-hidden bg-white dark:bg-zinc-800 border border-zinc-300 dark:border-zinc-700 hover:border-red-600/50 transition-colors cursor-pointer shadow-lg dark:shadow-none animate-in slide-up duration-600 delay-200"
+              className="group relative h-[450px] xs:h-[350px] overflow-hidden bg-white dark:bg-zinc-800 border border-zinc-300 dark:border-zinc-700 hover:border-red-600/50 transition-colors cursor-pointer shadow-lg dark:shadow-none animate-in slide-up duration-600 delay-200"
               role="listitem"
               tabIndex={0}
               onKeyDown={(e) => {
@@ -483,16 +483,16 @@ export default function Home() {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-slate-50 via-slate-50/60 to-transparent dark:from-zinc-900 dark:via-zinc-900/60 dark:to-transparent opacity-90 z-20" aria-hidden="true" />
               
-              <div className="absolute bottom-0 left-0 p-6 z-30 w-full pointer-events-none">
-                <div className="flex items-center gap-2 mb-3">
-                  <Layers className="w-5 h-5 text-red-600 dark:text-red-500" aria-hidden="true" />
-                  <span className="text-xs text-red-600 dark:text-red-400 uppercase tracking-wider font-semibold">{t('productItems.celik.subtitle')}</span>
+              <div className="absolute bottom-0 left-0 p-6 xs:p-4 z-30 w-full pointer-events-none">
+                <div className="flex items-center gap-2 xs:gap-1 mb-3 xs:mb-2">
+                  <Layers className="w-5 h-5 xs:w-4 xs:h-4 text-red-600 dark:text-red-500" aria-hidden="true" />
+                  <span className="text-xs xs:text-[10px] text-red-600 dark:text-red-400 uppercase tracking-wider font-semibold">{t('productItems.celik.subtitle')}</span>
                 </div>
-                <div className="w-10 h-1 bg-red-600 mb-3 transition-all duration-300 group-hover:w-16" aria-hidden="true"></div>
-                <h3 className="text-xl font-bold text-zinc-900 dark:text-white mb-2 group-hover:text-red-600 dark:group-hover:text-red-500 transition-colors">{t('productItems.celik.title')}</h3>
-                <p className="text-zinc-700 dark:text-zinc-400 text-sm mb-4 line-clamp-2">{t('productItems.celik.shortDesc')}</p>
-                <span className="inline-flex items-center text-zinc-900 dark:text-white font-semibold text-sm uppercase tracking-wider group-hover:translate-x-2 transition-transform">
-                  {t('products.viewDetails')} <ChevronRight className="ml-1 w-4 h-4 text-red-600 dark:text-red-500" aria-hidden="true" />
+                <div className="w-10 xs:w-8 h-1 bg-red-600 mb-3 xs:mb-2 transition-all duration-300 group-hover:w-16" aria-hidden="true"></div>
+                <h3 className="text-xl xs:text-base font-bold text-zinc-900 dark:text-white mb-2 xs:mb-1 group-hover:text-red-600 dark:group-hover:text-red-500 transition-colors">{t('productItems.celik.title')}</h3>
+                <p className="text-zinc-700 dark:text-zinc-400 text-sm xs:text-xs mb-4 xs:mb-2 line-clamp-2">{t('productItems.celik.shortDesc')}</p>
+                <span className="inline-flex items-center text-zinc-900 dark:text-white font-semibold text-sm xs:text-xs uppercase tracking-wider group-hover:translate-x-2 transition-transform">
+                  {t('products.viewDetails')} <ChevronRight className="ml-1 w-4 h-4 xs:w-3 xs:h-3 text-red-600 dark:text-red-500" aria-hidden="true" />
                 </span>
               </div>
             </article>
@@ -501,7 +501,7 @@ export default function Home() {
             <article 
               id="product-card-ozelMakine"
               onClick={() => openProductModal('ozelMakine')}
-              className="group relative h-[450px] overflow-hidden bg-white dark:bg-zinc-800 border border-zinc-300 dark:border-zinc-700 hover:border-red-600/50 transition-colors cursor-pointer shadow-lg dark:shadow-none animate-in slide-up duration-600 delay-300"
+              className="group relative h-[450px] xs:h-[350px] overflow-hidden bg-white dark:bg-zinc-800 border border-zinc-300 dark:border-zinc-700 hover:border-red-600/50 transition-colors cursor-pointer shadow-lg dark:shadow-none animate-in slide-up duration-600 delay-300"
               role="listitem"
               tabIndex={0}
               onKeyDown={(e) => {
@@ -521,16 +521,16 @@ export default function Home() {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-slate-50 via-slate-50/60 to-transparent dark:from-zinc-900 dark:via-zinc-900/60 dark:to-transparent opacity-90 z-20" aria-hidden="true" />
               
-              <div className="absolute bottom-0 left-0 p-6 z-30 w-full pointer-events-none">
-                <div className="flex items-center gap-2 mb-3">
-                  <Wrench className="w-5 h-5 text-red-600 dark:text-red-500" aria-hidden="true" />
-                  <span className="text-xs text-red-600 dark:text-red-400 uppercase tracking-wider font-semibold">{t('productItems.ozelMakine.subtitle')}</span>
+              <div className="absolute bottom-0 left-0 p-6 xs:p-4 z-30 w-full pointer-events-none">
+                <div className="flex items-center gap-2 xs:gap-1 mb-3 xs:mb-2">
+                  <Wrench className="w-5 h-5 xs:w-4 xs:h-4 text-red-600 dark:text-red-500" aria-hidden="true" />
+                  <span className="text-xs xs:text-[10px] text-red-600 dark:text-red-400 uppercase tracking-wider font-semibold">{t('productItems.ozelMakine.subtitle')}</span>
                 </div>
-                <div className="w-10 h-1 bg-red-600 mb-3 transition-all duration-300 group-hover:w-16" aria-hidden="true"></div>
-                <h3 className="text-xl font-bold text-zinc-900 dark:text-white mb-2 group-hover:text-red-600 dark:group-hover:text-red-500 transition-colors">{t('productItems.ozelMakine.title')}</h3>
-                <p className="text-zinc-700 dark:text-zinc-400 text-sm mb-4 line-clamp-2">{t('productItems.ozelMakine.shortDesc')}</p>
-                <span className="inline-flex items-center text-zinc-900 dark:text-white font-semibold text-sm uppercase tracking-wider group-hover:translate-x-2 transition-transform">
-                  {t('products.viewDetails')} <ChevronRight className="ml-1 w-4 h-4 text-red-600 dark:text-red-500" aria-hidden="true" />
+                <div className="w-10 xs:w-8 h-1 bg-red-600 mb-3 xs:mb-2 transition-all duration-300 group-hover:w-16" aria-hidden="true"></div>
+                <h3 className="text-xl xs:text-base font-bold text-zinc-900 dark:text-white mb-2 xs:mb-1 group-hover:text-red-600 dark:group-hover:text-red-500 transition-colors">{t('productItems.ozelMakine.title')}</h3>
+                <p className="text-zinc-700 dark:text-zinc-400 text-sm xs:text-xs mb-4 xs:mb-2 line-clamp-2">{t('productItems.ozelMakine.shortDesc')}</p>
+                <span className="inline-flex items-center text-zinc-900 dark:text-white font-semibold text-sm xs:text-xs uppercase tracking-wider group-hover:translate-x-2 transition-transform">
+                  {t('products.viewDetails')} <ChevronRight className="ml-1 w-4 h-4 xs:w-3 xs:h-3 text-red-600 dark:text-red-500" aria-hidden="true" />
                 </span>
               </div>
             </article>
@@ -544,43 +544,43 @@ export default function Home() {
         <div className="absolute bottom-0 left-0 w-64 h-64 border border-zinc-300 dark:border-zinc-600 rounded-full opacity-20 -translate-x-1/2 translate-y-1/2"></div>
         
         <div className="container mx-auto px-6 relative z-10">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
+          <div className="grid lg:grid-cols-2 gap-16 xs:gap-8 items-center">
             <div className="animate-in fade-in duration-600">
               <h3 className="text-red-600 dark:text-red-500 font-bold tracking-widest uppercase mb-4">{t('engineering.subtitle')}</h3>
-              <h2 className="text-4xl md:text-5xl font-black text-zinc-900 dark:text-white mb-8">{t('engineering.title')} <br />{t('engineering.title2')}</h2>
+              <h2 className="text-4xl xs:text-2xl md:text-5xl font-black text-zinc-900 dark:text-white mb-8 xs:mb-4">{t('engineering.title')} <br />{t('engineering.title2')}</h2>
               
-              <div className="space-y-8">
-                <div className="flex gap-4">
-                  <div className="w-12 h-12 bg-red-600/10 border border-red-600/30 flex items-center justify-center shrink-0">
-                    <Settings className="text-red-600 dark:text-red-500" />
+              <div className="space-y-8 xs:space-y-4">
+                <div className="flex gap-4 xs:gap-2">
+                  <div className="w-12 h-12 xs:w-10 xs:h-10 bg-red-600/10 border border-red-600/30 flex items-center justify-center shrink-0">
+                    <Settings className="text-red-600 dark:text-red-500 xs:w-5 xs:h-5" />
                   </div>
                   <div>
-                    <h4 className="text-xl font-bold text-zinc-900 dark:text-white mb-2">{t('engineering.customDesign')}</h4>
-                    <p className="text-zinc-600 dark:text-zinc-400 leading-relaxed">
+                    <h4 className="text-xl xs:text-base font-bold text-zinc-900 dark:text-white mb-2 xs:mb-1">{t('engineering.customDesign')}</h4>
+                    <p className="text-zinc-600 dark:text-zinc-400 leading-relaxed xs:text-sm xs:leading-snug">
                       {t('engineering.customDesignDesc')}
                     </p>
                   </div>
                 </div>
 
-                <div className="flex gap-4">
-                  <div className="w-12 h-12 bg-red-600/10 border border-red-600/30 flex items-center justify-center shrink-0">
-                    <Cog className="text-red-600 dark:text-red-500" />
+                <div className="flex gap-4 xs:gap-2">
+                  <div className="w-12 h-12 xs:w-10 xs:h-10 bg-red-600/10 border border-red-600/30 flex items-center justify-center shrink-0">
+                    <Cog className="text-red-600 dark:text-red-500 xs:w-5 xs:h-5" />
                   </div>
                   <div>
-                    <h4 className="text-xl font-bold text-zinc-900 dark:text-white mb-2">{t('engineering.precision')}</h4>
-                    <p className="text-zinc-600 dark:text-zinc-400 leading-relaxed">
+                    <h4 className="text-xl xs:text-base font-bold text-zinc-900 dark:text-white mb-2 xs:mb-1">{t('engineering.precision')}</h4>
+                    <p className="text-zinc-600 dark:text-zinc-400 leading-relaxed xs:text-sm xs:leading-snug">
                       {t('engineering.precisionDesc')}
                     </p>
                   </div>
                 </div>
 
-                <div className="flex gap-4">
-                  <div className="w-12 h-12 bg-red-600/10 border border-red-600/30 flex items-center justify-center shrink-0">
-                    <PenTool className="text-red-600 dark:text-red-500" />
+                <div className="flex gap-4 xs:gap-2">
+                  <div className="w-12 h-12 xs:w-10 xs:h-10 bg-red-600/10 border border-red-600/30 flex items-center justify-center shrink-0">
+                    <PenTool className="text-red-600 dark:text-red-500 xs:w-5 xs:h-5" />
                   </div>
                   <div>
-                    <h4 className="text-xl font-bold text-zinc-900 dark:text-white mb-2">{t('engineering.turnkey')}</h4>
-                    <p className="text-zinc-600 dark:text-zinc-400 leading-relaxed">
+                    <h4 className="text-xl xs:text-base font-bold text-zinc-900 dark:text-white mb-2 xs:mb-1">{t('engineering.turnkey')}</h4>
+                    <p className="text-zinc-600 dark:text-zinc-400 leading-relaxed xs:text-sm xs:leading-snug">
                       {t('engineering.turnkeyDesc')}
                     </p>
                   </div>
@@ -588,23 +588,23 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="grid grid-cols-2 gap-4">
-               <div className="space-y-4 mt-8 animate-in scale-in duration-500">
-                 <div className="bg-zinc-700 p-2 rounded-lg border border-zinc-600">
-                    <OptimizedImage src={`/media/${encodeURIComponent("WhatsApp Image 2026-01-16 at 14.32.07 (3).jpeg")}`} alt="Engineering Site" className="w-full h-48 object-cover rounded shadow-lg opacity-80 hover:opacity-100 transition-opacity" loading="lazy" />
+            <div className="grid grid-cols-2 gap-4 xs:gap-2">
+               <div className="space-y-4 xs:space-y-2 mt-8 xs:mt-4 animate-in scale-in duration-500">
+                 <div className="bg-zinc-700 p-2 xs:p-1 rounded-lg border border-zinc-600">
+                    <OptimizedImage src={`/media/${encodeURIComponent("WhatsApp Image 2026-01-16 at 14.32.07 (3).jpeg")}`} alt="Engineering Site" className="w-full h-48 xs:h-32 object-cover rounded shadow-lg opacity-80 hover:opacity-100 transition-opacity" loading="lazy" />
                  </div>
-                 <div className="bg-zinc-700 p-4 rounded-lg border border-zinc-600 text-center">
-                    <span className="block text-3xl font-black text-white">15+</span>
-                    <span className="text-xs uppercase tracking-wider text-zinc-400">{t('engineering.experience')}</span>
+                 <div className="bg-zinc-700 p-4 xs:p-2 rounded-lg border border-zinc-600 text-center">
+                    <span className="block text-3xl xs:text-2xl font-black text-white">15+</span>
+                    <span className="text-xs xs:text-[10px] uppercase tracking-wider text-zinc-400">{t('engineering.experience')}</span>
                  </div>
                </div>
-               <div className="space-y-4 animate-in scale-in duration-500 delay-200">
-                 <div className="bg-red-600 p-4 rounded-lg text-center shadow-[0_0_30px_rgba(220,38,38,0.3)]">
-                    <span className="block text-3xl font-black text-white">200+</span>
-                    <span className="text-xs uppercase tracking-wider text-white/80">{t('engineering.completedProjects')}</span>
+               <div className="space-y-4 xs:space-y-2 animate-in scale-in duration-500 delay-200">
+                 <div className="bg-red-600 p-4 xs:p-2 rounded-lg text-center shadow-[0_0_30px_rgba(220,38,38,0.3)]">
+                    <span className="block text-3xl xs:text-2xl font-black text-white">200+</span>
+                    <span className="text-xs xs:text-[10px] uppercase tracking-wider text-white/80">{t('engineering.completedProjects')}</span>
                  </div>
-                 <div className="bg-zinc-700 p-2 rounded-lg border border-zinc-600">
-                    <OptimizedImage src={`/media/${encodeURIComponent("WhatsApp Image 2026-01-16 at 14.32.08.jpeg")}`} alt="Automation Detail" className="w-full h-64 object-cover rounded shadow-lg opacity-80 hover:opacity-100 transition-opacity" loading="lazy" />
+                 <div className="bg-zinc-700 p-2 xs:p-1 rounded-lg border border-zinc-600">
+                    <OptimizedImage src={`/media/${encodeURIComponent("WhatsApp Image 2026-01-16 at 14.32.08.jpeg")}`} alt="Automation Detail" className="w-full h-64 xs:h-48 object-cover rounded shadow-lg opacity-80 hover:opacity-100 transition-opacity" loading="lazy" />
                  </div>
                </div>
             </div>
@@ -620,7 +620,7 @@ export default function Home() {
             <h2 className="text-4xl md:text-5xl font-black text-zinc-900 dark:text-white">{t('projectsSection.title')}</h2>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 xs:gap-2">
             {[
               "WhatsApp Image 2026-01-16 at 14.32.03 (3).jpeg",
               "WhatsApp Image 2026-01-16 at 14.32.03 (4).jpeg",
@@ -652,9 +652,9 @@ export default function Home() {
           </div>
 
           {/* Video Showcase */}
-          <div className="mt-16 animate-in fade-in duration-600">
-            <h3 className="text-2xl font-bold text-zinc-900 dark:text-white mb-8 text-center">{t('projectsSection.videoGallery')}</h3>
-            <div className="grid md:grid-cols-2 gap-6">
+          <div className="mt-16 xs:mt-8 animate-in fade-in duration-600">
+            <h3 className="text-2xl xs:text-xl font-bold text-zinc-900 dark:text-white mb-8 xs:mb-4 text-center">{t('projectsSection.videoGallery')}</h3>
+            <div className="grid md:grid-cols-2 gap-6 xs:gap-3">
               {[
                 "WhatsApp Video 2026-01-16 at 14.32.04.mp4",
                 "WhatsApp Video 2026-01-16 at 14.32.05.mp4",
@@ -680,20 +680,20 @@ export default function Home() {
       {/* CONTACT SECTION */}
       <section id="contact" className="py-24 bg-white dark:bg-zinc-900">
         <div className="container mx-auto px-6">
-          <div className="grid lg:grid-cols-2 gap-16">
+          <div className="grid lg:grid-cols-2 gap-16 xs:gap-8">
             <div className="animate-in fade-in duration-600">
               <h3 className="text-red-500 dark:text-red-500 font-bold tracking-widest uppercase mb-4">{t('contact.subtitle')}</h3>
-              <h2 className="text-4xl md:text-5xl font-black text-zinc-900 dark:text-white mb-8">{t('contact.title')} <br />{t('contact.title2')}</h2>
-              <p className="text-zinc-600 dark:text-zinc-400 mb-8 max-w-lg">
+              <h2 className="text-4xl xs:text-2xl md:text-5xl font-black text-zinc-900 dark:text-white mb-8 xs:mb-4">{t('contact.title')} <br />{t('contact.title2')}</h2>
+              <p className="text-zinc-600 dark:text-zinc-400 mb-8 xs:mb-4 max-w-lg xs:text-sm">
                 {t('contact.description')}
               </p>
               
-              <div className="bg-slate-100 dark:bg-zinc-800 border border-slate-200 dark:border-zinc-700 p-8 rounded-lg relative overflow-hidden shadow-lg dark:shadow-none">
+              <div className="bg-slate-100 dark:bg-zinc-800 border border-slate-200 dark:border-zinc-700 p-8 xs:p-4 rounded-lg relative overflow-hidden shadow-lg dark:shadow-none">
                 <div className="absolute top-0 right-0 w-24 h-24 bg-red-600/10 rounded-bl-full -mr-4 -mt-4"></div>
                 <div className="relative z-10">
-                    <h4 className="text-xl font-bold text-zinc-900 dark:text-white mb-4">{t('contact.whatsappTitle')}</h4>
+                    <h4 className="text-xl xs:text-lg font-bold text-zinc-900 dark:text-white mb-4 xs:mb-2">{t('contact.whatsappTitle')}</h4>
                     <Button 
-                      className="bg-[#25D366] hover:bg-[#20bd5a] text-white w-full py-6 font-bold text-lg"
+                      className="bg-[#25D366] hover:bg-[#20bd5a] text-white w-full py-6 xs:py-4 font-bold text-lg xs:text-base"
                       onClick={() => window.open('https://wa.me/905373197281', '_blank')}
                     >
                         {t('contact.whatsappButton')}
@@ -702,10 +702,10 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="bg-slate-50 dark:bg-zinc-800 p-8 md:p-10 border border-slate-200 dark:border-zinc-700 shadow-xl dark:shadow-2xl animate-in fade-in-right duration-800">
-              <h3 className="text-2xl font-bold text-zinc-900 dark:text-white mb-6 border-b border-slate-200 dark:border-zinc-700 pb-4">{t('contact.formTitle')}</h3>
+            <div className="bg-slate-50 dark:bg-zinc-800 p-8 xs:p-4 md:p-10 border border-slate-200 dark:border-zinc-700 shadow-xl dark:shadow-2xl animate-in fade-in-right duration-800">
+              <h3 className="text-2xl xs:text-xl font-bold text-zinc-900 dark:text-white mb-6 xs:mb-4 border-b border-slate-200 dark:border-zinc-700 pb-4 xs:pb-2">{t('contact.formTitle')}</h3>
               <Form {...form}>
-                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 xs:space-y-4">
                   <FormField
                     control={form.control}
                     name="name"

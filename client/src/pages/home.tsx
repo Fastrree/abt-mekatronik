@@ -10,7 +10,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { useToast } from "@/hooks/use-toast";
-import { useState, useCallback, useMemo } from "react";
+import { useState, useCallback, useMemo, useEffect, useRef } from "react";
 import { useI18n } from "@/lib/i18n";
 import { OptimizedImage } from "@/components/OptimizedImage";
 import { OptimizedVideo } from "@/components/OptimizedVideo";
@@ -91,6 +91,27 @@ export default function Home() {
   const { t, tArray } = useI18n();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState<ProductKey | null>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  // Force video play on mount for Edge compatibility
+  useEffect(() => {
+    const video = videoRef.current;
+    if (video) {
+      // Ensure muted is set
+      video.muted = true;
+      video.defaultMuted = true;
+      
+      // Try to play
+      const playPromise = video.play();
+      if (playPromise !== undefined) {
+        playPromise.catch((error) => {
+          console.warn('Video autoplay prevented:', error);
+          // Fallback: show poster image
+          video.style.display = 'none';
+        });
+      }
+    }
+  }, []);
 
   // Create schema with translated messages - memoized to prevent recreation
   const contactSchema = useMemo(() => createContactSchema(t), [t]);
@@ -308,16 +329,24 @@ export default function Home() {
       >
         <div className="absolute inset-0 z-0">
           <video 
+            ref={videoRef}
             autoPlay 
             muted 
             loop 
             playsInline
             preload="auto"
-            crossOrigin="anonymous"
             fetchpriority="high"
             className="absolute top-1/2 left-1/2 min-w-full min-h-full w-auto h-auto -translate-x-1/2 -translate-y-1/2 object-cover"
             poster="/media/img1.jpeg"
             aria-label="ABT Mekatronik üretim tesisi video arka planı"
+            onLoadedData={(e) => {
+              // Force play on load for Edge compatibility
+              const video = e.currentTarget;
+              video.muted = true;
+              video.play().catch((error) => {
+                console.warn('Video autoplay engellendi:', error);
+              });
+            }}
             onError={(e) => {
               // Fallback to poster image if video fails
               const video = e.currentTarget;
@@ -325,7 +354,6 @@ export default function Home() {
               console.warn('Video yükleme hatası, poster görseli gösteriliyor');
             }}
           >
-            <source src="/media/video1.mp4" type="video/mp4; codecs=avc1.42E01E,mp4a.40.2" />
             <source src="/media/video1.mp4" type="video/mp4" />
             {/* Fallback image */}
             <img 

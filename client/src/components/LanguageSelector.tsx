@@ -47,17 +47,17 @@ export const LanguageSelector = memo(function LanguageSelector({ isScrolled = fa
       {isOpen && (
         <>
           <div className="fixed inset-0 z-40" onClick={() => setIsOpen(false)} />
-          <div className="absolute right-0 top-full mt-2 z-50 bg-zinc-800 border border-zinc-700 rounded-lg shadow-xl overflow-hidden min-w-[160px] lg:min-w-[160px] max-w-[140px] lg:max-w-none">
+          <div className="absolute right-0 top-full mt-2 z-50 bg-zinc-800 border border-zinc-700 rounded-lg shadow-xl overflow-hidden w-[140px] sm:w-[160px]">
             {languages.map((lang) => (
               <button
                 key={lang.code}
                 onClick={() => handleSelect(lang.code)}
-                className={`w-full flex items-center gap-3 px-4 py-3 text-left hover:bg-zinc-700 transition-colors ${
+                className={`w-full flex items-center gap-2 px-3 py-2.5 text-left hover:bg-zinc-700 transition-colors ${
                   language === lang.code ? 'bg-red-600/20 text-red-400' : 'text-white'
                 }`}
               >
-                <img src={getFlagSrc(lang.code)} alt={lang.name} className="w-6 h-4 object-cover rounded-sm shrink-0" />
-                <span className="text-sm font-medium truncate">{lang.name}</span>
+                <img src={getFlagSrc(lang.code)} alt={lang.name} className="w-5 h-4 object-cover rounded-sm shrink-0" />
+                <span className="text-xs sm:text-sm font-medium truncate">{lang.name}</span>
               </button>
             ))}
           </div>

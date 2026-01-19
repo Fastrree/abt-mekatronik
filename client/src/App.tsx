@@ -6,6 +6,8 @@ import { SpeedInsights } from "@vercel/speed-insights/react";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { I18nProvider, useI18n } from "@/lib/i18n";
+import { ErrorBoundary } from "@/components/ErrorBoundary";
+import { initGA, trackPageView } from "@/lib/analytics";
 import { CookieBanner } from "@/components/CookieBanner";
 import { WhatsAppButton } from "@/components/WhatsAppButton";
 import { ScrollProgress } from "@/components/ScrollProgress";
@@ -33,6 +35,16 @@ function AppContent() {
     document.documentElement.dir = isRTL ? 'rtl' : 'ltr';
   }, [isRTL]);
 
+  // Initialize Google Analytics
+  useEffect(() => {
+    initGA();
+  }, []);
+
+  // Track page views on route change
+  useEffect(() => {
+    trackPageView(window.location.pathname);
+  }, [window.location.pathname]);
+
   return (
     <TooltipProvider>
       <ScrollProgress />
@@ -49,13 +61,15 @@ function AppContent() {
 
 function App() {
   return (
-    <QueryClientProvider client={queryClient}>
-      <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
-        <I18nProvider>
-          <AppContent />
-        </I18nProvider>
-      </ThemeProvider>
-    </QueryClientProvider>
+    <ErrorBoundary>
+      <QueryClientProvider client={queryClient}>
+        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
+          <I18nProvider>
+            <AppContent />
+          </I18nProvider>
+        </ThemeProvider>
+      </QueryClientProvider>
+    </ErrorBoundary>
   );
 }
 

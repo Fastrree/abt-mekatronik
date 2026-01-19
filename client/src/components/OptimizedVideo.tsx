@@ -34,7 +34,7 @@ export const OptimizedVideo = memo(function OptimizedVideo({
 }: OptimizedVideoProps) {
   const [isInView, setIsInView] = useState(false);
   const [hasError, setHasError] = useState(false);
-  const videoRef = useRef<HTMLVideoElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -52,15 +52,15 @@ export const OptimizedVideo = memo(function OptimizedVideo({
       }
     );
 
-    if (videoRef.current) {
-      observer.observe(videoRef.current);
+    if (containerRef.current) {
+      observer.observe(containerRef.current);
     }
 
     return () => observer.disconnect();
   }, []);
 
   return (
-    <div className={`relative ${className}`} ref={videoRef}>
+    <div className={`relative ${className}`} ref={containerRef}>
       {isInView && !hasError ? (
         <video
           className="w-full h-full object-contain"

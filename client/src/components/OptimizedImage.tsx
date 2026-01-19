@@ -21,6 +21,7 @@ interface OptimizedImageProps {
   blurDataURL?: string;
   aspectRatio?: string; // e.g., "16/9", "4/3", "1/1"
   useWebP?: boolean; // Enable WebP format (default: true)
+  style?: React.CSSProperties; // Allow custom inline styles
 }
 
 export const OptimizedImage = memo(function OptimizedImage({
@@ -33,6 +34,7 @@ export const OptimizedImage = memo(function OptimizedImage({
   blurDataURL,
   aspectRatio,
   useWebP = true,
+  style,
 }: OptimizedImageProps) {
   const [isLoaded, setIsLoaded] = useState(false);
   const [isInView, setIsInView] = useState(false);
@@ -42,6 +44,9 @@ export const OptimizedImage = memo(function OptimizedImage({
   // Calculate aspect ratio style for CLS prevention
   const aspectRatioStyle = aspectRatio ? { aspectRatio } : 
     (width && height) ? { aspectRatio: `${width}/${height}` } : undefined;
+  
+  // Merge custom style with aspect ratio style
+  const combinedStyle = { ...aspectRatioStyle, ...style };
 
   // Generate WebP source path
   const getWebPSrc = (originalSrc: string) => {
@@ -105,7 +110,7 @@ export const OptimizedImage = memo(function OptimizedImage({
             alt={alt}
             width={width}
             height={height}
-            style={aspectRatioStyle}
+            style={combinedStyle}
             className={`${className} transition-opacity duration-300 ${
               isLoaded ? 'opacity-100' : 'opacity-0'
             }`}

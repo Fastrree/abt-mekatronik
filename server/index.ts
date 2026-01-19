@@ -2,6 +2,13 @@ import express, { type Request, Response, NextFunction } from "express";
 import { registerRoutes } from "./routes";
 import { serveStatic } from "./static";
 import { createServer } from "http";
+import {
+  rateLimiter,
+  sanitizeInputs,
+  suspiciousActivityDetector,
+  requestSizeLimiter,
+  comprehensiveBotProtection
+} from "./middleware/security";
 
 const app = express();
 const httpServer = createServer(app);
@@ -46,6 +53,35 @@ app.use((req, res, next) => {
   next();
 });
 
+// 🔒 SECURITY MIDDLEWARE LAYER
+// Request size limiter - DoS koruması
+app.use(requestSizeLimiter(2 * 1024 * 1024)); // 2MB max
+
+// 🤖 BOT PROTECTION
+// Comprehensive bot protection (user agent, honeypot, fingerprint)
+app.use(comprehensiveBotProtection({
+  enableUserAgentCheck: true,
+  enableHoneypot: true,
+  enableFingerprint: true
+}));
+
+// Suspicious activity detector
+app.use(suspiciousActivityDetector);
+
+// Rate limiting - Brute force koruması
+app.use('/api', rateLimiter({
+  windowMs: 15 * 60 * 1000, // 15 dakika
+  maxRequests: 100, // 15 dakikada max 100 istek
+  message: 'Too many requests from this IP, please try again later.'
+}));
+
+// Contact form için daha sıkı rate limit
+app.use('/api/contact', rateLimiter({
+  windowMs: 60 * 60 * 1000, // 1 saat
+  maxRequests: 5, // Saatte max 5 form submission
+  message: 'Too many contact form submissions. Please try again in an hour.'
+}));
+
 app.use(
   express.json({
     verify: (req, _res, buf) => {
@@ -56,6 +92,9 @@ app.use(
 );
 
 app.use(express.urlencoded({ extended: false, limit: '1mb' }));
+
+// Input sanitization - XSS koruması
+app.use(sanitizeInputs);
 
 export function log(message: string, source = "express") {
   const formattedTime = new Date().toLocaleTimeString("en-US", {

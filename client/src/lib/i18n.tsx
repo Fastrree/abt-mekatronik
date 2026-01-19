@@ -166,6 +166,7 @@ export function I18nProvider({ children }: I18nProviderProps) {
 const tr = {
   nav: {
     home: 'Ana Sayfa',
+    about: 'Hakkımızda',
     products: 'Ürünler',
     engineering: 'Mühendislik',
     projects: 'Projeler',

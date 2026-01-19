@@ -4,10 +4,6 @@ import { useI18n } from "@/lib/i18n";
 
 type ProductKey = 'konveyor' | 'tekstil' | 'celik' | 'ozelMakine';
 
-interface FooterProps {
-  onOpenProduct?: (productKey: ProductKey) => void;
-}
-
 const certifications = [
   { icon: Shield, key: 'iso9001' },
   { icon: Award, key: 'tse' },
@@ -15,7 +11,7 @@ const certifications = [
   { icon: BadgeCheck, key: 'quality' },
 ];
 
-export const Footer = memo(function Footer({ onOpenProduct }: FooterProps) {
+export const Footer = memo(function Footer() {
   const { t } = useI18n();
   
   const productLinks: { key: ProductKey; icon: typeof Truck }[] = [
@@ -25,9 +21,24 @@ export const Footer = memo(function Footer({ onOpenProduct }: FooterProps) {
     { key: "ozelMakine", icon: Wrench },
   ];
 
-  const handleProductClick = (key: ProductKey) => {
-    if (onOpenProduct) {
-      onOpenProduct(key);
+  // Smart navigation: if already on home page, just scroll to top
+  const handleHomeClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    const currentPath = window.location.pathname;
+    if (currentPath === '/') {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
+
+  // Smart navigation for section links
+  const handleSectionClick = (e: React.MouseEvent<HTMLAnchorElement>, sectionId: string) => {
+    const currentPath = window.location.pathname;
+    if (currentPath === '/') {
+      e.preventDefault();
+      const element = document.getElementById(sectionId);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
     }
   };
 
@@ -82,14 +93,15 @@ export const Footer = memo(function Footer({ onOpenProduct }: FooterProps) {
           <div>
             <h3 className="text-zinc-900 dark:text-white font-bold uppercase tracking-wider mb-6">{t('footer.quickAccess')}</h3>
             <ul className="space-y-3 text-sm">
-              <li><a href="#hero" className="hover:text-primary transition-colors">{t('nav.home')}</a></li>
-              <li><a href="#products" className="hover:text-primary transition-colors">{t('nav.products')}</a></li>
-              <li><a href="#engineering" className="hover:text-primary transition-colors">{t('nav.engineering')}</a></li>
-              <li><a href="#projects" className="hover:text-primary transition-colors">{t('nav.projects')}</a></li>
-              <li><a href="#testimonials" className="hover:text-primary transition-colors">{t('nav.testimonials')}</a></li>
-              <li><a href="#faq" className="hover:text-primary transition-colors">{t('nav.faq')}</a></li>
-              <li><a href="#partners" className="hover:text-primary transition-colors">{t('nav.partners')}</a></li>
-              <li><a href="#contact" className="hover:text-primary transition-colors">{t('nav.contact')}</a></li>
+              <li><a href="/" onClick={handleHomeClick} className="hover:text-primary transition-colors">{t('nav.home')}</a></li>
+              <li><a href="/about" className="hover:text-primary transition-colors">{t('nav.about')}</a></li>
+              <li><a href="/#products" onClick={(e) => handleSectionClick(e, 'products')} className="hover:text-primary transition-colors">{t('nav.products')}</a></li>
+              <li><a href="/#engineering" onClick={(e) => handleSectionClick(e, 'engineering')} className="hover:text-primary transition-colors">{t('nav.engineering')}</a></li>
+              <li><a href="/#projects" onClick={(e) => handleSectionClick(e, 'projects')} className="hover:text-primary transition-colors">{t('nav.projects')}</a></li>
+              <li><a href="/#testimonials" onClick={(e) => handleSectionClick(e, 'testimonials')} className="hover:text-primary transition-colors">{t('nav.testimonials')}</a></li>
+              <li><a href="/#faq" onClick={(e) => handleSectionClick(e, 'faq')} className="hover:text-primary transition-colors">{t('nav.faq')}</a></li>
+              <li><a href="/#partners" onClick={(e) => handleSectionClick(e, 'partners')} className="hover:text-primary transition-colors">{t('nav.partners')}</a></li>
+              <li><a href="/#contact" onClick={(e) => handleSectionClick(e, 'contact')} className="hover:text-primary transition-colors">{t('nav.contact')}</a></li>
             </ul>
           </div>
 
@@ -100,13 +112,13 @@ export const Footer = memo(function Footer({ onOpenProduct }: FooterProps) {
                 const IconComponent = product.icon;
                 return (
                   <li key={product.key}>
-                    <button
-                      onClick={() => handleProductClick(product.key)}
+                    <a
+                      href={`/products/${product.key}`}
                       className="flex items-center gap-2 hover:text-primary transition-colors text-left"
                     >
                       <IconComponent size={14} className="text-red-600 dark:text-red-500" />
                       {t(`productItems.${product.key}.title`)}
-                    </button>
+                    </a>
                   </li>
                 );
               })}

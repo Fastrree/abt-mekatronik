@@ -4,7 +4,7 @@ import { SkipLink } from "@/components/SkipLink";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Settings, Cog, PenTool, ChevronRight, X, CheckCircle, Truck, Factory, Wrench, Layers } from "lucide-react";
+import { Settings, Cog, PenTool, ChevronRight, Truck, Factory, Wrench, Layers } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -44,53 +44,18 @@ const createContactSchema = (t: (key: string) => string) => z.object({
     .transform(sanitizeInput),
 });
 
-// Product media assets (text content comes from i18n)
-const productDetails = {
-  konveyor: {
-    icon: Truck,
-    heroImage: "WhatsApp Image 2026-01-16 at 14.32.03.jpeg",
-    gallery: [
-      "WhatsApp Image 2026-01-16 at 14.32.03 (1).jpeg",
-      "WhatsApp Image 2026-01-16 at 14.32.03 (2).jpeg",
-      "WhatsApp Image 2026-01-16 at 14.32.04.jpeg",
-    ],
-  },
-  tekstil: {
-    icon: Factory,
-    heroImage: "WhatsApp Image 2026-01-16 at 14.32.04 (3).jpeg",
-    gallery: [
-      "WhatsApp Image 2026-01-16 at 14.32.04 (4).jpeg",
-      "WhatsApp Image 2026-01-16 at 14.32.04 (5).jpeg",
-      "WhatsApp Image 2026-01-16 at 14.32.05.jpeg",
-    ],
-  },
-  celik: {
-    icon: Layers,
-    heroImage: "WhatsApp Image 2026-01-16 at 14.32.05 (3).jpeg",
-    gallery: [
-      "WhatsApp Image 2026-01-16 at 14.32.05 (4).jpeg",
-      "WhatsApp Image 2026-01-16 at 14.32.06.jpeg",
-      "WhatsApp Image 2026-01-16 at 14.32.06 (1).jpeg",
-    ],
-  },
-  ozelMakine: {
-    icon: Wrench,
-    heroImage: "WhatsApp Image 2026-01-16 at 14.32.06 (5).jpeg",
-    gallery: [
-      "WhatsApp Image 2026-01-16 at 14.32.07.jpeg",
-      "WhatsApp Image 2026-01-16 at 14.32.07 (1).jpeg",
-      "WhatsApp Image 2026-01-16 at 14.32.07 (2).jpeg",
-    ],
-  }
+// Product icons for cards
+const productIcons = {
+  konveyor: Truck,
+  tekstil: Factory,
+  celik: Layers,
+  ozelMakine: Wrench,
 };
-
-type ProductKey = keyof typeof productDetails;
 
 export default function Home() {
   const { toast } = useToast();
   const { t, tArray } = useI18n();
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [selectedProduct, setSelectedProduct] = useState<ProductKey | null>(null);
   
   // Detect Edge browser
   const isEdge = /Edg/.test(navigator.userAgent);
@@ -123,188 +88,10 @@ export default function Home() {
     }, 500);
   }, [toast, t, form]);
 
-  // Memoized modal handlers
-  const openProductModal = useCallback((productKey: ProductKey) => {
-    const cardElement = document.getElementById(`product-card-${productKey}`);
-    
-    if (cardElement) {
-      const rect = cardElement.getBoundingClientRect();
-      const isVisible = rect.top >= 0 && rect.bottom <= window.innerHeight;
-      
-      if (isVisible) {
-        // Kart zaten görünüyorsa direkt modal aç
-        setSelectedProduct(productKey);
-        document.body.style.overflow = 'hidden';
-      } else {
-        // Kart görünmüyorsa scroll yap, sonra modal aç
-        cardElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        setTimeout(() => {
-          setSelectedProduct(productKey);
-          document.body.style.overflow = 'hidden';
-        }, 350);
-      }
-    } else {
-      setSelectedProduct(productKey);
-      document.body.style.overflow = 'hidden';
-    }
-  }, []);
-
-  const closeProductModal = useCallback(() => {
-    setSelectedProduct(null);
-    document.body.style.overflow = 'auto';
-  }, []);
-
   return (
     <div className="min-h-screen bg-white dark:bg-zinc-900 text-zinc-900 dark:text-zinc-200 selection:bg-red-900 selection:text-white overflow-x-hidden transition-colors duration-300">
       <SkipLink />
-      <Navbar onOpenProduct={openProductModal} />
-
-      {/* PRODUCT DETAIL MODAL */}
-      {selectedProduct && (
-        <div
-          className="fixed inset-0 z-[100] flex items-center justify-center p-4 xs:p-2 bg-black/70 dark:bg-black/85 animate-in fade-in duration-200"
-          onClick={closeProductModal}
-          role="dialog"
-          aria-modal="true"
-          aria-labelledby="product-modal-title"
-        >
-          <div
-            className="relative w-full max-w-5xl xs:max-w-[95vw] max-h-[90vh] overflow-y-auto bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-600 rounded-lg shadow-2xl will-change-transform animate-in fade-in slide-up duration-300"
-            onClick={(e) => e.stopPropagation()}
-          >
-              {/* Close Button */}
-              <button
-                onClick={closeProductModal}
-                className="absolute top-4 xs:top-2 right-4 xs:right-2 z-10 p-2 xs:p-1.5 bg-zinc-100 dark:bg-zinc-700 hover:bg-red-600 rounded-full transition-colors"
-                aria-label={t('products.close')}
-              >
-                <X size={24} className="xs:w-5 xs:h-5 text-zinc-900 dark:text-white" />
-              </button>
-
-              {(() => {
-                const product = productDetails[selectedProduct];
-                const IconComponent = product.icon;
-                return (
-                  <>
-                    {/* Hero Image */}
-                    <div className="relative h-64 xs:h-48 md:h-80 overflow-hidden bg-zinc-100 dark:bg-zinc-700">
-                      <OptimizedImage 
-                        src={`/media/${encodeURIComponent(product.heroImage)}`}
-                        alt={t(`productItems.${selectedProduct}.title`)}
-                        className="w-full h-full object-cover"
-                        loading="eager"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-white via-white/50 to-transparent dark:from-zinc-800 dark:via-zinc-800/50 dark:to-transparent" />
-                      <div className="absolute bottom-6 xs:bottom-3 left-6 xs:left-3 right-6 xs:right-3">
-                        <div className="flex items-center gap-3 xs:gap-2 mb-2 xs:mb-1">
-                          <div className="p-2 xs:p-1.5 bg-red-600 rounded-lg" aria-hidden="true">
-                            <IconComponent className="w-6 h-6 xs:w-5 xs:h-5 text-white" />
-                          </div>
-                          <span className="text-red-600 dark:text-red-400 font-semibold uppercase tracking-wider text-sm xs:text-xs">
-                            {t(`productItems.${selectedProduct}.modalSubtitle`)}
-                          </span>
-                        </div>
-                        <h2 id="product-modal-title" className="text-3xl xs:text-xl md:text-4xl font-black text-zinc-900 dark:text-white">
-                          {t(`productItems.${selectedProduct}.title`)}
-                        </h2>
-                      </div>
-                    </div>
-
-                    {/* Content */}
-                    <div className="p-6 xs:p-3 md:p-8">
-                      {/* Description */}
-                      <div className="prose prose-invert dark:prose-invert prose-slate max-w-none mb-8 xs:mb-4">
-                        {t(`productItems.${selectedProduct}.description`).split('\n\n').map((paragraph, idx) => {
-                          if (paragraph.startsWith('**')) {
-                            const title = paragraph.match(/\*\*(.*?)\*\*/)?.[1];
-                            const content = paragraph.replace(/\*\*.*?\*\*\n?/, '');
-                            return (
-                              <div key={idx} className="mb-4 xs:mb-2">
-                                <h3 className="text-lg xs:text-base font-bold text-red-600 dark:text-red-500 mb-2 xs:mb-1">{title}</h3>
-                                <p className="text-zinc-700 dark:text-zinc-300 leading-relaxed xs:text-sm xs:leading-snug whitespace-pre-line">{content}</p>
-                              </div>
-                            );
-                          }
-                          return <p key={idx} className="text-zinc-700 dark:text-zinc-300 leading-relaxed xs:text-sm xs:leading-snug mb-4 xs:mb-2">{paragraph}</p>;
-                        })}
-                      </div>
-
-                      {/* Gallery */}
-                      <div className="mb-8 xs:mb-4">
-                        <h3 className="text-xl xs:text-lg font-bold text-zinc-900 dark:text-white mb-4 xs:mb-2">{t('products.gallery')}</h3>
-                        <div className="grid grid-cols-3 gap-3 xs:gap-2">
-                          {product.gallery.map((img, idx) => (
-                            <div key={idx} className="aspect-square overflow-hidden rounded-lg border border-zinc-200 dark:border-zinc-600">
-                              <OptimizedImage
-                                src={`/media/${encodeURIComponent(img)}`}
-                                alt={`${t(`productItems.${selectedProduct}.title`)} ${idx + 1}`}
-                                className="w-full h-full object-cover transition-transform duration-200 hover:scale-105"
-                                loading="lazy"
-                              />
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-
-                      {/* Features & Why Us */}
-                      <div className="grid md:grid-cols-2 gap-6 xs:gap-3 mb-8 xs:mb-4">
-                        <div className="bg-zinc-50 dark:bg-zinc-700/50 p-6 xs:p-3 rounded-lg border border-zinc-200 dark:border-zinc-600">
-                          <h3 className="text-lg xs:text-base font-bold text-zinc-900 dark:text-white mb-4 xs:mb-2 flex items-center gap-2">
-                            <Settings className="w-5 h-5 xs:w-4 xs:h-4 text-red-600 dark:text-red-500" />
-                            {t('products.features')}
-                          </h3>
-                          <ul className="space-y-2 xs:space-y-1">
-                            {tArray(`productItems.${selectedProduct}.features`).map((feature, idx) => (
-                              <li key={idx} className="flex items-start gap-2 xs:gap-1 text-zinc-700 dark:text-zinc-300 xs:text-sm">
-                                <CheckCircle className="w-4 h-4 xs:w-3 xs:h-3 text-green-500 mt-1 shrink-0" />
-                                <span>{feature}</span>
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
-
-                        <div className="bg-red-600/10 p-6 xs:p-3 rounded-lg border border-red-600/30">
-                          <h3 className="text-lg xs:text-base font-bold text-zinc-900 dark:text-white mb-4 xs:mb-2 flex items-center gap-2">
-                            <CheckCircle className="w-5 h-5 xs:w-4 xs:h-4 text-red-600 dark:text-red-500" />
-                            {t('products.whyUs')}
-                          </h3>
-                          <ul className="space-y-2 xs:space-y-1">
-                            {tArray(`productItems.${selectedProduct}.whyUs`).map((reason, idx) => (
-                              <li key={idx} className="flex items-start gap-2 xs:gap-1 text-zinc-700 dark:text-zinc-300 xs:text-sm">
-                                <ChevronRight className="w-4 h-4 xs:w-3 xs:h-3 text-red-600 dark:text-red-500 mt-1 shrink-0" />
-                                <span>{reason}</span>
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
-                      </div>
-
-                      {/* CTA */}
-                      <div className="flex flex-col sm:flex-row gap-4 xs:gap-2">
-                        <Button
-                          onClick={() => {
-                            closeProductModal();
-                            document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
-                          }}
-                          className="flex-1 bg-red-600 hover:bg-red-700 text-white font-bold py-6 xs:py-4 xs:text-sm"
-                        >
-                          {t('products.getQuote')}
-                        </Button>
-                        <Button
-                          variant="outline"
-                          className="flex-1 border-zinc-400 dark:border-zinc-500 text-zinc-900 dark:text-zinc-200 hover:bg-zinc-200 dark:hover:bg-zinc-700 py-6 xs:py-4 xs:text-sm"
-                          onClick={() => window.open('https://wa.me/905373197281', '_blank')}
-                        >
-                          {t('products.whatsappContact')}
-                        </Button>
-                      </div>
-                    </div>
-                  </>
-                );
-              })()}
-            </div>
-          </div>
-        )}
+      <Navbar />
 
       {/* HERO SECTION */}
       <section 
@@ -412,18 +199,10 @@ export default function Home() {
 
           <div className="grid grid-cols-1 xs:grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 xs:gap-3" role="list" aria-label="Ürün kategorileri">
             {/* Konveyör Sistemleri */}
-            <article 
-              id="product-card-konveyor"
-              onClick={() => openProductModal('konveyor')}
+            <a 
+              href="/products/konveyor"
               className="group relative h-[450px] xs:h-[350px] overflow-hidden bg-white dark:bg-zinc-800 border border-zinc-300 dark:border-red-600/30 border-t-0 hover:border-t-4 hover:border-t-red-600 dark:hover:border-t-red-500 transition-all cursor-pointer shadow-lg dark:shadow-none animate-in slide-up duration-600"
               role="listitem"
-              tabIndex={0}
-              onKeyDown={(e) => {
-                if (e.key === 'Enter' || e.key === ' ') {
-                  e.preventDefault();
-                  openProductModal('konveyor');
-                }
-              }}
               aria-label={`${t('productItems.konveyor.title')} - Detayları görüntülemek için tıklayın`}
             >
               <div className="absolute inset-0 bg-white/20 dark:bg-zinc-800/20 group-hover:bg-transparent transition-colors duration-500 z-10" />
@@ -447,21 +226,13 @@ export default function Home() {
                   {t('products.viewDetails')} <ChevronRight className="ml-1 w-4 h-4 xs:w-3 xs:h-3 text-red-600 dark:text-red-500" />
                 </span>
               </div>
-            </article>
+            </a>
 
             {/* Tekstil Makinaları */}
-            <article 
-              id="product-card-tekstil"
-              onClick={() => openProductModal('tekstil')}
+            <a 
+              href="/products/tekstil"
               className="group relative h-[450px] xs:h-[350px] overflow-hidden bg-white dark:bg-zinc-800 border border-zinc-300 dark:border-red-600/30 border-t-0 hover:border-t-4 hover:border-t-red-600 dark:hover:border-t-red-500 transition-all cursor-pointer shadow-lg dark:shadow-none animate-in slide-up duration-600 delay-100"
               role="listitem"
-              tabIndex={0}
-              onKeyDown={(e) => {
-                if (e.key === 'Enter' || e.key === ' ') {
-                  e.preventDefault();
-                  openProductModal('tekstil');
-                }
-              }}
               aria-label={`${t('productItems.tekstil.title')} - Detayları görüntülemek için tıklayın`}
             >
               <div className="absolute inset-0 bg-white/20 dark:bg-zinc-800/20 group-hover:bg-transparent transition-colors duration-500 z-10" aria-hidden="true" />
@@ -485,21 +256,13 @@ export default function Home() {
                   {t('products.viewDetails')} <ChevronRight className="ml-1 w-4 h-4 xs:w-3 xs:h-3 text-red-600 dark:text-red-500" aria-hidden="true" />
                 </span>
               </div>
-            </article>
+            </a>
 
             {/* Çelik Konstrüksiyon */}
-            <article 
-              id="product-card-celik"
-              onClick={() => openProductModal('celik')}
+            <a 
+              href="/products/celik"
               className="group relative h-[450px] xs:h-[350px] overflow-hidden bg-white dark:bg-zinc-800 border border-zinc-300 dark:border-red-600/30 border-t-0 hover:border-t-4 hover:border-t-red-600 dark:hover:border-t-red-500 transition-all cursor-pointer shadow-lg dark:shadow-none animate-in slide-up duration-600 delay-200"
               role="listitem"
-              tabIndex={0}
-              onKeyDown={(e) => {
-                if (e.key === 'Enter' || e.key === ' ') {
-                  e.preventDefault();
-                  openProductModal('celik');
-                }
-              }}
               aria-label={`${t('productItems.celik.title')} - Detayları görüntülemek için tıklayın`}
             >
               <div className="absolute inset-0 bg-white/20 dark:bg-zinc-800/20 group-hover:bg-transparent transition-colors duration-500 z-10" aria-hidden="true" />
@@ -523,21 +286,13 @@ export default function Home() {
                   {t('products.viewDetails')} <ChevronRight className="ml-1 w-4 h-4 xs:w-3 xs:h-3 text-red-600 dark:text-red-500" aria-hidden="true" />
                 </span>
               </div>
-            </article>
+            </a>
 
             {/* Özel Makine Tasarımı */}
-            <article 
-              id="product-card-ozelMakine"
-              onClick={() => openProductModal('ozelMakine')}
+            <a 
+              href="/products/ozelMakine"
               className="group relative h-[450px] xs:h-[350px] overflow-hidden bg-white dark:bg-zinc-800 border border-zinc-300 dark:border-red-600/30 border-t-0 hover:border-t-4 hover:border-t-red-600 dark:hover:border-t-red-500 transition-all cursor-pointer shadow-lg dark:shadow-none animate-in slide-up duration-600 delay-300"
               role="listitem"
-              tabIndex={0}
-              onKeyDown={(e) => {
-                if (e.key === 'Enter' || e.key === ' ') {
-                  e.preventDefault();
-                  openProductModal('ozelMakine');
-                }
-              }}
               aria-label={`${t('productItems.ozelMakine.title')} - Detayları görüntülemek için tıklayın`}
             >
               <div className="absolute inset-0 bg-white/20 dark:bg-zinc-800/20 group-hover:bg-transparent transition-colors duration-500 z-10" aria-hidden="true" />
@@ -561,7 +316,7 @@ export default function Home() {
                   {t('products.viewDetails')} <ChevronRight className="ml-1 w-4 h-4 xs:w-3 xs:h-3 text-red-600 dark:text-red-500" aria-hidden="true" />
                 </span>
               </div>
-            </article>
+            </a>
           </div>
         </div>
       </section>
@@ -829,7 +584,7 @@ export default function Home() {
         </Suspense>
       </section>
 
-      <Footer onOpenProduct={openProductModal} />
+      <Footer />
     </div>
   );
 }

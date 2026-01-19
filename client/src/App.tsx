@@ -13,6 +13,8 @@ import { ScrollProgress } from "@/components/ScrollProgress";
 import { BackToTop } from "@/components/BackToTop";
 import { ExitIntentPopup } from "@/components/ExitIntentPopup";
 import Home from "@/pages/home";
+import About from "@/pages/about";
+import ProductDetail from "@/pages/product-detail";
 import NotFound from "@/pages/not-found";
 import { useEffect } from "react";
 
@@ -20,6 +22,8 @@ function Router() {
   return (
     <Switch>
       <Route path="/" component={Home} />
+      <Route path="/about" component={About} />
+      <Route path="/products/:productKey" component={ProductDetail} />
       <Route component={NotFound} />
     </Switch>
   );

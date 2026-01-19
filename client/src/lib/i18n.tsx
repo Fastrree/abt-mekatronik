@@ -1,6 +1,6 @@
 import { createContext, useContext, useState, ReactNode, useEffect } from 'react';
 
-export type Language = 'tr' | 'en' | 'de' | 'fr' | 'es' | 'ar';
+export type Language = 'tr' | 'en' | 'de' | 'fr' | 'es' | 'ar' | 'ru';
 
 // Flag images as small inline SVGs for Windows compatibility
 const flagSvgs: Record<Language, string> = {
@@ -10,15 +10,17 @@ const flagSvgs: Record<Language, string> = {
   fr: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3 2"><rect fill="#002395" width="1" height="2"/><rect fill="#fff" x="1" width="1" height="2"/><rect fill="#ED2939" x="2" width="1" height="2"/></svg>`,
   es: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 750 500"><rect fill="#c60b1e" width="750" height="500"/><rect fill="#ffc400" y="125" width="750" height="250"/></svg>`,
   ar: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 600"><rect fill="#007A3D" width="900" height="600"/><rect fill="#FFF" width="900" height="400"/><rect fill="#000" width="900" height="200"/><polygon fill="#CE1126" points="0,0 0,600 300,300"/></svg>`,
+  ru: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 9 6"><rect fill="#fff" width="9" height="3"/><rect fill="#0039A6" y="2" width="9" height="2"/><rect fill="#D52B1E" y="4" width="9" height="2"/></svg>`,
 };
 
 export const languages: { code: Language; name: string; flag: string }[] = [
   { code: 'tr', name: 'Türkçe', flag: '🇹🇷' },
   { code: 'en', name: 'English', flag: '🇬🇧' },
+  { code: 'ru', name: 'Русский', flag: '��' },
+  { code: 'ar', name: 'العربية', flag: '��' },
   { code: 'de', name: 'Deutsch', flag: '🇩🇪' },
-  { code: 'fr', name: 'Français', flag: '🇫🇷' },
-  { code: 'es', name: 'Español', flag: '🇪🇸' },
-  { code: 'ar', name: 'العربية', flag: '🇦🇪' },
+  { code: 'fr', name: 'Français', flag: '��' },
+  { code: 'es', name: 'Español', flag: '��' },
 ];
 
 // Get flag as data URL for img src
@@ -69,6 +71,13 @@ const seoMeta: Record<Language, { title: string; description: string; keywords: 
     keywords: 'أنظمة النقل، آلات النسيج، البناء الفولاذي، تصميم الآلات المخصصة، الأتمتة الصناعية، تركيا',
     ogTitle: 'ABT MECHATRONICS | حلول الإنتاج الصناعي',
     ogDescription: 'أنظمة النقل، آلات النسيج، البناء الفولاذي. خدمة في جميع أنحاء تركيا مع خبرة أكثر من 15 عامًا.',
+  },
+  ru: {
+    title: 'ABT MECHATRONICS | Конвейерные Системы, Текстильное Оборудование, Стальные Конструкции',
+    description: 'ABT Mechatronics - ведущий партнер промышленных решений в Турции. Конвейерные системы, текстильное оборудование, стальные конструкции и индивидуальное проектирование машин. Опыт 15+ лет.',
+    keywords: 'конвейерные системы, текстильное оборудование, стальные конструкции, индивидуальное проектирование машин, промышленная автоматизация, Турция',
+    ogTitle: 'ABT MECHATRONICS | Промышленные Производственные Решения',
+    ogDescription: 'Конвейерные системы, текстильное оборудование, стальные конструкции. Обслуживание по всей Турции с опытом 15+ лет.',
   },
 };
 
@@ -124,7 +133,7 @@ export function I18nProvider({ children }: I18nProviderProps) {
     if (twDesc) twDesc.setAttribute('content', meta.ogDescription);
     
     // Update html lang attribute
-    document.documentElement.lang = language === 'tr' ? 'tr' : language === 'de' ? 'de' : language === 'fr' ? 'fr' : language === 'es' ? 'es' : 'en';
+    document.documentElement.lang = language === 'tr' ? 'tr' : language === 'de' ? 'de' : language === 'fr' ? 'fr' : language === 'es' ? 'es' : language === 'ru' ? 'ru' : language === 'ar' ? 'ar' : 'en';
     
   }, [language]);
 
@@ -174,7 +183,7 @@ const tr = {
     title2: 'MÜHENDİSLİK',
     title3: 'KUSURSUZ',
     title4: 'GELECEK',
-    description: 'Burhan Topal liderliğinde; konveyör sistemlerinden tekstil makinelerine, endüstriyel geleceği inşa ediyoruz.',
+    description: 'ABT MEKATRONİK önderliğinde; konveyör sistemlerinden tekstil makinelerine, endüstriyel geleceği inşa ediyoruz.',
     solutions: 'ÇÖZÜMLERİMİZ',
     projects: 'PROJELERİMİZ',
     scroll: 'Kaydır',
@@ -371,7 +380,7 @@ Piyasada bulunmayan veya mevcut makinelerin karşılayamadığı özel üretim i
     successDesc: 'En kısa sürede sizinle iletişime geçeceğiz.',
   },
   footer: {
-    description: 'Burhan Topal liderliğinde; endüstriyel üretim teknolojilerinde geleceği inşa ediyoruz. Yüksek hassasiyet, güçlü mühendislik.',
+    description: 'ABT MEKATRONİK önderliğinde; endüstriyel üretim teknolojilerinde geleceği inşa ediyoruz. Yüksek hassasiyet, güçlü mühendislik.',
     quickAccess: 'Hızlı Erişim',
     productGroups: 'Ürün Grupları',
     contactTitle: 'İletişim',
@@ -478,7 +487,7 @@ const en = {
     title2: 'ENGINEERING',
     title3: 'FLAWLESS',
     title4: 'FUTURE',
-    description: 'Under the leadership of Burhan Topal; from conveyor systems to textile machinery, we build the industrial future.',
+    description: 'Under the leadership of ABT MECHATRONICS; from conveyor systems to textile machinery, we build the industrial future.',
     solutions: 'OUR SOLUTIONS',
     projects: 'OUR PROJECTS',
     scroll: 'Scroll',
@@ -675,7 +684,7 @@ Needs analysis → Concept design → 3D modeling → Prototype → Test → Ser
     successDesc: 'We will contact you as soon as possible.',
   },
   footer: {
-    description: 'Under the leadership of Burhan Topal; we build the future in industrial production technologies. High precision, strong engineering.',
+    description: 'Under the leadership of ABT MECHATRONICS; we build the future in industrial production technologies. High precision, strong engineering.',
     quickAccess: 'Quick Access',
     productGroups: 'Product Groups',
     contactTitle: 'Contact',
@@ -782,7 +791,7 @@ const de = {
     title2: 'TECHNIK',
     title3: 'MAKELLOSE',
     title4: 'ZUKUNFT',
-    description: 'Unter der Führung von Burhan Topal; von Fördersystemen bis zu Textilmaschinen bauen wir die industrielle Zukunft.',
+    description: 'Unter der Führung von ABT MECHATRONICS; von Fördersystemen bis zu Textilmaschinen bauen wir die industrielle Zukunft.',
     solutions: 'UNSERE LÖSUNGEN',
     projects: 'UNSERE PROJEKTE',
     scroll: 'Scrollen',
@@ -930,7 +939,7 @@ Löst spezielle Produktionsanforderungen, die auf dem Markt nicht verfügbar sin
     successDesc: 'Wir werden Sie so schnell wie möglich kontaktieren.',
   },
   footer: {
-    description: 'Unter der Führung von Burhan Topal bauen wir die Zukunft der industriellen Produktionstechnologien.',
+    description: 'Unter der Führung von ABT MECHATRONICS bauen wir die Zukunft der industriellen Produktionstechnologien.',
     quickAccess: 'Schnellzugriff',
     productGroups: 'Produktgruppen',
     contactTitle: 'Kontakt',
@@ -1025,7 +1034,7 @@ const fr = {
     title2: 'PUISSANTE',
     title3: 'AVENIR',
     title4: 'PARFAIT',
-    description: 'Sous la direction de Burhan Topal; des systèmes de convoyage aux machines textiles, nous construisons l\'avenir industriel.',
+    description: 'Sous la direction d\'ABT MECHATRONICS; des systèmes de convoyage aux machines textiles, nous construisons l\'avenir industriel.',
     solutions: 'NOS SOLUTIONS',
     projects: 'NOS PROJETS',
     scroll: 'Défiler',
@@ -1156,7 +1165,7 @@ Résout les besoins de production spéciaux non disponibles sur le marché.
     successDesc: 'Nous vous contacterons dès que possible.',
   },
   footer: {
-    description: 'Sous la direction de Burhan Topal, nous construisons l\'avenir des technologies de production industrielle.',
+    description: 'Sous la direction d\'ABT MECHATRONICS, nous construisons l\'avenir des technologies de production industrielle.',
     quickAccess: 'Accès Rapide',
     productGroups: 'Groupes de Produits',
     contactTitle: 'Contact',
@@ -1251,7 +1260,7 @@ const es = {
     title2: 'PODEROSA',
     title3: 'FUTURO',
     title4: 'PERFECTO',
-    description: 'Bajo el liderazgo de Burhan Topal; desde sistemas de transporte hasta maquinaria textil, construimos el futuro industrial.',
+    description: 'Bajo el liderazgo de ABT MECHATRONICS; desde sistemas de transporte hasta maquinaria textil, construimos el futuro industrial.',
     solutions: 'NUESTRAS SOLUCIONES',
     projects: 'NUESTROS PROYECTOS',
     scroll: 'Desplazar',
@@ -1382,7 +1391,7 @@ Resuelve necesidades de producción especiales no disponibles en el mercado.
     successDesc: 'Nos pondremos en contacto con usted lo antes posible.',
   },
   footer: {
-    description: 'Bajo el liderazgo de Burhan Topal, construimos el futuro de las tecnologías de producción industrial.',
+    description: 'Bajo el liderazgo de ABT MECHATRONICS, construimos el futuro de las tecnologías de producción industrial.',
     quickAccess: 'Acceso Rápido',
     productGroups: 'Grupos de Productos',
     contactTitle: 'Contacto',
@@ -1489,7 +1498,7 @@ const ar = {
     title2: 'قوية',
     title3: 'مستقبل',
     title4: 'مثالي',
-    description: 'تحت قيادة برهان توبال؛ من أنظمة النقل إلى آلات النسيج، نبني المستقبل الصناعي.',
+    description: 'تحت قيادة ABT MECHATRONICS؛ من أنظمة النقل إلى آلات النسيج، نبني المستقبل الصناعي.',
     solutions: 'حلولنا',
     projects: 'مشاريعنا',
     scroll: 'مرر',
@@ -1686,7 +1695,7 @@ const ar = {
     successDesc: 'سنتواصل معك في أقرب وقت ممكن.',
   },
   footer: {
-    description: 'تحت قيادة برهان توبال؛ نبني المستقبل في تقنيات الإنتاج الصناعي. دقة عالية، هندسة قوية.',
+    description: 'تحت قيادة ABT MECHATRONICS؛ نبني المستقبل في تقنيات الإنتاج الصناعي. دقة عالية، هندسة قوية.',
     quickAccess: 'الوصول السريع',
     productGroups: 'مجموعات المنتجات',
     contactTitle: 'اتصل بنا',
@@ -1773,5 +1782,309 @@ const ar = {
 };
 
 
+const ru = {
+  nav: {
+    home: 'Главная',
+    products: 'Продукция',
+    engineering: 'Инжиниринг',
+    projects: 'Проекты',
+    contact: 'Контакты',
+    quickAccess: 'Быстрый доступ',
+    selectLanguage: 'Язык',
+    faq: 'FAQ',
+    testimonials: 'Отзывы',
+    partners: 'Партнёры',
+    viewAll: 'Посмотреть все',
+  },
+  hero: {
+    badge: 'Промышленное Совершенство',
+    title1: 'МОЩНАЯ',
+    title2: 'ИНЖЕНЕРИЯ',
+    title3: 'БЕЗУПРЕЧНОЕ',
+    title4: 'БУДУЩЕЕ',
+    description: 'Под руководством ABT MECHATRONICS; от конвейерных систем до текстильного оборудования, мы строим промышленное будущее.',
+    solutions: 'НАШИ РЕШЕНИЯ',
+    projects: 'НАШИ ПРОЕКТЫ',
+    scroll: 'Прокрутить',
+  },
+  products: {
+    subtitle: 'Наши Группы Продукции',
+    title: 'ПРОИЗВОДСТВЕННЫЕ ОБЛАСТИ',
+    description: 'Долговечные и эффективные промышленные решения, специально разработанные для высокопроизводительных объектов.',
+    viewDetails: 'Подробнее',
+    getQuote: 'ПОЛУЧИТЬ ПРЕДЛОЖЕНИЕ',
+    whatsappContact: 'Связаться через WhatsApp',
+    features: 'Характеристики',
+    whyUs: 'Почему мы?',
+    gallery: 'Галерея',
+    close: 'Закрыть',
+  },
+  productItems: {
+    konveyor: {
+      title: 'Конвейерные Системы',
+      subtitle: 'Транспортные Системы',
+      shortDesc: 'Тяжелые ленточные конвейеры, цепные системы и автоматические линии загрузки.',
+      modalSubtitle: 'Промышленные Транспортные Решения',
+      description: `Конвейерные системы - это механические системы, которые автоматически транспортируют материалы из одной точки в другую. Используются во всех секторах от заводов до логистических центров.
+
+**Для чего это нужно?**
+Устраняет необходимость ручной транспортировки продукции, сырья или упаковок. Экономит рабочую силу, увеличивает скорость производства и повышает безопасность труда.
+
+**Как это работает?**
+Моторизованная система непрерывно перемещает материалы по лентам или роликам. Интеллектуальная маршрутизация может осуществляться с помощью датчиков и блоков управления.
+
+**Области применения:**
+• Производственные линии на заводах
+• Складские и логистические центры
+• Системы багажа в аэропортах
+• Шахты и карьеры
+• Предприятия пищевой промышленности`,
+      features: [
+        'Грузоподъёмность (500кг - 50 тонн)',
+        'Модульная конструкция - лёгкое расширение',
+        'Интеллектуальные системы с ПЛК',
+        'Низкие затраты на обслуживание',
+        'Непрерывная работа 24/7',
+        'Специальные ленты (термостойкие, маслостойкие, износостойкие)'
+      ],
+      whyUs: [
+        '15+ лет опыта работы',
+        'Выезд на объект и бесплатное проектирование',
+        'Монтажная команда по всей Турции',
+        '2 года гарантии + пожизненная техподдержка',
+        'Гарантия запчастей'
+      ]
+    },
+    tekstil: {
+      title: 'Текстильное Оборудование',
+      subtitle: 'Обработка Тканей',
+      shortDesc: 'Док-цилиндры для денима, машины для раскрытия ткани и системы натяжения.',
+      modalSubtitle: 'Технологии Обработки Тканей',
+      description: `Текстильное оборудование - это специальное оборудование, которое обрабатывает сырую ткань до готового к использованию состояния. Мы предлагаем решения для всех типов тканей, включая деним, хлопок, полиэстер.
+
+**Для чего это нужно?**
+Автоматизирует процессы раскрытия, растяжения, намотки, резки и контроля качества ткани. Минимизирует ручной труд, стандартизирует качество производства.
+
+**Как это работает?**
+Док-цилиндры равномерно раскрывают ткань, системы натяжения устраняют складки, датчики обнаруживают дефекты. Весь процесс контролируется ПЛК.
+
+**Области применения:**
+• Фабрики денима
+• Красильни тканей
+• Швейные мастерские
+• Экспортёры текстиля
+• Производители домашнего текстиля`,
+      features: [
+        'Док-цилиндры для денима (специальное покрытие)',
+        'Автоматические машины раскрытия ткани',
+        'Системы натяжения и коррекции',
+        'Датчики контроля качества',
+        'Высокая скорость (120м/мин)',
+        'Точный контроль натяжения'
+      ],
+      whyUs: [
+        'Обслуживание ведущих текстильных компаний Турции',
+        'Команда, специализирующаяся на дениме',
+        'Быстрое реагирование на неисправности (в течение 24 часов)',
+        'Склад оригинальных запчастей',
+        'Обучение и поддержка операторов'
+      ]
+    },
+    celik: {
+      title: 'Стальные Конструкции',
+      subtitle: 'Строительные Системы',
+      shortDesc: 'Заводские здания, складские системы и промышленные стальные каркасы.',
+      modalSubtitle: 'Промышленные Строительные Системы',
+      description: `Стальные конструкции - это несущая каркасная система для заводских зданий, складов и промышленных объектов.
+
+**Для чего это нужно?**
+Перекрывает большие пролёты без разделения колоннами. Обеспечивает идеальную инфраструктуру для крановых путей, платформенных систем и станин оборудования.
+
+**Как это работает?**
+Стальные профили соединяются сваркой и болтами, образуя жёсткий каркас. Проектируется с учётом сейсмических и ветровых нагрузок на основе статических расчётов.
+
+**Области применения:**
+• Заводы и производственные объекты
+• Логистические склады
+• Сельскохозяйственные сооружения
+• Спортивные залы
+• Торговые центры`,
+      features: [
+        'Сейсмостойкая конструкция',
+        'Быстрый монтаж (на 60% быстрее железобетона)',
+        'Большие пролёты (30м+ между колоннами)',
+        'Возможность модульного расширения',
+        'Долгий срок службы (50+ лет)',
+        'Перерабатываемый материал'
+      ],
+      whyUs: [
+        'Под ключ включая статический проект',
+        'Использование материалов с сертификатом TSE',
+        'Собственное производственное предприятие',
+        'Опытные монтажные бригады',
+        'Конкурентные цены'
+      ]
+    },
+    ozelMakine: {
+      title: 'Индивидуальное Проектирование Машин',
+      subtitle: 'НИОКР и Проектирование',
+      shortDesc: 'Инжиниринг с нуля, производство прототипов и решения по автоматизации.',
+      modalSubtitle: 'Инженерные Решения с Нуля',
+      description: `Индивидуальное проектирование машин - это инженерные проекты, разработанные с нуля, когда стандартные решения недостаточны.
+
+**Для чего это нужно?**
+Решает специальные производственные потребности, которые недоступны на рынке или не могут быть удовлетворены существующими машинами.
+
+**Как это работает?**
+Анализ потребностей → Концептуальное проектирование → 3D-моделирование → Прототип → Тестирование → Серийное производство.
+
+**Области применения:**
+• Системы автоматизации
+• Упаковочные машины
+• Испытательное и измерительное оборудование
+• Сборочные линии
+• Робототехнические приложения`,
+      features: [
+        '3D CAD проектирование (SolidWorks)',
+        'FEA анализ (расчёт прочности)',
+        'Производство прототипов',
+        'Программирование ПЛК',
+        'Проектирование HMI интерфейса',
+        'Поддержка сертификации CE'
+      ],
+      whyUs: [
+        'Полная поддержка от идеи до производства',
+        'Защита интеллектуальной собственности с NDA',
+        'Консультации по стимулам НИОКР',
+        'Гарантия доработки',
+        'Удалённый мониторинг и поддержка'
+      ]
+    }
+  },
+  engineering: {
+    subtitle: 'Инженерное Видение',
+    title: 'ИНДИВИДУАЛЬНОЕ ПРОЕКТИРОВАНИЕ МАШИН &',
+    title2: 'МЕХАТРОННАЯ ИНТЕГРАЦИЯ',
+    customDesign: 'Индивидуальные Проектные Решения',
+    customDesignDesc: 'Полная кастомизация в проектировании и производственных процессах в соответствии с потребностями.',
+    precision: 'Высокая Точность',
+    precisionDesc: 'Механические детали и качество сборки, требующие микронной точности.',
+    turnkey: 'Проекты Под Ключ',
+    turnkeyDesc: 'Комплексное управление проектом от проектирования до монтажа и ввода в эксплуатацию.',
+    experience: 'Лет Опыта',
+    completedProjects: 'Завершённых Проектов',
+  },
+  projectsSection: {
+    subtitle: 'Наши Проекты',
+    title: 'КАДРЫ ИЗ НАШЕЙ РАБОТЫ',
+    videoGallery: 'Видеогалерея',
+  },
+  contact: {
+    subtitle: 'Свяжитесь с Нами',
+    title: 'ДАВАЙТЕ СПРОЕКТИРУЕМ',
+    title2: 'ВАШ ПРОЕКТ ВМЕСТЕ',
+    description: 'Мы предлагаем профессиональные решения для ваших промышленных потребностей. Заполните форму, чтобы получить предложение или подробную информацию.',
+    whatsappTitle: 'Линия Поддержки WhatsApp',
+    whatsappButton: 'Быстрая Связь через WhatsApp',
+    formTitle: 'Форма Запроса Предложения',
+    name: 'Полное Имя',
+    namePlaceholder: 'Ваше полное имя',
+    email: 'Эл. Почта',
+    emailPlaceholder: 'primer@kompaniya.com',
+    message: 'Ваше Сообщение',
+    messagePlaceholder: 'Детали проекта или ваш запрос...',
+    submit: 'ОТПРАВИТЬ',
+    submitting: 'ОТПРАВКА...',
+    successTitle: 'Сообщение Получено',
+    successDesc: 'Мы свяжемся с вами в ближайшее время.',
+  },
+  footer: {
+    description: 'Под руководством ABT MECHATRONICS; мы строим будущее в промышленных производственных технологиях. Высокая точность, мощная инженерия.',
+    quickAccess: 'Быстрый Доступ',
+    productGroups: 'Группы Продукции',
+    contactTitle: 'Контакты',
+    copyright: '© 2026 ABT MECHATRONICS IND. TRADE CO. LTD. Все права защищены.',
+  },
+  validation: {
+    nameMin: 'Имя должно содержать минимум 2 символа',
+    nameMax: 'Имя может содержать максимум 100 символов',
+    emailInvalid: 'Пожалуйста, введите действительный адрес электронной почты',
+    emailMax: 'Адрес электронной почты слишком длинный',
+    messageMin: 'Ваше сообщение должно содержать минимум 10 символов',
+    messageMax: 'Ваше сообщение может содержать максимум 2000 символов',
+  },
+  notFound: {
+    title: 'Страница Не Найдена',
+    description: 'Страница, которую вы ищете, не существует или была перемещена.',
+    homeButton: 'На Главную',
+    backButton: 'Назад',
+    contactButton: 'Контакты',
+  },
+  cookie: {
+    message: 'Этот веб-сайт использует файлы cookie для улучшения вашего опыта.',
+    accept: 'Принять',
+    decline: 'Отклонить',
+    learnMore: 'Узнать Больше',
+  },
+  whatsapp: {
+    tooltip: 'Написать в WhatsApp',
+  },
+  exitPopup: {
+    title: 'Подождите!',
+    subtitle: 'У нас есть специальное предложение для вас',
+    description: 'Хотите получить бесплатный выезд на объект и предложение для ваших проектов?',
+    whatsappButton: 'Связаться через WhatsApp',
+    contactButton: 'Контактная Форма',
+    dismiss: 'Нет, спасибо',
+  },
+  testimonials: {
+    subtitle: 'Отзывы Клиентов',
+    title: 'РЕКОМЕНДАЦИИ',
+    items: [
+      { quote: 'Они доставили нашу конвейерную систему вовремя и с качеством. Профессиональная команда.', name: 'Ахмет Йылмаз', company: 'Текстиль ООО' },
+      { quote: 'Они проделали отличную работу над нашим проектом стальных конструкций. Настоятельно рекомендую.', name: 'Мехмет Демир', company: 'Логистика Плюс' },
+      { quote: 'Мы получили результаты, превосходящие наши ожидания в индивидуальном проектировании машин.', name: 'Фатма Кая', company: 'Индустриальная Группа' },
+    ],
+  },
+  certifications: {
+    iso9001: 'ISO 9001',
+    tse: 'Сертифицировано TSE',
+    ce: 'Соответствует CE',
+    quality: 'Гарантия Качества',
+  },
+  clients: {
+    title: 'Наши Надёжные Партнёры',
+    industries: {
+      tekstil: 'ТЕКСТИЛЬ',
+      celik: 'СТАЛЬ',
+      lojistik: 'ЛОГИСТИКА',
+      uretim: 'ПРОИЗВОДСТВО',
+      makine: 'МАШИНЫ',
+      endustri: 'ПРОМЫШЛЕННОСТЬ',
+      otomasyon: 'АВТОМАТИЗАЦИЯ',
+      konveyor: 'КОНВЕЙЕРЫ',
+      metal: 'МЕТАЛЛ',
+    },
+  },
+  newsletter: {
+    title: 'Подпишитесь на Нашу Рассылку',
+    description: 'Будьте в курсе новых проектов и акций.',
+    placeholder: 'Ваш адрес электронной почты',
+    button: 'Подписаться',
+    success: 'Успешно подписаны!',
+  },
+  faq: {
+    subtitle: 'Часто Задаваемые Вопросы',
+    title: 'FAQ',
+    items: [
+      { question: 'Каков срок сдачи проекта?', answer: 'В зависимости от размера проекта, стандартные проекты сдаются в течение 4-8 недель. Для срочных проектов может быть составлен специальный план.' },
+      { question: 'Каков гарантийный срок?', answer: 'Вся наша продукция имеет 2-летнюю гарантию. Мы также предлагаем пожизненную техническую поддержку и гарантию на запчасти.' },
+      { question: 'Вы обслуживаете по всей Турции?', answer: 'Да, мы предоставляем услуги монтажа и обслуживания по всей Турции. Наши опытные команды работают на объектах.' },
+      { question: 'Вы предлагаете бесплатные выезды на объект?', answer: 'Да, мы предлагаем бесплатные услуги выезда на объект и проектирования для всех проектов.' },
+    ],
+  },
+};
+
+
 // TRANSLATIONS OBJECT - must be after all language definitions
-const translations: Record<Language, typeof tr> = { tr, en, de, fr, es, ar };
+const translations: Record<Language, typeof tr> = { tr, en, de, fr, es, ar, ru };

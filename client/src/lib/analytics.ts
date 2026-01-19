@@ -1,76 +1,69 @@
-import ReactGA from "react-ga4";
-
 /**
  * Google Analytics 4 Integration
- * Tracks user behavior, page views, and custom events
+ * GA4 is loaded via HTML script tag in index.html
+ * This file provides helper functions to track events using gtag
  */
 
-// Initialize GA4
-export const initGA = () => {
-  const measurementId = import.meta.env.VITE_GA_MEASUREMENT_ID;
-  
-  if (!measurementId) {
-    console.warn("GA4 Measurement ID not found. Analytics disabled.");
-    return;
+// Declare gtag for TypeScript
+declare global {
+  interface Window {
+    gtag: (...args: any[]) => void;
+    dataLayer: any[];
   }
-
-  ReactGA.initialize(measurementId, {
-    gaOptions: {
-      anonymizeIp: true, // GDPR compliance
-      cookieFlags: "SameSite=None;Secure",
-    },
-  });
-
-  console.log("✅ Google Analytics 4 initialized");
-};
+}
 
 /**
  * Track page view
  */
 export const trackPageView = (path: string, title?: string) => {
-  ReactGA.send({
-    hitType: "pageview",
-    page: path,
-    title: title || document.title,
-  });
+  if (window.gtag) {
+    window.gtag('event', 'page_view', {
+      page_path: path,
+      page_title: title || document.title,
+    });
+  }
 };
 
 /**
  * Track custom event
  */
 export const trackEvent = (
-  category: string,
-  action: string,
-  label?: string,
-  value?: number
+  eventName: string,
+  eventParams?: Record<string, any>
 ) => {
-  ReactGA.event({
-    category,
-    action,
-    label,
-    value,
-  });
+  if (window.gtag) {
+    window.gtag('event', eventName, eventParams);
+  }
 };
 
 /**
  * Track button click
  */
 export const trackButtonClick = (buttonName: string, location: string) => {
-  trackEvent("Button", "Click", `${buttonName} - ${location}`);
+  trackEvent('button_click', {
+    button_name: buttonName,
+    location: location
+  });
 };
 
 /**
  * Track form submission
  */
 export const trackFormSubmit = (formName: string, success: boolean) => {
-  trackEvent("Form", success ? "Submit Success" : "Submit Error", formName);
+  trackEvent('form_submit', {
+    form_name: formName,
+    success: success
+  });
 };
 
 /**
  * Track external link click
  */
 export const trackExternalLink = (url: string, linkText: string) => {
-  trackEvent("External Link", "Click", `${linkText} - ${url}`);
+  trackEvent('external_link_click', {
+    url: url,
+    link_text: linkText
+  });
 };
 
 /**
@@ -80,42 +73,58 @@ export const trackVideoEvent = (
   action: "play" | "pause" | "complete",
   videoName: string
 ) => {
-  trackEvent("Video", action, videoName);
+  trackEvent(`video_${action}`, {
+    video_name: videoName
+  });
 };
 
 /**
  * Track download
  */
 export const trackDownload = (fileName: string, fileType: string) => {
-  trackEvent("Download", "File", `${fileName} (${fileType})`);
+  trackEvent('file_download', {
+    file_name: fileName,
+    file_type: fileType
+  });
 };
 
 /**
  * Track search
  */
 export const trackSearch = (searchTerm: string, resultsCount: number) => {
-  trackEvent("Search", "Query", searchTerm, resultsCount);
+  trackEvent('search', {
+    search_term: searchTerm,
+    results_count: resultsCount
+  });
 };
 
 /**
  * Track language change
  */
 export const trackLanguageChange = (from: string, to: string) => {
-  trackEvent("Language", "Change", `${from} → ${to}`);
+  trackEvent('language_change', {
+    from_language: from,
+    to_language: to
+  });
 };
 
 /**
  * Track theme change
  */
 export const trackThemeChange = (theme: "light" | "dark") => {
-  trackEvent("Theme", "Change", theme);
+  trackEvent('theme_change', {
+    theme: theme
+  });
 };
 
 /**
  * Track error
  */
 export const trackError = (errorMessage: string, errorLocation: string) => {
-  trackEvent("Error", "Occurred", `${errorLocation}: ${errorMessage}`);
+  trackEvent('error_occurred', {
+    error_message: errorMessage,
+    error_location: errorLocation
+  });
 };
 
 /**
@@ -127,11 +136,11 @@ export const trackTiming = (
   value: number,
   label?: string
 ) => {
-  ReactGA.event({
-    category: "Timing",
-    action: category,
-    label: `${variable}${label ? ` - ${label}` : ""}`,
-    value: Math.round(value),
+  trackEvent('timing_complete', {
+    timing_category: category,
+    timing_variable: variable,
+    timing_value: Math.round(value),
+    timing_label: label
   });
 };
 
@@ -139,19 +148,27 @@ export const trackTiming = (
  * Track user engagement
  */
 export const trackEngagement = (action: string, details?: string) => {
-  trackEvent("Engagement", action, details);
+  trackEvent('user_engagement', {
+    engagement_action: action,
+    engagement_details: details
+  });
 };
 
 /**
  * Set user properties (for segmentation)
  */
 export const setUserProperties = (properties: Record<string, any>) => {
-  ReactGA.set(properties);
+  if (window.gtag) {
+    window.gtag('set', 'user_properties', properties);
+  }
 };
 
 /**
  * Track conversion (goal completion)
  */
 export const trackConversion = (conversionName: string, value?: number) => {
-  trackEvent("Conversion", "Complete", conversionName, value);
+  trackEvent('conversion', {
+    conversion_name: conversionName,
+    value: value
+  });
 };

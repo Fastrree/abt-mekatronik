@@ -7,7 +7,6 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { I18nProvider, useI18n } from "@/lib/i18n";
 import { ErrorBoundary } from "@/components/ErrorBoundary";
-import { initGA, trackPageView } from "@/lib/analytics";
 import { CookieBanner } from "@/components/CookieBanner";
 import { WhatsAppButton } from "@/components/WhatsAppButton";
 import { ScrollProgress } from "@/components/ScrollProgress";
@@ -35,14 +34,14 @@ function AppContent() {
     document.documentElement.dir = isRTL ? 'rtl' : 'ltr';
   }, [isRTL]);
 
-  // Initialize Google Analytics
+  // Track page views on route change (GA4 is loaded via HTML script tag)
   useEffect(() => {
-    initGA();
-  }, []);
-
-  // Track page views on route change
-  useEffect(() => {
-    trackPageView(window.location.pathname);
+    if (window.gtag) {
+      window.gtag('event', 'page_view', {
+        page_path: window.location.pathname,
+        page_title: document.title
+      });
+    }
   }, [window.location.pathname]);
 
   return (

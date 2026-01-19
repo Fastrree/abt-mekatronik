@@ -330,17 +330,79 @@ try {
 - GA4: User behavior and conversions
 - Complementary data sources
 
+## Testing GA4 Integration
+
+### Local Testing (http://localhost:3000)
+
+#### 1. Browser Console Check
+Open browser DevTools (F12) and check Console:
+```
+✅ Google Analytics 4 initialized
+```
+
+#### 2. Network Tab Verification
+1. Open DevTools → Network tab
+2. Filter by "google-analytics.com" or "gtag"
+3. You should see requests to:
+   - `https://www.googletagmanager.com/gtag/js?id=G-6VF25T2SF3`
+   - `https://www.google-analytics.com/g/collect?...`
+
+#### 3. GA4 Real-Time Dashboard
+1. Go to [Google Analytics](https://analytics.google.com)
+2. Select your property
+3. Navigate to: **Reports → Real-time**
+4. You should see:
+   - Active users (1+)
+   - Current page views
+   - Events being tracked
+
+#### 4. Test Custom Events
+Open browser console and run:
+```javascript
+// Test button click tracking
+window.trackButtonClick?.('Test Button', 'Console Test');
+
+// Test page view
+window.trackPageView?.('/test-page', 'Test Page');
+
+// Test form submission
+window.trackFormSubmit?.('Test Form', true);
+```
+
+### Common Issues
+
+#### Issue: "GA4 Measurement ID not found"
+**Solution**: 
+- Check `.env` file has `VITE_GA_MEASUREMENT_ID=G-6VF25T2SF3`
+- Restart dev server: `npm run dev`
+
+#### Issue: No requests in Network tab
+**Solution**:
+- Check browser ad blockers (disable for localhost)
+- Try Incognito/Private mode
+- Verify Measurement ID is correct
+
+#### Issue: Events not showing in GA4
+**Solution**:
+- Wait 24-48 hours for data processing
+- Check Real-time reports (instant)
+- Verify event names match GA4 expectations
+
 ## Next Steps
 
 1. ✅ GA4 installed and configured
-2. ⏳ Create GA4 property and get Measurement ID
-3. ⏳ Add environment variable to Vercel
-4. ⏳ Deploy and verify tracking
-5. ⏳ Set up conversion goals in GA4
-6. ⏳ Create custom reports and dashboards
+2. ✅ Measurement ID added (G-6VF25T2SF3)
+3. ✅ Environment variable configured
+4. ✅ Code committed and pushed to GitHub
+5. ⏳ **TEST NOW**: Open http://localhost:3000 and verify tracking
+6. ⏳ Add environment variable to Vercel
+7. ⏳ Deploy and verify production tracking
+8. ⏳ Set up conversion goals in GA4
+9. ⏳ Create custom reports and dashboards
 
 ---
 
-**Status**: ✅ Implemented  
+**Status**: ✅ Implemented & Ready for Testing  
 **Last Updated**: 2026-01-19  
+**Measurement ID**: G-6VF25T2SF3  
 **Owner**: Development Team

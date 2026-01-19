@@ -133,11 +133,11 @@ export const Footer = memo(function Footer() {
                 <span>Burhan Topal İnşaat Mekatronik</span>
               </li>
               <li className="flex items-start gap-3">
-                <Phone className="text-primary shrink-0 mt-1" size={18} />
+                <Phone className="text-primary shrink-0 mt-1.5" size={18} />
                 <a href="tel:+905373197281" className="hover:text-primary transition-colors">0 537 319 72 81</a>
               </li>
               <li className="flex items-start gap-3">
-                <Mail className="text-primary shrink-0 mt-1" size={18} />
+                <Mail className="text-primary shrink-0 mt-1.5" size={18} />
                 <a href="mailto:info@abtmekatronik.com" className="hover:text-primary transition-colors">info@abtmekatronik.com</a>
               </li>
             </ul>

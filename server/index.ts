@@ -19,35 +19,39 @@ declare module "http" {
   }
 }
 
-// Security Headers - Bot widget'larına izin veren CSP
+// 🔒 SECURITY HEADERS - A+ Rating
 app.use((req, res, next) => {
-  // XSS koruması
+  // HSTS - Force HTTPS (1 year, includeSubDomains, preload)
+  res.setHeader('Strict-Transport-Security', 'max-age=31536000; includeSubDomains; preload');
+  
+  // XSS Protection
   res.setHeader('X-Content-Type-Options', 'nosniff');
   res.setHeader('X-XSS-Protection', '1; mode=block');
   
-  // Clickjacking koruması - kendi domain'inde iframe'e izin ver
+  // Clickjacking Protection
   res.setHeader('X-Frame-Options', 'SAMEORIGIN');
   
-  // Referrer policy
+  // Referrer Policy - Strict for privacy
   res.setHeader('Referrer-Policy', 'strict-origin-when-cross-origin');
   
-  // Permissions policy - gereksiz API'leri kapat
-  res.setHeader('Permissions-Policy', 'geolocation=(), microphone=(), camera=()');
+  // Permissions Policy - Disable unnecessary APIs
+  res.setHeader('Permissions-Policy', 'geolocation=(), microphone=(), camera=(), payment=(), usb=(), magnetometer=(), gyroscope=(), accelerometer=()');
   
-  // Content Security Policy - Bot widget'larına izin verir
-  // Tawk.to, Crisp, Intercom, WhatsApp widget, Tidio vb. için açık
+  // Content Security Policy - Balanced security with functionality
   res.setHeader('Content-Security-Policy', [
     "default-src 'self'",
-    "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://*.tawk.to https://*.crisp.chat https://*.intercom.io https://*.tidio.co https://*.hubspot.com https://*.zopim.com https://*.zendesk.com https://cdn.jsdelivr.net https://unpkg.com",
-    "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://*.tawk.to https://*.crisp.chat",
+    "script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://unpkg.com",
+    "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
     "font-src 'self' https://fonts.gstatic.com data:",
-    "img-src 'self' data: blob: https: http:",
+    "img-src 'self' data: blob: https:",
     "connect-src 'self' https: wss:",
-    "frame-src 'self' https://*.tawk.to https://*.crisp.chat https://*.intercom.io https://wa.me https://api.whatsapp.com",
+    "frame-src 'self' https://wa.me https://api.whatsapp.com",
     "media-src 'self' blob: data:",
     "object-src 'none'",
     "base-uri 'self'",
     "form-action 'self'",
+    "frame-ancestors 'self'",
+    "upgrade-insecure-requests"
   ].join('; '));
   
   next();

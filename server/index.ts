@@ -19,28 +19,16 @@ declare module "http" {
   }
 }
 
-// 🔒 SECURITY HEADERS - A+ Rating
+// 🔒 SECURITY HEADERS - A+ Rating (SecurityHeaders.com Compliant)
 app.use((req, res, next) => {
-  // HSTS - Force HTTPS (1 year, includeSubDomains, preload)
+  // 1. HSTS - Force HTTPS (1 year, includeSubDomains, preload)
   res.setHeader('Strict-Transport-Security', 'max-age=31536000; includeSubDomains; preload');
   
-  // XSS Protection
-  res.setHeader('X-Content-Type-Options', 'nosniff');
-  res.setHeader('X-XSS-Protection', '1; mode=block');
-  
-  // Clickjacking Protection
-  res.setHeader('X-Frame-Options', 'SAMEORIGIN');
-  
-  // Referrer Policy - Strict for privacy
-  res.setHeader('Referrer-Policy', 'strict-origin-when-cross-origin');
-  
-  // Permissions Policy - Disable unnecessary APIs
-  res.setHeader('Permissions-Policy', 'geolocation=(), microphone=(), camera=(), payment=(), usb=(), magnetometer=(), gyroscope=(), accelerometer=()');
-  
-  // Content Security Policy - Balanced security with functionality
+  // 2. Content-Security-Policy (CSP) - XSS Protection
+  // CRITICAL: This is the most important security header
   res.setHeader('Content-Security-Policy', [
     "default-src 'self'",
-    "script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://unpkg.com",
+    "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.jsdelivr.net https://unpkg.com",
     "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
     "font-src 'self' https://fonts.gstatic.com data:",
     "img-src 'self' data: blob: https:",
@@ -50,9 +38,57 @@ app.use((req, res, next) => {
     "object-src 'none'",
     "base-uri 'self'",
     "form-action 'self'",
-    "frame-ancestors 'self'",
-    "upgrade-insecure-requests"
+    "frame-ancestors 'none'",  // Changed from 'self' to 'none' for better clickjacking protection
+    "upgrade-insecure-requests",
+    "block-all-mixed-content"  // Added: Block mixed content
   ].join('; '));
+  
+  // 3. X-Frame-Options - Clickjacking Protection
+  // DENY is stronger than SAMEORIGIN
+  res.setHeader('X-Frame-Options', 'DENY');
+  
+  // 4. X-Content-Type-Options - MIME Sniffing Protection
+  res.setHeader('X-Content-Type-Options', 'nosniff');
+  
+  // 5. Referrer-Policy - Information Leakage Protection
+  res.setHeader('Referrer-Policy', 'strict-origin-when-cross-origin');
+  
+  // 6. Permissions-Policy - Feature Control (Disable unnecessary APIs)
+  res.setHeader('Permissions-Policy', [
+    'geolocation=()',
+    'microphone=()',
+    'camera=()',
+    'payment=()',
+    'usb=()',
+    'magnetometer=()',
+    'gyroscope=()',
+    'accelerometer=()',
+    'autoplay=()',
+    'encrypted-media=()',
+    'fullscreen=(self)',
+    'picture-in-picture=()'
+  ].join(', '));
+  
+  // 7. X-XSS-Protection - Legacy XSS Protection (for older browsers)
+  res.setHeader('X-XSS-Protection', '1; mode=block');
+  
+  // 8. X-DNS-Prefetch-Control - Privacy Enhancement
+  res.setHeader('X-DNS-Prefetch-Control', 'off');
+  
+  // 9. X-Download-Options - IE8+ Download Protection
+  res.setHeader('X-Download-Options', 'noopen');
+  
+  // 10. X-Permitted-Cross-Domain-Policies - Adobe Products Protection
+  res.setHeader('X-Permitted-Cross-Domain-Policies', 'none');
+  
+  // 11. Cross-Origin-Embedder-Policy - Isolation
+  res.setHeader('Cross-Origin-Embedder-Policy', 'require-corp');
+  
+  // 12. Cross-Origin-Opener-Policy - Isolation
+  res.setHeader('Cross-Origin-Opener-Policy', 'same-origin');
+  
+  // 13. Cross-Origin-Resource-Policy - Resource Protection
+  res.setHeader('Cross-Origin-Resource-Policy', 'same-origin');
   
   next();
 });

@@ -54,77 +54,79 @@ function LogoItem({ client }: LogoItemProps) {
 export const ClientLogos = memo(function ClientLogos() {
   const { t } = useI18n();
 
+  // Show only first 8 partners on home page (teaser)
+  const featuredClients = clientsRow1.slice(0, 8);
+
   return (
     <section className="relative py-16 bg-zinc-50 dark:bg-zinc-800/50 border-y border-zinc-200 dark:border-zinc-700 overflow-hidden" dir="ltr">
+      {/* Title Section - With Container */}
       <div className="container mx-auto px-6 mb-12">
         <div className="text-center animate-in slide-in-from-bottom duration-500">
-          <h3 className="text-zinc-600 dark:text-zinc-400 text-sm uppercase tracking-widest font-semibold">
+          <h3 className="text-zinc-600 dark:text-zinc-400 text-sm uppercase tracking-widest font-semibold mb-2">
             {t('clients.title')}
           </h3>
+          <p className="text-zinc-500 dark:text-zinc-500 text-xs">
+            Türkiye'nin önde gelen firmaları ile çalışıyoruz
+          </p>
         </div>
       </div>
 
-      {/* First Row - Left to Right - Full Width */}
-      <div className="relative mb-6 group/row">
-        {/* Tunnel fade effect - Left */}
-        <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-zinc-50 via-zinc-50/50 to-transparent dark:from-zinc-800/50 dark:via-zinc-800/30 dark:to-transparent z-10 pointer-events-none" />
+      {/* Infinite Scrolling Partners - Full Width */}
+      <div className="w-full mb-12">
+        {/* Gradient Overlays for smooth fade effect */}
+        <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-zinc-50 dark:from-zinc-800/50 to-transparent z-10 pointer-events-none" />
+        <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-zinc-50 dark:from-zinc-800/50 to-transparent z-10 pointer-events-none" />
         
-        {/* Tunnel fade effect - Right */}
-        <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-zinc-50 via-zinc-50/50 to-transparent dark:from-zinc-800/50 dark:via-zinc-800/30 dark:to-transparent z-10 pointer-events-none" />
-        
-        <div className="flex gap-4 group-hover/row:pause-animation will-change-transform animate-scroll-left">
-          {/* First set */}
-          {clientsRow1.map((client, index) => (
-            <LogoItem key={`row1-set1-${index}`} client={client} />
+        {/* Scrolling Container */}
+        <div className="flex gap-6 animate-scroll-left">
+          {/* First set of logos */}
+          {featuredClients.map((client, index) => (
+            <div 
+              key={`first-${index}`}
+              className="flex-shrink-0 flex flex-col items-center justify-center px-6 py-6 bg-white/80 dark:bg-zinc-800/50 border border-zinc-300 dark:border-zinc-700/50 rounded-lg hover:border-red-600/50 transition-all duration-300 group min-w-[180px] shadow-lg dark:shadow-none"
+            >
+              <div className="w-20 h-20 bg-zinc-100 dark:bg-zinc-700/50 rounded-lg flex items-center justify-center mb-3 group-hover:bg-red-600/20 transition-all duration-300 group-hover:scale-110">
+                <span className="text-3xl font-black text-zinc-700 dark:text-zinc-500 group-hover:text-red-600 dark:group-hover:text-red-500 transition-colors">
+                  {client.name.charAt(0)}
+                </span>
+              </div>
+              <span className="text-xs text-zinc-600 dark:text-zinc-500 uppercase tracking-wider group-hover:text-zinc-700 dark:group-hover:text-zinc-400 transition-colors text-center">
+                {t(`clients.industries.${client.industryKey}`)}
+              </span>
+            </div>
           ))}
-          {/* Duplicate for seamless loop */}
-          {clientsRow1.map((client, index) => (
-            <LogoItem key={`row1-set2-${index}`} client={client} />
-          ))}
-          {/* Triple for extra smoothness */}
-          {clientsRow1.map((client, index) => (
-            <LogoItem key={`row1-set3-${index}`} client={client} />
-          ))}
-          {/* Fourth set for ultra-smooth loop */}
-          {clientsRow1.map((client, index) => (
-            <LogoItem key={`row1-set4-${index}`} client={client} />
-          ))}
-          {/* Fifth set for no gaps */}
-          {clientsRow1.map((client, index) => (
-            <LogoItem key={`row1-set5-${index}`} client={client} />
+          
+          {/* Duplicate set for seamless loop */}
+          {featuredClients.map((client, index) => (
+            <div 
+              key={`second-${index}`}
+              className="flex-shrink-0 flex flex-col items-center justify-center px-6 py-6 bg-white/80 dark:bg-zinc-800/50 border border-zinc-300 dark:border-zinc-700/50 rounded-lg hover:border-red-600/50 transition-all duration-300 group min-w-[180px] shadow-lg dark:shadow-none"
+            >
+              <div className="w-20 h-20 bg-zinc-100 dark:bg-zinc-700/50 rounded-lg flex items-center justify-center mb-3 group-hover:bg-red-600/20 transition-all duration-300 group-hover:scale-110">
+                <span className="text-3xl font-black text-zinc-700 dark:text-zinc-500 group-hover:text-red-600 dark:group-hover:text-red-500 transition-colors">
+                  {client.name.charAt(0)}
+                </span>
+              </div>
+              <span className="text-xs text-zinc-600 dark:text-zinc-500 uppercase tracking-wider group-hover:text-zinc-700 dark:group-hover:text-zinc-400 transition-colors text-center">
+                {t(`clients.industries.${client.industryKey}`)}
+              </span>
+            </div>
           ))}
         </div>
       </div>
 
-      {/* Second Row - Right to Left - Full Width */}
-      <div className="relative group/row">
-        {/* Tunnel fade effect - Left */}
-        <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-zinc-50 via-zinc-50/50 to-transparent dark:from-zinc-800/50 dark:via-zinc-800/30 dark:to-transparent z-10 pointer-events-none" />
-        
-        {/* Tunnel fade effect - Right */}
-        <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-zinc-50 via-zinc-50/50 to-transparent dark:from-zinc-800/50 dark:via-zinc-800/30 dark:to-transparent z-10 pointer-events-none" />
-        
-        <div className="flex gap-4 group-hover/row:pause-animation will-change-transform animate-scroll-right">
-          {/* First set */}
-          {clientsRow2.map((client, index) => (
-            <LogoItem key={`row2-set1-${index}`} client={client} />
-          ))}
-          {/* Duplicate for seamless loop */}
-          {clientsRow2.map((client, index) => (
-            <LogoItem key={`row2-set2-${index}`} client={client} />
-          ))}
-          {/* Triple for extra smoothness */}
-          {clientsRow2.map((client, index) => (
-            <LogoItem key={`row2-set3-${index}`} client={client} />
-          ))}
-          {/* Fourth set for ultra-smooth loop */}
-          {clientsRow2.map((client, index) => (
-            <LogoItem key={`row2-set4-${index}`} client={client} />
-          ))}
-          {/* Fifth set for no gaps */}
-          {clientsRow2.map((client, index) => (
-            <LogoItem key={`row2-set5-${index}`} client={client} />
-          ))}
+      {/* CTA Button - With Container */}
+      <div className="container mx-auto px-6">
+        <div className="text-center animate-in fade-in duration-600" style={{ animationDelay: '400ms' }}>
+          <a 
+            href="/exports#ortaklarimiz"
+            className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white font-bold text-base rounded-xl transition-all shadow-xl hover:shadow-2xl hover:scale-105 group"
+          >
+            <span>Tüm Ortaklarımızı Gör</span>
+            <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+            </svg>
+          </a>
         </div>
       </div>
 
@@ -134,39 +136,16 @@ export const ClientLogos = memo(function ClientLogos() {
             transform: translateX(0);
           }
           100% {
-            transform: translateX(-20%);
+            transform: translateX(-50%);
           }
         }
-
-        @keyframes scroll-right {
-          0% {
-            transform: translateX(-20%);
-          }
-          100% {
-            transform: translateX(0);
-          }
-        }
-
+        
         .animate-scroll-left {
-          animation: scroll-left 10s linear infinite;
-          will-change: transform;
+          animation: scroll-left 30s linear infinite;
         }
-
-        .animate-scroll-right {
-          animation: scroll-right 10s linear infinite;
-          will-change: transform;
-        }
-
-        .pause-animation {
-          animation-play-state: paused !important;
-        }
-
-        /* Respect user's motion preferences */
-        @media (prefers-reduced-motion: reduce) {
-          .animate-scroll-left,
-          .animate-scroll-right {
-            animation: none;
-          }
+        
+        .animate-scroll-left:hover {
+          animation-play-state: paused;
         }
       `}</style>
     </section>

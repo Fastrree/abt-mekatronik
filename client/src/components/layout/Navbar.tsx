@@ -4,11 +4,13 @@ import { Button } from "@/components/ui/button";
 import { LanguageSelector } from "@/components/LanguageSelector";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { useI18n } from "@/lib/i18n";
+import { useLocation } from "wouter";
 
 type ProductKey = 'konveyor' | 'tekstil' | 'celik' | 'ozelMakine';
 
 export const Navbar = memo(function Navbar() {
   const { t, language } = useI18n();
+  const [, setLocation] = useLocation();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isQuickMenuOpen, setIsQuickMenuOpen] = useState(false);
   
@@ -59,6 +61,22 @@ export const Navbar = memo(function Navbar() {
     }
     // If on another page, let the default link behavior work (navigate to /#section)
   }, []);
+
+  // Programmatic navigation for hamburger menu (works from any page)
+  const navigateToSection = useCallback((sectionId: string) => {
+    const currentPath = window.location.pathname;
+    if (currentPath === '/') {
+      // Already on home page, just scroll
+      const element = document.getElementById(sectionId);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    } else {
+      // Navigate to home page with hash
+      setLocation(`/#${sectionId}`);
+    }
+    setIsQuickMenuOpen(false);
+  }, [setLocation]);
 
   return (
     <nav
@@ -141,100 +159,73 @@ export const Navbar = memo(function Navbar() {
                   
                   {/* Mühendislik */}
                   <div className="border-t border-zinc-600 mt-2 pt-2">
-                    <a
-                      href="/#engineering"
-                      onClick={(e) => {
-                        handleSectionClick(e, 'engineering');
-                        setIsQuickMenuOpen(false);
-                      }}
-                      className="block px-3 py-2 text-sm text-white hover:text-gray-200 hover:bg-zinc-700 rounded-md transition-colors"
+                    <button
+                      onClick={() => navigateToSection('engineering')}
+                      className="w-full text-left block px-3 py-2 text-sm text-white hover:text-gray-200 hover:bg-zinc-700 rounded-md transition-colors"
                     >
                       {t('nav.engineering')}
-                    </a>
+                    </button>
                   </div>
 
                   {/* Projeler */}
                   <div className="border-t border-zinc-600 mt-2 pt-2">
-                    <a
-                      href="/#projects"
-                      onClick={(e) => {
-                        handleSectionClick(e, 'projects');
-                        setIsQuickMenuOpen(false);
-                      }}
-                      className="block px-3 py-2 text-sm text-white hover:text-gray-200 hover:bg-zinc-700 rounded-md transition-colors"
+                    <button
+                      onClick={() => navigateToSection('projects')}
+                      className="w-full text-left block px-3 py-2 text-sm text-white hover:text-gray-200 hover:bg-zinc-700 rounded-md transition-colors"
                     >
                       {t('nav.projects')}
-                    </a>
+                    </button>
                   </div>
 
-                  {/* İletişim */}
+                  {/* İhracatlarımız */}
                   <div className="border-t border-zinc-600 mt-2 pt-2">
                     <a
-                      href="/#contact"
-                      onClick={(e) => {
-                        handleSectionClick(e, 'contact');
-                        setIsQuickMenuOpen(false);
-                      }}
+                      href="/exports"
+                      onClick={() => setIsQuickMenuOpen(false)}
                       className="block px-3 py-2 text-sm text-white hover:text-gray-200 hover:bg-zinc-700 rounded-md transition-colors"
                     >
-                      {t('nav.contact')}
+                      {t('nav.exports')}
                     </a>
                   </div>
 
                   {/* SSS */}
                   <div className="border-t border-zinc-600 mt-2 pt-2">
-                    <a
-                      href="/#faq"
-                      onClick={(e) => {
-                        handleSectionClick(e, 'faq');
-                        setIsQuickMenuOpen(false);
-                      }}
-                      className="block px-3 py-2 text-sm text-white hover:text-gray-200 hover:bg-zinc-700 rounded-md transition-colors"
+                    <button
+                      onClick={() => navigateToSection('faq')}
+                      className="w-full text-left block px-3 py-2 text-sm text-white hover:text-gray-200 hover:bg-zinc-700 rounded-md transition-colors"
                     >
                       {t('nav.faq')}
-                    </a>
+                    </button>
                   </div>
 
                   {/* Referanslar */}
                   <div className="border-t border-zinc-600 mt-2 pt-2">
-                    <a
-                      href="/#testimonials"
-                      onClick={(e) => {
-                        handleSectionClick(e, 'testimonials');
-                        setIsQuickMenuOpen(false);
-                      }}
-                      className="block px-3 py-2 text-sm text-white hover:text-gray-200 hover:bg-zinc-700 rounded-md transition-colors"
+                    <button
+                      onClick={() => navigateToSection('testimonials')}
+                      className="w-full text-left block px-3 py-2 text-sm text-white hover:text-gray-200 hover:bg-zinc-700 rounded-md transition-colors"
                     >
                       {t('nav.testimonials')}
-                    </a>
+                    </button>
                   </div>
 
-                  {/* Ortaklarımız */}
+                  {/* İletişim */}
                   <div className="border-t border-zinc-600 mt-2 pt-2">
-                    <a
-                      href="/#partners"
-                      onClick={(e) => {
-                        handleSectionClick(e, 'partners');
-                        setIsQuickMenuOpen(false);
-                      }}
-                      className="block px-3 py-2 text-sm text-white hover:text-gray-200 hover:bg-zinc-700 rounded-md transition-colors"
+                    <button
+                      onClick={() => navigateToSection('contact')}
+                      className="w-full text-left block px-3 py-2 text-sm text-white hover:text-gray-200 hover:bg-zinc-700 rounded-md transition-colors"
                     >
-                      {t('nav.partners')}
-                    </a>
+                      {t('nav.contact')}
+                    </button>
                   </div>
                   
                   {/* CTA */}
                   <div className="border-t border-zinc-600 mt-2 pt-2">
-                    <a
-                      href="/#contact"
-                      onClick={(e) => {
-                        handleSectionClick(e, 'contact');
-                        setIsQuickMenuOpen(false);
-                      }}
-                      className="block px-3 py-2.5 text-sm font-semibold text-red-500 hover:text-red-400 hover:bg-red-600/10 rounded-md transition-colors"
+                    <button
+                      onClick={() => navigateToSection('contact')}
+                      className="w-full text-left block px-3 py-2.5 text-sm font-semibold text-red-500 hover:text-red-400 hover:bg-red-600/10 rounded-md transition-colors"
                     >
                       🚀 {t('products.getQuote')}
-                    </a>
+                    </button>
                   </div>
                 </div>
               </div>
@@ -316,6 +307,26 @@ export const Navbar = memo(function Navbar() {
             <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all group-hover:w-full"></span>
           </a>
 
+          {/* İhracatlarımız */}
+          <a
+            href="/exports"
+            onClick={closeAllDropdowns}
+            className="text-xs font-semibold uppercase tracking-wider py-2.5 text-white hover:text-primary transition-colors relative group whitespace-nowrap"
+          >
+            {t('nav.exports')}
+            <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all group-hover:w-full"></span>
+          </a>
+
+          {/* Ortaklarımız */}
+          <a
+            href="/exports#ortaklarimiz"
+            onClick={closeAllDropdowns}
+            className="text-xs font-semibold uppercase tracking-wider py-2.5 text-white hover:text-primary transition-colors relative group whitespace-nowrap"
+          >
+            {t('nav.partners')}
+            <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all group-hover:w-full"></span>
+          </a>
+
           {/* İletişim */}
           <a
             href="/#contact"
@@ -347,7 +358,7 @@ export const Navbar = memo(function Navbar() {
         </div>
 
         {/* Mobile: Theme Toggle + Language Selector (RIGHT SIDE) */}
-        <div className={`lg:hidden flex items-center gap-0.5 sm:gap-1 ${isRTL ? 'ml-20' : ''}`}>
+        <div className="lg:hidden flex items-center gap-0.5 sm:gap-1">
           <ThemeToggle />
           <LanguageSelector isScrolled={isScrolled} />
         </div>

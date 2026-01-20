@@ -106,11 +106,15 @@ export default function ProductDetail() {
   const heroTranslations = productTranslations[language as 'tr' | 'en'].hero;
 
   const scrollToContact = () => {
-    setLocation("/#contact");
+    // Scroll to contact section on current page (Footer)
+    const contactElement = document.getElementById('contact');
+    if (contactElement) {
+      contactElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
   };
 
   return (
-    <div className="min-h-screen bg-white dark:bg-zinc-900 text-zinc-900 dark:text-zinc-200 selection:bg-red-900 selection:text-white overflow-x-hidden">
+    <div className="min-h-screen bg-white dark:bg-zinc-900 text-zinc-900 dark:text-zinc-200 selection:bg-red-900 selection:text-white overflow-x-hidden" dir={language === 'ar' ? 'rtl' : 'ltr'}>
       <SkipLink />
       <Navbar />
 
@@ -194,7 +198,7 @@ export default function ProductDetail() {
         {/* Scroll Indicator */}
         <div className="absolute bottom-10 xs:bottom-6 left-1/2 -translate-x-1/2 text-white/70 flex flex-col items-center gap-2 animate-bounce" aria-hidden="true">
           <span className="text-[10px] uppercase tracking-[0.3em]">
-            {language === 'tr' ? 'Keşfet' : 'Explore'}
+            {heroTranslations.scrollIndicator}
           </span>
           <div className="w-[1px] h-12 xs:h-8 bg-gradient-to-b from-red-600 to-transparent"></div>
         </div>
@@ -209,10 +213,10 @@ export default function ProductDetail() {
         <div className="container mx-auto px-6 relative z-10">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 xs:gap-4">
             {[
-              { icon: Award, value: "15+", label: language === 'tr' ? 'Yıl Tecrübe' : 'Years Experience' },
-              { icon: Users, value: "200+", label: language === 'tr' ? 'Tamamlanan Proje' : 'Completed Projects' },
-              { icon: Shield, value: "ISO 9001", label: language === 'tr' ? 'Kalite Belgesi' : 'Quality Certificate' },
-              { icon: TrendingUp, value: "%98", label: language === 'tr' ? 'Müşteri Memnuniyeti' : 'Customer Satisfaction' },
+              { icon: Award, value: "15+", label: heroTranslations.stats.yearsExperience },
+              { icon: Users, value: "200+", label: heroTranslations.stats.completedProjects },
+              { icon: Shield, value: "ISO 9001", label: heroTranslations.stats.qualityCertificate },
+              { icon: TrendingUp, value: "%98", label: heroTranslations.stats.customerSatisfaction },
             ].map((stat, index) => (
               <div
                 key={index}
@@ -240,7 +244,7 @@ export default function ProductDetail() {
           {/* Section Header */}
           <div className="text-center mb-16 xs:mb-10 animate-in fade-in duration-600">
             <p className="text-red-600 dark:text-red-500 font-bold tracking-widest uppercase mb-2 text-sm">
-              {language === 'tr' ? 'ÖZELLİKLER' : 'FEATURES'}
+              {heroTranslations.sections.features}
             </p>
             <h2 className="text-4xl xs:text-3xl md:text-5xl font-black text-zinc-900 dark:text-white">
               {translations.features.title}
@@ -286,10 +290,10 @@ export default function ProductDetail() {
           {/* Section Header */}
           <div className="text-center mb-16 xs:mb-10 animate-in fade-in duration-600">
             <p className="text-red-600 dark:text-red-500 font-bold tracking-widest uppercase mb-2 text-sm">
-              {language === 'tr' ? 'GALERİ' : 'GALLERY'}
+              {heroTranslations.sections.gallery}
             </p>
             <h2 className="text-4xl xs:text-3xl md:text-5xl font-black text-zinc-900 dark:text-white">
-              {language === 'tr' ? 'Projelerimizden Görüntüler' : 'Images from Our Projects'}
+              {heroTranslations.sections.galleryTitle}
             </h2>
           </div>
 
@@ -310,7 +314,7 @@ export default function ProductDetail() {
                 {/* Overlay on Hover */}
                 <div className="absolute inset-0 bg-gradient-to-t from-red-900/80 via-red-900/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4 xs:p-2">
                   <span className="text-white font-bold text-sm xs:text-xs uppercase tracking-wider">
-                    {language === 'tr' ? 'Proje' : 'Project'} {index + 1}
+                    {heroTranslations.sections.project} {index + 1}
                   </span>
                 </div>
               </div>
@@ -330,15 +334,13 @@ export default function ProductDetail() {
             {/* Left: Title and Description */}
             <div className="animate-in fade-in slide-in-from-left duration-700">
               <p className="text-red-600 dark:text-red-500 font-bold tracking-widest uppercase mb-4 text-sm">
-                {language === 'tr' ? 'UYGULAMA ALANLARI' : 'APPLICATION AREAS'}
+                {heroTranslations.sections.applications}
               </p>
               <h2 className="text-4xl xs:text-3xl md:text-5xl font-black text-zinc-900 dark:text-white mb-6 xs:mb-4">
                 {translations.applications.title}
               </h2>
               <p className="text-lg xs:text-base text-zinc-600 dark:text-zinc-400 leading-relaxed mb-8 xs:mb-6">
-                {language === 'tr' 
-                  ? 'Çözümlerimiz geniş bir endüstri yelpazesinde başarıyla kullanılmaktadır. Her sektörün özel ihtiyaçlarına uygun özelleştirilebilir sistemler sunuyoruz.'
-                  : 'Our solutions are successfully used across a wide range of industries. We offer customizable systems tailored to the specific needs of each sector.'}
+                {heroTranslations.sections.applicationsDescription}
               </p>
               
               {/* Stats */}
@@ -346,13 +348,13 @@ export default function ProductDetail() {
                 <div className="p-6 xs:p-4 bg-white dark:bg-zinc-900 border-2 border-red-600/20 dark:border-red-500/20 rounded-lg">
                   <div className="text-3xl xs:text-2xl font-black text-red-600 dark:text-red-500 mb-2">50+</div>
                   <div className="text-sm xs:text-xs text-zinc-600 dark:text-zinc-400 uppercase tracking-wider font-semibold">
-                    {language === 'tr' ? 'Farklı Sektör' : 'Different Sectors'}
+                    {heroTranslations.sections.differentSectors}
                   </div>
                 </div>
                 <div className="p-6 xs:p-4 bg-white dark:bg-zinc-900 border-2 border-red-600/20 dark:border-red-500/20 rounded-lg">
                   <div className="text-3xl xs:text-2xl font-black text-red-600 dark:text-red-500 mb-2">200+</div>
                   <div className="text-sm xs:text-xs text-zinc-600 dark:text-zinc-400 uppercase tracking-wider font-semibold">
-                    {language === 'tr' ? 'Başarılı Proje' : 'Successful Projects'}
+                    {heroTranslations.sections.successfulProjects}
                   </div>
                 </div>
               </div>
@@ -385,32 +387,30 @@ export default function ProductDetail() {
           {/* Section Header */}
           <div className="text-center mb-16 xs:mb-10 animate-in fade-in duration-600">
             <p className="text-red-600 dark:text-red-500 font-bold tracking-widest uppercase mb-2 text-sm">
-              {language === 'tr' ? 'TEKNİK ÖZELLİKLER' : 'TECHNICAL SPECIFICATIONS'}
+              {heroTranslations.sections.technicalSpecs}
             </p>
             <h2 className="text-4xl xs:text-3xl md:text-5xl font-black text-zinc-900 dark:text-white mb-4">
               {translations.technical.title}
             </h2>
             <p className="text-lg xs:text-base text-zinc-600 dark:text-zinc-400 max-w-2xl mx-auto">
-              {language === 'tr'
-                ? 'Detaylı teknik özellikler ve performans parametreleri'
-                : 'Detailed technical specifications and performance parameters'}
+              {heroTranslations.sections.technicalSpecsDescription}
             </p>
           </div>
 
           {/* Specs Grid */}
           <div className="max-w-4xl mx-auto">
-            <div className="grid md:grid-cols-2 gap-4 xs:gap-3">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 xs:gap-3">
               {translations.technical.specs.map((spec, index) => (
                 <div
                   key={index}
-                  className="group flex justify-between items-center p-6 xs:p-4 bg-zinc-50 dark:bg-zinc-800 border-2 border-zinc-200 dark:border-zinc-700 hover:border-red-600 dark:hover:border-red-500 transition-all duration-300 shadow-lg dark:shadow-none hover:shadow-xl animate-in fade-in slide-up duration-500"
+                  className="group flex flex-col xs:flex-row justify-between xs:items-center p-6 xs:p-4 bg-zinc-50 dark:bg-zinc-800 border-2 border-zinc-200 dark:border-zinc-700 hover:border-red-600 dark:hover:border-red-500 transition-all duration-300 shadow-lg dark:shadow-none hover:shadow-xl animate-in fade-in slide-up duration-500"
                   style={{ animationDelay: `${index * 50}ms` }}
                 >
-                  <div className="flex items-center gap-3 xs:gap-2">
-                    <div className="w-2 h-2 bg-red-600 dark:bg-red-500 rounded-full group-hover:scale-150 transition-transform" aria-hidden="true" />
-                    <span className="font-bold text-zinc-900 dark:text-white text-sm xs:text-xs">{spec.label}</span>
+                  <div className="flex items-center gap-3 xs:gap-2 mb-2 xs:mb-0">
+                    <div className="w-2 h-2 bg-red-600 dark:bg-red-500 rounded-full group-hover:scale-150 transition-transform shrink-0" aria-hidden="true" />
+                    <span className="font-bold text-zinc-900 dark:text-white text-base xs:text-sm">{spec.label}</span>
                   </div>
-                  <span className="text-zinc-600 dark:text-zinc-400 font-semibold text-sm xs:text-xs">{spec.value}</span>
+                  <span className="text-zinc-600 dark:text-zinc-400 font-semibold text-sm xs:text-xs xs:text-right">{spec.value}</span>
                 </div>
               ))}
             </div>
@@ -421,95 +421,12 @@ export default function ProductDetail() {
                 <Settings className="w-6 h-6 xs:w-5 xs:h-5 text-red-600 dark:text-red-500 shrink-0 mt-1" />
                 <div>
                   <h3 className="font-bold text-zinc-900 dark:text-white mb-2 xs:mb-1 text-base xs:text-sm">
-                    {language === 'tr' ? 'Özelleştirilebilir Çözümler' : 'Customizable Solutions'}
+                    {heroTranslations.sections.customizableTitle}
                   </h3>
                   <p className="text-zinc-600 dark:text-zinc-400 text-sm xs:text-xs leading-relaxed">
-                    {language === 'tr'
-                      ? 'Tüm teknik özellikler projenizin özel gereksinimlerine göre özelleştirilebilir. Detaylı bilgi için bizimle iletişime geçin.'
-                      : 'All technical specifications can be customized according to your project\'s specific requirements. Contact us for detailed information.'}
+                    {heroTranslations.sections.customizableDescription}
                   </p>
                 </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* FINAL CTA SECTION - Bold and Impactful */}
-      <section className="py-24 xs:py-16 bg-gradient-to-r from-red-600 via-red-700 to-red-800 dark:from-red-700 dark:via-red-800 dark:to-red-900 relative overflow-hidden">
-        {/* Animated Background Pattern */}
-        <div className="absolute inset-0 opacity-10" aria-hidden="true">
-          <div className="absolute top-0 left-0 w-full h-full" style={{
-            backgroundImage: 'repeating-linear-gradient(45deg, transparent, transparent 35px, rgba(255,255,255,.1) 35px, rgba(255,255,255,.1) 70px)',
-          }} />
-        </div>
-        
-        {/* Decorative Circles */}
-        <div className="absolute top-10 right-10 w-64 h-64 bg-white/5 rounded-full blur-3xl" aria-hidden="true" />
-        <div className="absolute bottom-10 left-10 w-96 h-96 bg-black/10 rounded-full blur-3xl" aria-hidden="true" />
-        
-        <div className="container mx-auto px-6 relative z-10">
-          <div className="max-w-4xl mx-auto text-center">
-            {/* Badge */}
-            <div className="inline-block mb-6 xs:mb-4 px-4 py-2 bg-white/10 border border-white/20 text-white font-bold text-xs tracking-widest uppercase rounded-sm backdrop-blur-sm animate-in fade-in duration-500">
-              {language === 'tr' ? 'ÜCRETSİZ TEKLİF' : 'FREE QUOTE'}
-            </div>
-            
-            {/* Title */}
-            <h2 className="text-4xl xs:text-3xl md:text-6xl font-black text-white mb-6 xs:mb-4 leading-tight animate-in fade-in duration-700 delay-100">
-              {language === 'tr' 
-                ? 'Projeniz İçin Hemen Teklif Alın'
-                : 'Get a Quote for Your Project Now'}
-            </h2>
-            
-            {/* Description */}
-            <p className="text-xl xs:text-base text-white/90 mb-10 xs:mb-8 max-w-2xl mx-auto leading-relaxed animate-in fade-in duration-700 delay-200">
-              {language === 'tr' 
-                ? 'Uzman ekibimiz size en uygun çözümü sunmak ve sorularınızı yanıtlamak için hazır. 24 saat içinde geri dönüş yapıyoruz.'
-                : 'Our expert team is ready to provide you with the most suitable solution and answer your questions. We respond within 24 hours.'}
-            </p>
-            
-            {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4 xs:gap-3 justify-center items-center animate-in fade-in duration-700 delay-300">
-              <Button
-                onClick={scrollToContact}
-                size="lg"
-                className="bg-white text-red-600 hover:bg-zinc-100 font-bold text-base xs:text-sm sm:text-lg px-10 xs:px-8 py-7 xs:py-6 rounded-none skew-x-[-10deg] shadow-2xl hover:shadow-[0_0_40px_rgba(255,255,255,0.3)] transition-all group"
-              >
-                <span className="skew-x-[10deg] flex items-center gap-2">
-                  <Mail className="w-5 h-5 xs:w-4 xs:h-4 group-hover:rotate-12 transition-transform" />
-                  {heroTranslations.getQuote}
-                </span>
-              </Button>
-              
-              <Button
-                onClick={() => window.open('https://wa.me/905373197281', '_blank')}
-                size="lg"
-                variant="outline"
-                className="border-2 border-white text-white hover:bg-white hover:text-red-600 font-bold text-base xs:text-sm sm:text-lg px-10 xs:px-8 py-7 xs:py-6 rounded-none skew-x-[-10deg] backdrop-blur-sm transition-all group"
-              >
-                <span className="skew-x-[10deg] flex items-center gap-2">
-                  <Phone className="w-5 h-5 xs:w-4 xs:h-4 group-hover:rotate-12 transition-transform" />
-                  WhatsApp
-                </span>
-              </Button>
-            </div>
-            
-            {/* Contact Info */}
-            <div className="mt-12 xs:mt-8 pt-8 xs:pt-6 border-t border-white/20 flex flex-col sm:flex-row gap-6 xs:gap-4 justify-center items-center text-white/80 text-sm xs:text-xs animate-in fade-in duration-700 delay-400">
-              <div className="flex items-center gap-2">
-                <Phone className="w-4 h-4" />
-                <span>+90 537 319 72 81</span>
-              </div>
-              <div className="hidden sm:block w-px h-4 bg-white/20" aria-hidden="true" />
-              <div className="flex items-center gap-2">
-                <Mail className="w-4 h-4" />
-                <span>info@abtmekatronik.com</span>
-              </div>
-              <div className="hidden sm:block w-px h-4 bg-white/20" aria-hidden="true" />
-              <div className="flex items-center gap-2">
-                <MapPin className="w-4 h-4" />
-                <span>{language === 'tr' ? 'Bursa, Türkiye' : 'Bursa, Turkey'}</span>
               </div>
             </div>
           </div>

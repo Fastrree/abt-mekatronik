@@ -2,94 +2,20 @@ import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { SkipLink } from "@/components/SkipLink";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { Settings, Cog, PenTool, ChevronRight, Truck, Factory, Wrench, Layers } from "lucide-react";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
-import { useToast } from "@/hooks/use-toast";
-import { useState, useCallback, useMemo } from "react";
+import { Settings, Cog, PenTool, ChevronRight, Truck, Factory, Wrench, Layers, Phone, Mail, MapPin, Shield, Award, CheckCircle } from "lucide-react";
 import { useI18n } from "@/lib/i18n";
 import { OptimizedImage } from "@/components/OptimizedImage";
-import { OptimizedVideo } from "@/components/OptimizedVideo";
 import { FAQ, Testimonials, ClientLogos, ComponentLoader } from "@/components/LazyComponents";
 import { Suspense } from "react";
 
-// Security: Input sanitization - XSS koruması
-const sanitizeInput = (input: string): string => {
-  return input
-    .replace(/[<>]/g, '')
-    .replace(/javascript:/gi, '')
-    .replace(/on\w+=/gi, '')
-    .trim()
-    .slice(0, 1000);
-};
-
-// Security: Enhanced validation schema - moved inside component for i18n
-// Base schema without messages (messages added dynamically in component)
-const createContactSchema = (t: (key: string) => string) => z.object({
-  name: z.string()
-    .min(2, t('validation.nameMin'))
-    .max(100, t('validation.nameMax'))
-    .transform(sanitizeInput),
-  email: z.string()
-    .email(t('validation.emailInvalid'))
-    .max(254, t('validation.emailMax'))
-    .transform(val => val.toLowerCase().trim()),
-  message: z.string()
-    .min(10, t('validation.messageMin'))
-    .max(2000, t('validation.messageMax'))
-    .transform(sanitizeInput),
-});
-
-// Product icons for cards
-const productIcons = {
-  konveyor: Truck,
-  tekstil: Factory,
-  celik: Layers,
-  ozelMakine: Wrench,
-};
-
 export default function Home() {
-  const { toast } = useToast();
-  const { t, tArray } = useI18n();
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  const { t, language } = useI18n();
   
   // Detect Edge browser
   const isEdge = /Edg/.test(navigator.userAgent);
-  
-  // For Edge: use static image instead of video (autoplay issues)
-  // For other browsers: use video with autoplay
-
-  // Create schema with translated messages - memoized to prevent recreation
-  const contactSchema = useMemo(() => createContactSchema(t), [t]);
-
-  const form = useForm<z.infer<typeof contactSchema>>({
-    resolver: zodResolver(contactSchema),
-    defaultValues: {
-      name: "",
-      email: "",
-      message: "",
-    },
-  });
-
-  // Memoized submit handler
-  const onSubmit = useCallback((_data: z.infer<typeof contactSchema>) => {
-    setIsSubmitting(true);
-    setTimeout(() => {
-      toast({
-        title: t('contact.successTitle'),
-        description: t('contact.successDesc'),
-      });
-      form.reset();
-      setIsSubmitting(false);
-    }, 500);
-  }, [toast, t, form]);
 
   return (
-    <div className="min-h-screen bg-white dark:bg-zinc-900 text-zinc-900 dark:text-zinc-200 selection:bg-red-900 selection:text-white overflow-x-hidden">
+    <div className="min-h-screen bg-white dark:bg-zinc-900 text-zinc-900 dark:text-zinc-200 selection:bg-red-900 selection:text-white overflow-x-hidden" dir={language === 'ar' ? 'rtl' : 'ltr'}>
       <SkipLink />
       <Navbar />
 
@@ -395,6 +321,88 @@ export default function Home() {
         </div>
       </section>
 
+      {/* CERTIFICATIONS SECTION */}
+      <section className="py-16 bg-white dark:bg-zinc-900">
+        <div className="container mx-auto px-6">
+          <div className="text-center mb-12 animate-in fade-in duration-600">
+            <h3 className="text-red-600 dark:text-red-500 font-bold tracking-widest uppercase mb-2">{t('home.certifications.subtitle')}</h3>
+            <h2 className="text-3xl md:text-4xl font-black text-zinc-900 dark:text-white">{t('home.certifications.title')}</h2>
+          </div>
+          <div className="flex flex-wrap justify-center items-center gap-8 md:gap-16">
+            {/* ISO 9001 - Real Certificate Image */}
+            <div
+              className="flex flex-col items-center gap-3 group animate-in scale-in duration-500"
+            >
+              <div className="w-32 h-32 bg-white dark:bg-zinc-800 border-2 border-zinc-200 dark:border-zinc-600 rounded-xl flex items-center justify-center group-hover:border-red-600 dark:group-hover:border-red-500 group-hover:shadow-xl group-hover:shadow-red-600/20 transition-all duration-300 group-hover:scale-110 p-2 overflow-hidden">
+                <OptimizedImage 
+                  src="/certifications/iso9001.webp"
+                  alt="ISO 9001 Sertifikası"
+                  className="w-full h-full object-contain"
+                  loading="lazy"
+                />
+              </div>
+              <span className="text-sm text-zinc-700 dark:text-zinc-400 uppercase tracking-wider font-bold group-hover:text-red-600 dark:group-hover:text-red-500 transition-colors">
+                {t('certifications.iso9001')}
+              </span>
+            </div>
+
+            {/* TSE - Real Certificate Image */}
+            <div
+              className="flex flex-col items-center gap-3 group animate-in scale-in duration-500"
+              style={{ animationDelay: '100ms' }}
+            >
+              <div className="w-32 h-32 bg-white dark:bg-zinc-800 border-2 border-zinc-200 dark:border-zinc-600 rounded-xl flex items-center justify-center group-hover:border-red-600 dark:group-hover:border-red-500 group-hover:shadow-xl group-hover:shadow-red-600/20 transition-all duration-300 group-hover:scale-110 p-2 overflow-hidden">
+                <OptimizedImage 
+                  src="/certifications/tse.webp"
+                  alt="TSE Sertifikası"
+                  className="w-full h-full object-contain"
+                  loading="lazy"
+                />
+              </div>
+              <span className="text-sm text-zinc-700 dark:text-zinc-400 uppercase tracking-wider font-bold group-hover:text-red-600 dark:group-hover:text-red-500 transition-colors">
+                {t('certifications.tse')}
+              </span>
+            </div>
+
+            {/* CE - Real Certificate Image */}
+            <div
+              className="flex flex-col items-center gap-3 group animate-in scale-in duration-500"
+              style={{ animationDelay: '200ms' }}
+            >
+              <div className="w-32 h-32 bg-white dark:bg-zinc-800 border-2 border-zinc-200 dark:border-zinc-600 rounded-xl flex items-center justify-center group-hover:border-red-600 dark:group-hover:border-red-500 group-hover:shadow-xl group-hover:shadow-red-600/20 transition-all duration-300 group-hover:scale-110 p-4 overflow-hidden">
+                <OptimizedImage 
+                  src="/certifications/ce.webp"
+                  alt="CE Uygunluk Sertifikası"
+                  className="w-full h-full object-contain mt-2"
+                  loading="lazy"
+                />
+              </div>
+              <span className="text-sm text-zinc-700 dark:text-zinc-400 uppercase tracking-wider font-bold group-hover:text-red-600 dark:group-hover:text-red-500 transition-colors">
+                {t('certifications.ce')}
+              </span>
+            </div>
+
+            {/* Quality - Real Certificate Image (Golden) */}
+            <div
+              className="flex flex-col items-center gap-3 group animate-in scale-in duration-500"
+              style={{ animationDelay: '300ms' }}
+            >
+              <div className="w-32 h-32 bg-white dark:bg-zinc-800 border-2 border-zinc-200 dark:border-zinc-600 rounded-xl flex items-center justify-center group-hover:border-red-600 dark:group-hover:border-red-500 group-hover:shadow-xl group-hover:shadow-red-600/20 transition-all duration-300 group-hover:scale-110 p-4 overflow-hidden">
+                <OptimizedImage 
+                  src="/certifications/golden.webp"
+                  alt="Kalite Garantisi"
+                  className="w-full h-full object-contain"
+                  loading="lazy"
+                />
+              </div>
+              <span className="text-sm text-zinc-700 dark:text-zinc-400 uppercase tracking-wider font-bold group-hover:text-red-600 dark:group-hover:text-red-500 transition-colors">
+                {t('certifications.quality')}
+              </span>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* PROJECTS / GALLERY SECTION */}
       <section id="projects" className="py-24 bg-white dark:bg-zinc-900">
         <div className="container mx-auto px-6">
@@ -460,106 +468,6 @@ export default function Home() {
             </div>
           </div>
           */}
-        </div>
-      </section>
-
-      {/* CONTACT SECTION */}
-      <section id="contact" className="py-24 bg-white dark:bg-zinc-900">
-        <div className="container mx-auto px-6">
-          <div className="grid lg:grid-cols-2 gap-16 xs:gap-8">
-            <div className="animate-in fade-in duration-600">
-              <h3 className="text-red-500 dark:text-red-500 font-bold tracking-widest uppercase mb-4">{t('contact.subtitle')}</h3>
-              <h2 className="text-4xl xs:text-2xl md:text-5xl font-black text-zinc-900 dark:text-white mb-8 xs:mb-4">{t('contact.title')} <br />{t('contact.title2')}</h2>
-              <p className="text-zinc-600 dark:text-zinc-400 mb-8 xs:mb-4 max-w-lg xs:text-sm">
-                {t('contact.description')}
-              </p>
-              
-              <div className="bg-slate-100 dark:bg-zinc-800 border border-slate-200 dark:border-zinc-700 p-8 xs:p-4 rounded-lg relative overflow-hidden shadow-lg dark:shadow-none">
-                <div className="absolute top-0 right-0 w-24 h-24 bg-red-600/10 rounded-bl-full -mr-4 -mt-4"></div>
-                <div className="relative z-10">
-                    <h4 className="text-xl xs:text-lg font-bold text-zinc-900 dark:text-white mb-4 xs:mb-2">{t('contact.whatsappTitle')}</h4>
-                    <Button 
-                      className="bg-[#25D366] hover:bg-[#20bd5a] text-white w-full py-6 xs:py-4 font-bold text-lg xs:text-base"
-                      onClick={() => window.open('https://wa.me/905373197281', '_blank')}
-                    >
-                        {t('contact.whatsappButton')}
-                    </Button>
-                </div>
-              </div>
-            </div>
-
-            <div className="bg-slate-50 dark:bg-zinc-800 p-8 xs:p-4 md:p-10 border border-slate-200 dark:border-zinc-700 shadow-xl dark:shadow-2xl animate-in fade-in-right duration-800">
-              <h3 className="text-2xl xs:text-xl font-bold text-zinc-900 dark:text-white mb-6 xs:mb-4 border-b border-slate-200 dark:border-zinc-700 pb-4 xs:pb-2">{t('contact.formTitle')}</h3>
-              <Form {...form}>
-                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 xs:space-y-4">
-                  <FormField
-                    control={form.control}
-                    name="name"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel className="text-zinc-700 dark:text-zinc-400">{t('contact.name')}</FormLabel>
-                        <FormControl>
-                          <Input 
-                            placeholder={t('contact.namePlaceholder')} 
-                            {...field} 
-                            className="bg-white dark:bg-zinc-900 border-slate-300 dark:border-zinc-700 focus:border-red-600 h-12"
-                            maxLength={100}
-                            autoComplete="name"
-                          />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                  <FormField
-                    control={form.control}
-                    name="email"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel className="text-zinc-700 dark:text-zinc-400">{t('contact.email')}</FormLabel>
-                        <FormControl>
-                          <Input 
-                            placeholder={t('contact.emailPlaceholder')} 
-                            type="email"
-                            {...field} 
-                            className="bg-white dark:bg-zinc-900 border-slate-300 dark:border-zinc-700 focus:border-red-600 h-12"
-                            maxLength={254}
-                            autoComplete="email"
-                          />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                  <FormField
-                    control={form.control}
-                    name="message"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel className="text-zinc-700 dark:text-zinc-400">{t('contact.message')}</FormLabel>
-                        <FormControl>
-                          <Textarea 
-                            placeholder={t('contact.messagePlaceholder')} 
-                            {...field} 
-                            className="bg-white dark:bg-zinc-900 border-slate-300 dark:border-zinc-700 focus:border-red-600 min-h-[120px]"
-                            maxLength={2000}
-                          />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                  <Button 
-                    type="submit" 
-                    className="w-full bg-red-600 hover:bg-red-700 text-white font-bold h-12 uppercase tracking-wide disabled:opacity-50 disabled:cursor-not-allowed"
-                    disabled={isSubmitting}
-                  >
-                    {isSubmitting ? t('contact.submitting') : t('contact.submit')}
-                  </Button>
-                </form>
-              </Form>
-            </div>
-          </div>
         </div>
       </section>
 

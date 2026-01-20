@@ -10,7 +10,7 @@ import { aboutTranslations } from "@/lib/about-translations";
 type ProductKey = 'konveyor' | 'tekstil' | 'celik' | 'ozelMakine';
 
 export default function About() {
-  const { t: baseT, tArray: baseTArray, language } = useI18n();
+  const { language } = useI18n();
 
   // Custom translation function for about page
   const t = (key: string): string => {
@@ -35,7 +35,7 @@ export default function About() {
   };
 
   return (
-    <div className="min-h-screen bg-white dark:bg-zinc-900 text-zinc-900 dark:text-zinc-200 selection:bg-red-900 selection:text-white overflow-x-hidden">
+    <div className="min-h-screen bg-white dark:bg-zinc-900 text-zinc-900 dark:text-zinc-200 selection:bg-red-900 selection:text-white overflow-x-hidden" dir={language === 'ar' ? 'rtl' : 'ltr'}>
       <SkipLink />
       <Navbar />
 
@@ -95,18 +95,18 @@ export default function About() {
                   className="w-full h-96 object-cover mb-6"
                   loading="lazy"
                 />
-                <div className="grid grid-cols-3 gap-4 text-center">
-                  <div className="bg-zinc-50 dark:bg-zinc-700 p-4 rounded-lg">
-                    <span className="block text-3xl font-black text-red-600 dark:text-red-500">15+</span>
-                    <span className="text-xs uppercase tracking-wider text-zinc-600 dark:text-zinc-400">{t('about.yearsExperience')}</span>
+                <div className="grid grid-cols-1 xs:grid-cols-3 gap-4 text-center">
+                  <div className="bg-zinc-50 dark:bg-zinc-700 p-4 xs:p-3 rounded-lg">
+                    <span className="block text-3xl xs:text-2xl font-black text-red-600 dark:text-red-500 mb-1">15+</span>
+                    <span className="text-xs xs:text-[10px] uppercase tracking-wider text-zinc-600 dark:text-zinc-400 leading-tight">{t('about.yearsExperience')}</span>
                   </div>
-                  <div className="bg-zinc-50 dark:bg-zinc-700 p-4 rounded-lg">
-                    <span className="block text-3xl font-black text-red-600 dark:text-red-500">200+</span>
-                    <span className="text-xs uppercase tracking-wider text-zinc-600 dark:text-zinc-400">{t('about.completedProjects')}</span>
+                  <div className="bg-zinc-50 dark:bg-zinc-700 p-4 xs:p-3 rounded-lg">
+                    <span className="block text-3xl xs:text-2xl font-black text-red-600 dark:text-red-500 mb-1">200+</span>
+                    <span className="text-xs xs:text-[10px] uppercase tracking-wider text-zinc-600 dark:text-zinc-400 leading-tight">{t('about.completedProjects')}</span>
                   </div>
-                  <div className="bg-zinc-50 dark:bg-zinc-700 p-4 rounded-lg">
-                    <span className="block text-3xl font-black text-red-600 dark:text-red-500">50+</span>
-                    <span className="text-xs uppercase tracking-wider text-zinc-600 dark:text-zinc-400">{t('about.happyClients')}</span>
+                  <div className="bg-zinc-50 dark:bg-zinc-700 p-4 xs:p-3 rounded-lg">
+                    <span className="block text-3xl xs:text-2xl font-black text-red-600 dark:text-red-500 mb-1">50+</span>
+                    <span className="text-xs xs:text-[10px] uppercase tracking-wider text-zinc-600 dark:text-zinc-400 leading-tight">{t('about.happyClients')}</span>
                   </div>
                 </div>
               </div>

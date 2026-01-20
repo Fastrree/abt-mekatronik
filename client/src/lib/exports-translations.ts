@@ -1,0 +1,765 @@
+export const exportsTranslations = {
+  tr: {
+    hero: {
+      badge: 'Küresel Erişim',
+      title1: 'DÜNYA',
+      title2: 'ÇAPINDAKİ',
+      title3: 'İHRACATLARIMIZ',
+      description: 'Türkiye\'den dünyaya kaliteli endüstriyel çözümler sunuyoruz. 12+ ülkeye ihracat yapan güvenilir ortağınız.',
+    },
+    stats: {
+      countries: 'İhracat Ülkesi',
+      machines: 'İhraç Edilen Makine',
+      growth: 'Yıllık Büyüme',
+      certificate: 'Kalite Belgesi',
+    },
+    productsSection: {
+      title: 'İHRAÇ ETTİĞİMİZ ÜRÜNLER',
+      titleHighlight: 'DÜNYA STANDARTLARINDA',
+      description: 'Uluslararası kalite standartlarında ürettiğimiz ürünlerimiz, dünya genelinde tercih ediliyor.',
+    },
+    products: {
+      conveyor: 'Konveyör Sistemleri',
+      conveyorDesc: 'Ağır yük taşıma kapasiteli, modüler konveyör sistemleri',
+      textile: 'Tekstil Makineleri',
+      textileDesc: 'Yüksek hassasiyetli, enerji verimli tekstil üretim makineleri',
+      steel: 'Çelik Konstrüksiyon',
+      steelDesc: 'Depreme dayanıklı, uzun ömürlü çelik yapı sistemleri',
+      custom: 'Özel Makine Tasarımı',
+      customDesc: 'İhtiyaca özel, sıfırdan tasarlanmış endüstriyel çözümler',
+    },
+    advantages: {
+      title: 'İHRACAT AVANTAJLARIMIZ',
+      items: [
+        {
+          title: 'Uluslararası Standartlar',
+          description: 'ISO 9001, CE belgeli ürünler ile global pazarlarda güvenilir çözümler',
+        },
+        {
+          title: 'Hızlı Teslimat',
+          description: 'Dünya geneline hızlı ve güvenli lojistik ağı ile zamanında teslimat',
+        },
+        {
+          title: 'Teknik Destek',
+          description: '7/24 uzaktan teknik destek ve yerinde servis hizmeti',
+        },
+        {
+          title: 'Rekabetçi Fiyat',
+          description: 'Kaliteden ödün vermeden, rekabetçi fiyatlarla global pazarda güçlü konum',
+        },
+      ],
+    },
+    countries: {
+      title: 'İHRACAT HARİTAMIZ',
+      subtitle: 'Dünya Genelinde Güvenilir Ortağınız',
+      description: 'Türkiye\'den 12+ ülkeye kaliteli endüstriyel çözümler sunuyoruz.',
+      legend: {
+        production: 'Üretim Merkezi',
+        export: 'İhracat Ülkeleri',
+        other: 'Diğer Ülkeler',
+      },
+    },
+    whyUs: {
+      title: 'NEDEN BİZİ TERCİH EDİYORLAR?',
+      description: 'Global müşterilerimiz neden ABT Mekatronik\'i tercih ediyor?',
+      reasons: [
+        {
+          title: 'Kanıtlanmış Kalite',
+          description: 'Uluslararası sertifikalar ve referanslarla desteklenen kalite güvencesi',
+        },
+        {
+          title: 'Zamanında Teslimat',
+          description: '%98 zamanında teslimat oranı ile güvenilir iş ortağı',
+        },
+        {
+          title: 'Teknik Uzmanlık',
+          description: '15+ yıllık deneyim ve uzman mühendislik ekibi',
+        },
+        {
+          title: 'Özelleştirilebilir Çözümler',
+          description: 'Her projeye özel tasarım ve üretim imkanı',
+        },
+        {
+          title: 'Rekabetçi Fiyatlandırma',
+          description: 'Kalite-fiyat dengesinde en iyi değer',
+        },
+        {
+          title: 'Sürekli İnovasyon',
+          description: 'Ar-Ge yatırımları ile sürekli gelişen ürün portföyü',
+        },
+      ],
+    },
+    partners: {
+      title: 'GLOBAL ORTAKLARIMIZ',
+      subtitle: 'Dünya Genelinde Güvenilir İş Birlikleri',
+      description: 'Uluslararası iş ortaklarımız ile birlikte büyüyoruz.',
+      items: [
+        { name: 'Özbekistan Tekstil A.Ş.', country: 'Özbekistan', industry: 'Tekstil' },
+        { name: 'Mısır Endüstri Ltd.', country: 'Mısır', industry: 'Gıda' },
+        { name: 'Tacikistan Lojistik', country: 'Tacikistan', industry: 'Lojistik' },
+        { name: 'Kazakistan Metal', country: 'Kazakistan', industry: 'Metal' },
+        { name: 'Türkmenistan Üretim', country: 'Türkmenistan', industry: 'Üretim' },
+      ],
+    },
+    cta: {
+      title: 'İHRACAT İÇİN BİZİMLE İLETİŞİME GEÇİN',
+      description: 'Global pazarlarda güvenilir ortağınız olmak için hazırız. Projeleriniz için teklif alın.',
+      contactButton: 'İletişime Geçin',
+      whatsappButton: 'WhatsApp ile Ulaşın',
+    },
+  },
+  en: {
+    hero: {
+      badge: 'Global Reach',
+      title1: 'OUR',
+      title2: 'WORLDWIDE',
+      title3: 'EXPORTS',
+      description: 'We provide quality industrial solutions from Turkey to the world. Your reliable partner exporting to 12+ countries.',
+    },
+    stats: {
+      countries: 'Export Countries',
+      machines: 'Machines Exported',
+      growth: 'Annual Growth',
+      certificate: 'Quality Certificate',
+    },
+    productsSection: {
+      title: 'OUR EXPORTED PRODUCTS',
+      titleHighlight: 'WORLD-CLASS STANDARDS',
+      description: 'Our products manufactured to international quality standards are preferred worldwide.',
+    },
+    products: {
+      conveyor: 'Conveyor Systems',
+      conveyorDesc: 'Heavy-duty, modular conveyor systems with high load capacity',
+      textile: 'Textile Machinery',
+      textileDesc: 'High-precision, energy-efficient textile production machinery',
+      steel: 'Steel Construction',
+      steelDesc: 'Earthquake-resistant, long-lasting steel structure systems',
+      custom: 'Custom Machine Design',
+      customDesc: 'Custom-designed industrial solutions from scratch',
+    },
+    advantages: {
+      title: 'OUR EXPORT ADVANTAGES',
+      items: [
+        {
+          title: 'International Standards',
+          description: 'Reliable solutions in global markets with ISO 9001, CE certified products',
+        },
+        {
+          title: 'Fast Delivery',
+          description: 'On-time delivery worldwide with fast and secure logistics network',
+        },
+        {
+          title: 'Technical Support',
+          description: '24/7 remote technical support and on-site service',
+        },
+        {
+          title: 'Competitive Pricing',
+          description: 'Strong position in global market with competitive prices without compromising quality',
+        },
+      ],
+    },
+    countries: {
+      title: 'OUR EXPORT MAP',
+      subtitle: 'Your Reliable Partner Worldwide',
+      description: 'We provide quality industrial solutions from Turkey to 12+ countries.',
+      legend: {
+        production: 'Production Center',
+        export: 'Export Countries',
+        other: 'Other Countries',
+      },
+    },
+    whyUs: {
+      title: 'WHY THEY CHOOSE US?',
+      description: 'Why do our global customers choose ABT Mechatronics?',
+      reasons: [
+        {
+          title: 'Proven Quality',
+          description: 'Quality assurance backed by international certificates and references',
+        },
+        {
+          title: 'On-Time Delivery',
+          description: 'Reliable business partner with 98% on-time delivery rate',
+        },
+        {
+          title: 'Technical Expertise',
+          description: '15+ years of experience and expert engineering team',
+        },
+        {
+          title: 'Customizable Solutions',
+          description: 'Custom design and production capability for each project',
+        },
+        {
+          title: 'Competitive Pricing',
+          description: 'Best value in quality-price balance',
+        },
+        {
+          title: 'Continuous Innovation',
+          description: 'Constantly evolving product portfolio with R&D investments',
+        },
+      ],
+    },
+    partners: {
+      title: 'OUR GLOBAL PARTNERS',
+      subtitle: 'Reliable Collaborations Worldwide',
+      description: 'Growing together with our international business partners.',
+      items: [
+        { name: 'Uzbekistan Textile Inc.', country: 'Uzbekistan', industry: 'Textile' },
+        { name: 'Egypt Industry Ltd.', country: 'Egypt', industry: 'Food' },
+        { name: 'Tajikistan Logistics', country: 'Tajikistan', industry: 'Logistics' },
+        { name: 'Kazakhstan Metal', country: 'Kazakhstan', industry: 'Metal' },
+        { name: 'Turkmenistan Production', country: 'Turkmenistan', industry: 'Production' },
+      ],
+    },
+    cta: {
+      title: 'CONTACT US FOR EXPORT',
+      description: 'We are ready to be your reliable partner in global markets. Get a quote for your projects.',
+      contactButton: 'Contact Us',
+      whatsappButton: 'Contact via WhatsApp',
+    },
+  },
+  de: {
+    hero: {
+      badge: 'Globale Reichweite',
+      title1: 'UNSERE',
+      title2: 'WELTWEITEN',
+      title3: 'EXPORTE',
+      description: 'Wir bieten qualitativ hochwertige industrielle Lösungen von der Türkei in die Welt. Ihr zuverlässiger Partner mit Exporten in über 12 Länder.',
+    },
+    stats: {
+      countries: 'Exportländer',
+      machines: 'Exportierte Maschinen',
+      growth: 'Jährliches Wachstum',
+      certificate: 'Qualitätszertifikat',
+    },
+    productsSection: {
+      title: 'UNSERE EXPORTIERTEN PRODUKTE',
+      titleHighlight: 'WELTKLASSE-STANDARDS',
+      description: 'Unsere nach internationalen Qualitätsstandards hergestellten Produkte werden weltweit bevorzugt.',
+    },
+    products: {
+      conveyor: 'Fördersysteme',
+      conveyorDesc: 'Schwerlast-, modulare Fördersysteme mit hoher Tragfähigkeit',
+      textile: 'Textilmaschinen',
+      textileDesc: 'Hochpräzise, energieeffiziente Textilproduktionsmaschinen',
+      steel: 'Stahlkonstruktion',
+      steelDesc: 'Erdbebensichere, langlebige Stahlbausysteme',
+      custom: 'Kundenspezifisches Maschinendesign',
+      customDesc: 'Kundenspezifisch entworfene industrielle Lösungen von Grund auf',
+    },
+    advantages: {
+      title: 'UNSERE EXPORTVORTEILE',
+      items: [
+        {
+          title: 'Internationale Standards',
+          description: 'Zuverlässige Lösungen auf globalen Märkten mit ISO 9001, CE-zertifizierten Produkten',
+        },
+        {
+          title: 'Schnelle Lieferung',
+          description: 'Pünktliche Lieferung weltweit mit schnellem und sicherem Logistiknetzwerk',
+        },
+        {
+          title: 'Technischer Support',
+          description: '24/7 Remote-Technischer Support und Vor-Ort-Service',
+        },
+        {
+          title: 'Wettbewerbsfähige Preise',
+          description: 'Starke Position auf dem globalen Markt mit wettbewerbsfähigen Preisen ohne Qualitätskompromisse',
+        },
+      ],
+    },
+    countries: {
+      title: 'UNSERE EXPORTKARTE',
+      subtitle: 'Ihr Zuverlässiger Partner Weltweit',
+      description: 'Wir bieten qualitativ hochwertige industrielle Lösungen von der Türkei in über 12 Länder.',
+      legend: {
+        production: 'Produktionszentrum',
+        export: 'Exportländer',
+        other: 'Andere Länder',
+      },
+    },
+    whyUs: {
+      title: 'WARUM WÄHLEN SIE UNS?',
+      description: 'Warum wählen unsere globalen Kunden ABT Mechatronics?',
+      reasons: [
+        {
+          title: 'Bewährte Qualität',
+          description: 'Qualitätssicherung unterstützt durch internationale Zertifikate und Referenzen',
+        },
+        {
+          title: 'Pünktliche Lieferung',
+          description: 'Zuverlässiger Geschäftspartner mit 98% pünktlicher Lieferungsrate',
+        },
+        {
+          title: 'Technische Expertise',
+          description: '15+ Jahre Erfahrung und erfahrenes Ingenieurteam',
+        },
+        {
+          title: 'Anpassbare Lösungen',
+          description: 'Kundenspezifisches Design und Produktionsfähigkeit für jedes Projekt',
+        },
+        {
+          title: 'Wettbewerbsfähige Preise',
+          description: 'Bester Wert im Qualitäts-Preis-Verhältnis',
+        },
+        {
+          title: 'Kontinuierliche Innovation',
+          description: 'Ständig weiterentwickelndes Produktportfolio mit F&E-Investitionen',
+        },
+      ],
+    },
+    partners: {
+      title: 'UNSERE GLOBALEN PARTNER',
+      subtitle: 'Zuverlässige Zusammenarbeit Weltweit',
+      description: 'Wachsen gemeinsam mit unseren internationalen Geschäftspartnern.',
+      items: [
+        { name: 'Usbekistan Textil GmbH', country: 'Usbekistan', industry: 'Textil' },
+        { name: 'Ägypten Industrie Ltd.', country: 'Ägypten', industry: 'Lebensmittel' },
+        { name: 'Tadschikistan Logistik', country: 'Tadschikistan', industry: 'Logistik' },
+        { name: 'Kasachstan Metall', country: 'Kasachstan', industry: 'Metall' },
+        { name: 'Turkmenistan Produktion', country: 'Turkmenistan', industry: 'Produktion' },
+      ],
+    },
+    cta: {
+      title: 'KONTAKTIEREN SIE UNS FÜR EXPORT',
+      description: 'Wir sind bereit, Ihr zuverlässiger Partner auf globalen Märkten zu sein. Holen Sie sich ein Angebot für Ihre Projekte.',
+      contactButton: 'Kontaktieren Sie Uns',
+      whatsappButton: 'Kontakt über WhatsApp',
+    },
+  },
+  fr: {
+    hero: {
+      badge: 'Portée Mondiale',
+      title1: 'NOS',
+      title2: 'EXPORTATIONS',
+      title3: 'MONDIALES',
+      description: 'Nous fournissons des solutions industrielles de qualité de la Turquie vers le monde. Votre partenaire fiable exportant vers plus de 12 pays.',
+    },
+    stats: {
+      countries: 'Pays d\'Exportation',
+      machines: 'Machines Exportées',
+      growth: 'Croissance Annuelle',
+      certificate: 'Certificat de Qualité',
+    },
+    productsSection: {
+      title: 'NOS PRODUITS EXPORTÉS',
+      titleHighlight: 'NORMES DE CLASSE MONDIALE',
+      description: 'Nos produits fabriqués selon des normes de qualité internationales sont préférés dans le monde entier.',
+    },
+    products: {
+      conveyor: 'Systèmes de Convoyage',
+      conveyorDesc: 'Systèmes de convoyage modulaires robustes avec haute capacité de charge',
+      textile: 'Machines Textiles',
+      textileDesc: 'Machines de production textile haute précision et économes en énergie',
+      steel: 'Construction en Acier',
+      steelDesc: 'Systèmes de structure en acier résistants aux tremblements de terre et durables',
+      custom: 'Conception de Machines Personnalisées',
+      customDesc: 'Solutions industrielles conçues sur mesure à partir de zéro',
+    },
+    advantages: {
+      title: 'NOS AVANTAGES À L\'EXPORTATION',
+      items: [
+        {
+          title: 'Normes Internationales',
+          description: 'Solutions fiables sur les marchés mondiaux avec des produits certifiés ISO 9001, CE',
+        },
+        {
+          title: 'Livraison Rapide',
+          description: 'Livraison à temps dans le monde entier avec un réseau logistique rapide et sécurisé',
+        },
+        {
+          title: 'Support Technique',
+          description: 'Support technique à distance 24/7 et service sur site',
+        },
+        {
+          title: 'Prix Compétitifs',
+          description: 'Position forte sur le marché mondial avec des prix compétitifs sans compromettre la qualité',
+        },
+      ],
+    },
+    countries: {
+      title: 'NOTRE CARTE D\'EXPORTATION',
+      subtitle: 'Votre Partenaire Fiable dans le Monde Entier',
+      description: 'Nous fournissons des solutions industrielles de qualité de la Turquie vers plus de 12 pays.',
+      legend: {
+        production: 'Centre de Production',
+        export: 'Pays d\'Exportation',
+        other: 'Autres Pays',
+      },
+    },
+    whyUs: {
+      title: 'POURQUOI NOUS CHOISIR?',
+      description: 'Pourquoi nos clients mondiaux choisissent-ils ABT Mechatronics?',
+      reasons: [
+        {
+          title: 'Qualité Prouvée',
+          description: 'Assurance qualité soutenue par des certificats et références internationaux',
+        },
+        {
+          title: 'Livraison à Temps',
+          description: 'Partenaire commercial fiable avec un taux de livraison à temps de 98%',
+        },
+        {
+          title: 'Expertise Technique',
+          description: '15+ années d\'expérience et équipe d\'ingénierie experte',
+        },
+        {
+          title: 'Solutions Personnalisables',
+          description: 'Capacité de conception et de production personnalisée pour chaque projet',
+        },
+        {
+          title: 'Prix Compétitifs',
+          description: 'Meilleur rapport qualité-prix',
+        },
+        {
+          title: 'Innovation Continue',
+          description: 'Portefeuille de produits en constante évolution avec des investissements en R&D',
+        },
+      ],
+    },
+    partners: {
+      title: 'NOS PARTENAIRES MONDIAUX',
+      subtitle: 'Collaborations Fiables dans le Monde Entier',
+      description: 'Croître ensemble avec nos partenaires commerciaux internationaux.',
+      items: [
+        { name: 'Ouzbékistan Textile Inc.', country: 'Ouzbékistan', industry: 'Textile' },
+        { name: 'Égypte Industrie Ltd.', country: 'Égypte', industry: 'Alimentaire' },
+        { name: 'Tadjikistan Logistique', country: 'Tadjikistan', industry: 'Logistique' },
+        { name: 'Kazakhstan Métal', country: 'Kazakhstan', industry: 'Métal' },
+        { name: 'Turkménistan Production', country: 'Turkménistan', industry: 'Production' },
+      ],
+    },
+    cta: {
+      title: 'CONTACTEZ-NOUS POUR L\'EXPORTATION',
+      description: 'Nous sommes prêts à être votre partenaire fiable sur les marchés mondiaux. Obtenez un devis pour vos projets.',
+      contactButton: 'Contactez-Nous',
+      whatsappButton: 'Contacter via WhatsApp',
+    },
+  },
+  es: {
+    hero: {
+      badge: 'Alcance Global',
+      title1: 'NUESTRAS',
+      title2: 'EXPORTACIONES',
+      title3: 'MUNDIALES',
+      description: 'Proporcionamos soluciones industriales de calidad desde Turquía al mundo. Su socio confiable exportando a más de 12 países.',
+    },
+    stats: {
+      countries: 'Países de Exportación',
+      machines: 'Máquinas Exportadas',
+      growth: 'Crecimiento Anual',
+      certificate: 'Certificado de Calidad',
+    },
+    productsSection: {
+      title: 'NUESTROS PRODUCTOS EXPORTADOS',
+      titleHighlight: 'ESTÁNDARES DE CLASE MUNDIAL',
+      description: 'Nuestros productos fabricados según estándares de calidad internacional son preferidos en todo el mundo.',
+    },
+    products: {
+      conveyor: 'Sistemas Transportadores',
+      conveyorDesc: 'Sistemas transportadores modulares de servicio pesado con alta capacidad de carga',
+      textile: 'Maquinaria Textil',
+      textileDesc: 'Maquinaria de producción textil de alta precisión y eficiencia energética',
+      steel: 'Construcción de Acero',
+      steelDesc: 'Sistemas de estructura de acero resistentes a terremotos y duraderos',
+      custom: 'Diseño de Máquinas Personalizadas',
+      customDesc: 'Soluciones industriales diseñadas a medida desde cero',
+    },
+    advantages: {
+      title: 'NUESTRAS VENTAJAS DE EXPORTACIÓN',
+      items: [
+        {
+          title: 'Estándares Internacionales',
+          description: 'Soluciones confiables en mercados globales con productos certificados ISO 9001, CE',
+        },
+        {
+          title: 'Entrega Rápida',
+          description: 'Entrega a tiempo en todo el mundo con red logística rápida y segura',
+        },
+        {
+          title: 'Soporte Técnico',
+          description: 'Soporte técnico remoto 24/7 y servicio en sitio',
+        },
+        {
+          title: 'Precios Competitivos',
+          description: 'Posición fuerte en el mercado global con precios competitivos sin comprometer la calidad',
+        },
+      ],
+    },
+    countries: {
+      title: 'NUESTRO MAPA DE EXPORTACIÓN',
+      subtitle: 'Su Socio Confiable en Todo el Mundo',
+      description: 'Proporcionamos soluciones industriales de calidad desde Turquía a más de 12 países.',
+      legend: {
+        production: 'Centro de Producción',
+        export: 'Países de Exportación',
+        other: 'Otros Países',
+      },
+    },
+    whyUs: {
+      title: '¿POR QUÉ ELEGIRNOS?',
+      description: '¿Por qué nuestros clientes globales eligen ABT Mechatronics?',
+      reasons: [
+        {
+          title: 'Calidad Probada',
+          description: 'Garantía de calidad respaldada por certificados y referencias internacionales',
+        },
+        {
+          title: 'Entrega a Tiempo',
+          description: 'Socio comercial confiable con tasa de entrega a tiempo del 98%',
+        },
+        {
+          title: 'Experiencia Técnica',
+          description: '15+ años de experiencia y equipo de ingeniería experto',
+        },
+        {
+          title: 'Soluciones Personalizables',
+          description: 'Capacidad de diseño y producción personalizada para cada proyecto',
+        },
+        {
+          title: 'Precios Competitivos',
+          description: 'Mejor valor en equilibrio calidad-precio',
+        },
+        {
+          title: 'Innovación Continua',
+          description: 'Portafolio de productos en constante evolución con inversiones en I+D',
+        },
+      ],
+    },
+    partners: {
+      title: 'NUESTROS SOCIOS GLOBALES',
+      subtitle: 'Colaboraciones Confiables en Todo el Mundo',
+      description: 'Creciendo juntos con nuestros socios comerciales internacionales.',
+      items: [
+        { name: 'Uzbekistán Textil Inc.', country: 'Uzbekistán', industry: 'Textil' },
+        { name: 'Egipto Industria Ltd.', country: 'Egipto', industry: 'Alimentación' },
+        { name: 'Tayikistán Logística', country: 'Tayikistán', industry: 'Logística' },
+        { name: 'Kazajistán Metal', country: 'Kazajistán', industry: 'Metal' },
+        { name: 'Turkmenistán Producción', country: 'Turkmenistán', industry: 'Producción' },
+      ],
+    },
+    cta: {
+      title: 'CONTÁCTENOS PARA EXPORTACIÓN',
+      description: 'Estamos listos para ser su socio confiable en los mercados globales. Obtenga una cotización para sus proyectos.',
+      contactButton: 'Contáctenos',
+      whatsappButton: 'Contactar vía WhatsApp',
+    },
+  },
+  ar: {
+    hero: {
+      badge: 'الوصول العالمي',
+      title1: 'صادراتنا',
+      title2: 'حول',
+      title3: 'العالم',
+      description: 'نقدم حلول صناعية عالية الجودة من تركيا إلى العالم. شريكك الموثوق الذي يصدر إلى أكثر من 12 دولة.',
+    },
+    stats: {
+      countries: 'دول التصدير',
+      machines: 'الآلات المصدرة',
+      growth: 'النمو السنوي',
+      certificate: 'شهادة الجودة',
+    },
+    productsSection: {
+      title: 'منتجاتنا المصدرة',
+      titleHighlight: 'معايير عالمية',
+      description: 'منتجاتنا المصنعة وفقًا لمعايير الجودة الدولية مفضلة في جميع أنحاء العالم.',
+    },
+    products: {
+      conveyor: 'أنظمة النقل',
+      conveyorDesc: 'أنظمة نقل معيارية للخدمة الشاقة بسعة تحميل عالية',
+      textile: 'آلات النسيج',
+      textileDesc: 'آلات إنتاج نسيج عالية الدقة وموفرة للطاقة',
+      steel: 'البناء الفولاذي',
+      steelDesc: 'أنظمة هيكل فولاذي مقاومة للزلازل ودائمة',
+      custom: 'تصميم آلات مخصصة',
+      customDesc: 'حلول صناعية مصممة خصيصًا من الصفر',
+    },
+    advantages: {
+      title: 'مزايا التصدير لدينا',
+      items: [
+        {
+          title: 'المعايير الدولية',
+          description: 'حلول موثوقة في الأسواق العالمية مع منتجات معتمدة ISO 9001، CE',
+        },
+        {
+          title: 'التسليم السريع',
+          description: 'التسليم في الوقت المحدد في جميع أنحاء العالم مع شبكة لوجستية سريعة وآمنة',
+        },
+        {
+          title: 'الدعم الفني',
+          description: 'دعم فني عن بعد على مدار الساعة طوال أيام الأسبوع وخدمة في الموقع',
+        },
+        {
+          title: 'أسعار تنافسية',
+          description: 'موقع قوي في السوق العالمية بأسعار تنافسية دون المساس بالجودة',
+        },
+      ],
+    },
+    countries: {
+      title: 'خريطة التصدير لدينا',
+      subtitle: 'شريكك الموثوق في جميع أنحاء العالم',
+      description: 'نقدم حلول صناعية عالية الجودة من تركيا إلى أكثر من 12 دولة.',
+      legend: {
+        production: 'مركز الإنتاج',
+        export: 'دول التصدير',
+        other: 'دول أخرى',
+      },
+    },
+    whyUs: {
+      title: 'لماذا تختارنا؟',
+      description: 'لماذا يختار عملاؤنا العالميون ABT Mechatronics؟',
+      reasons: [
+        {
+          title: 'جودة مثبتة',
+          description: 'ضمان الجودة مدعوم بشهادات ومراجع دولية',
+        },
+        {
+          title: 'التسليم في الوقت المحدد',
+          description: 'شريك تجاري موثوق بمعدل تسليم في الوقت المحدد 98%',
+        },
+        {
+          title: 'الخبرة الفنية',
+          description: '15+ سنة من الخبرة وفريق هندسي خبير',
+        },
+        {
+          title: 'حلول قابلة للتخصيص',
+          description: 'قدرة التصميم والإنتاج المخصصة لكل مشروع',
+        },
+        {
+          title: 'أسعار تنافسية',
+          description: 'أفضل قيمة في توازن الجودة والسعر',
+        },
+        {
+          title: 'الابتكار المستمر',
+          description: 'محفظة منتجات متطورة باستمرار مع استثمارات البحث والتطوير',
+        },
+      ],
+    },
+    partners: {
+      title: 'شركاؤنا العالميون',
+      subtitle: 'تعاون موثوق في جميع أنحاء العالم',
+      description: 'النمو معًا مع شركائنا التجاريين الدوليين.',
+      items: [
+        { name: 'أوزبكستان للنسيج', country: 'أوزبكستان', industry: 'النسيج' },
+        { name: 'مصر للصناعة', country: 'مصر', industry: 'الغذاء' },
+        { name: 'طاجيكستان للوجستيات', country: 'طاجيكستان', industry: 'اللوجستيات' },
+        { name: 'كازاخستان للمعادن', country: 'كازاخستان', industry: 'المعادن' },
+        { name: 'تركمانستان للإنتاج', country: 'تركمانستان', industry: 'الإنتاج' },
+      ],
+    },
+    cta: {
+      title: 'اتصل بنا للتصدير',
+      description: 'نحن مستعدون لنكون شريكك الموثوق في الأسواق العالمية. احصل على عرض أسعار لمشاريعك.',
+      contactButton: 'اتصل بنا',
+      whatsappButton: 'اتصل عبر واتساب',
+    },
+  },
+  ru: {
+    hero: {
+      badge: 'Глобальный Охват',
+      title1: 'НАШИ',
+      title2: 'МИРОВЫЕ',
+      title3: 'ЭКСПОРТЫ',
+      description: 'Мы предоставляем качественные промышленные решения из Турции в мир. Ваш надежный партнер, экспортирующий в более чем 12 стран.',
+    },
+    stats: {
+      countries: 'Страны Экспорта',
+      machines: 'Экспортированные Машины',
+      growth: 'Годовой Рост',
+      certificate: 'Сертификат Качества',
+    },
+    productsSection: {
+      title: 'НАШИ ЭКСПОРТИРУЕМЫЕ ПРОДУКТЫ',
+      titleHighlight: 'МИРОВЫЕ СТАНДАРТЫ',
+      description: 'Наши продукты, изготовленные по международным стандартам качества, предпочитаются во всем мире.',
+    },
+    products: {
+      conveyor: 'Конвейерные Системы',
+      conveyorDesc: 'Тяжелые, модульные конвейерные системы с высокой грузоподъемностью',
+      textile: 'Текстильное Оборудование',
+      textileDesc: 'Высокоточное, энергоэффективное текстильное производственное оборудование',
+      steel: 'Стальные Конструкции',
+      steelDesc: 'Сейсмостойкие, долговечные системы стальных конструкций',
+      custom: 'Индивидуальное Проектирование Машин',
+      customDesc: 'Индивидуально разработанные промышленные решения с нуля',
+    },
+    advantages: {
+      title: 'НАШИ ЭКСПОРТНЫЕ ПРЕИМУЩЕСТВА',
+      items: [
+        {
+          title: 'Международные Стандарты',
+          description: 'Надежные решения на мировых рынках с продуктами, сертифицированными ISO 9001, CE',
+        },
+        {
+          title: 'Быстрая Доставка',
+          description: 'Своевременная доставка по всему миру с быстрой и безопасной логистической сетью',
+        },
+        {
+          title: 'Техническая Поддержка',
+          description: 'Удаленная техническая поддержка 24/7 и обслуживание на месте',
+        },
+        {
+          title: 'Конкурентные Цены',
+          description: 'Сильная позиция на мировом рынке с конкурентными ценами без ущерба для качества',
+        },
+      ],
+    },
+    countries: {
+      title: 'НАША КАРТА ЭКСПОРТА',
+      subtitle: 'Ваш Надежный Партнер по Всему Миру',
+      description: 'Мы предоставляем качественные промышленные решения из Турции в более чем 12 стран.',
+      legend: {
+        production: 'Производственный Центр',
+        export: 'Страны Экспорта',
+        other: 'Другие Страны',
+      },
+    },
+    whyUs: {
+      title: 'ПОЧЕМУ ВЫБИРАЮТ НАС?',
+      description: 'Почему наши глобальные клиенты выбирают ABT Mechatronics?',
+      reasons: [
+        {
+          title: 'Проверенное Качество',
+          description: 'Гарантия качества, подкрепленная международными сертификатами и рекомендациями',
+        },
+        {
+          title: 'Своевременная Доставка',
+          description: 'Надежный деловой партнер с показателем своевременной доставки 98%',
+        },
+        {
+          title: 'Техническая Экспертиза',
+          description: '15+ лет опыта и экспертная инженерная команда',
+        },
+        {
+          title: 'Настраиваемые Решения',
+          description: 'Возможность индивидуального проектирования и производства для каждого проекта',
+        },
+        {
+          title: 'Конкурентные Цены',
+          description: 'Лучшее соотношение цены и качества',
+        },
+        {
+          title: 'Непрерывные Инновации',
+          description: 'Постоянно развивающийся портфель продуктов с инвестициями в НИОКР',
+        },
+      ],
+    },
+    partners: {
+      title: 'НАШИ ГЛОБАЛЬНЫЕ ПАРТНЕРЫ',
+      subtitle: 'Надежное Сотрудничество по Всему Миру',
+      description: 'Растем вместе с нашими международными деловыми партнерами.',
+      items: [
+        { name: 'Узбекистан Текстиль Инк.', country: 'Узбекистан', industry: 'Текстиль' },
+        { name: 'Египет Индастри Лтд.', country: 'Египет', industry: 'Пищевая' },
+        { name: 'Таджикистан Логистика', country: 'Таджикистан', industry: 'Логистика' },
+        { name: 'Казахстан Металл', country: 'Казахстан', industry: 'Металл' },
+        { name: 'Туркменистан Продакшн', country: 'Туркменистан', industry: 'Производство' },
+      ],
+    },
+    cta: {
+      title: 'СВЯЖИТЕСЬ С НАМИ ДЛЯ ЭКСПОРТА',
+      description: 'Мы готовы стать вашим надежным партнером на мировых рынках. Получите предложение для ваших проектов.',
+      contactButton: 'Свяжитесь с Нами',
+      whatsappButton: 'Связаться через WhatsApp',
+    },
+  },
+};

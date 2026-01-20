@@ -65,9 +65,9 @@ export default function Home() {
           <div className="absolute inset-0 bg-gradient-to-r from-zinc-900/70 via-zinc-900/50 to-zinc-900/30 dark:from-zinc-900/90 dark:via-zinc-900/80 dark:to-zinc-900/60" style={{ zIndex: 2 }} aria-hidden="true" />
         </div>
 
-        <div className="container mx-auto px-6 relative z-10 pt-20">
+        <div className="container mx-auto px-4 xs:px-3 sm:px-6 relative z-10 pt-20">
           <div className="max-w-4xl animate-in fade-in-left duration-800">
-            <div className="inline-block mb-4 px-3 py-1 bg-red-600/20 border border-red-600/50 text-red-500 font-bold text-xs tracking-widest uppercase rounded-sm backdrop-blur-sm">
+            <div className="inline-block mb-3 xs:mb-2 px-2.5 xs:px-2 py-1 xs:py-0.5 bg-red-600/20 border border-red-600/50 text-red-500 font-bold text-xs xs:text-[10px] tracking-widest uppercase rounded-sm backdrop-blur-sm">
               {t('hero.badge')}
             </div>
             <h1 id="hero-title" className="text-3xl xs:text-2xl sm:text-5xl md:text-7xl lg:text-8xl font-black text-white leading-[0.9] mb-6 xs:mb-4 sm:mb-8 tracking-tighter">
@@ -75,13 +75,13 @@ export default function Home() {
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-gray-100 to-gray-400">{t('hero.title2')}</span> <br />
               <span className="text-red-500">{t('hero.title3')}</span> {t('hero.title4')}
             </h1>
-            <p className="text-base xs:text-sm sm:text-xl md:text-2xl text-gray-200 max-w-2xl mb-8 xs:mb-6 sm:mb-10 font-light leading-relaxed border-l-4 border-red-500 pl-4 xs:pl-3 sm:pl-6">
+            <p className="text-base xs:text-sm sm:text-xl md:text-2xl text-gray-200 max-w-2xl mb-8 xs:mb-6 sm:mb-10 font-light leading-relaxed border-l-4 xs:border-l-2 border-red-500 pl-4 xs:pl-2 sm:pl-6">
               {t('hero.description')}
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 sm:gap-4 w-full sm:w-auto" role="group" aria-label="Ana eylem butonları">
+            <div className="flex flex-col sm:flex-row gap-3 xs:gap-2 sm:gap-4 w-full sm:w-auto" role="group" aria-label="Ana eylem butonları">
               <Button 
                 size="lg" 
-                className="w-full xs:w-full sm:w-auto bg-red-600 hover:bg-red-700 text-white font-bold text-base xs:text-sm sm:text-lg px-6 xs:px-4 sm:px-8 py-5 xs:py-4 sm:py-6 rounded-none skew-x-[-10deg] border-2 border-red-600 hover:shadow-[0_0_30px_rgba(220,38,38,0.5)] transition-all"
+                className="w-full xs:w-full sm:w-auto bg-red-600 hover:bg-red-700 text-white font-bold text-base xs:text-sm sm:text-lg px-6 xs:px-3 sm:px-8 py-5 xs:py-3 sm:py-6 rounded-none skew-x-[-10deg] border-2 border-red-600 hover:shadow-[0_0_30px_rgba(220,38,38,0.5)] transition-all"
                 onClick={() => document.getElementById('products')?.scrollIntoView({ behavior: 'smooth' })}
                 aria-label="Çözümlerimizi keşfedin"
               >
@@ -90,7 +90,7 @@ export default function Home() {
               <Button 
                 size="lg" 
                 variant="outline" 
-                className="w-full xs:w-full sm:w-auto border-gray-300 text-white hover:bg-white/10 hover:text-white font-bold text-base xs:text-sm sm:text-lg px-6 xs:px-4 sm:px-8 py-5 xs:py-4 sm:py-6 rounded-none skew-x-[-10deg] backdrop-blur-sm"
+                className="w-full xs:w-full sm:w-auto border-gray-300 text-white hover:bg-white/10 hover:text-white font-bold text-base xs:text-sm sm:text-lg px-6 xs:px-3 sm:px-8 py-5 xs:py-3 sm:py-6 rounded-none skew-x-[-10deg] backdrop-blur-sm"
                 onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })}
                 aria-label="Projelerimizi görüntüleyin"
               >
@@ -112,18 +112,18 @@ export default function Home() {
         className="py-24 bg-zinc-50 dark:bg-zinc-900 relative"
         aria-labelledby="products-title"
       >
-        <div className="container mx-auto px-6">
-          <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6 animate-in fade-in duration-600">
+        <div className="container mx-auto px-4 xs:px-3 sm:px-6">
+          <div className="flex flex-col md:flex-row justify-between items-end mb-12 xs:mb-8 sm:mb-16 gap-4 xs:gap-3 sm:gap-6 animate-in fade-in duration-600">
             <div>
-              <p className="text-red-600 dark:text-red-500 font-bold tracking-widest uppercase mb-2">{t('products.subtitle')}</p>
-              <h2 id="products-title" className="text-4xl md:text-5xl font-black text-zinc-900 dark:text-white">{t('products.title')}</h2>
+              <p className="text-red-600 dark:text-red-500 font-bold tracking-widest uppercase mb-2 xs:mb-1 text-xs xs:text-[10px]">{t('products.subtitle')}</p>
+              <h2 id="products-title" className="text-3xl xs:text-2xl sm:text-4xl md:text-5xl font-black text-zinc-900 dark:text-white">{t('products.title')}</h2>
             </div>
-            <p className="text-zinc-600 dark:text-zinc-400 max-w-md text-right md:text-left leading-relaxed">
+            <p className="text-zinc-600 dark:text-zinc-400 max-w-md text-right md:text-left leading-relaxed text-sm xs:text-xs">
               {t('products.description')}
             </p>
           </div>
 
-          <div className="grid grid-cols-1 xs:grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 xs:gap-3" role="list" aria-label="Ürün kategorileri">
+          <div className="grid grid-cols-1 xs:grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 xs:gap-2 sm:gap-6" role="list" aria-label="Ürün kategorileri">
             {/* Konveyör Sistemleri */}
             <a 
               href="/products/konveyor"
@@ -248,38 +248,38 @@ export default function Home() {
       </section>
 
       {/* EARLY CTA SECTION - Quick Contact */}
-      <section className="py-16 bg-gradient-to-r from-red-600 to-red-700 dark:from-red-700 dark:to-red-800 relative overflow-hidden">
+      <section className="py-12 xs:py-8 sm:py-16 bg-gradient-to-r from-red-600 to-red-700 dark:from-red-700 dark:to-red-800 relative overflow-hidden">
         <div className="absolute inset-0 opacity-10">
           <div className="absolute top-0 left-0 w-64 h-64 bg-white rounded-full blur-3xl"></div>
           <div className="absolute bottom-0 right-0 w-96 h-96 bg-white rounded-full blur-3xl"></div>
         </div>
-        <div className="container mx-auto px-6 text-center relative z-10">
-          <h3 className="text-3xl xs:text-2xl md:text-4xl font-black text-white mb-4 animate-in fade-in duration-600">
+        <div className="container mx-auto px-4 xs:px-3 sm:px-6 text-center relative z-10">
+          <h3 className="text-2xl xs:text-xl sm:text-3xl md:text-4xl font-black text-white mb-3 xs:mb-2 sm:mb-4 animate-in fade-in duration-600">
             {t('cta.quickContact.title')}
           </h3>
-          <p className="text-white/90 text-base xs:text-sm md:text-lg mb-8 max-w-2xl mx-auto leading-relaxed animate-in fade-in duration-600 delay-100">
+          <p className="text-white/90 text-sm xs:text-xs sm:text-base md:text-lg mb-6 xs:mb-4 sm:mb-8 max-w-2xl mx-auto leading-relaxed animate-in fade-in duration-600 delay-100">
             {t('cta.quickContact.description')}
           </p>
-          <div className="flex gap-4 xs:gap-3 justify-center flex-wrap animate-in scale-in duration-600 delay-200">
+          <div className="flex gap-3 xs:gap-2 sm:gap-4 justify-center flex-wrap animate-in scale-in duration-600 delay-200">
             <Button 
               size="lg"
-              className="bg-white text-red-600 hover:bg-zinc-100 font-bold text-base xs:text-sm px-8 xs:px-4 py-6 xs:py-4 rounded-none skew-x-[-10deg] shadow-xl hover:shadow-2xl transition-all hover:scale-105"
+              className="bg-white text-red-600 hover:bg-zinc-100 font-bold text-sm xs:text-xs sm:text-base px-6 xs:px-3 sm:px-8 py-4 xs:py-3 sm:py-6 rounded-none skew-x-[-10deg] shadow-xl hover:shadow-2xl transition-all hover:scale-105"
               onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
               aria-label="Hemen teklif alın"
             >
-              <span className="skew-x-[10deg] flex items-center gap-2 xs:gap-1.5">
-                <Phone className="w-5 h-5 xs:w-4 xs:h-4" />
+              <span className="skew-x-[10deg] flex items-center gap-1.5 xs:gap-1">
+                <Phone className="w-4 h-4 xs:w-3 xs:h-3" />
                 {t('cta.getQuote')}
               </span>
             </Button>
             <Button 
               size="lg"
               variant="outline"
-              className="border-2 border-white text-white hover:bg-white/10 font-bold text-base xs:text-sm px-8 xs:px-4 py-6 xs:py-4 rounded-none skew-x-[-10deg] backdrop-blur-sm transition-all hover:scale-105"
+              className="border-2 border-white text-white hover:bg-white/10 font-bold text-sm xs:text-xs sm:text-base px-6 xs:px-3 sm:px-8 py-4 xs:py-3 sm:py-6 rounded-none skew-x-[-10deg] backdrop-blur-sm transition-all hover:scale-105"
               onClick={() => window.open('https://wa.me/905300594494', '_blank')}
               aria-label="WhatsApp ile iletişime geçin"
             >
-              <span className="skew-x-[10deg] flex items-center gap-2">
+              <span className="skew-x-[10deg] flex items-center gap-1.5 xs:gap-1">
                 💬 {t('cta.whatsapp')}
               </span>
             </Button>
@@ -288,48 +288,48 @@ export default function Home() {
       </section>
 
       {/* ENGINEERING / ABOUT SECTION */}
-      <section id="engineering" className="py-24 bg-zinc-50 dark:bg-zinc-800 relative overflow-hidden">
+      <section id="engineering" className="py-16 xs:py-12 sm:py-24 bg-zinc-50 dark:bg-zinc-800 relative overflow-hidden">
         <div className="absolute top-0 right-0 w-1/3 h-full bg-zinc-200/30 dark:bg-zinc-700/20 skew-x-12 transform translate-x-20"></div>
         <div className="absolute bottom-0 left-0 w-64 h-64 border border-zinc-300 dark:border-zinc-600 rounded-full opacity-20 -translate-x-1/2 translate-y-1/2"></div>
         
-        <div className="container mx-auto px-6 relative z-10">
-          <div className="grid lg:grid-cols-2 gap-16 xs:gap-8 items-center">
+        <div className="container mx-auto px-4 xs:px-3 sm:px-6 relative z-10">
+          <div className="grid lg:grid-cols-2 gap-12 xs:gap-6 sm:gap-16 items-center">
             <div className="animate-in fade-in duration-600">
-              <h3 className="text-red-600 dark:text-red-500 font-bold tracking-widest uppercase mb-4">{t('engineering.subtitle')}</h3>
-              <h2 className="text-4xl xs:text-2xl md:text-5xl font-black text-zinc-900 dark:text-white mb-8 xs:mb-4">{t('engineering.title')} <br />{t('engineering.title2')}</h2>
+              <h3 className="text-red-600 dark:text-red-500 font-bold tracking-widest uppercase mb-3 xs:mb-2 sm:mb-4 text-xs xs:text-[10px]">{t('engineering.subtitle')}</h3>
+              <h2 className="text-3xl xs:text-xl sm:text-4xl md:text-5xl font-black text-zinc-900 dark:text-white mb-6 xs:mb-3 sm:mb-8">{t('engineering.title')} <br />{t('engineering.title2')}</h2>
               
-              <div className="space-y-8 xs:space-y-4">
-                <div className="flex gap-4 xs:gap-2">
-                  <div className="w-12 h-12 xs:w-10 xs:h-10 bg-red-600/10 border border-red-600/30 flex items-center justify-center shrink-0">
-                    <Settings className="text-red-600 dark:text-red-500 xs:w-5 xs:h-5" />
+              <div className="space-y-6 xs:space-y-3 sm:space-y-8">
+                <div className="flex gap-3 xs:gap-2 sm:gap-4">
+                  <div className="w-10 h-10 xs:w-8 xs:h-8 sm:w-12 sm:h-12 bg-red-600/10 border border-red-600/30 flex items-center justify-center shrink-0">
+                    <Settings className="text-red-600 dark:text-red-500 w-5 h-5 xs:w-4 xs:h-4" />
                   </div>
                   <div>
-                    <h4 className="text-xl xs:text-base font-bold text-zinc-900 dark:text-white mb-2 xs:mb-1">{t('engineering.customDesign')}</h4>
-                    <p className="text-zinc-600 dark:text-zinc-400 leading-relaxed xs:text-sm xs:leading-snug">
+                    <h4 className="text-lg xs:text-sm sm:text-xl font-bold text-zinc-900 dark:text-white mb-1.5 xs:mb-1">{t('engineering.customDesign')}</h4>
+                    <p className="text-zinc-600 dark:text-zinc-400 leading-relaxed text-sm xs:text-xs xs:leading-snug">
                       {t('engineering.customDesignDesc')}
                     </p>
                   </div>
                 </div>
 
-                <div className="flex gap-4 xs:gap-2">
-                  <div className="w-12 h-12 xs:w-10 xs:h-10 bg-red-600/10 border border-red-600/30 flex items-center justify-center shrink-0">
-                    <Cog className="text-red-600 dark:text-red-500 xs:w-5 xs:h-5" />
+                <div className="flex gap-3 xs:gap-2 sm:gap-4">
+                  <div className="w-10 h-10 xs:w-8 xs:h-8 sm:w-12 sm:h-12 bg-red-600/10 border border-red-600/30 flex items-center justify-center shrink-0">
+                    <Cog className="text-red-600 dark:text-red-500 w-5 h-5 xs:w-4 xs:h-4" />
                   </div>
                   <div>
-                    <h4 className="text-xl xs:text-base font-bold text-zinc-900 dark:text-white mb-2 xs:mb-1">{t('engineering.precision')}</h4>
-                    <p className="text-zinc-600 dark:text-zinc-400 leading-relaxed xs:text-sm xs:leading-snug">
+                    <h4 className="text-lg xs:text-sm sm:text-xl font-bold text-zinc-900 dark:text-white mb-1.5 xs:mb-1">{t('engineering.precision')}</h4>
+                    <p className="text-zinc-600 dark:text-zinc-400 leading-relaxed text-sm xs:text-xs xs:leading-snug">
                       {t('engineering.precisionDesc')}
                     </p>
                   </div>
                 </div>
 
-                <div className="flex gap-4 xs:gap-2">
-                  <div className="w-12 h-12 xs:w-10 xs:h-10 bg-red-600/10 border border-red-600/30 flex items-center justify-center shrink-0">
-                    <PenTool className="text-red-600 dark:text-red-500 xs:w-5 xs:h-5" />
+                <div className="flex gap-3 xs:gap-2 sm:gap-4">
+                  <div className="w-10 h-10 xs:w-8 xs:h-8 sm:w-12 sm:h-12 bg-red-600/10 border border-red-600/30 flex items-center justify-center shrink-0">
+                    <PenTool className="text-red-600 dark:text-red-500 w-5 h-5 xs:w-4 xs:h-4" />
                   </div>
                   <div>
-                    <h4 className="text-xl xs:text-base font-bold text-zinc-900 dark:text-white mb-2 xs:mb-1">{t('engineering.turnkey')}</h4>
-                    <p className="text-zinc-600 dark:text-zinc-400 leading-relaxed xs:text-sm xs:leading-snug">
+                    <h4 className="text-lg xs:text-sm sm:text-xl font-bold text-zinc-900 dark:text-white mb-1.5 xs:mb-1">{t('engineering.turnkey')}</h4>
+                    <p className="text-zinc-600 dark:text-zinc-400 leading-relaxed text-sm xs:text-xs xs:leading-snug">
                       {t('engineering.turnkeyDesc')}
                     </p>
                   </div>
@@ -352,53 +352,53 @@ export default function Home() {
           </div>
 
           {/* TRUST INDICATORS - Certifications + Numbers Combined */}
-          <div className="mt-20 pt-16 border-t border-zinc-300 dark:border-zinc-600">
-            <div className="text-center mb-12 animate-in fade-in duration-600">
-              <h3 className="text-red-600 dark:text-red-500 font-bold tracking-widest uppercase mb-2">{t('trust.subtitle')}</h3>
-              <h2 className="text-3xl md:text-4xl font-black text-zinc-900 dark:text-white">{t('trust.title')}</h2>
+          <div className="mt-16 xs:mt-10 sm:mt-20 pt-12 xs:pt-8 sm:pt-16 border-t border-zinc-300 dark:border-zinc-600">
+            <div className="text-center mb-8 xs:mb-6 sm:mb-12 animate-in fade-in duration-600">
+              <h3 className="text-red-600 dark:text-red-500 font-bold tracking-widest uppercase mb-2 xs:mb-1 text-xs xs:text-[10px]">{t('trust.subtitle')}</h3>
+              <h2 className="text-2xl xs:text-xl sm:text-3xl md:text-4xl font-black text-zinc-900 dark:text-white">{t('trust.title')}</h2>
             </div>
             
             {/* Certifications - Top Row */}
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 xs:gap-4 mb-12 animate-in fade-in duration-600">
-              <div className="flex flex-col items-center gap-2 group animate-in scale-in duration-500">
-                <div className="w-24 h-24 xs:w-20 xs:h-20 bg-white dark:bg-zinc-700 border-2 border-zinc-200 dark:border-zinc-600 rounded-lg flex items-center justify-center group-hover:border-red-600 dark:group-hover:border-red-500 group-hover:shadow-xl group-hover:shadow-red-600/20 transition-all p-2">
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 xs:gap-2 sm:gap-6 mb-8 xs:mb-6 sm:mb-12 animate-in fade-in duration-600">
+              <div className="flex flex-col items-center gap-1.5 xs:gap-1 sm:gap-2 group animate-in scale-in duration-500">
+                <div className="w-20 h-20 xs:w-16 xs:h-16 sm:w-24 sm:h-24 bg-white dark:bg-zinc-700 border-2 border-zinc-200 dark:border-zinc-600 rounded-lg flex items-center justify-center group-hover:border-red-600 dark:group-hover:border-red-500 group-hover:shadow-xl group-hover:shadow-red-600/20 transition-all p-1.5 xs:p-1 sm:p-2">
                   <OptimizedImage src="/certifications/iso9001.webp" alt="ISO 9001" className="w-full h-full object-contain" loading="lazy" />
                 </div>
-                <span className="text-xs text-zinc-600 dark:text-zinc-400 font-semibold group-hover:text-red-600 dark:group-hover:text-red-500 transition-colors">ISO 9001</span>
+                <span className="text-[10px] xs:text-[9px] sm:text-xs text-zinc-600 dark:text-zinc-400 font-semibold group-hover:text-red-600 dark:group-hover:text-red-500 transition-colors">ISO 9001</span>
               </div>
-              <div className="flex flex-col items-center gap-2 group animate-in scale-in duration-500" style={{ animationDelay: '50ms' }}>
-                <div className="w-24 h-24 xs:w-20 xs:h-20 bg-white dark:bg-zinc-700 border-2 border-zinc-200 dark:border-zinc-600 rounded-lg flex items-center justify-center group-hover:border-red-600 dark:group-hover:border-red-500 group-hover:shadow-xl group-hover:shadow-red-600/20 transition-all p-2">
+              <div className="flex flex-col items-center gap-1.5 xs:gap-1 sm:gap-2 group animate-in scale-in duration-500" style={{ animationDelay: '50ms' }}>
+                <div className="w-20 h-20 xs:w-16 xs:h-16 sm:w-24 sm:h-24 bg-white dark:bg-zinc-700 border-2 border-zinc-200 dark:border-zinc-600 rounded-lg flex items-center justify-center group-hover:border-red-600 dark:group-hover:border-red-500 group-hover:shadow-xl group-hover:shadow-red-600/20 transition-all p-1.5 xs:p-1 sm:p-2">
                   <OptimizedImage src="/certifications/tse.webp" alt="TSE" className="w-full h-full object-contain" loading="lazy" />
                 </div>
-                <span className="text-xs text-zinc-600 dark:text-zinc-400 font-semibold group-hover:text-red-600 dark:group-hover:text-red-500 transition-colors">TSE</span>
+                <span className="text-[10px] xs:text-[9px] sm:text-xs text-zinc-600 dark:text-zinc-400 font-semibold group-hover:text-red-600 dark:group-hover:text-red-500 transition-colors">TSE</span>
               </div>
-              <div className="flex flex-col items-center gap-2 group animate-in scale-in duration-500" style={{ animationDelay: '100ms' }}>
-                <div className="w-24 h-24 xs:w-20 xs:h-20 bg-white dark:bg-zinc-700 border-2 border-zinc-200 dark:border-zinc-600 rounded-lg flex items-center justify-center group-hover:border-red-600 dark:group-hover:border-red-500 group-hover:shadow-xl group-hover:shadow-red-600/20 transition-all p-2">
+              <div className="flex flex-col items-center gap-1.5 xs:gap-1 sm:gap-2 group animate-in scale-in duration-500" style={{ animationDelay: '100ms' }}>
+                <div className="w-20 h-20 xs:w-16 xs:h-16 sm:w-24 sm:h-24 bg-white dark:bg-zinc-700 border-2 border-zinc-200 dark:border-zinc-600 rounded-lg flex items-center justify-center group-hover:border-red-600 dark:group-hover:border-red-500 group-hover:shadow-xl group-hover:shadow-red-600/20 transition-all p-1.5 xs:p-1 sm:p-2">
                   <OptimizedImage src="/certifications/ce.webp" alt="CE" className="w-full h-full object-contain" loading="lazy" />
                 </div>
-                <span className="text-xs text-zinc-600 dark:text-zinc-400 font-semibold group-hover:text-red-600 dark:group-hover:text-red-500 transition-colors">CE</span>
+                <span className="text-[10px] xs:text-[9px] sm:text-xs text-zinc-600 dark:text-zinc-400 font-semibold group-hover:text-red-600 dark:group-hover:text-red-500 transition-colors">CE</span>
               </div>
-              <div className="flex flex-col items-center gap-2 group animate-in scale-in duration-500" style={{ animationDelay: '150ms' }}>
-                <div className="w-24 h-24 xs:w-20 xs:h-20 bg-white dark:bg-zinc-700 border-2 border-zinc-200 dark:border-zinc-600 rounded-lg flex items-center justify-center group-hover:border-red-600 dark:group-hover:border-red-500 group-hover:shadow-xl group-hover:shadow-red-600/20 transition-all p-2">
+              <div className="flex flex-col items-center gap-1.5 xs:gap-1 sm:gap-2 group animate-in scale-in duration-500" style={{ animationDelay: '150ms' }}>
+                <div className="w-20 h-20 xs:w-16 xs:h-16 sm:w-24 sm:h-24 bg-white dark:bg-zinc-700 border-2 border-zinc-200 dark:border-zinc-600 rounded-lg flex items-center justify-center group-hover:border-red-600 dark:group-hover:border-red-500 group-hover:shadow-xl group-hover:shadow-red-600/20 transition-all p-1.5 xs:p-1 sm:p-2">
                   <OptimizedImage src="/certifications/golden.webp" alt="Quality" className="w-full h-full object-contain" loading="lazy" />
                 </div>
-                <span className="text-xs text-zinc-600 dark:text-zinc-400 font-semibold group-hover:text-red-600 dark:group-hover:text-red-500 transition-colors">{t('certifications.quality')}</span>
+                <span className="text-[10px] xs:text-[9px] sm:text-xs text-zinc-600 dark:text-zinc-400 font-semibold group-hover:text-red-600 dark:group-hover:text-red-500 transition-colors">{t('certifications.quality')}</span>
               </div>
             </div>
 
             {/* Numbers - Bottom Row */}
-            <div className="grid grid-cols-3 gap-8 xs:gap-4 animate-in fade-in duration-600" style={{ animationDelay: '200ms' }}>
+            <div className="grid grid-cols-3 gap-6 xs:gap-3 sm:gap-8 animate-in fade-in duration-600" style={{ animationDelay: '200ms' }}>
               <div className="text-center group">
-                <div className="text-5xl xs:text-4xl font-black text-red-600 dark:text-red-500 mb-2 group-hover:scale-110 transition-transform">15+</div>
-                <div className="text-sm xs:text-xs text-zinc-600 dark:text-zinc-400 uppercase tracking-wider font-semibold">{t('trust.years')}</div>
+                <div className="text-4xl xs:text-3xl sm:text-5xl font-black text-red-600 dark:text-red-500 mb-1.5 xs:mb-1 sm:mb-2 group-hover:scale-110 transition-transform">15+</div>
+                <div className="text-xs xs:text-[10px] sm:text-sm text-zinc-600 dark:text-zinc-400 uppercase tracking-wider font-semibold">{t('trust.years')}</div>
               </div>
               <div className="text-center group">
-                <div className="text-5xl xs:text-4xl font-black text-red-600 dark:text-red-500 mb-2 group-hover:scale-110 transition-transform">200+</div>
-                <div className="text-sm xs:text-xs text-zinc-600 dark:text-zinc-400 uppercase tracking-wider font-semibold">{t('trust.projects')}</div>
+                <div className="text-4xl xs:text-3xl sm:text-5xl font-black text-red-600 dark:text-red-500 mb-1.5 xs:mb-1 sm:mb-2 group-hover:scale-110 transition-transform">200+</div>
+                <div className="text-xs xs:text-[10px] sm:text-sm text-zinc-600 dark:text-zinc-400 uppercase tracking-wider font-semibold">{t('trust.projects')}</div>
               </div>
               <div className="text-center group">
-                <div className="text-5xl xs:text-4xl font-black text-red-600 dark:text-red-500 mb-2 group-hover:scale-110 transition-transform">50+</div>
-                <div className="text-sm xs:text-xs text-zinc-600 dark:text-zinc-400 uppercase tracking-wider font-semibold">{t('trust.clients')}</div>
+                <div className="text-4xl xs:text-3xl sm:text-5xl font-black text-red-600 dark:text-red-500 mb-1.5 xs:mb-1 sm:mb-2 group-hover:scale-110 transition-transform">50+</div>
+                <div className="text-xs xs:text-[10px] sm:text-sm text-zinc-600 dark:text-zinc-400 uppercase tracking-wider font-semibold">{t('trust.clients')}</div>
               </div>
             </div>
           </div>
@@ -406,11 +406,11 @@ export default function Home() {
       </section>
 
       {/* PROJECTS / GALLERY SECTION */}
-      <section id="projects" className="py-24 bg-white dark:bg-zinc-900">
-        <div className="container mx-auto px-6">
-          <div className="text-center mb-16 animate-in fade-in duration-600">
-            <h3 className="text-red-600 dark:text-red-500 font-bold tracking-widest uppercase mb-2">{t('projectsSection.subtitle')}</h3>
-            <h2 className="text-4xl md:text-5xl font-black text-zinc-900 dark:text-white">{t('projectsSection.title')}</h2>
+      <section id="projects" className="py-16 xs:py-12 sm:py-24 bg-white dark:bg-zinc-900">
+        <div className="container mx-auto px-4 xs:px-3 sm:px-6">
+          <div className="text-center mb-12 xs:mb-8 sm:mb-16 animate-in fade-in duration-600">
+            <h3 className="text-red-600 dark:text-red-500 font-bold tracking-widest uppercase mb-2 xs:mb-1 text-xs xs:text-[10px]">{t('projectsSection.subtitle')}</h3>
+            <h2 className="text-3xl xs:text-2xl sm:text-4xl md:text-5xl font-black text-zinc-900 dark:text-white">{t('projectsSection.title')}</h2>
           </div>
 
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 xs:gap-1.5">

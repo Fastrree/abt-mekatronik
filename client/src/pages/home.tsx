@@ -247,6 +247,46 @@ export default function Home() {
         </div>
       </section>
 
+      {/* EARLY CTA SECTION - Quick Contact */}
+      <section className="py-16 bg-gradient-to-r from-red-600 to-red-700 dark:from-red-700 dark:to-red-800 relative overflow-hidden">
+        <div className="absolute inset-0 opacity-10">
+          <div className="absolute top-0 left-0 w-64 h-64 bg-white rounded-full blur-3xl"></div>
+          <div className="absolute bottom-0 right-0 w-96 h-96 bg-white rounded-full blur-3xl"></div>
+        </div>
+        <div className="container mx-auto px-6 text-center relative z-10">
+          <h3 className="text-3xl xs:text-2xl md:text-4xl font-black text-white mb-4 animate-in fade-in duration-600">
+            {t('cta.quickContact.title')}
+          </h3>
+          <p className="text-white/90 text-base xs:text-sm md:text-lg mb-8 max-w-2xl mx-auto leading-relaxed animate-in fade-in duration-600 delay-100">
+            {t('cta.quickContact.description')}
+          </p>
+          <div className="flex gap-4 xs:gap-2 justify-center flex-wrap animate-in scale-in duration-600 delay-200">
+            <Button 
+              size="lg"
+              className="bg-white text-red-600 hover:bg-zinc-100 font-bold text-base xs:text-sm px-8 xs:px-6 py-6 xs:py-5 rounded-none skew-x-[-10deg] shadow-xl hover:shadow-2xl transition-all hover:scale-105"
+              onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+              aria-label="Hemen teklif alın"
+            >
+              <span className="skew-x-[10deg] flex items-center gap-2">
+                <Phone className="w-5 h-5" />
+                {t('cta.getQuote')}
+              </span>
+            </Button>
+            <Button 
+              size="lg"
+              variant="outline"
+              className="border-2 border-white text-white hover:bg-white/10 font-bold text-base xs:text-sm px-8 xs:px-6 py-6 xs:py-5 rounded-none skew-x-[-10deg] backdrop-blur-sm transition-all hover:scale-105"
+              onClick={() => window.open('https://wa.me/905300594494', '_blank')}
+              aria-label="WhatsApp ile iletişime geçin"
+            >
+              <span className="skew-x-[10deg] flex items-center gap-2">
+                💬 {t('cta.whatsapp')}
+              </span>
+            </Button>
+          </div>
+        </div>
+      </section>
+
       {/* ENGINEERING / ABOUT SECTION */}
       <section id="engineering" className="py-24 bg-zinc-50 dark:bg-zinc-800 relative overflow-hidden">
         <div className="absolute top-0 right-0 w-1/3 h-full bg-zinc-200/30 dark:bg-zinc-700/20 skew-x-12 transform translate-x-20"></div>
@@ -302,102 +342,62 @@ export default function Home() {
                  <div className="bg-zinc-700 p-2 xs:p-1 rounded-lg border border-zinc-600">
                     <OptimizedImage src={`/media/${encodeURIComponent("WhatsApp Image 2026-01-16 at 14.32.07 (3).jpeg")}`} alt="Engineering Site" className="w-full h-48 xs:h-32 object-cover rounded shadow-lg opacity-80 hover:opacity-100 transition-opacity" loading="lazy" />
                  </div>
-                 <div className="bg-zinc-700 p-4 xs:p-2 rounded-lg border border-zinc-600 text-center">
-                    <span className="block text-3xl xs:text-2xl font-black text-white">15+</span>
-                    <span className="text-xs xs:text-[10px] uppercase tracking-wider text-zinc-400">{t('engineering.experience')}</span>
-                 </div>
                </div>
                <div className="space-y-4 xs:space-y-2 animate-in scale-in duration-500 delay-200">
-                 <div className="bg-red-600 p-4 xs:p-2 rounded-lg text-center shadow-[0_0_30px_rgba(220,38,38,0.3)]">
-                    <span className="block text-3xl xs:text-2xl font-black text-white">200+</span>
-                    <span className="text-xs xs:text-[10px] uppercase tracking-wider text-white/80">{t('engineering.completedProjects')}</span>
-                 </div>
                  <div className="bg-zinc-700 p-2 xs:p-1 rounded-lg border border-zinc-600">
                     <OptimizedImage src={`/media/${encodeURIComponent("WhatsApp Image 2026-01-16 at 14.32.08.jpeg")}`} alt="Automation Detail" className="w-full h-64 xs:h-48 object-cover rounded shadow-lg opacity-80 hover:opacity-100 transition-opacity" loading="lazy" />
                  </div>
                </div>
             </div>
           </div>
-        </div>
-      </section>
 
-      {/* CERTIFICATIONS SECTION */}
-      <section className="py-16 bg-white dark:bg-zinc-900">
-        <div className="container mx-auto px-6">
-          <div className="text-center mb-12 animate-in fade-in duration-600">
-            <h3 className="text-red-600 dark:text-red-500 font-bold tracking-widest uppercase mb-2">{t('home.certifications.subtitle')}</h3>
-            <h2 className="text-3xl md:text-4xl font-black text-zinc-900 dark:text-white">{t('home.certifications.title')}</h2>
-          </div>
-          <div className="flex flex-wrap justify-center items-center gap-8 md:gap-16">
-            {/* ISO 9001 - Real Certificate Image */}
-            <div
-              className="flex flex-col items-center gap-3 group animate-in scale-in duration-500"
-            >
-              <div className="w-32 h-32 bg-white dark:bg-zinc-800 border-2 border-zinc-200 dark:border-zinc-600 rounded-xl flex items-center justify-center group-hover:border-red-600 dark:group-hover:border-red-500 group-hover:shadow-xl group-hover:shadow-red-600/20 transition-all duration-300 group-hover:scale-110 p-2 overflow-hidden">
-                <OptimizedImage 
-                  src="/certifications/iso9001.webp"
-                  alt="ISO 9001 Sertifikası"
-                  className="w-full h-full object-contain"
-                  loading="lazy"
-                />
-              </div>
-              <span className="text-sm text-zinc-700 dark:text-zinc-400 uppercase tracking-wider font-bold group-hover:text-red-600 dark:group-hover:text-red-500 transition-colors">
-                {t('certifications.iso9001')}
-              </span>
+          {/* TRUST INDICATORS - Numbers + Certifications Combined */}
+          <div className="mt-20 pt-16 border-t border-zinc-300 dark:border-zinc-600">
+            <div className="text-center mb-12 animate-in fade-in duration-600">
+              <h3 className="text-red-600 dark:text-red-500 font-bold tracking-widest uppercase mb-2">{t('trust.subtitle')}</h3>
+              <h2 className="text-3xl md:text-4xl font-black text-zinc-900 dark:text-white">{t('trust.title')}</h2>
             </div>
-
-            {/* TSE - Real Certificate Image */}
-            <div
-              className="flex flex-col items-center gap-3 group animate-in scale-in duration-500"
-              style={{ animationDelay: '100ms' }}
-            >
-              <div className="w-32 h-32 bg-white dark:bg-zinc-800 border-2 border-zinc-200 dark:border-zinc-600 rounded-xl flex items-center justify-center group-hover:border-red-600 dark:group-hover:border-red-500 group-hover:shadow-xl group-hover:shadow-red-600/20 transition-all duration-300 group-hover:scale-110 p-2 overflow-hidden">
-                <OptimizedImage 
-                  src="/certifications/tse.webp"
-                  alt="TSE Sertifikası"
-                  className="w-full h-full object-contain"
-                  loading="lazy"
-                />
+            
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-6 xs:gap-4 items-center">
+              {/* Numbers */}
+              <div className="text-center group animate-in scale-in duration-500">
+                <div className="text-4xl xs:text-3xl font-black text-red-600 dark:text-red-500 mb-2 group-hover:scale-110 transition-transform">15+</div>
+                <div className="text-sm xs:text-xs text-zinc-600 dark:text-zinc-400 uppercase tracking-wider">{t('trust.years')}</div>
               </div>
-              <span className="text-sm text-zinc-700 dark:text-zinc-400 uppercase tracking-wider font-bold group-hover:text-red-600 dark:group-hover:text-red-500 transition-colors">
-                {t('certifications.tse')}
-              </span>
-            </div>
-
-            {/* CE - Real Certificate Image */}
-            <div
-              className="flex flex-col items-center gap-3 group animate-in scale-in duration-500"
-              style={{ animationDelay: '200ms' }}
-            >
-              <div className="w-32 h-32 bg-white dark:bg-zinc-800 border-2 border-zinc-200 dark:border-zinc-600 rounded-xl flex items-center justify-center group-hover:border-red-600 dark:group-hover:border-red-500 group-hover:shadow-xl group-hover:shadow-red-600/20 transition-all duration-300 group-hover:scale-110 p-4 overflow-hidden">
-                <OptimizedImage 
-                  src="/certifications/ce.webp"
-                  alt="CE Uygunluk Sertifikası"
-                  className="w-full h-full object-contain mt-2"
-                  loading="lazy"
-                />
+              <div className="text-center group animate-in scale-in duration-500" style={{ animationDelay: '50ms' }}>
+                <div className="text-4xl xs:text-3xl font-black text-red-600 dark:text-red-500 mb-2 group-hover:scale-110 transition-transform">200+</div>
+                <div className="text-sm xs:text-xs text-zinc-600 dark:text-zinc-400 uppercase tracking-wider">{t('trust.projects')}</div>
               </div>
-              <span className="text-sm text-zinc-700 dark:text-zinc-400 uppercase tracking-wider font-bold group-hover:text-red-600 dark:group-hover:text-red-500 transition-colors">
-                {t('certifications.ce')}
-              </span>
-            </div>
-
-            {/* Quality - Real Certificate Image (Golden) */}
-            <div
-              className="flex flex-col items-center gap-3 group animate-in scale-in duration-500"
-              style={{ animationDelay: '300ms' }}
-            >
-              <div className="w-32 h-32 bg-white dark:bg-zinc-800 border-2 border-zinc-200 dark:border-zinc-600 rounded-xl flex items-center justify-center group-hover:border-red-600 dark:group-hover:border-red-500 group-hover:shadow-xl group-hover:shadow-red-600/20 transition-all duration-300 group-hover:scale-110 p-4 overflow-hidden">
-                <OptimizedImage 
-                  src="/certifications/golden.webp"
-                  alt="Kalite Garantisi"
-                  className="w-full h-full object-contain"
-                  loading="lazy"
-                />
+              <div className="text-center group animate-in scale-in duration-500" style={{ animationDelay: '100ms' }}>
+                <div className="text-4xl xs:text-3xl font-black text-red-600 dark:text-red-500 mb-2 group-hover:scale-110 transition-transform">50+</div>
+                <div className="text-sm xs:text-xs text-zinc-600 dark:text-zinc-400 uppercase tracking-wider">{t('trust.clients')}</div>
               </div>
-              <span className="text-sm text-zinc-700 dark:text-zinc-400 uppercase tracking-wider font-bold group-hover:text-red-600 dark:group-hover:text-red-500 transition-colors">
-                {t('certifications.quality')}
-              </span>
+              
+              {/* Certifications (compact) */}
+              <div className="flex flex-col items-center gap-2 group animate-in scale-in duration-500" style={{ animationDelay: '150ms' }}>
+                <div className="w-20 h-20 xs:w-16 xs:h-16 bg-white dark:bg-zinc-700 border border-zinc-200 dark:border-zinc-600 rounded-lg flex items-center justify-center group-hover:border-red-600 dark:group-hover:border-red-500 group-hover:shadow-lg transition-all p-2">
+                  <OptimizedImage src="/certifications/iso9001.webp" alt="ISO 9001" className="w-full h-full object-contain" loading="lazy" />
+                </div>
+                <span className="text-xs text-zinc-600 dark:text-zinc-400 font-semibold">ISO 9001</span>
+              </div>
+              <div className="flex flex-col items-center gap-2 group animate-in scale-in duration-500" style={{ animationDelay: '200ms' }}>
+                <div className="w-20 h-20 xs:w-16 xs:h-16 bg-white dark:bg-zinc-700 border border-zinc-200 dark:border-zinc-600 rounded-lg flex items-center justify-center group-hover:border-red-600 dark:group-hover:border-red-500 group-hover:shadow-lg transition-all p-2">
+                  <OptimizedImage src="/certifications/tse.webp" alt="TSE" className="w-full h-full object-contain" loading="lazy" />
+                </div>
+                <span className="text-xs text-zinc-600 dark:text-zinc-400 font-semibold">TSE</span>
+              </div>
+              <div className="flex flex-col items-center gap-2 group animate-in scale-in duration-500" style={{ animationDelay: '250ms' }}>
+                <div className="w-20 h-20 xs:w-16 xs:h-16 bg-white dark:bg-zinc-700 border border-zinc-200 dark:border-zinc-600 rounded-lg flex items-center justify-center group-hover:border-red-600 dark:group-hover:border-red-500 group-hover:shadow-lg transition-all p-2">
+                  <OptimizedImage src="/certifications/ce.webp" alt="CE" className="w-full h-full object-contain" loading="lazy" />
+                </div>
+                <span className="text-xs text-zinc-600 dark:text-zinc-400 font-semibold">CE</span>
+              </div>
+              <div className="flex flex-col items-center gap-2 group animate-in scale-in duration-500" style={{ animationDelay: '300ms' }}>
+                <div className="w-20 h-20 xs:w-16 xs:h-16 bg-white dark:bg-zinc-700 border border-zinc-200 dark:border-zinc-600 rounded-lg flex items-center justify-center group-hover:border-red-600 dark:group-hover:border-red-500 group-hover:shadow-lg transition-all p-2">
+                  <OptimizedImage src="/certifications/golden.webp" alt="Quality" className="w-full h-full object-contain" loading="lazy" />
+                </div>
+                <span className="text-xs text-zinc-600 dark:text-zinc-400 font-semibold">{t('certifications.quality')}</span>
+              </div>
             </div>
           </div>
         </div>

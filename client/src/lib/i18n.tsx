@@ -207,6 +207,21 @@ const tr = {
     projects: 'PROJELERİMİZ',
     scroll: 'Kaydır',
   },
+  cta: {
+    quickContact: {
+      title: 'Projenizi Konuşalım',
+      description: '15 dakikalık ücretsiz danışmanlık ile projeniz için en uygun çözümü birlikte belirleyelim.',
+    },
+    getQuote: 'Hemen Teklif Al',
+    whatsapp: 'WhatsApp ile Yaz',
+  },
+  trust: {
+    subtitle: 'GÜVENİLİRLİK',
+    title: 'Kalite ve Tecrübe',
+    years: 'Yıllık Tecrübe',
+    projects: 'Tamamlanan Proje',
+    clients: 'Mutlu Müşteri',
+  },
   products: {
     subtitle: 'Ürün Gruplarımız',
     title: 'ÜRETİM ALANLARI',
@@ -626,6 +641,21 @@ const en = {
     solutions: 'OUR SOLUTIONS',
     projects: 'OUR PROJECTS',
     scroll: 'Scroll',
+  },
+  cta: {
+    quickContact: {
+      title: 'Let\'s Discuss Your Project',
+      description: 'Let\'s determine the most suitable solution for your project together with a 15-minute free consultation.',
+    },
+    getQuote: 'Get Quote Now',
+    whatsapp: 'Message on WhatsApp',
+  },
+  trust: {
+    subtitle: 'RELIABILITY',
+    title: 'Quality and Experience',
+    years: 'Years of Experience',
+    projects: 'Completed Projects',
+    clients: 'Happy Clients',
   },
   products: {
     subtitle: 'Our Product Groups',
@@ -1047,6 +1077,21 @@ const de = {
     projects: 'UNSERE PROJEKTE',
     scroll: 'Scrollen',
   },
+  cta: {
+    quickContact: {
+      title: 'Lassen Sie uns über Ihr Projekt sprechen',
+      description: 'Lassen Sie uns gemeinsam die am besten geeignete Lösung für Ihr Projekt mit einer 15-minütigen kostenlosen Beratung bestimmen.',
+    },
+    getQuote: 'Jetzt Angebot erhalten',
+    whatsapp: 'Nachricht auf WhatsApp',
+  },
+  trust: {
+    subtitle: 'ZUVERLÄSSIGKEIT',
+    title: 'Qualität und Erfahrung',
+    years: 'Jahre Erfahrung',
+    projects: 'Abgeschlossene Projekte',
+    clients: 'Zufriedene Kunden',
+  },
   products: {
     subtitle: 'Unsere Produktgruppen',
     title: 'PRODUKTIONSBEREICHE',
@@ -1406,6 +1451,21 @@ const fr = {
     solutions: 'NOS SOLUTIONS',
     projects: 'NOS PROJETS',
     scroll: 'Défiler',
+  },
+  cta: {
+    quickContact: {
+      title: 'Discutons de votre projet',
+      description: 'Déterminons ensemble la solution la plus adaptée à votre projet avec une consultation gratuite de 15 minutes.',
+    },
+    getQuote: 'Obtenir un devis maintenant',
+    whatsapp: 'Message sur WhatsApp',
+  },
+  trust: {
+    subtitle: 'FIABILITÉ',
+    title: 'Qualité et Expérience',
+    years: 'Années d\'expérience',
+    projects: 'Projets terminés',
+    clients: 'Clients satisfaits',
   },
   products: {
     subtitle: 'Nos Groupes de Produits',
@@ -1771,6 +1831,21 @@ const es = {
     projects: 'NUESTROS PROYECTOS',
     scroll: 'Desplazar',
   },
+  cta: {
+    quickContact: {
+      title: 'Hablemos de su proyecto',
+      description: 'Determinemos juntos la solución más adecuada para su proyecto con una consulta gratuita de 15 minutos.',
+    },
+    getQuote: 'Obtener cotización ahora',
+    whatsapp: 'Mensaje en WhatsApp',
+  },
+  trust: {
+    subtitle: 'CONFIABILIDAD',
+    title: 'Calidad y Experiencia',
+    years: 'Años de experiencia',
+    projects: 'Proyectos completados',
+    clients: 'Clientes satisfechos',
+  },
   products: {
     subtitle: 'Nuestros Grupos de Productos',
     title: 'ÁREAS DE PRODUCCIÓN',
@@ -2134,6 +2209,21 @@ const ar = {
     solutions: 'حلولنا',
     projects: 'مشاريعنا',
     scroll: 'مرر',
+  },
+  cta: {
+    quickContact: {
+      title: 'لنناقش مشروعك',
+      description: 'دعنا نحدد معًا الحل الأنسب لمشروعك من خلال استشارة مجانية لمدة 15 دقيقة.',
+    },
+    getQuote: 'احصل على عرض أسعار الآن',
+    whatsapp: 'رسالة على واتساب',
+  },
+  trust: {
+    subtitle: 'الموثوقية',
+    title: 'الجودة والخبرة',
+    years: 'سنوات من الخبرة',
+    projects: 'المشاريع المكتملة',
+    clients: 'العملاء السعداء',
   },
   products: {
     subtitle: 'مجموعات منتجاتنا',
@@ -2564,6 +2654,21 @@ const ru = {
     solutions: 'НАШИ РЕШЕНИЯ',
     projects: 'НАШИ ПРОЕКТЫ',
     scroll: 'Прокрутить',
+  },
+  cta: {
+    quickContact: {
+      title: 'Давайте обсудим ваш проект',
+      description: 'Давайте вместе определим наиболее подходящее решение для вашего проекта с помощью 15-минутной бесплатной консультации.',
+    },
+    getQuote: 'Получить предложение сейчас',
+    whatsapp: 'Сообщение в WhatsApp',
+  },
+  trust: {
+    subtitle: 'НАДЕЖНОСТЬ',
+    title: 'Качество и Опыт',
+    years: 'Лет опыта',
+    projects: 'Завершенных проектов',
+    clients: 'Довольных клиентов',
   },
   products: {
     subtitle: 'Наши Группы Продукции',

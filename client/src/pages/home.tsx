@@ -260,22 +260,22 @@ export default function Home() {
           <p className="text-white/90 text-base xs:text-sm md:text-lg mb-8 max-w-2xl mx-auto leading-relaxed animate-in fade-in duration-600 delay-100">
             {t('cta.quickContact.description')}
           </p>
-          <div className="flex gap-4 xs:gap-2 justify-center flex-wrap animate-in scale-in duration-600 delay-200">
+          <div className="flex gap-4 xs:gap-3 justify-center flex-wrap animate-in scale-in duration-600 delay-200">
             <Button 
               size="lg"
-              className="bg-white text-red-600 hover:bg-zinc-100 font-bold text-base xs:text-sm px-8 xs:px-6 py-6 xs:py-5 rounded-none skew-x-[-10deg] shadow-xl hover:shadow-2xl transition-all hover:scale-105"
+              className="bg-white text-red-600 hover:bg-zinc-100 font-bold text-base xs:text-sm px-8 xs:px-4 py-6 xs:py-4 rounded-none skew-x-[-10deg] shadow-xl hover:shadow-2xl transition-all hover:scale-105"
               onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
               aria-label="Hemen teklif alın"
             >
-              <span className="skew-x-[10deg] flex items-center gap-2">
-                <Phone className="w-5 h-5" />
+              <span className="skew-x-[10deg] flex items-center gap-2 xs:gap-1.5">
+                <Phone className="w-5 h-5 xs:w-4 xs:h-4" />
                 {t('cta.getQuote')}
               </span>
             </Button>
             <Button 
               size="lg"
               variant="outline"
-              className="border-2 border-white text-white hover:bg-white/10 font-bold text-base xs:text-sm px-8 xs:px-6 py-6 xs:py-5 rounded-none skew-x-[-10deg] backdrop-blur-sm transition-all hover:scale-105"
+              className="border-2 border-white text-white hover:bg-white/10 font-bold text-base xs:text-sm px-8 xs:px-4 py-6 xs:py-4 rounded-none skew-x-[-10deg] backdrop-blur-sm transition-all hover:scale-105"
               onClick={() => window.open('https://wa.me/905300594494', '_blank')}
               aria-label="WhatsApp ile iletişime geçin"
             >
@@ -337,15 +337,15 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="grid grid-cols-2 gap-4 xs:gap-2">
-               <div className="space-y-4 xs:space-y-2 mt-8 xs:mt-4 animate-in scale-in duration-500">
-                 <div className="bg-zinc-700 p-2 xs:p-1 rounded-lg border border-zinc-600">
-                    <OptimizedImage src={`/media/${encodeURIComponent("WhatsApp Image 2026-01-16 at 14.32.07 (3).jpeg")}`} alt="Engineering Site" className="w-full h-48 xs:h-32 object-cover rounded shadow-lg opacity-80 hover:opacity-100 transition-opacity" loading="lazy" />
+            <div className="grid grid-cols-2 gap-3 xs:gap-2">
+               <div className="space-y-3 xs:space-y-2 mt-8 xs:mt-4 animate-in scale-in duration-500">
+                 <div className="bg-zinc-700 p-1.5 xs:p-1 rounded-lg border border-zinc-600">
+                    <OptimizedImage src={`/media/${encodeURIComponent("WhatsApp Image 2026-01-16 at 14.32.07 (3).jpeg")}`} alt="Engineering Site" className="w-full h-40 xs:h-28 object-cover rounded shadow-lg opacity-80 hover:opacity-100 transition-opacity" loading="lazy" />
                  </div>
                </div>
-               <div className="space-y-4 xs:space-y-2 animate-in scale-in duration-500 delay-200">
-                 <div className="bg-zinc-700 p-2 xs:p-1 rounded-lg border border-zinc-600">
-                    <OptimizedImage src={`/media/${encodeURIComponent("WhatsApp Image 2026-01-16 at 14.32.08.jpeg")}`} alt="Automation Detail" className="w-full h-64 xs:h-48 object-cover rounded shadow-lg opacity-80 hover:opacity-100 transition-opacity" loading="lazy" />
+               <div className="space-y-3 xs:space-y-2 animate-in scale-in duration-500 delay-200">
+                 <div className="bg-zinc-700 p-1.5 xs:p-1 rounded-lg border border-zinc-600">
+                    <OptimizedImage src={`/media/${encodeURIComponent("WhatsApp Image 2026-01-16 at 14.32.08.jpeg")}`} alt="Automation Detail" className="w-full h-56 xs:h-40 object-cover rounded shadow-lg opacity-80 hover:opacity-100 transition-opacity" loading="lazy" />
                  </div>
                </div>
             </div>
@@ -413,7 +413,7 @@ export default function Home() {
             <h2 className="text-4xl md:text-5xl font-black text-zinc-900 dark:text-white">{t('projectsSection.title')}</h2>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 xs:gap-2">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 xs:gap-1.5">
             {[
               "WhatsApp Image 2026-01-16 at 14.32.03 (3).jpeg",
               "WhatsApp Image 2026-01-16 at 14.32.03 (4).jpeg",

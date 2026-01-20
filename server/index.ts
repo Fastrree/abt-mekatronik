@@ -28,19 +28,20 @@ app.use((req, res, next) => {
   // CRITICAL: This is the most important security header
   res.setHeader('Content-Security-Policy', [
     "default-src 'self'",
-    "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.jsdelivr.net https://unpkg.com",
-    "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
+    "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.jsdelivr.net https://unpkg.com https://www.googletagmanager.com https://www.google-analytics.com blob:",
+    "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net",
     "font-src 'self' https://fonts.gstatic.com data:",
     "img-src 'self' data: blob: https:",
-    "connect-src 'self' https: wss:",
+    "connect-src 'self' https: wss: https://www.google-analytics.com https://o4510736861036544.ingest.de.sentry.io",
     "frame-src 'self' https://wa.me https://api.whatsapp.com",
     "media-src 'self' blob: data:",
+    "worker-src 'self' blob:",
     "object-src 'none'",
     "base-uri 'self'",
     "form-action 'self'",
-    "frame-ancestors 'none'",  // Changed from 'self' to 'none' for better clickjacking protection
+    "frame-ancestors 'none'",
     "upgrade-insecure-requests",
-    "block-all-mixed-content"  // Added: Block mixed content
+    "block-all-mixed-content"
   ].join('; '));
   
   // 3. X-Frame-Options - Clickjacking Protection

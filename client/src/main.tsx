@@ -3,6 +3,14 @@ import * as Sentry from "@sentry/react";
 import App from "./App";
 import "./index.css";
 
+// Production: Suppress console logs
+if (import.meta.env.PROD) {
+  console.log = () => {};
+  console.debug = () => {};
+  console.info = () => {};
+  // Keep console.warn and console.error for critical issues
+}
+
 // Make Sentry globally accessible for testing
 (window as any).Sentry = Sentry;
 
@@ -28,7 +36,21 @@ Sentry.init({
   ignoreErrors: [
     "ResizeObserver loop limit exceeded",
     "Non-Error promise rejection captured",
+    "Network request failed",
+    "Failed to fetch",
   ],
+  // Filter out noise from Sentry
+  beforeSend(event, hint) {
+    // Don't send events from browser extensions
+    if (event.exception?.values?.[0]?.value?.includes('chrome-extension://')) {
+      return null;
+    }
+    // Don't send ad blocker errors
+    if (event.exception?.values?.[0]?.value?.includes('ERR_BLOCKED_BY_CLIENT')) {
+      return null;
+    }
+    return event;
+  },
 });
 
 createRoot(document.getElementById("root")!).render(<App />);

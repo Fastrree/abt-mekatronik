@@ -514,39 +514,22 @@ Piyasada bulunmayan veya mevcut makinelerin karşılayamadığı özel üretim i
       custom: 'Özel Makine Tasarımı',
       customDesc: 'İhtiyaca özel, sıfırdan tasarlanmış endüstriyel çözümler',
     },
-    advantages: {
-      title: 'İHRACAT AVANTAJLARIMIZ',
-      items: [
-        {
-          title: 'Uluslararası Standartlar',
-          description: 'ISO 9001, CE belgeli ürünler ile global pazarlarda güvenilir çözümler',
-        },
-        {
-          title: 'Hızlı Teslimat',
-          description: 'Dünya geneline hızlı ve güvenli lojistik ağı ile zamanında teslimat',
-        },
-        {
-          title: 'Teknik Destek',
-          description: '7/24 uzaktan teknik destek ve yerinde servis hizmeti',
-        },
-        {
-          title: 'Rekabetçi Fiyat',
-          description: 'Kaliteden ödün vermeden, rekabetçi fiyatlarla global pazarda güçlü konum',
-        },
-      ],
-    },
     countries: {
       title: 'İHRACAT HARİTAMIZ',
+      titleHighlight: 'DÜNYA GENELİNDE',
       subtitle: 'Dünya Genelinde Güvenilir Ortağınız',
       description: 'Türkiye\'den 12+ ülkeye kaliteli endüstriyel çözümler sunuyoruz.',
-      legend: {
-        production: 'Üretim Merkezi',
-        export: 'İhracat Ülkeleri',
-        other: 'Diğer Ülkeler',
-      },
+    },
+    legend: {
+      productionCenter: 'Üretim Merkezi',
+      turkey: 'Türkiye',
+      exportCountries: 'İhracat Ülkeleri',
+      otherCountries: 'Diğer Ülkeler',
+      export: 'İhracat',
     },
     whyUs: {
       title: 'NEDEN BİZİ TERCİH EDİYORLAR?',
+      titleHighlight: 'ABT MEKATRONİK',
       description: 'Global müşterilerimiz neden ABT Mekatronik\'i tercih ediyor?',
       reasons: [
         {
@@ -575,10 +558,20 @@ Piyasada bulunmayan veya mevcut makinelerin karşılayamadığı özel üretim i
         },
       ],
     },
+    advantages: {
+      certified: 'ISO 9001, CE Sertifikalı Ürünler',
+      standards: 'Uluslararası Kalite Standartları',
+      shipping: 'Dünya Geneline Hızlı Kargo',
+      support: '7/24 Teknik Destek',
+      warranty: '2 Yıl Garanti',
+      multilingual: 'Çok Dilli Müşteri Hizmetleri',
+    },
     partners: {
       title: 'GLOBAL ORTAKLARIMIZ',
+      titleHighlight: 'DÜNYA GENELİNDE',
       subtitle: 'Dünya Genelinde Güvenilir İş Birlikleri',
       description: 'Uluslararası iş ortaklarımız ile birlikte büyüyoruz.',
+      partner: 'Ortak',
       items: [
         { name: 'Özbekistan Tekstil A.Ş.', country: 'Özbekistan', industry: 'Tekstil' },
         { name: 'Mısır Endüstri Ltd.', country: 'Mısır', industry: 'Gıda' },
@@ -906,6 +899,114 @@ Needs analysis → Concept design → 3D modeling → Prototype → Test → Ser
     button: 'Subscribe',
     success: 'Successfully subscribed!',
   },
+  home: {
+    certifications: {
+      subtitle: 'Quality Assurance',
+      title: 'Our Certificates',
+    },
+  },
+  exports: {
+    hero: {
+      badge: 'Global Reach',
+      title1: 'OUR',
+      title2: 'WORLDWIDE',
+      title3: 'EXPORTS',
+      description: 'We provide quality industrial solutions from Turkey to the world. Your trusted partner exporting to 12+ countries.',
+    },
+    stats: {
+      countries: 'Export Countries',
+      machines: 'Machines Exported',
+      growth: 'Annual Growth',
+      certificate: 'Quality Certificates',
+    },
+    productsSection: {
+      title: 'PRODUCTS WE EXPORT',
+      titleHighlight: 'WORLD-CLASS STANDARDS',
+      description: 'Our products manufactured to international quality standards are preferred worldwide.',
+    },
+    products: {
+      conveyor: 'Conveyor Systems',
+      conveyorDesc: 'Heavy-duty, modular conveyor systems with high load capacity',
+      textile: 'Textile Machinery',
+      textileDesc: 'High-precision, energy-efficient textile production machines',
+      steel: 'Steel Construction',
+      steelDesc: 'Earthquake-resistant, long-lasting steel building systems',
+      custom: 'Custom Machine Design',
+      customDesc: 'Custom-designed industrial solutions from scratch',
+    },
+    countries: {
+      title: 'OUR EXPORT MAP',
+      titleHighlight: 'WORLDWIDE',
+      subtitle: 'Your Trusted Partner Worldwide',
+      description: 'We provide quality industrial solutions from Turkey to 12+ countries.',
+    },
+    legend: {
+      productionCenter: 'Production Center',
+      turkey: 'Turkey',
+      exportCountries: 'Export Countries',
+      otherCountries: 'Other Countries',
+      export: 'Export',
+    },
+    whyUs: {
+      title: 'WHY DO THEY CHOOSE US?',
+      titleHighlight: 'ABT MECHATRONICS',
+      description: 'Why do our global customers choose ABT Mechatronics?',
+      reasons: [
+        {
+          title: 'Proven Quality',
+          description: 'Quality assurance backed by international certificates and references',
+        },
+        {
+          title: 'On-Time Delivery',
+          description: 'Reliable business partner with 98% on-time delivery rate',
+        },
+        {
+          title: 'Technical Expertise',
+          description: '15+ years of experience and expert engineering team',
+        },
+        {
+          title: 'Customizable Solutions',
+          description: 'Custom design and production capability for each project',
+        },
+        {
+          title: 'Competitive Pricing',
+          description: 'Best value in quality-price balance',
+        },
+        {
+          title: 'Continuous Innovation',
+          description: 'Continuously evolving product portfolio with R&D investments',
+        },
+      ],
+    },
+    advantages: {
+      certified: 'ISO 9001, CE Certified Products',
+      standards: 'International Quality Standards',
+      shipping: 'Fast Worldwide Shipping',
+      support: '24/7 Technical Support',
+      warranty: '2 Year Warranty',
+      multilingual: 'Multilingual Customer Service',
+    },
+    partners: {
+      title: 'OUR GLOBAL PARTNERS',
+      titleHighlight: 'WORLDWIDE',
+      subtitle: 'Trusted Business Partnerships Worldwide',
+      description: 'We grow together with our international business partners.',
+      partner: 'Partner',
+      items: [
+        { name: 'Uzbekistan Textile Inc.', country: 'Uzbekistan', industry: 'Textile' },
+        { name: 'Egypt Industry Ltd.', country: 'Egypt', industry: 'Food' },
+        { name: 'Tajikistan Logistics', country: 'Tajikistan', industry: 'Logistics' },
+        { name: 'Kazakhstan Metal', country: 'Kazakhstan', industry: 'Metal' },
+        { name: 'Turkmenistan Production', country: 'Turkmenistan', industry: 'Production' },
+      ],
+    },
+    cta: {
+      title: 'CONTACT US FOR EXPORT',
+      description: 'We are ready to be your trusted partner in global markets. Get a quote for your projects.',
+      contactButton: 'Contact Us',
+      whatsappButton: 'Contact via WhatsApp',
+    },
+  },
   faq: {
     subtitle: 'Frequently Asked Questions',
     title: 'FAQ',
@@ -1204,36 +1305,18 @@ Löst spezielle Produktionsanforderungen, die auf dem Markt nicht verfügbar sin
       custom: 'Sondermaschinenbau',
       customDesc: 'Maßgeschneiderte Industrielösungen von Grund auf',
     },
-    advantages: {
-      title: 'UNSERE EXPORTVORTEILE',
-      items: [
-        {
-          title: 'Internationale Standards',
-          description: 'Zuverlässige Lösungen auf globalen Märkten mit ISO 9001, CE-zertifizierten Produkten',
-        },
-        {
-          title: 'Schnelle Lieferung',
-          description: 'Pünktliche Lieferung weltweit mit schnellem und sicherem Logistiknetzwerk',
-        },
-        {
-          title: 'Technischer Support',
-          description: '24/7 Remote-Technischer Support und Vor-Ort-Service',
-        },
-        {
-          title: 'Wettbewerbsfähige Preise',
-          description: 'Starke Position auf dem Weltmarkt mit wettbewerbsfähigen Preisen ohne Qualitätskompromisse',
-        },
-      ],
-    },
     countries: {
       title: 'UNSERE EXPORTKARTE',
+      titleHighlight: 'WELTWEIT',
       subtitle: 'Ihr Zuverlässiger Partner Weltweit',
       description: 'Wir bieten qualitativ hochwertige Industrielösungen aus der Türkei in 12+ Länder.',
-      legend: {
-        production: 'Produktionszentrum',
-        export: 'Exportländer',
-        other: 'Andere Länder',
-      },
+    },
+    legend: {
+      productionCenter: 'Produktionszentrum',
+      turkey: 'Türkei',
+      exportCountries: 'Exportländer',
+      otherCountries: 'Andere Länder',
+      export: 'Export',
     },
     whyUs: {
       title: 'WARUM SIE UNS WÄHLEN?',
@@ -1588,13 +1671,16 @@ Résout les besoins de production spéciaux non disponibles sur le marché.
     },
     countries: {
       title: 'NOTRE CARTE D\'EXPORTATION',
+      titleHighlight: 'MONDIALE',
       subtitle: 'Votre Partenaire Fiable Dans Le Monde Entier',
       description: 'Nous fournissons des solutions industrielles de qualité de la Turquie vers 12+ pays.',
-      legend: {
-        production: 'Centre de Production',
-        export: 'Pays d\'Exportation',
-        other: 'Autres Pays',
-      },
+    },
+    legend: {
+      productionCenter: 'Centre de Production',
+      turkey: 'Turquie',
+      exportCountries: 'Pays d\'Exportation',
+      otherCountries: 'Autres Pays',
+      export: 'Exportation',
     },
     whyUs: {
       title: 'POURQUOI NOUS CHOISIR?',
@@ -1949,13 +2035,16 @@ Resuelve necesidades de producción especiales no disponibles en el mercado.
     },
     countries: {
       title: 'NUESTRO MAPA DE EXPORTACIÓN',
+      titleHighlight: 'MUNDIAL',
       subtitle: 'Su Socio Confiable En Todo El Mundo',
       description: 'Proporcionamos soluciones industriales de calidad desde Turquía a 12+ países.',
-      legend: {
-        production: 'Centro de Producción',
-        export: 'Países de Exportación',
-        other: 'Otros Países',
-      },
+    },
+    legend: {
+      productionCenter: 'Centro de Producción',
+      turkey: 'Turquía',
+      exportCountries: 'Países de Exportación',
+      otherCountries: 'Otros Países',
+      export: 'Exportación',
     },
     whyUs: {
       title: '¿POR QUÉ NOS ELIGEN?',
@@ -2376,13 +2465,16 @@ const ar = {
     },
     countries: {
       title: 'خريطة التصدير لدينا',
+      titleHighlight: 'العالمية',
       subtitle: 'شريكك الموثوق في جميع أنحاء العالم',
       description: 'نقدم حلولاً صناعية عالية الجودة من تركيا إلى أكثر من 12 دولة.',
-      legend: {
-        production: 'مركز الإنتاج',
-        export: 'دول التصدير',
-        other: 'دول أخرى',
-      },
+    },
+    legend: {
+      productionCenter: 'مركز الإنتاج',
+      turkey: 'تركيا',
+      exportCountries: 'دول التصدير',
+      otherCountries: 'دول أخرى',
+      export: 'تصدير',
     },
     whyUs: {
       title: 'لماذا يختاروننا؟',
@@ -2803,13 +2895,16 @@ const ru = {
     },
     countries: {
       title: 'НАША КАРТА ЭКСПОРТА',
+      titleHighlight: 'МИРОВАЯ',
       subtitle: 'Ваш Надёжный Партнёр По Всему Миру',
       description: 'Мы предоставляем качественные промышленные решения из Турции в 12+ стран.',
-      legend: {
-        production: 'Производственный Центр',
-        export: 'Страны Экспорта',
-        other: 'Другие Страны',
-      },
+    },
+    legend: {
+      productionCenter: 'Производственный Центр',
+      turkey: 'Турция',
+      exportCountries: 'Страны Экспорта',
+      otherCountries: 'Другие Страны',
+      export: 'Экспорт',
     },
     whyUs: {
       title: 'ПОЧЕМУ НАС ВЫБИРАЮТ?',

@@ -5,21 +5,9 @@ import { OptimizedImage } from "@/components/OptimizedImage";
 import { Globe, TrendingUp, Award, Package, Ship, CheckCircle } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { useI18n } from "@/lib/i18n";
-import { exportsTranslations } from "@/lib/exports-translations";
 
 function OurExports() {
-  const { language } = useI18n();
-  
-  // Custom translation function for exports page - supports all 7 languages
-  const t = (key: string): string => {
-    const exportsData = exportsTranslations[language] || exportsTranslations.tr;
-    const keys = key.replace('exports.', '').split('.');
-    let value: any = exportsData;
-    for (const k of keys) {
-      value = value?.[k];
-    }
-    return (typeof value === 'string' ? value : key);
-  };
+  const { language, t } = useI18n();
   
   const mapRef = useRef<HTMLDivElement>(null);
   const mapInstance = useRef<any>(null);
@@ -549,12 +537,12 @@ function OurExports() {
                                 <div className="w-1.5 h-1.5 bg-blue-500/70 rounded-full animate-ping absolute"></div>
                                 <div className="w-1.5 h-1.5 bg-blue-600/90 rounded-full"></div>
                               </div>
-                              <span className="text-[10px] font-bold uppercase tracking-wide text-white/90">🏭 Üretim Merkezi</span>
+                              <span className="text-[10px] font-bold uppercase tracking-wide text-white/90">🏭 {t('exports.legend.productionCenter')}</span>
                             </>
                           ) : (
                             <>
                               <div className="w-1.5 h-1.5 bg-white rounded-full animate-pulse"></div>
-                              <span className="text-[10px] font-bold uppercase tracking-wide text-white/90">İhracat</span>
+                              <span className="text-[10px] font-bold uppercase tracking-wide text-white/90">{t('exports.legend.export')}</span>
                             </>
                           )}
                         </div>

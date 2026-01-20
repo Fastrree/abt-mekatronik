@@ -507,10 +507,10 @@ function OurExports() {
                   </div>
                 )}
 
-                {/* Modern Hover Tooltip - Desktop only */}
+                {/* Modern Hover Tooltip - Always visible on hover */}
                 {hoveredCountry && !isZooming && (
                   <div
-                    className="absolute pointer-events-none z-50 hidden sm:block"
+                    className="absolute pointer-events-none z-50"
                     style={{
                       left: `${hoveredCountry.x + 15}px`,
                       top: `${hoveredCountry.y - 15}px`,

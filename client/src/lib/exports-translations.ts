@@ -2,9 +2,9 @@ export const exportsTranslations = {
   tr: {
     hero: {
       badge: 'Küresel Erişim',
-      title1: 'DÜNYA',
-      title2: 'ÇAPINDAKİ',
-      title3: 'İHRACATLARIMIZ',
+      title1: 'SATIŞ YAPTIĞIMIZ',
+      title2: 'ÜLKELER',
+      title3: '',
       description: 'Türkiye\'den dünyaya kaliteli endüstriyel çözümler sunuyoruz. 12+ ülkeye ihracat yapan güvenilir ortağınız.',
     },
     stats: {
@@ -97,9 +97,9 @@ export const exportsTranslations = {
   en: {
     hero: {
       badge: 'Global Reach',
-      title1: 'OUR',
-      title2: 'WORLDWIDE',
-      title3: 'EXPORTS',
+      title1: 'COUNTRIES',
+      title2: 'WE EXPORT TO',
+      title3: '',
       description: 'We provide quality industrial solutions from Turkey to the world. Your reliable partner exporting to 12+ countries.',
     },
     stats: {

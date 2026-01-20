@@ -105,7 +105,7 @@ export const Navbar = memo(function Navbar() {
               <ChevronDown size={14} className={`transition-transform hidden sm:block xs:w-3 xs:h-3 ${isQuickMenuOpen ? 'rotate-180' : ''}`} />
             </button>
             
-            {/* Quick Menu Dropdown - Same for Mobile & Desktop */}
+            {/* Quick Menu Dropdown - Hierarchical Structure */}
             {isQuickMenuOpen && (
               <div 
                 className="absolute top-full mt-2 w-64 bg-zinc-800 border border-zinc-600 rounded-lg shadow-xl overflow-hidden animate-in fade-in slide-in-from-top-2 z-50"
@@ -113,7 +113,7 @@ export const Navbar = memo(function Navbar() {
                 dir={isRTL ? 'rtl' : 'ltr'}
               >
                 <div className="p-2 max-h-[70vh] overflow-y-auto scrollbar-thin">
-                  {/* Ana Sayfa */}
+                  {/* 1. Ana Sayfa */}
                   <a
                     href="/"
                     onClick={(e) => {
@@ -125,7 +125,7 @@ export const Navbar = memo(function Navbar() {
                     {t('nav.home')}
                   </a>
 
-                  {/* Hakkımızda */}
+                  {/* 2. Hakkımızda (Separate Page) */}
                   <div className="border-t border-zinc-600 mt-2 pt-2">
                     <a
                       href="/about"
@@ -136,7 +136,7 @@ export const Navbar = memo(function Navbar() {
                     </a>
                   </div>
 
-                  {/* Products Section */}
+                  {/* 3. Ürünler (Products Section) */}
                   <div className="border-t border-zinc-600 mt-2 pt-2">
                     <div className="text-xs font-semibold text-gray-300 uppercase tracking-wider px-3 py-2">
                       {t('nav.products')}
@@ -157,7 +157,7 @@ export const Navbar = memo(function Navbar() {
                     })}
                   </div>
                   
-                  {/* Mühendislik */}
+                  {/* 4. Mühendislik (Engineering + Trust Indicators) */}
                   <div className="border-t border-zinc-600 mt-2 pt-2">
                     <button
                       onClick={() => navigateToSection('engineering')}
@@ -167,7 +167,7 @@ export const Navbar = memo(function Navbar() {
                     </button>
                   </div>
 
-                  {/* Projeler */}
+                  {/* 5. Projeler (Gallery) */}
                   <div className="border-t border-zinc-600 mt-2 pt-2">
                     <button
                       onClick={() => navigateToSection('projects')}
@@ -177,7 +177,37 @@ export const Navbar = memo(function Navbar() {
                     </button>
                   </div>
 
-                  {/* İhracatlarımız */}
+                  {/* 6. SSS (FAQ) */}
+                  <div className="border-t border-zinc-600 mt-2 pt-2">
+                    <button
+                      onClick={() => navigateToSection('faq')}
+                      className="w-full text-left block px-3 py-2 text-sm text-white hover:text-gray-200 hover:bg-zinc-700 rounded-md transition-colors"
+                    >
+                      {t('nav.faq')}
+                    </button>
+                  </div>
+
+                  {/* 7. Referanslar (Testimonials) */}
+                  <div className="border-t border-zinc-600 mt-2 pt-2">
+                    <button
+                      onClick={() => navigateToSection('testimonials')}
+                      className="w-full text-left block px-3 py-2 text-sm text-white hover:text-gray-200 hover:bg-zinc-700 rounded-md transition-colors"
+                    >
+                      {t('nav.testimonials')}
+                    </button>
+                  </div>
+
+                  {/* 8. Ortaklarımız (Client Logos) */}
+                  <div className="border-t border-zinc-600 mt-2 pt-2">
+                    <button
+                      onClick={() => navigateToSection('partners')}
+                      className="w-full text-left block px-3 py-2 text-sm text-white hover:text-gray-200 hover:bg-zinc-700 rounded-md transition-colors"
+                    >
+                      {t('nav.partners')}
+                    </button>
+                  </div>
+
+                  {/* 9. İhracatlarımız (Separate Page) */}
                   <div className="border-t border-zinc-600 mt-2 pt-2">
                     <a
                       href="/exports"
@@ -188,27 +218,7 @@ export const Navbar = memo(function Navbar() {
                     </a>
                   </div>
 
-                  {/* SSS */}
-                  <div className="border-t border-zinc-600 mt-2 pt-2">
-                    <button
-                      onClick={() => navigateToSection('faq')}
-                      className="w-full text-left block px-3 py-2 text-sm text-white hover:text-gray-200 hover:bg-zinc-700 rounded-md transition-colors"
-                    >
-                      {t('nav.faq')}
-                    </button>
-                  </div>
-
-                  {/* Referanslar */}
-                  <div className="border-t border-zinc-600 mt-2 pt-2">
-                    <button
-                      onClick={() => navigateToSection('testimonials')}
-                      className="w-full text-left block px-3 py-2 text-sm text-white hover:text-gray-200 hover:bg-zinc-700 rounded-md transition-colors"
-                    >
-                      {t('nav.testimonials')}
-                    </button>
-                  </div>
-
-                  {/* İletişim */}
+                  {/* 10. İletişim (Contact in Footer) */}
                   <div className="border-t border-zinc-600 mt-2 pt-2">
                     <button
                       onClick={() => navigateToSection('contact')}
@@ -218,7 +228,7 @@ export const Navbar = memo(function Navbar() {
                     </button>
                   </div>
                   
-                  {/* CTA */}
+                  {/* CTA - Highlighted */}
                   <div className="border-t border-zinc-600 mt-2 pt-2">
                     <button
                       onClick={() => navigateToSection('contact')}
@@ -314,16 +324,6 @@ export const Navbar = memo(function Navbar() {
             className="text-xs font-semibold uppercase tracking-wider py-2.5 text-white hover:text-primary transition-colors relative group whitespace-nowrap"
           >
             {t('nav.exports')}
-            <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all group-hover:w-full"></span>
-          </a>
-
-          {/* Ortaklarımız */}
-          <a
-            href="/exports#ortaklarimiz"
-            onClick={closeAllDropdowns}
-            className="text-xs font-semibold uppercase tracking-wider py-2.5 text-white hover:text-primary transition-colors relative group whitespace-nowrap"
-          >
-            {t('nav.partners')}
             <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all group-hover:w-full"></span>
           </a>
 

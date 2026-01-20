@@ -188,15 +188,16 @@ export const Footer = memo(function Footer() {
           <div>
             <h3 className="text-zinc-900 dark:text-white font-bold uppercase tracking-wider mb-6">{t('footer.quickAccess')}</h3>
             <ul className="space-y-3 text-sm">
+              {/* Hierarchical Navigation - Matches New Page Structure */}
               <li><a href="/" onClick={handleHomeClick} className="hover:text-primary transition-colors">{t('nav.home')}</a></li>
               <li><a href="/about" className="hover:text-primary transition-colors">{t('nav.about')}</a></li>
               <li><a href="/#products" onClick={(e) => handleSectionClick(e, 'products')} className="hover:text-primary transition-colors">{t('nav.products')}</a></li>
               <li><a href="/#engineering" onClick={(e) => handleSectionClick(e, 'engineering')} className="hover:text-primary transition-colors">{t('nav.engineering')}</a></li>
               <li><a href="/#projects" onClick={(e) => handleSectionClick(e, 'projects')} className="hover:text-primary transition-colors">{t('nav.projects')}</a></li>
-              <li><a href="/exports" className="hover:text-primary transition-colors">{t('nav.exports')}</a></li>
               <li><a href="/#faq" onClick={(e) => handleSectionClick(e, 'faq')} className="hover:text-primary transition-colors">{t('nav.faq')}</a></li>
               <li><a href="/#testimonials" onClick={(e) => handleSectionClick(e, 'testimonials')} className="hover:text-primary transition-colors">{t('nav.testimonials')}</a></li>
-              <li><a href="/exports#ortaklarimiz" className="hover:text-primary transition-colors">{t('nav.partners')}</a></li>
+              <li><a href="/#partners" onClick={(e) => handleSectionClick(e, 'partners')} className="hover:text-primary transition-colors">{t('nav.partners')}</a></li>
+              <li><a href="/exports" className="hover:text-primary transition-colors">{t('nav.exports')}</a></li>
               <li><a href="/#contact" onClick={(e) => handleSectionClick(e, 'contact')} className="hover:text-primary transition-colors">{t('nav.contact')}</a></li>
             </ul>
           </div>

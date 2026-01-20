@@ -351,52 +351,54 @@ export default function Home() {
             </div>
           </div>
 
-          {/* TRUST INDICATORS - Numbers + Certifications Combined */}
+          {/* TRUST INDICATORS - Certifications + Numbers Combined */}
           <div className="mt-20 pt-16 border-t border-zinc-300 dark:border-zinc-600">
             <div className="text-center mb-12 animate-in fade-in duration-600">
               <h3 className="text-red-600 dark:text-red-500 font-bold tracking-widest uppercase mb-2">{t('trust.subtitle')}</h3>
               <h2 className="text-3xl md:text-4xl font-black text-zinc-900 dark:text-white">{t('trust.title')}</h2>
             </div>
             
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-6 xs:gap-4 items-center">
-              {/* Numbers */}
-              <div className="text-center group animate-in scale-in duration-500">
-                <div className="text-4xl xs:text-3xl font-black text-red-600 dark:text-red-500 mb-2 group-hover:scale-110 transition-transform">15+</div>
-                <div className="text-sm xs:text-xs text-zinc-600 dark:text-zinc-400 uppercase tracking-wider">{t('trust.years')}</div>
-              </div>
-              <div className="text-center group animate-in scale-in duration-500" style={{ animationDelay: '50ms' }}>
-                <div className="text-4xl xs:text-3xl font-black text-red-600 dark:text-red-500 mb-2 group-hover:scale-110 transition-transform">200+</div>
-                <div className="text-sm xs:text-xs text-zinc-600 dark:text-zinc-400 uppercase tracking-wider">{t('trust.projects')}</div>
-              </div>
-              <div className="text-center group animate-in scale-in duration-500" style={{ animationDelay: '100ms' }}>
-                <div className="text-4xl xs:text-3xl font-black text-red-600 dark:text-red-500 mb-2 group-hover:scale-110 transition-transform">50+</div>
-                <div className="text-sm xs:text-xs text-zinc-600 dark:text-zinc-400 uppercase tracking-wider">{t('trust.clients')}</div>
-              </div>
-              
-              {/* Certifications (compact) */}
-              <div className="flex flex-col items-center gap-2 group animate-in scale-in duration-500" style={{ animationDelay: '150ms' }}>
-                <div className="w-20 h-20 xs:w-16 xs:h-16 bg-white dark:bg-zinc-700 border border-zinc-200 dark:border-zinc-600 rounded-lg flex items-center justify-center group-hover:border-red-600 dark:group-hover:border-red-500 group-hover:shadow-lg transition-all p-2">
+            {/* Certifications - Top Row */}
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 xs:gap-4 mb-12 animate-in fade-in duration-600">
+              <div className="flex flex-col items-center gap-2 group animate-in scale-in duration-500">
+                <div className="w-24 h-24 xs:w-20 xs:h-20 bg-white dark:bg-zinc-700 border-2 border-zinc-200 dark:border-zinc-600 rounded-lg flex items-center justify-center group-hover:border-red-600 dark:group-hover:border-red-500 group-hover:shadow-xl group-hover:shadow-red-600/20 transition-all p-2">
                   <OptimizedImage src="/certifications/iso9001.webp" alt="ISO 9001" className="w-full h-full object-contain" loading="lazy" />
                 </div>
-                <span className="text-xs text-zinc-600 dark:text-zinc-400 font-semibold">ISO 9001</span>
+                <span className="text-xs text-zinc-600 dark:text-zinc-400 font-semibold group-hover:text-red-600 dark:group-hover:text-red-500 transition-colors">ISO 9001</span>
               </div>
-              <div className="flex flex-col items-center gap-2 group animate-in scale-in duration-500" style={{ animationDelay: '200ms' }}>
-                <div className="w-20 h-20 xs:w-16 xs:h-16 bg-white dark:bg-zinc-700 border border-zinc-200 dark:border-zinc-600 rounded-lg flex items-center justify-center group-hover:border-red-600 dark:group-hover:border-red-500 group-hover:shadow-lg transition-all p-2">
+              <div className="flex flex-col items-center gap-2 group animate-in scale-in duration-500" style={{ animationDelay: '50ms' }}>
+                <div className="w-24 h-24 xs:w-20 xs:h-20 bg-white dark:bg-zinc-700 border-2 border-zinc-200 dark:border-zinc-600 rounded-lg flex items-center justify-center group-hover:border-red-600 dark:group-hover:border-red-500 group-hover:shadow-xl group-hover:shadow-red-600/20 transition-all p-2">
                   <OptimizedImage src="/certifications/tse.webp" alt="TSE" className="w-full h-full object-contain" loading="lazy" />
                 </div>
-                <span className="text-xs text-zinc-600 dark:text-zinc-400 font-semibold">TSE</span>
+                <span className="text-xs text-zinc-600 dark:text-zinc-400 font-semibold group-hover:text-red-600 dark:group-hover:text-red-500 transition-colors">TSE</span>
               </div>
-              <div className="flex flex-col items-center gap-2 group animate-in scale-in duration-500" style={{ animationDelay: '250ms' }}>
-                <div className="w-20 h-20 xs:w-16 xs:h-16 bg-white dark:bg-zinc-700 border border-zinc-200 dark:border-zinc-600 rounded-lg flex items-center justify-center group-hover:border-red-600 dark:group-hover:border-red-500 group-hover:shadow-lg transition-all p-2">
+              <div className="flex flex-col items-center gap-2 group animate-in scale-in duration-500" style={{ animationDelay: '100ms' }}>
+                <div className="w-24 h-24 xs:w-20 xs:h-20 bg-white dark:bg-zinc-700 border-2 border-zinc-200 dark:border-zinc-600 rounded-lg flex items-center justify-center group-hover:border-red-600 dark:group-hover:border-red-500 group-hover:shadow-xl group-hover:shadow-red-600/20 transition-all p-2">
                   <OptimizedImage src="/certifications/ce.webp" alt="CE" className="w-full h-full object-contain" loading="lazy" />
                 </div>
-                <span className="text-xs text-zinc-600 dark:text-zinc-400 font-semibold">CE</span>
+                <span className="text-xs text-zinc-600 dark:text-zinc-400 font-semibold group-hover:text-red-600 dark:group-hover:text-red-500 transition-colors">CE</span>
               </div>
-              <div className="flex flex-col items-center gap-2 group animate-in scale-in duration-500" style={{ animationDelay: '300ms' }}>
-                <div className="w-20 h-20 xs:w-16 xs:h-16 bg-white dark:bg-zinc-700 border border-zinc-200 dark:border-zinc-600 rounded-lg flex items-center justify-center group-hover:border-red-600 dark:group-hover:border-red-500 group-hover:shadow-lg transition-all p-2">
+              <div className="flex flex-col items-center gap-2 group animate-in scale-in duration-500" style={{ animationDelay: '150ms' }}>
+                <div className="w-24 h-24 xs:w-20 xs:h-20 bg-white dark:bg-zinc-700 border-2 border-zinc-200 dark:border-zinc-600 rounded-lg flex items-center justify-center group-hover:border-red-600 dark:group-hover:border-red-500 group-hover:shadow-xl group-hover:shadow-red-600/20 transition-all p-2">
                   <OptimizedImage src="/certifications/golden.webp" alt="Quality" className="w-full h-full object-contain" loading="lazy" />
                 </div>
-                <span className="text-xs text-zinc-600 dark:text-zinc-400 font-semibold">{t('certifications.quality')}</span>
+                <span className="text-xs text-zinc-600 dark:text-zinc-400 font-semibold group-hover:text-red-600 dark:group-hover:text-red-500 transition-colors">{t('certifications.quality')}</span>
+              </div>
+            </div>
+
+            {/* Numbers - Bottom Row */}
+            <div className="grid grid-cols-3 gap-8 xs:gap-4 animate-in fade-in duration-600" style={{ animationDelay: '200ms' }}>
+              <div className="text-center group">
+                <div className="text-5xl xs:text-4xl font-black text-red-600 dark:text-red-500 mb-2 group-hover:scale-110 transition-transform">15+</div>
+                <div className="text-sm xs:text-xs text-zinc-600 dark:text-zinc-400 uppercase tracking-wider font-semibold">{t('trust.years')}</div>
+              </div>
+              <div className="text-center group">
+                <div className="text-5xl xs:text-4xl font-black text-red-600 dark:text-red-500 mb-2 group-hover:scale-110 transition-transform">200+</div>
+                <div className="text-sm xs:text-xs text-zinc-600 dark:text-zinc-400 uppercase tracking-wider font-semibold">{t('trust.projects')}</div>
+              </div>
+              <div className="text-center group">
+                <div className="text-5xl xs:text-4xl font-black text-red-600 dark:text-red-500 mb-2 group-hover:scale-110 transition-transform">50+</div>
+                <div className="text-sm xs:text-xs text-zinc-600 dark:text-zinc-400 uppercase tracking-wider font-semibold">{t('trust.clients')}</div>
               </div>
             </div>
           </div>

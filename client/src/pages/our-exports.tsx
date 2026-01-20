@@ -377,7 +377,7 @@ function OurExports() {
   ];
 
   const exportStats = [
-    { icon: Globe, value: "12+", label: t('exports.stats.countries') },
+    { icon: Globe, value: "5+", label: t('exports.stats.countries') },
     { icon: Package, value: "500+", label: t('exports.stats.machines') },
     { icon: TrendingUp, value: "%40", label: t('exports.stats.growth') },
     { icon: Award, value: "ISO 9001", label: t('exports.stats.certificate') }

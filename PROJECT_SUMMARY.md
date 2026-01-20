@@ -415,6 +415,7 @@ ABT Mekatronik için sıfırdan geliştirilen, modern ve profesyonel bir kurumsa
 4. **🇫🇷 Fransızca**: Avrupa pazarı (Fransa, Belçika)
 5. **🇪🇸 İspanyolca**: İspanya ve Latin Amerika
 6. **🇦🇪 Arapça**: Ortadoğu pazarı (RTL desteği ile)
+7. **🇷🇺 Rusça**: Rusya ve Doğu Avrupa pazarı
 
 ### Çeviri Kapsamı
 - Tüm sayfa içerikleri
@@ -529,7 +530,7 @@ ABT Mekatronik için sıfırdan geliştirilen, modern ve profesyonel bir kurumsa
 - Accessibility audits (WCAG 2.1 AA)
 
 ### Tamamlanan Özellikler ✅
-- ✅ 6 dilde tam çok dilli destek (TR, EN, DE, FR, ES, AR)
+- ✅ 7 dilde tam çok dilli destek (TR, EN, DE, FR, ES, AR, RU)
 - ✅ Light/Dark theme sistemi
 - ✅ Video autoplay (tüm tarayıcılarda çalışıyor)
 - ✅ Responsive design (320px - 4K)
@@ -546,6 +547,7 @@ ABT Mekatronik için sıfırdan geliştirilen, modern ve profesyonel bir kurumsa
 - ✅ Performance monitoring (Lighthouse CI)
 - ✅ User analytics (Google Analytics 4)
 - ✅ Production observability stack
+- ✅ i18n legend keys fix (exports page map translations)
 
 ## 📞 İletişim ve Destek
 
@@ -614,6 +616,31 @@ useEffect(() => videoRef.current?.play())
 **Çözüm**: Kapsamlı cross-browser testing ve fixes  
 **Sonuç**: Chrome, Firefox, Safari, Edge (Desktop & Mobile) %100 uyumlu
 
+### 8. i18n Legend Keys Translation Fix ✅
+**Problem**: Exports page map legend'ında translation key'leri görünüyordu (örn: "exports.legend.productionCenter")  
+**Çözüm**: `i18n.tsx` dosyasına tüm diller için `exports.legend` key'leri eklendi  
+**Sonuç**: Map legend'ı tüm 7 dilde doğru çevrileri gösteriyor
+
+**Teknik Detaylar:**
+```typescript
+// ✅ FIXED - i18n.tsx'e eklenen legend keys
+exports: {
+  legend: {
+    productionCenter: 'Üretim Merkezi',  // TR
+    turkey: 'Türkiye',
+    exportCountries: 'İhracat Ülkeleri',
+    otherCountries: 'Diğer Ülkeler',
+    export: 'İhracat'
+  }
+}
+
+// Diğer diller için de aynı yapı (EN, DE, FR, ES, AR, RU)
+```
+
+**Etkilenen Sayfalar:**
+- `/our-exports` - İhracat haritası legend'ı
+- Tüm 7 dilde çalışıyor (TR, EN, DE, FR, ES, AR, RU)
+
 ### 7. Security Headers Implementation ✅
 **Problem**: HTTP Observatory skoru 58/100 (C), kritik güvenlik header'ları eksik  
 **Çözüm**: 10 kritik güvenlik header'ı eklendi (CSP, X-Frame-Options, HSTS, vb.)  
@@ -647,7 +674,7 @@ ABT Mekatronik web sitesi, modern web teknolojileri ve en iyi uygulamalar kullan
 ### Proje Başarı Kriterleri ✅
 - ✅ **Performans**: Lighthouse 92+ skoru (hedef 90+)
 - ✅ **Erişilebilirlik**: WCAG 2.1 AA uyumlu (95+ skor)
-- ✅ **Çok Dilli**: 6 dilde tam destek (TR, EN, DE, FR, ES, AR)
+- ✅ **Çok Dilli**: 7 dilde tam destek (TR, EN, DE, FR, ES, AR, RU)
 - ✅ **Responsive**: 320px'den 4K'ya kadar mükemmel görünüm
 - ✅ **SEO**: Optimize edilmiş meta tags, sitemap, robots.txt
 - ✅ **UX**: Kullanıcı dostu ve sezgisel arayüz
@@ -655,7 +682,7 @@ ABT Mekatronik web sitesi, modern web teknolojileri ve en iyi uygulamalar kullan
 - ✅ **Cross-Browser**: Edge Desktop dahil tüm tarayıcılarda çalışıyor
 - ✅ **Video Autoplay**: %100 başarı oranı tüm platformlarda
 - ✅ **Theme System**: Light/Dark theme sorunsuz çalışıyor
-- ✅ **i18n Coverage**: %100 lokalizasyon (hardcoded text yok)
+- ✅ **i18n Coverage**: %100 lokalizasyon (hardcoded text yok, legend keys fixed)
 - ✅ **Bundle Size**: 200KB (hedef <250KB)
 - ✅ **Loading Speed**: FCP 1.2s (hedef <1.5s)
 - ✅ **Security Score**: HTTP Observatory 88/100 (B+)
@@ -663,11 +690,11 @@ ABT Mekatronik web sitesi, modern web teknolojileri ve en iyi uygulamalar kullan
 
 ### Proje İstatistikleri
 - **Geliştirme Süresi**: 8 gün (2026-01-16 - 2026-01-24)
-- **Toplam Commit**: 160+ Git commit
+- **Toplam Commit**: 170+ Git commit
 - **Kod Satırı**: ~13,000 satır (TypeScript, CSS, Config)
 - **Component Sayısı**: 40+ React component
 - **Sayfa Sayısı**: 1 (Single Page Application)
-- **Dil Desteği**: 6 dil (TR, EN, DE, FR, ES, AR)
+- **Dil Desteği**: 7 dil (TR, EN, DE, FR, ES, AR, RU)
 - **Görsel/Video**: 60+ medya dosyası (WebP optimized)
 - **Bundle Size**: 200KB gzipped (40% reduction)
 - **Lighthouse Score**: 92+ (all categories)
@@ -676,6 +703,7 @@ ABT Mekatronik web sitesi, modern web teknolojileri ve en iyi uygulamalar kullan
 - **Accessibility**: WCAG 2.1 AA compliant
 - **Performance**: FCP 1.2s, LCP 2.1s, TTI 2.8s
 - **Monitoring**: Sentry + Lighthouse CI + GA4
+- **i18n Keys**: 500+ translation keys across 7 languages
 
 ---
 
@@ -684,8 +712,8 @@ ABT Mekatronik web sitesi, modern web teknolojileri ve en iyi uygulamalar kullan
 Bu proje, **Burhan Topal** liderliğindeki **ABT Mekatronik** ekibinin vizyonu ve güveni ile hayata geçirilmiştir. Modern teknolojiler ve en iyi uygulamalar kullanılarak, şirketin dijital varlığını güçlendiren, müşteri kazanımını artıran ve uluslararası pazarlara açılan bir platform oluşturulmuştur.
 
 **Proje Durumu**: ✅ **PRODUCTION READY - DEPLOYMENT COMPLETE**  
-**Son Güncelleme**: 2026-01-18  
-**Versiyon**: 1.0.0 FINAL  
+**Son Güncelleme**: 2026-01-20  
+**Versiyon**: 1.0.1 (i18n legend keys fix)  
 **Deployment**: Vercel (https://abt-mekatronik.vercel.app)  
 **Status**: Live & Fully Operational
 

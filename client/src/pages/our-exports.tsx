@@ -400,7 +400,7 @@ function OurExports() {
   ];
 
   return (
-    <div className="min-h-screen bg-white dark:bg-zinc-900 text-zinc-900 dark:text-zinc-200" dir={language === 'ar' ? 'rtl' : 'ltr'}>
+    <div className="min-h-screen bg-white dark:bg-zinc-900 text-zinc-900 dark:text-zinc-200" dir="ltr">
       <SkipLink />
       <Navbar />
 
@@ -410,9 +410,9 @@ function OurExports() {
           <div className="absolute inset-0 bg-gradient-to-r from-zinc-900/90 via-zinc-900/70 to-zinc-900/50" />
         </div>
         <div className="container mx-auto px-6 xs:px-4 relative z-10 text-center">
-          <div className="inline-block mb-4 xs:mb-3 px-4 xs:px-3 py-2 xs:py-1.5 bg-red-600/20 border border-red-600/50 text-red-500 font-bold text-sm xs:text-xs tracking-widest uppercase rounded-sm backdrop-blur-sm">{t('exports.hero.badge')}</div>
-          <h1 className="text-3xl xs:text-2xl sm:text-4xl md:text-7xl font-black text-white leading-tight mb-6 xs:mb-4 px-4 xs:px-0">{t('exports.hero.title1')} <br /><span className="text-red-500">{t('exports.hero.title2')}</span> {t('exports.hero.title3')}</h1>
-          <p className="text-lg xs:text-base sm:text-xl text-gray-200 max-w-3xl mx-auto leading-relaxed px-4 xs:px-0">{t('exports.hero.description')}</p>
+          <div className="inline-block mb-4 xs:mb-3 px-4 xs:px-3 py-2 xs:py-1.5 bg-red-600/20 border border-red-600/50 text-red-500 font-bold text-sm xs:text-xs tracking-widest uppercase rounded-sm backdrop-blur-sm" dir={language === 'ar' ? 'rtl' : 'ltr'}>{t('exports.hero.badge')}</div>
+          <h1 className="text-3xl xs:text-2xl sm:text-4xl md:text-7xl font-black text-white leading-tight mb-6 xs:mb-4 px-4 xs:px-0" dir={language === 'ar' ? 'rtl' : 'ltr'}>{t('exports.hero.title1')} <br /><span className="text-red-500">{t('exports.hero.title2')}</span> {t('exports.hero.title3')}</h1>
+          <p className="text-lg xs:text-base sm:text-xl text-gray-200 max-w-3xl mx-auto leading-relaxed px-4 xs:px-0" dir={language === 'ar' ? 'rtl' : 'ltr'}>{t('exports.hero.description')}</p>
         </div>
       </section>
 
@@ -438,8 +438,8 @@ function OurExports() {
       <section className="py-24 xs:py-16 bg-zinc-50 dark:bg-zinc-900">
         <div className="container mx-auto px-6 xs:px-4">
           <div className="text-center mb-16 xs:mb-12">
-            <h2 className="text-3xl xs:text-2xl sm:text-4xl md:text-5xl font-black text-zinc-900 dark:text-white mb-6 xs:mb-4 px-4 xs:px-0"><span className="text-red-600 dark:text-red-500">{t('exports.countries.title')}</span> {t('exports.countries.titleHighlight')}</h2>
-            <p className="text-zinc-600 dark:text-zinc-400 max-w-2xl mx-auto text-base xs:text-sm sm:text-lg px-4 xs:px-0">{t('exports.countries.description')}</p>
+            <h2 className="text-3xl xs:text-2xl sm:text-4xl md:text-5xl font-black text-zinc-900 dark:text-white mb-6 xs:mb-4 px-4 xs:px-0" dir={language === 'ar' ? 'rtl' : 'ltr'}><span className="text-red-600 dark:text-red-500">{t('exports.countries.title')}</span> {t('exports.countries.titleHighlight')}</h2>
+            <p className="text-zinc-600 dark:text-zinc-400 max-w-2xl mx-auto text-base xs:text-sm sm:text-lg px-4 xs:px-0" dir={language === 'ar' ? 'rtl' : 'ltr'}>{t('exports.countries.description')}</p>
           </div>
           <div className="max-w-6xl mx-auto mb-16 xs:mb-12">
             <div className="bg-white dark:bg-zinc-800 p-8 xs:p-4 rounded-2xl border-2 border-zinc-200 dark:border-zinc-700 shadow-2xl">
@@ -584,8 +584,8 @@ function OurExports() {
             {exportCountries.map((country, index) => (
               <div key={country.name} className="bg-white dark:bg-zinc-800 p-4 xs:p-3 rounded-xl border-2 border-zinc-200 dark:border-zinc-700 hover:border-red-500 dark:hover:border-red-500 shadow-lg hover:shadow-xl transition-all group text-center animate-in slide-up duration-600" style={{ animationDelay: `${index * 50}ms` }}>
                 <div className="text-4xl xs:text-3xl mb-2 xs:mb-1.5 group-hover:scale-110 transition-transform">{country.flag}</div>
-                <h3 className="text-sm xs:text-xs font-bold text-zinc-900 dark:text-white mb-1 xs:mb-0.5">{country.name}</h3>
-                <p className="text-[10px] xs:text-[9px] text-zinc-500 dark:text-zinc-400">{country.region}</p>
+                <h3 className="text-sm xs:text-xs font-bold text-zinc-900 dark:text-white mb-1 xs:mb-0.5" dir={language === 'ar' ? 'rtl' : 'ltr'}>{country.name}</h3>
+                <p className="text-[10px] xs:text-[9px] text-zinc-500 dark:text-zinc-400" dir={language === 'ar' ? 'rtl' : 'ltr'}>{country.region}</p>
               </div>
             ))}
           </div>
@@ -595,8 +595,8 @@ function OurExports() {
       <section className="py-24 xs:py-16 bg-white dark:bg-zinc-800">
         <div className="container mx-auto px-6 xs:px-4">
           <div className="text-center mb-16 xs:mb-12">
-            <h2 className="text-3xl xs:text-2xl sm:text-4xl md:text-5xl font-black text-zinc-900 dark:text-white mb-6 xs:mb-4 px-4 xs:px-0">{t('exports.productsSection.title')} <span className="text-red-600 dark:text-red-500">{t('exports.productsSection.titleHighlight')}</span></h2>
-            <p className="text-zinc-600 dark:text-zinc-400 max-w-2xl mx-auto text-base xs:text-sm sm:text-lg px-4 xs:px-0">{t('exports.productsSection.description')}</p>
+            <h2 className="text-3xl xs:text-2xl sm:text-4xl md:text-5xl font-black text-zinc-900 dark:text-white mb-6 xs:mb-4 px-4 xs:px-0" dir={language === 'ar' ? 'rtl' : 'ltr'}>{t('exports.productsSection.title')} <span className="text-red-600 dark:text-red-500">{t('exports.productsSection.titleHighlight')}</span></h2>
+            <p className="text-zinc-600 dark:text-zinc-400 max-w-2xl mx-auto text-base xs:text-sm sm:text-lg px-4 xs:px-0" dir={language === 'ar' ? 'rtl' : 'ltr'}>{t('exports.productsSection.description')}</p>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4 xs:gap-3">
             {exportProducts.map((product, index) => (
@@ -618,7 +618,7 @@ function OurExports() {
         <div className="container mx-auto px-6 xs:px-4">
           <div className="max-w-4xl mx-auto">
             <div className="text-center mb-16 xs:mb-12">
-              <h2 className="text-3xl xs:text-2xl sm:text-4xl md:text-5xl font-black text-zinc-900 dark:text-white mb-6 xs:mb-4 px-4 xs:px-0">{t('exports.whyUs.title')} <span className="text-red-600 dark:text-red-500">{t('exports.whyUs.titleHighlight')}</span></h2>
+              <h2 className="text-3xl xs:text-2xl sm:text-4xl md:text-5xl font-black text-zinc-900 dark:text-white mb-6 xs:mb-4 px-4 xs:px-0" dir={language === 'ar' ? 'rtl' : 'ltr'}>{t('exports.whyUs.title')} <span className="text-red-600 dark:text-red-500">{t('exports.whyUs.titleHighlight')}</span></h2>
             </div>
             <div className="grid md:grid-cols-2 gap-4 xs:gap-3">
               {exportAdvantages.map((advantage, index) => (
@@ -626,7 +626,7 @@ function OurExports() {
                   <div className="shrink-0 w-10 h-10 xs:w-8 xs:h-8 bg-red-600/10 dark:bg-red-500/10 rounded-full flex items-center justify-center">
                     <CheckCircle className="w-5 h-5 xs:w-4 xs:h-4 text-red-600 dark:text-red-500" />
                   </div>
-                  <span className="text-sm xs:text-xs font-semibold text-zinc-900 dark:text-white leading-snug">{advantage}</span>
+                  <span className="text-sm xs:text-xs font-semibold text-zinc-900 dark:text-white leading-snug" dir={language === 'ar' ? 'rtl' : 'ltr'}>{advantage}</span>
                 </div>
               ))}
             </div>
@@ -638,8 +638,8 @@ function OurExports() {
         <div className="container mx-auto px-6 xs:px-4 text-center">
           <div className="max-w-3xl mx-auto">
             <Ship className="w-20 h-20 xs:w-16 xs:h-16 text-white mx-auto mb-8 xs:mb-6" />
-            <h2 className="text-4xl xs:text-3xl md:text-5xl font-black text-white mb-6 xs:mb-4">{t('exports.cta.title')}</h2>
-            <p className="text-xl xs:text-lg text-white/90 mb-8 xs:mb-6 leading-relaxed">{t('exports.cta.description')}</p>
+            <h2 className="text-4xl xs:text-3xl md:text-5xl font-black text-white mb-6 xs:mb-4" dir={language === 'ar' ? 'rtl' : 'ltr'}>{t('exports.cta.title')}</h2>
+            <p className="text-xl xs:text-lg text-white/90 mb-8 xs:mb-6 leading-relaxed" dir={language === 'ar' ? 'rtl' : 'ltr'}>{t('exports.cta.description')}</p>
             <div className="flex flex-col sm:flex-row gap-3 xs:gap-2 justify-center">
               <button 
                 onClick={() => {
@@ -666,10 +666,10 @@ function OurExports() {
         {/* Title Section - With Container */}
         <div className="container mx-auto px-6 mb-16 xs:mb-12">
           <div className="text-center animate-in fade-in duration-600">
-            <h2 className="text-4xl xs:text-3xl md:text-5xl font-black text-zinc-900 dark:text-white mb-6">
+            <h2 className="text-4xl xs:text-3xl md:text-5xl font-black text-zinc-900 dark:text-white mb-6" dir={language === 'ar' ? 'rtl' : 'ltr'}>
               {t('exports.partners.title')} <span className="text-red-600 dark:text-red-500">{t('exports.partners.titleHighlight')}</span>
             </h2>
-            <p className="text-zinc-600 dark:text-zinc-400 max-w-2xl mx-auto text-lg xs:text-base">
+            <p className="text-zinc-600 dark:text-zinc-400 max-w-2xl mx-auto text-lg xs:text-base" dir={language === 'ar' ? 'rtl' : 'ltr'}>
               {t('exports.partners.description')}
             </p>
           </div>

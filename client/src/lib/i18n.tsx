@@ -1,4 +1,5 @@
 import { createContext, useContext, useState, ReactNode, useEffect } from 'react';
+import { exportsTranslations } from './exports-translations';
 
 export type Language = 'tr' | 'en' | 'de' | 'fr' | 'es' | 'ar' | 'ru';
 
@@ -500,108 +501,6 @@ Piyasada bulunmayan veya mevcut makinelerin karşılayamadığı özel üretim i
       title: 'Sertifikalarımız',
     },
   },
-  exports: {
-    hero: {
-      badge: 'Küresel Erişim',
-      title1: 'DÜNYA',
-      title2: 'ÇAPINDAKİ',
-      title3: 'İHRACATLARIMIZ',
-      description: 'Türkiye\'den dünyaya kaliteli endüstriyel çözümler sunuyoruz. 12+ ülkeye ihracat yapan güvenilir ortağınız.',
-    },
-    stats: {
-      countries: 'İhracat Ülkesi',
-      machines: 'İhraç Edilen Makine',
-      growth: 'Yıllık Büyüme',
-      certificate: 'Kalite Belgesi',
-    },
-    productsSection: {
-      title: 'İHRAÇ ETTİĞİMİZ ÜRÜNLER',
-      titleHighlight: 'DÜNYA STANDARTLARINDA',
-      description: 'Uluslararası kalite standartlarında ürettiğimiz ürünlerimiz, dünya genelinde tercih ediliyor.',
-    },
-    products: {
-      conveyor: 'Konveyör Sistemleri',
-      conveyorDesc: 'Ağır yük taşıma kapasiteli, modüler konveyör sistemleri',
-      textile: 'Tekstil Makineleri',
-      textileDesc: 'Yüksek hassasiyetli, enerji verimli tekstil üretim makineleri',
-      steel: 'Çelik Konstrüksiyon',
-      steelDesc: 'Depreme dayanıklı, uzun ömürlü çelik yapı sistemleri',
-      custom: 'Özel Makine Tasarımı',
-      customDesc: 'İhtiyaca özel, sıfırdan tasarlanmış endüstriyel çözümler',
-    },
-    countries: {
-      title: 'İHRACAT HARİTAMIZ',
-      titleHighlight: 'DÜNYA GENELİNDE',
-      subtitle: 'Dünya Genelinde Güvenilir Ortağınız',
-      description: 'Türkiye\'den 12+ ülkeye kaliteli endüstriyel çözümler sunuyoruz.',
-    },
-    legend: {
-      productionCenter: 'Üretim Merkezi',
-      turkey: 'Türkiye',
-      exportCountries: 'İhracat Ülkeleri',
-      otherCountries: 'Diğer Ülkeler',
-      export: 'İhracat',
-    },
-    whyUs: {
-      title: 'NEDEN BİZİ TERCİH EDİYORLAR?',
-      titleHighlight: 'ABT MEKATRONİK',
-      description: 'Global müşterilerimiz neden ABT Mekatronik\'i tercih ediyor?',
-      reasons: [
-        {
-          title: 'Kanıtlanmış Kalite',
-          description: 'Uluslararası sertifikalar ve referanslarla desteklenen kalite güvencesi',
-        },
-        {
-          title: 'Zamanında Teslimat',
-          description: '%98 zamanında teslimat oranı ile güvenilir iş ortağı',
-        },
-        {
-          title: 'Teknik Uzmanlık',
-          description: '15+ yıllık deneyim ve uzman mühendislik ekibi',
-        },
-        {
-          title: 'Özelleştirilebilir Çözümler',
-          description: 'Her projeye özel tasarım ve üretim imkanı',
-        },
-        {
-          title: 'Rekabetçi Fiyatlandırma',
-          description: 'Kalite-fiyat dengesinde en iyi değer',
-        },
-        {
-          title: 'Sürekli İnovasyon',
-          description: 'Ar-Ge yatırımları ile sürekli gelişen ürün portföyü',
-        },
-      ],
-    },
-    advantages: {
-      certified: 'ISO 9001, CE Sertifikalı Ürünler',
-      standards: 'Uluslararası Kalite Standartları',
-      shipping: 'Dünya Geneline Hızlı Kargo',
-      support: '7/24 Teknik Destek',
-      warranty: '2 Yıl Garanti',
-      multilingual: 'Çok Dilli Müşteri Hizmetleri',
-    },
-    partners: {
-      title: 'GLOBAL ORTAKLARIMIZ',
-      titleHighlight: 'DÜNYA GENELİNDE',
-      subtitle: 'Dünya Genelinde Güvenilir İş Birlikleri',
-      description: 'Uluslararası iş ortaklarımız ile birlikte büyüyoruz.',
-      partner: 'Ortak',
-      items: [
-        { name: 'Özbekistan Tekstil A.Ş.', country: 'Özbekistan', industry: 'Tekstil' },
-        { name: 'Mısır Endüstri Ltd.', country: 'Mısır', industry: 'Gıda' },
-        { name: 'Tacikistan Lojistik', country: 'Tacikistan', industry: 'Lojistik' },
-        { name: 'Kazakistan Metal', country: 'Kazakistan', industry: 'Metal' },
-        { name: 'Türkmenistan Üretim', country: 'Türkmenistan', industry: 'Üretim' },
-      ],
-    },
-    cta: {
-      title: 'İHRACAT İÇİN BİZİMLE İLETİŞİME GEÇİN',
-      description: 'Global pazarlarda güvenilir ortağınız olmak için hazırız. Projeleriniz için teklif alın.',
-      contactButton: 'İletişime Geçin',
-      whatsappButton: 'WhatsApp ile Ulaşın',
-    },
-  },
   faq: {
     subtitle: 'Sıkça Sorulan Sorular',
     title: 'MERAK EDİLENLER',
@@ -612,6 +511,7 @@ Piyasada bulunmayan veya mevcut makinelerin karşılayamadığı özel üretim i
       { question: 'Ücretsiz keşif yapıyor musunuz?', answer: 'Evet, tüm projeler için ücretsiz yerinde keşif ve projelendirme hizmeti sunuyoruz.' },
     ],
   },
+  exports: exportsTranslations.tr,
 };
 
 
@@ -935,108 +835,6 @@ Needs analysis → Concept design → 3D modeling → Prototype → Test → Ser
       title: 'Our Certificates',
     },
   },
-  exports: {
-    hero: {
-      badge: 'Global Reach',
-      title1: 'OUR',
-      title2: 'WORLDWIDE',
-      title3: 'EXPORTS',
-      description: 'We provide quality industrial solutions from Turkey to the world. Your trusted partner exporting to 12+ countries.',
-    },
-    stats: {
-      countries: 'Export Countries',
-      machines: 'Machines Exported',
-      growth: 'Annual Growth',
-      certificate: 'Quality Certificates',
-    },
-    productsSection: {
-      title: 'PRODUCTS WE EXPORT',
-      titleHighlight: 'WORLD-CLASS STANDARDS',
-      description: 'Our products manufactured to international quality standards are preferred worldwide.',
-    },
-    products: {
-      conveyor: 'Conveyor Systems',
-      conveyorDesc: 'Heavy-duty, modular conveyor systems with high load capacity',
-      textile: 'Textile Machinery',
-      textileDesc: 'High-precision, energy-efficient textile production machines',
-      steel: 'Steel Construction',
-      steelDesc: 'Earthquake-resistant, long-lasting steel building systems',
-      custom: 'Custom Machine Design',
-      customDesc: 'Custom-designed industrial solutions from scratch',
-    },
-    countries: {
-      title: 'OUR EXPORT MAP',
-      titleHighlight: 'WORLDWIDE',
-      subtitle: 'Your Trusted Partner Worldwide',
-      description: 'We provide quality industrial solutions from Turkey to 12+ countries.',
-    },
-    legend: {
-      productionCenter: 'Production Center',
-      turkey: 'Turkey',
-      exportCountries: 'Export Countries',
-      otherCountries: 'Other Countries',
-      export: 'Export',
-    },
-    whyUs: {
-      title: 'WHY DO THEY CHOOSE US?',
-      titleHighlight: 'ABT MECHATRONICS',
-      description: 'Why do our global customers choose ABT Mechatronics?',
-      reasons: [
-        {
-          title: 'Proven Quality',
-          description: 'Quality assurance backed by international certificates and references',
-        },
-        {
-          title: 'On-Time Delivery',
-          description: 'Reliable business partner with 98% on-time delivery rate',
-        },
-        {
-          title: 'Technical Expertise',
-          description: '15+ years of experience and expert engineering team',
-        },
-        {
-          title: 'Customizable Solutions',
-          description: 'Custom design and production capability for each project',
-        },
-        {
-          title: 'Competitive Pricing',
-          description: 'Best value in quality-price balance',
-        },
-        {
-          title: 'Continuous Innovation',
-          description: 'Continuously evolving product portfolio with R&D investments',
-        },
-      ],
-    },
-    advantages: {
-      certified: 'ISO 9001, CE Certified Products',
-      standards: 'International Quality Standards',
-      shipping: 'Fast Worldwide Shipping',
-      support: '24/7 Technical Support',
-      warranty: '2 Year Warranty',
-      multilingual: 'Multilingual Customer Service',
-    },
-    partners: {
-      title: 'OUR GLOBAL PARTNERS',
-      titleHighlight: 'WORLDWIDE',
-      subtitle: 'Trusted Business Partnerships Worldwide',
-      description: 'We grow together with our international business partners.',
-      partner: 'Partner',
-      items: [
-        { name: 'Uzbekistan Textile Inc.', country: 'Uzbekistan', industry: 'Textile' },
-        { name: 'Egypt Industry Ltd.', country: 'Egypt', industry: 'Food' },
-        { name: 'Tajikistan Logistics', country: 'Tajikistan', industry: 'Logistics' },
-        { name: 'Kazakhstan Metal', country: 'Kazakhstan', industry: 'Metal' },
-        { name: 'Turkmenistan Production', country: 'Turkmenistan', industry: 'Production' },
-      ],
-    },
-    cta: {
-      title: 'CONTACT US FOR EXPORT',
-      description: 'We are ready to be your trusted partner in global markets. Get a quote for your projects.',
-      contactButton: 'Contact Us',
-      whatsappButton: 'Contact via WhatsApp',
-    },
-  },
   faq: {
     subtitle: 'Frequently Asked Questions',
     title: 'FAQ',
@@ -1047,6 +845,7 @@ Needs analysis → Concept design → 3D modeling → Prototype → Test → Ser
       { question: 'Do you offer free site surveys?', answer: 'Yes, we offer free on-site survey and project design services for all projects.' },
     ],
   },
+  exports: exportsTranslations.en,
 };
 
 
@@ -1422,6 +1221,7 @@ Löst spezielle Produktionsanforderungen, die auf dem Markt nicht verfügbar sin
       { question: 'Bieten Sie kostenlose Besichtigungen an?', answer: 'Ja, wir bieten kostenlose Vor-Ort-Besichtigung und Projektplanung für alle Projekte an.' },
     ],
   },
+  exports: exportsTranslations.de,
 };
 
 
@@ -1801,6 +1601,7 @@ Résout les besoins de production spéciaux non disponibles sur le marché.
       { question: 'Offrez-vous des visites gratuites?', answer: 'Oui, nous offrons des services gratuits de visite sur site et de conception de projet pour tous les projets.' },
     ],
   },
+  exports: exportsTranslations.fr,
 };
 
 
@@ -2180,6 +1981,7 @@ Resuelve necesidades de producción especiales no disponibles en el mercado.
       { question: '¿Ofrecen visitas gratuitas?', answer: 'Sí, ofrecemos servicios gratuitos de visita en sitio y diseño de proyectos para todos los proyectos.' },
     ],
   },
+  exports: exportsTranslations.es,
 };
 
 
@@ -2625,6 +2427,7 @@ const ar = {
       { question: 'هل تقدمون زيارات موقع مجانية؟', answer: 'نعم، نقدم خدمات زيارة الموقع وتصميم المشروع مجانًا لجميع المشاريع.' },
     ],
   },
+  exports: exportsTranslations.ar,
 };
 
 
@@ -3070,6 +2873,7 @@ const ru = {
       { question: 'Вы предлагаете бесплатные выезды на объект?', answer: 'Да, мы предлагаем бесплатные услуги выезда на объект и проектирования для всех проектов.' },
     ],
   },
+  exports: exportsTranslations.ru,
 };
 
 

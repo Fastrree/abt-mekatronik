@@ -5,7 +5,7 @@ export const exportsTranslations = {
       title1: 'SATIŞ YAPTIĞIMIZ',
       title2: 'ÜLKELER',
       title3: '',
-      description: 'Türkiye\'den dünyaya kaliteli endüstriyel çözümler sunuyoruz. 12+ ülkeye ihracat yapan güvenilir ortağınız.',
+      description: 'Türkiye\'den dünyaya kaliteli endüstriyel çözümler sunuyoruz. 5+ ülkeye ihracat yapan güvenilir ortağınız.',
     },
     stats: {
       countries: 'İhracat Ülkesi',
@@ -40,7 +40,7 @@ export const exportsTranslations = {
       title: 'İHRACAT',
       titleHighlight: 'HARİTAMIZ',
       subtitle: 'Dünya Genelinde Güvenilir Ortağınız',
-      description: 'Türkiye\'den 12+ ülkeye kaliteli endüstriyel çözümler sunuyoruz.',
+      description: 'Türkiye\'den 5+ ülkeye kaliteli endüstriyel çözümler sunuyoruz.',
     },
     legend: {
       productionCenter: 'Üretim Merkezi',
@@ -100,7 +100,7 @@ export const exportsTranslations = {
       title1: 'COUNTRIES',
       title2: 'WE EXPORT TO',
       title3: '',
-      description: 'We provide quality industrial solutions from Turkey to the world. Your reliable partner exporting to 12+ countries.',
+      description: 'We provide quality industrial solutions from Turkey to the world. Your reliable partner exporting to 5+ countries.',
     },
     stats: {
       countries: 'Export Countries',
@@ -135,7 +135,7 @@ export const exportsTranslations = {
       title: 'OUR EXPORT',
       titleHighlight: 'MAP',
       subtitle: 'Your Reliable Partner Worldwide',
-      description: 'We provide quality industrial solutions from Turkey to 12+ countries.',
+      description: 'We provide quality industrial solutions from Turkey to 5+ countries.',
     },
     legend: {
       productionCenter: 'Production Center',
@@ -195,7 +195,7 @@ export const exportsTranslations = {
       title1: 'UNSERE',
       title2: 'WELTWEITEN',
       title3: '',
-      description: 'Wir bieten qualitativ hochwertige industrielle Lösungen von der Türkei in die Welt. Ihr zuverlässiger Partner mit Exporten in über 12 Länder.',
+      description: 'Wir bieten qualitativ hochwertige industrielle Lösungen von der Türkei in die Welt. Ihr zuverlässiger Partner mit Exporten in über 5 Länder.',
     },
     stats: {
       countries: 'Exportländer',
@@ -230,7 +230,7 @@ export const exportsTranslations = {
       title: 'UNSERE',
       titleHighlight: 'EXPORTKARTE',
       subtitle: 'Ihr Zuverlässiger Partner Weltweit',
-      description: 'Wir bieten qualitativ hochwertige industrielle Lösungen von der Türkei in über 12 Länder.',
+      description: 'Wir bieten qualitativ hochwertige industrielle Lösungen von der Türkei in über 5 Länder.',
     },
     legend: {
       productionCenter: 'Produktionszentrum',
@@ -290,7 +290,7 @@ export const exportsTranslations = {
       title1: 'NOS',
       title2: 'EXPORTATIONS',
       title3: '',
-      description: 'Nous fournissons des solutions industrielles de qualité de la Turquie vers le monde. Votre partenaire fiable exportant vers plus de 12 pays.',
+      description: 'Nous fournissons des solutions industrielles de qualité de la Turquie vers le monde. Votre partenaire fiable exportant vers plus de 5 pays.',
     },
     stats: {
       countries: 'Pays d\'Exportation',
@@ -325,7 +325,7 @@ export const exportsTranslations = {
       title: 'NOTRE CARTE',
       titleHighlight: 'D\'EXPORTATION',
       subtitle: 'Votre Partenaire Fiable dans le Monde Entier',
-      description: 'Nous fournissons des solutions industrielles de qualité de la Turquie vers plus de 12 pays.',
+      description: 'Nous fournissons des solutions industrielles de qualité de la Turquie vers plus de 5 pays.',
     },
     legend: {
       productionCenter: 'Centre de Production',
@@ -385,7 +385,7 @@ export const exportsTranslations = {
       title1: 'NUESTRAS',
       title2: 'EXPORTACIONES',
       title3: '',
-      description: 'Proporcionamos soluciones industriales de calidad desde Turquía al mundo. Su socio confiable exportando a más de 12 países.',
+      description: 'Proporcionamos soluciones industriales de calidad desde Turquía al mundo. Su socio confiable exportando a más de 5 países.',
     },
     stats: {
       countries: 'Países de Exportación',
@@ -420,7 +420,7 @@ export const exportsTranslations = {
       title: 'NUESTRO MAPA',
       titleHighlight: 'DE EXPORTACIÓN',
       subtitle: 'Su Socio Confiable en Todo el Mundo',
-      description: 'Proporcionamos soluciones industriales de calidad desde Turquía a más de 12 países.',
+      description: 'Proporcionamos soluciones industriales de calidad desde Turquía a más de 5 países.',
     },
     legend: {
       productionCenter: 'Centro de Producción',
@@ -480,7 +480,7 @@ export const exportsTranslations = {
       title1: 'صادراتنا',
       title2: 'حول',
       title3: '',
-      description: 'نقدم حلول صناعية عالية الجودة من تركيا إلى العالم. شريكك الموثوق الذي يصدر إلى أكثر من 12 دولة.',
+      description: 'نقدم حلول صناعية عالية الجودة من تركيا إلى العالم. شريكك الموثوق الذي يصدر إلى أكثر من 5 دولة.',
     },
     stats: {
       countries: 'دول التصدير',
@@ -515,7 +515,7 @@ export const exportsTranslations = {
       title: 'خريطة',
       titleHighlight: 'التصدير لدينا',
       subtitle: 'شريكك الموثوق في جميع أنحاء العالم',
-      description: 'نقدم حلول صناعية عالية الجودة من تركيا إلى أكثر من 12 دولة.',
+      description: 'نقدم حلول صناعية عالية الجودة من تركيا إلى أكثر من 5 دولة.',
     },
     legend: {
       productionCenter: 'مركز الإنتاج',
@@ -575,7 +575,7 @@ export const exportsTranslations = {
       title1: 'НАШИ',
       title2: 'МИРОВЫЕ',
       title3: '',
-      description: 'Мы предоставляем качественные промышленные решения из Турции в мир. Ваш надежный партнер, экспортирующий в более чем 12 стран.',
+      description: 'Мы предоставляем качественные промышленные решения из Турции в мир. Ваш надежный партнер, экспортирующий в более чем 5 стран.',
     },
     stats: {
       countries: 'Страны Экспорта',
@@ -610,7 +610,7 @@ export const exportsTranslations = {
       title: 'НАША КАРТА',
       titleHighlight: 'ЭКСПОРТА',
       subtitle: 'Ваш Надежный Партнер по Всему Миру',
-      description: 'Мы предоставляем качественные промышленные решения из Турции в более чем 12 стран.',
+      description: 'Мы предоставляем качественные промышленные решения из Турции в более чем 5 стран.',
     },
     legend: {
       productionCenter: 'Производственный Центр',

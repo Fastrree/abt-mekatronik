@@ -411,7 +411,7 @@ function OurExports() {
         </div>
         <div className="container mx-auto px-6 xs:px-4 relative z-10 text-center">
           <div className="inline-block mb-4 xs:mb-3 px-4 xs:px-3 py-2 xs:py-1.5 bg-red-600/20 border border-red-600/50 text-red-500 font-bold text-sm xs:text-xs tracking-widest uppercase rounded-sm backdrop-blur-sm" dir={language === 'ar' ? 'rtl' : 'ltr'}>{t('exports.hero.badge')}</div>
-          <h1 className="text-3xl xs:text-2xl sm:text-4xl md:text-7xl font-black text-white leading-tight mb-6 xs:mb-4 px-4 xs:px-0" dir={language === 'ar' ? 'rtl' : 'ltr'}>{t('exports.hero.title1')} <br /><span className="text-red-500">{t('exports.hero.title2')}</span> {t('exports.hero.title3')}</h1>
+          <h1 className="text-3xl xs:text-2xl sm:text-4xl md:text-7xl font-black text-white leading-tight mb-6 xs:mb-4 px-4 xs:px-0" dir={language === 'ar' ? 'rtl' : 'ltr'}>{t('exports.hero.title1')} <br /><span className="text-red-500">{t('exports.hero.title2')}</span></h1>
           <p className="text-lg xs:text-base sm:text-xl text-gray-200 max-w-3xl mx-auto leading-relaxed px-4 xs:px-0" dir={language === 'ar' ? 'rtl' : 'ltr'}>{t('exports.hero.description')}</p>
         </div>
       </section>

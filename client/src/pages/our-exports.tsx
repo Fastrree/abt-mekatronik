@@ -584,8 +584,8 @@ function OurExports() {
             {exportCountries.map((country, index) => (
               <div key={country.name} className="bg-white dark:bg-zinc-800 p-4 xs:p-3 rounded-xl border-2 border-zinc-200 dark:border-zinc-700 hover:border-red-500 dark:hover:border-red-500 shadow-lg hover:shadow-xl transition-all group text-center animate-in slide-up duration-600" style={{ animationDelay: `${index * 50}ms` }}>
                 <div className="text-4xl xs:text-3xl mb-2 xs:mb-1.5 group-hover:scale-110 transition-transform">{country.flag}</div>
-                <h3 className="text-sm xs:text-xs font-bold text-zinc-900 dark:text-white mb-1 xs:mb-0.5" dir={language === 'ar' ? 'rtl' : 'ltr'}>{country.name}</h3>
-                <p className="text-[10px] xs:text-[9px] text-zinc-500 dark:text-zinc-400" dir={language === 'ar' ? 'rtl' : 'ltr'}>{country.region}</p>
+                <h3 className="text-sm xs:text-xs font-bold text-zinc-900 dark:text-white mb-1 xs:mb-0.5 break-words leading-tight" dir={language === 'ar' ? 'rtl' : 'ltr'}>{country.name}</h3>
+                <p className="text-[10px] xs:text-[9px] text-zinc-500 dark:text-zinc-400 break-words" dir={language === 'ar' ? 'rtl' : 'ltr'}>{country.region}</p>
               </div>
             ))}
           </div>

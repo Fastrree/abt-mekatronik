@@ -1,0 +1,223 @@
+ABT MEKATRONİK WEB SİTESİ - DOSYA ŞEMASI
+========================================
+
+PROJE KÖKÜ: Mekatronik-Site/Mekatronik-Site/
+
+1. YAPILANDIRMA DOSYALARI (Root)
+   ├── .env                          # Ortam değişkenleri (GİZLİ)
+   ├── .env.example                  # Ortam değişkenleri şablonu
+   ├── .gitignore                    # Git ignore kuralları
+   ├── package.json                  # NPM bağımlılıkları
+   ├── package-lock.json             # NPM kilit dosyası
+   ├── tsconfig.json                 # TypeScript yapılandırması
+   ├── vite.config.ts                # Vite build yapılandırması
+   ├── postcss.config.js             # PostCSS yapılandırması
+   ├── components.json               # shadcn/ui yapılandırması
+   ├── drizzle.config.ts             # Drizzle ORM yapılandırması
+   ├── lighthouserc.json             # Lighthouse CI yapılandırması
+   ├── vercel.json                   # Vercel deployment yapılandırması
+   └── vite-plugin-meta-images.ts    # Özel Vite plugin
+
+2. DOKÜMANTASYON (Root)
+   ├── README.md                     # Proje ana dokümantasyonu
+   ├── PROJECT_SUMMARY.md            # Proje özeti
+   ├── MONITORING_GUIDE.md           # İzleme rehberi
+   ├── SPEED_INSIGHTS_GUIDE.md       # Performans rehberi
+   ├── SECURITY.md                   # Güvenlik politikası
+   ├── SECURITY_IMPLEMENTATION.md    # Güvenlik implementasyonu
+   └── BOT_PROTECTION.md             # Bot koruma dokümantasyonu
+
+3. CLIENT (Frontend)
+   client/
+   ├── index.html                    # Ana HTML dosyası
+   │
+   ├── public/                       # Statik dosyalar
+   │   ├── favicon.png
+   │   ├── favicon.svg
+   │   ├── robots.txt
+   │   ├── sitemap.xml
+   │   ├── site.webmanifest
+   │   ├── world-map.svg
+   │   │
+   │   ├── certifications/           # Sertifika görselleri
+   │   │   ├── ce.webp
+   │   │   ├── golden.webp
+   │   │   ├── iso9001.webp
+   │   │   ├── kalite.webp
+   │   │   └── tse.webp
+   │   │
+   │   └── media/                    # Medya dosyaları
+   │       ├── img1.webp - img55.webp (55 görsel)
+   │       ├── video1.mp4 - video4.mp4 (4 video)
+   │       └── WhatsApp Image/Video dosyaları
+   │
+   └── src/                          # Kaynak kodlar
+       ├── main.tsx                  # Uygulama giriş noktası
+       ├── App.tsx                   # Ana uygulama bileşeni
+       ├── index.css                 # Global CSS
+       ├── vite-env.d.ts             # Vite tip tanımları
+       │
+       ├── components/               # React bileşenleri
+       │   ├── BackToTop.tsx
+       │   ├── ClientLogos.tsx
+       │   ├── CookieBanner.tsx
+       │   ├── ErrorBoundary.tsx
+       │   ├── ExitIntentPopup.tsx
+       │   ├── FAQ.tsx
+       │   ├── LanguageSelector.tsx
+       │   ├── LazyComponents.tsx
+       │   ├── LocationMap.tsx
+       │   ├── Newsletter.tsx
+       │   ├── OptimizedImage.tsx
+       │   ├── OptimizedVideo.tsx
+       │   ├── ScrollProgress.tsx
+       │   ├── SkipLink.tsx
+       │   ├── Testimonials.tsx
+       │   ├── ThemeToggle.tsx
+       │   ├── WhatsAppButton.tsx
+       │   │
+       │   ├── layout/               # Layout bileşenleri
+       │   │   └── (Header, Footer, vb.)
+       │   │
+       │   └── ui/                   # shadcn/ui bileşenleri
+       │       ├── accordion.tsx
+       │       ├── alert-dialog.tsx
+       │       ├── alert.tsx
+       │       ├── avatar.tsx
+       │       ├── badge.tsx
+       │       ├── button.tsx
+       │       ├── card.tsx
+       │       ├── carousel.tsx
+       │       ├── checkbox.tsx
+       │       ├── dialog.tsx
+       │       ├── dropdown-menu.tsx
+       │       ├── form.tsx
+       │       ├── input.tsx
+       │       ├── label.tsx
+       │       ├── select.tsx
+       │       ├── separator.tsx
+       │       ├── sheet.tsx
+       │       ├── skeleton.tsx
+       │       ├── tabs.tsx
+       │       ├── textarea.tsx
+       │       ├── toast.tsx
+       │       ├── toaster.tsx
+       │       └── (50+ UI bileşeni)
+       │
+       ├── pages/                    # Sayfa bileşenleri
+       │   ├── home.tsx              # Ana sayfa
+       │   ├── about.tsx             # Hakkımızda
+       │   ├── exports.tsx           # İhracat (eski)
+       │   ├── our-exports.tsx       # İhracatımız (yeni)
+       │   ├── product-detail.tsx    # Ürün detay
+       │   └── not-found.tsx         # 404 sayfası
+       │
+       ├── lib/                      # Yardımcı kütüphaneler
+       │   ├── i18n.tsx              # Çok dilli sistem
+       │   ├── about-translations.ts # Hakkımızda çevirileri
+       │   ├── exports-translations.ts # İhracat çevirileri
+       │   ├── product-translations.ts # Ürün çevirileri
+       │   ├── analytics.ts          # Google Analytics
+       │   ├── sentry.ts             # Sentry hata izleme
+       │   ├── queryClient.ts        # React Query yapılandırması
+       │   └── utils.ts              # Genel yardımcı fonksiyonlar
+       │
+       ├── hooks/                    # Custom React hooks
+       │   ├── use-mobile.tsx
+       │   └── use-toast.ts
+       │
+       └── types/                    # TypeScript tip tanımları
+
+4. SERVER (Backend)
+   server/
+   ├── index.ts                      # Express sunucu giriş noktası
+   ├── routes.ts                     # API rotaları
+   ├── static.ts                     # Statik dosya sunumu
+   ├── storage.ts                    # Veri depolama
+   ├── vite.ts                       # Vite middleware
+   │
+   ├── middleware/                   # Express middleware'ler
+   │   └── security.ts               # Güvenlik middleware
+   │
+   └── monitoring/                   # İzleme sistemleri
+       └── security-monitor.ts       # Güvenlik izleme
+
+5. SHARED (Ortak)
+   shared/
+   └── schema.ts                     # Ortak veri şemaları (Zod)
+
+6. SCRIPTS (Betikler)
+   scripts/
+   └── convert-to-webp.cjs           # Görsel dönüştürme betiği
+
+   script/
+   └── build.ts                      # Build betiği
+
+7. DOCS (Detaylı Dokümantasyon)
+   docs/
+   ├── GOOGLE_ANALYTICS.md           # Google Analytics kurulumu
+   ├── IMPLEMENTATION_SUMMARY.md     # Implementasyon özeti
+   ├── LIGHTHOUSE_CI.md              # Lighthouse CI kurulumu
+   ├── MONITORING_SETUP.md           # İzleme kurulumu
+   └── SENTRY_SETUP.md               # Sentry kurulumu
+
+8. SCREENSHOTS (Ekran Görüntüleri)
+   screenshots/
+   ├── certifications.png
+   ├── contact.png
+   ├── faq.png
+   ├── hero.png
+   ├── loading.png
+   ├── projects.png
+   ├── projects2.png
+   └── testimonials.png
+
+9. BUILD OUTPUT (Üretim Dosyaları)
+   dist/                             # Build çıktısı (git'te yok)
+   node_modules/                     # NPM paketleri (git'te yok)
+
+10. GIT & CI/CD
+    .git/                            # Git repository
+    .github/                         # GitHub Actions workflows
+    .lighthouseci/                   # Lighthouse CI raporları
+
+11. DİĞER KLASÖRLER (Workspace)
+    İçerecekleri/                    # Medya içerikleri
+    └── zip/                         # WhatsApp görselleri
+
+TOPLAM DOSYA SAYILARI:
+- TypeScript/TSX Dosyaları: ~100+
+- Görsel Dosyaları (WebP): 150+
+- Video Dosyaları (MP4): 8
+- Yapılandırma Dosyaları: 15+
+- Dokümantasyon Dosyaları: 15+
+- UI Bileşenleri: 50+
+
+TEKNOLOJİ STACK:
+- Frontend: React 18 + TypeScript + Vite
+- Styling: Tailwind CSS + shadcn/ui
+- Routing: Wouter
+- State: React Query
+- i18n: Custom implementation (TR, EN, AR)
+- Backend: Express.js + TypeScript
+- Database: Drizzle ORM
+- Monitoring: Sentry + Google Analytics
+- Deployment: Vercel
+- CI/CD: GitHub Actions + Lighthouse CI
+
+PERFORMANS:
+- Lighthouse Score: 90+ (Mobile & Desktop)
+- Bundle Size: <200KB (gzipped)
+- FCP: <1.5s
+- LCP: <2.5s
+- Accessibility: WCAG 2.1 AA
+
+GÜVENLİK:
+- CSP Headers
+- Rate Limiting
+- Input Validation
+- SQL Injection Protection
+- XSS Protection
+- Bot Protection
+
+SON GÜNCELLEME: 2026-01-21

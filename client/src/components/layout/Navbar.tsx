@@ -254,7 +254,9 @@ export const Navbar = memo(function Navbar() {
         </div>
 
         {/* RIGHT SIDE: Desktop Nav Items + Language + CTA */}
-        <div className="hidden lg:flex items-center space-x-6">
+        <div className={`hidden lg:flex items-center space-x-6 ${
+          isRTL ? 'ml-8' : ''
+        }`}>
           {/* Ana Sayfa */}
           <a
             href="/"
@@ -358,7 +360,9 @@ export const Navbar = memo(function Navbar() {
         </div>
 
         {/* Mobile: Theme Toggle + Language Selector (RIGHT SIDE) */}
-        <div className="lg:hidden flex items-center gap-0.5 sm:gap-1">
+        <div className={`lg:hidden flex items-center gap-0.5 sm:gap-1 ${
+          isRTL ? 'ml-16 sm:ml-8' : ''
+        }`}>
           <ThemeToggle />
           <LanguageSelector isScrolled={isScrolled} />
         </div>

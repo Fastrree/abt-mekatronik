@@ -194,7 +194,7 @@ export const exportsTranslations = {
       badge: 'Globale Reichweite',
       title1: 'UNSERE',
       title2: 'WELTWEITEN',
-      title3: 'EXPORTE',
+      title3: '',
       description: 'Wir bieten qualitativ hochwertige industrielle Lösungen von der Türkei in die Welt. Ihr zuverlässiger Partner mit Exporten in über 12 Länder.',
     },
     stats: {
@@ -289,7 +289,7 @@ export const exportsTranslations = {
       badge: 'Portée Mondiale',
       title1: 'NOS',
       title2: 'EXPORTATIONS',
-      title3: 'MONDIALES',
+      title3: '',
       description: 'Nous fournissons des solutions industrielles de qualité de la Turquie vers le monde. Votre partenaire fiable exportant vers plus de 12 pays.',
     },
     stats: {
@@ -384,7 +384,7 @@ export const exportsTranslations = {
       badge: 'Alcance Global',
       title1: 'NUESTRAS',
       title2: 'EXPORTACIONES',
-      title3: 'MUNDIALES',
+      title3: '',
       description: 'Proporcionamos soluciones industriales de calidad desde Turquía al mundo. Su socio confiable exportando a más de 12 países.',
     },
     stats: {
@@ -479,7 +479,7 @@ export const exportsTranslations = {
       badge: 'الوصول العالمي',
       title1: 'صادراتنا',
       title2: 'حول',
-      title3: 'العالم',
+      title3: '',
       description: 'نقدم حلول صناعية عالية الجودة من تركيا إلى العالم. شريكك الموثوق الذي يصدر إلى أكثر من 12 دولة.',
     },
     stats: {
@@ -574,7 +574,7 @@ export const exportsTranslations = {
       badge: 'Глобальный Охват',
       title1: 'НАШИ',
       title2: 'МИРОВЫЕ',
-      title3: 'ЭКСПОРТЫ',
+      title3: '',
       description: 'Мы предоставляем качественные промышленные решения из Турции в мир. Ваш надежный партнер, экспортирующий в более чем 12 стран.',
     },
     stats: {

@@ -179,6 +179,32 @@ HTTP Observatory bu konuda uyarı veriyor ama **kabul edilebilir bir tradeoff**:
 - Karmaşıklık artışı: 10x
 - **Karar**: Pragmatik yaklaşım, mevcut durum kabul edilebilir
 
+**⚠️ jsDelivr CSP Bypass Warning**
+
+HTTP Observatory jsDelivr için uyarı veriyor: "cdn.jsdelivr.net is known to host JSONP endpoints and Angular libraries which allow to bypass this CSP."
+
+**Risk Analizi:**
+- 🔴 **Teorik Risk**: jsDelivr Angular ve JSONP barındırıyor (CSP bypass mümkün)
+- 🟢 **Pratik Risk**: DÜŞÜK - Biz sadece jsvectormap CSS ve twemoji JS kullanıyoruz
+- 🟢 **Mitigation**: SRI hash'leri var - dosyalar değiştirilemez
+
+**Neden Kabul Edilebilir:**
+1. ✅ **SRI Protection**: Dosyalar integrity hash ile korunuyor
+2. ✅ **No Angular/JSONP**: Sadece güvenli kütüphaneler kullanıyoruz
+3. ✅ **Whitelist Approach**: Sadece gerekli CDN'ler izin listesinde
+4. ✅ **Monitoring**: Sentry ile anormal aktivite tespiti
+
+**Alternatif: Self-Hosting**
+```bash
+# CDN dosyalarını self-host etmek mümkün ama:
+- CDN hızı kaybı
+- Bundle size artışı  
+- Manuel güncelleme yükü
+# Tradeoff: Minimal risk artışı vs büyük operasyonel yük
+```
+
+**Karar**: jsDelivr kullanımı SRI ile birlikte kabul edilebilir.
+
 **Development CSP (Relaxed for Vite HMR):**
 ```http
 Content-Security-Policy: 

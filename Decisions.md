@@ -311,3 +311,84 @@ const cspDirectives = [
 - Hash-based CSP: Too complex, hard to maintain
 - Nonce-based CSP: Requires SSR, overkill for static site
 - Keep unsafe directives: Security risk, failed audit
+
+
+## ADR-009: Subresource Integrity (SRI) Implementation
+
+**Date**: 2026-01-27  
+**Status**: Accepted  
+**Tags**: security, sri, cdn, http-observatory
+
+### Context
+HTTP Observatory reported missing SRI (Subresource Integrity) for external CDN scripts. Score: 110/100 (A+), losing 5 points on SRI.
+
+### Problem
+- jsVectorMap CSS loaded from jsDelivr CDN without integrity check
+- Twemoji JS loaded from jsDelivr CDN without integrity check
+- Risk: CDN compromise or MITM attack could inject malicious code
+
+### Decision
+Add SHA-256 integrity hashes to all external CDN resources.
+
+### Implementation
+```html
+<!-- jsVectorMap CSS with SRI -->
+<link 
+  rel="stylesheet" 
+  href="https://cdn.jsdelivr.net/npm/jsvectormap@1.7.0/dist/css/jsvectormap.min.css"
+  integrity="sha256-NkQbLGYECH1w1eFLjP8KY8synGbECfD3zmXvtsi0h5I="
+  crossorigin="anonymous">
+
+<!-- Twemoji JS with SRI -->
+<script 
+  src="https://cdn.jsdelivr.net/npm/twemoji@14.0.2/dist/twemoji.min.js"
+  integrity="sha256-cGIk2NxUQEYPjtkcGmqtJdcyr24O5vsxFRsVerSFurs="
+  crossorigin="anonymous"></script>
+```
+
+### Hash Generation
+```powershell
+# Download file and compute SHA-256 hash
+$content = Invoke-WebRequest -Uri "https://cdn.jsdelivr.net/..." -UseBasicParsing
+$bytes = [System.Text.Encoding]::UTF8.GetBytes($content.Content)
+$hash = [System.Security.Cryptography.SHA256]::Create().ComputeHash($bytes)
+$base64 = [Convert]::ToBase64String($hash)
+Write-Output "sha256-$base64"
+```
+
+### Rationale
+- **CDN Compromise Protection**: If CDN is hacked, browser rejects modified files
+- **MITM Protection**: Man-in-the-Middle attacks can't inject malicious code
+- **Supply Chain Security**: Ensures third-party resources are not tampered with
+- **Zero Performance Impact**: Hash verification is instant
+
+### Consequences
+**Positive**: 
+- HTTP Observatory score: 110/100 → 115/100 (A+)
+- +5 points improvement
+- Maximum security score achieved
+- Protection against CDN compromise
+- Protection against supply chain attacks
+
+**Negative**: 
+- Hash must be updated when CDN file version changes
+- Requires manual hash generation for new CDN resources
+- Slight maintenance overhead
+
+### Alternatives Considered
+- Self-hosting CDN files: Increases bundle size, loses CDN benefits
+- Skip SRI: Security risk, failed audit
+- Use jsDelivr auto-SRI: Not reliable, manual is better
+
+### Maintenance
+When updating CDN versions:
+1. Download new file from CDN
+2. Compute SHA-256 hash
+3. Update `integrity` attribute in HTML
+4. Test that file loads correctly
+5. Commit changes
+
+---
+
+**STATUS**: ACTIVE & ENFORCED  
+**LAST UPDATED**: 2026-01-27

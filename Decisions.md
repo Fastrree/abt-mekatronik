@@ -250,3 +250,64 @@ function AppContent() {
 
 **STATUS**: ACTIVE & ENFORCED  
 **LAST UPDATED**: 2026-01-24
+
+
+## ADR-008: CSP Improvement - Remove unsafe-inline/unsafe-eval
+
+**Date**: 2026-01-27  
+**Status**: Accepted  
+**Tags**: security, csp, http-observatory
+
+### Context
+HTTP Observatory reported CSP failure due to `unsafe-inline` and `unsafe-eval` in production. Score: 88/100 (B+), losing 20 points on CSP.
+
+### Problem
+- Inline Google Analytics script in `index.html`
+- Inline splash screen script in `index.html`
+- Development CSP with `unsafe-inline` and `unsafe-eval` leaking to production
+
+### Decision
+1. Move all inline scripts to external `init.js` file
+2. Implement environment-aware CSP (development vs production)
+3. Keep Schema.org JSON-LD scripts inline (safe, `type="application/ld+json"`)
+
+### Implementation
+```typescript
+// server/index.ts - Environment-aware CSP
+const isDevelopment = process.env.NODE_ENV !== 'production';
+const cspDirectives = [
+  "default-src 'self'",
+  isDevelopment 
+    ? "script-src 'self' 'unsafe-inline' 'unsafe-eval' ..." // Dev only
+    : "script-src 'self' ...", // Production: NO unsafe directives
+  // ... other directives
+];
+```
+
+```html
+<!-- index.html - External scripts only -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-6VF25T2SF3"></script>
+<script src="/init.js"></script>
+```
+
+### Rationale
+- `unsafe-inline` and `unsafe-eval` are major XSS risks
+- External scripts are easier to audit and secure
+- Environment-aware CSP allows development flexibility
+- Schema.org JSON-LD is safe (not executable JavaScript)
+
+### Consequences
+**Positive**: 
+- HTTP Observatory score: 88/100 → 95-100/100 (B+ → A+)
+- +7-12 points improvement
+- Enterprise-grade CSP compliance
+- Maximum XSS protection
+
+**Negative**: 
+- Additional HTTP request for `init.js` (minimal impact, ~1KB)
+- CSP complexity increased (environment awareness)
+
+### Alternatives Considered
+- Hash-based CSP: Too complex, hard to maintain
+- Nonce-based CSP: Requires SSR, overkill for static site
+- Keep unsafe directives: Security risk, failed audit

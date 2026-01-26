@@ -16,7 +16,7 @@ if (import.meta.env.PROD) {
 
 // Initialize Sentry for error tracking
 Sentry.init({
-  dsn: import.meta.env.VITE_SENTRY_DSN || "https://27046cc68c698b40908324726d122527@o4510736861036544.ingest.de.sentry.io/4510736862412880",
+  dsn: import.meta.env.VITE_SENTRY_DSN,
   environment: import.meta.env.MODE,
   integrations: [
     Sentry.browserTracingIntegration(),

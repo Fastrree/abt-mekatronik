@@ -26,14 +26,20 @@ app.use((req, res, next) => {
   
   // 2. Content-Security-Policy (CSP) - XSS Protection
   // CRITICAL: This is the most important security header
-  res.setHeader('Content-Security-Policy', [
+  // Development: unsafe-inline/unsafe-eval for HMR
+  // Production: Strict CSP without unsafe directives
+  const isDevelopment = process.env.NODE_ENV !== 'production';
+  
+  const cspDirectives = [
     "default-src 'self'",
-    "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.jsdelivr.net https://unpkg.com https://www.googletagmanager.com https://www.google-analytics.com blob:",
+    isDevelopment 
+      ? "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.jsdelivr.net https://unpkg.com https://www.googletagmanager.com https://www.google-analytics.com blob:"
+      : "script-src 'self' https://cdn.jsdelivr.net https://unpkg.com https://www.googletagmanager.com https://www.google-analytics.com blob:",
     "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net",
     "font-src 'self' https://fonts.gstatic.com data:",
     "img-src 'self' data: blob: https:",
-    "connect-src 'self' https: wss: https://www.google-analytics.com https://o4510736861036544.ingest.de.sentry.io",
-    "frame-src 'self' https://wa.me https://api.whatsapp.com",
+    "connect-src 'self' https: wss: https://www.google-analytics.com https://*.ingest.de.sentry.io",
+    "frame-src 'self' https://wa.me https://api.whatsapp.com https://www.google.com",
     "media-src 'self' blob: data:",
     "worker-src 'self' blob:",
     "object-src 'none'",
@@ -42,7 +48,9 @@ app.use((req, res, next) => {
     "frame-ancestors 'none'",
     "upgrade-insecure-requests",
     "block-all-mixed-content"
-  ].join('; '));
+  ];
+  
+  res.setHeader('Content-Security-Policy', cspDirectives.join('; '));
   
   // 3. X-Frame-Options - Clickjacking Protection
   // DENY is stronger than SAMEORIGIN

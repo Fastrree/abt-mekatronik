@@ -1,11 +1,14 @@
 import { memo } from 'react';
 import { MapPin, Phone, Mail, Linkedin, Instagram, Facebook, Truck, Factory, Layers, Wrench } from "lucide-react";
 import { useI18n } from "@/lib/i18n";
+import { smoothScrollToElement, smoothScrollToTop } from "@/lib/scroll-utils";
 
 type ProductKey = 'konveyor' | 'tekstil' | 'celik' | 'ozelMakine';
 
 export const Footer = memo(function Footer() {
-  const { t } = useI18n();
+  const { t, language } = useI18n();
+  
+  const isRTL = language === 'ar';
   
   const productLinks: { key: ProductKey; icon: typeof Truck }[] = [
     { key: "konveyor", icon: Truck },
@@ -19,7 +22,7 @@ export const Footer = memo(function Footer() {
     const currentPath = window.location.pathname;
     if (currentPath === '/') {
       e.preventDefault();
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      smoothScrollToTop();
     }
   };
 
@@ -28,15 +31,12 @@ export const Footer = memo(function Footer() {
     const currentPath = window.location.pathname;
     if (currentPath === '/') {
       e.preventDefault();
-      const element = document.getElementById(sectionId);
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
+      smoothScrollToElement(sectionId);
     }
   };
 
   return (
-    <footer className="bg-zinc-50 dark:bg-zinc-900 text-zinc-600 dark:text-zinc-400">
+    <footer className="bg-zinc-50 dark:bg-zinc-900 text-zinc-600 dark:text-zinc-400" dir={isRTL ? 'rtl' : 'ltr'}>
       {/* FOOTER CONTENT */}
       <div className="container mx-auto px-6 pt-20 pb-10">
         {/* GOOGLE MAPS SECTION */}
@@ -86,15 +86,15 @@ export const Footer = memo(function Footer() {
                 </div>
               </div>
 
-              {/* Hover Overlay with CTA */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-black/0 to-black/0 opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-center justify-center">
-                <div className="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
-                  <div className="bg-white dark:bg-zinc-800 px-8 py-4 rounded-2xl shadow-2xl border-2 border-red-600 backdrop-blur-xl">
-                    <div className="flex items-center gap-3">
-                      <div className="bg-red-600 p-2 rounded-lg">
-                        <MapPin className="text-white" size={20} />
+              {/* Hover Overlay with CTA - Mobilde her zaman görünür, altta konumlu */}
+              <div className="absolute inset-x-0 bottom-0 md:inset-0 bg-gradient-to-t from-black/40 via-black/0 to-black/0 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-all duration-300 flex items-end md:items-center justify-center pb-6 md:pb-0">
+                <div className="transform translate-y-0 md:translate-y-4 md:group-hover:translate-y-0 transition-transform duration-300">
+                  <div className="bg-white dark:bg-zinc-800 px-4 py-3 md:px-8 md:py-4 rounded-xl md:rounded-2xl shadow-2xl border-2 border-red-600 backdrop-blur-xl">
+                    <div className="flex items-center gap-2 md:gap-3">
+                      <div className="bg-red-600 p-1.5 md:p-2 rounded-lg">
+                        <MapPin className="text-white" size={16} />
                       </div>
-                      <span className="text-zinc-900 dark:text-white font-black text-lg tracking-tight">
+                      <span className="text-zinc-900 dark:text-white font-black text-sm md:text-lg tracking-tight">
                         {t('footer.openInMaps')}
                       </span>
                     </div>
@@ -109,10 +109,10 @@ export const Footer = memo(function Footer() {
             {/* CONTACT INFO */}
             <div className="flex flex-col justify-center space-y-6">
               <div>
-                <h3 className="text-2xl font-black text-zinc-900 dark:text-white mb-4">
+                <h3 className="text-2xl font-black text-zinc-900 dark:text-white mb-4" dir={isRTL ? 'rtl' : 'ltr'}>
                   {t('footer.contactTitle')}
                 </h3>
-                <p className="text-sm text-zinc-600 dark:text-zinc-400 mb-6">
+                <p className="text-sm text-zinc-600 dark:text-zinc-400 mb-6" dir={isRTL ? 'rtl' : 'ltr'}>
                   {t('footer.contactSubtitle')}
                 </p>
               </div>
@@ -168,8 +168,8 @@ export const Footer = memo(function Footer() {
 
         <div className="grid md:grid-cols-3 gap-12 mb-16">
           <div className="col-span-1 md:col-span-1">
-            <h2 className="text-2xl font-black text-zinc-900 dark:text-white mb-6">ABT <span className="text-primary">MEKATRONİK</span></h2>
-            <p className="text-sm leading-relaxed mb-6">
+            <h2 className="text-2xl font-black text-zinc-900 dark:text-white mb-6" dir={isRTL ? 'rtl' : 'ltr'}>ABT <span className="text-primary">MEKATRONİK</span></h2>
+            <p className="text-sm leading-relaxed mb-6" dir={isRTL ? 'rtl' : 'ltr'}>
               {t('footer.description')}
             </p>
             <div className="flex space-x-4">
@@ -186,24 +186,24 @@ export const Footer = memo(function Footer() {
           </div>
 
           <div>
-            <h3 className="text-zinc-900 dark:text-white font-bold uppercase tracking-wider mb-6">{t('footer.quickAccess')}</h3>
+            <h3 className="text-zinc-900 dark:text-white font-bold uppercase tracking-wider mb-6" dir={isRTL ? 'rtl' : 'ltr'}>{t('footer.quickAccess')}</h3>
             <ul className="space-y-3 text-sm">
               {/* Hierarchical Navigation - Matches New Page Structure */}
-              <li><a href="/" onClick={handleHomeClick} className="hover:text-primary transition-colors">{t('nav.home')}</a></li>
-              <li><a href="/about" className="hover:text-primary transition-colors">{t('nav.about')}</a></li>
-              <li><a href="/#products" onClick={(e) => handleSectionClick(e, 'products')} className="hover:text-primary transition-colors">{t('nav.products')}</a></li>
-              <li><a href="/#engineering" onClick={(e) => handleSectionClick(e, 'engineering')} className="hover:text-primary transition-colors">{t('nav.engineering')}</a></li>
-              <li><a href="/#projects" onClick={(e) => handleSectionClick(e, 'projects')} className="hover:text-primary transition-colors">{t('nav.projects')}</a></li>
-              <li><a href="/#faq" onClick={(e) => handleSectionClick(e, 'faq')} className="hover:text-primary transition-colors">{t('nav.faq')}</a></li>
-              <li><a href="/#testimonials" onClick={(e) => handleSectionClick(e, 'testimonials')} className="hover:text-primary transition-colors">{t('nav.testimonials')}</a></li>
-              <li><a href="/#partners" onClick={(e) => handleSectionClick(e, 'partners')} className="hover:text-primary transition-colors">{t('nav.partners')}</a></li>
-              <li><a href="/exports" className="hover:text-primary transition-colors">{t('nav.exports')}</a></li>
-              <li><a href="/#contact" onClick={(e) => handleSectionClick(e, 'contact')} className="hover:text-primary transition-colors">{t('nav.contact')}</a></li>
+              <li><a href="/" onClick={handleHomeClick} className="hover:text-primary transition-colors" dir={isRTL ? 'rtl' : 'ltr'}>{t('nav.home')}</a></li>
+              <li><a href="/about" className="hover:text-primary transition-colors" dir={isRTL ? 'rtl' : 'ltr'}>{t('nav.about')}</a></li>
+              <li><a href="/#products" onClick={(e) => handleSectionClick(e, 'products')} className="hover:text-primary transition-colors" dir={isRTL ? 'rtl' : 'ltr'}>{t('nav.products')}</a></li>
+              <li><a href="/#engineering" onClick={(e) => handleSectionClick(e, 'engineering')} className="hover:text-primary transition-colors" dir={isRTL ? 'rtl' : 'ltr'}>{t('nav.engineering')}</a></li>
+              <li><a href="/#projects" onClick={(e) => handleSectionClick(e, 'projects')} className="hover:text-primary transition-colors" dir={isRTL ? 'rtl' : 'ltr'}>{t('nav.projects')}</a></li>
+              <li><a href="/#faq" onClick={(e) => handleSectionClick(e, 'faq')} className="hover:text-primary transition-colors" dir={isRTL ? 'rtl' : 'ltr'}>{t('nav.faq')}</a></li>
+              <li><a href="/#testimonials" onClick={(e) => handleSectionClick(e, 'testimonials')} className="hover:text-primary transition-colors" dir={isRTL ? 'rtl' : 'ltr'}>{t('nav.testimonials')}</a></li>
+              <li><a href="/#partners" onClick={(e) => handleSectionClick(e, 'partners')} className="hover:text-primary transition-colors" dir={isRTL ? 'rtl' : 'ltr'}>{t('nav.partners')}</a></li>
+              <li><a href="/exports" className="hover:text-primary transition-colors" dir={isRTL ? 'rtl' : 'ltr'}>{t('nav.exports')}</a></li>
+              <li><a href="/#contact" onClick={(e) => handleSectionClick(e, 'contact')} className="hover:text-primary transition-colors" dir={isRTL ? 'rtl' : 'ltr'}>{t('nav.contact')}</a></li>
             </ul>
           </div>
 
           <div>
-            <h3 className="text-zinc-900 dark:text-white font-bold uppercase tracking-wider mb-6">{t('footer.productGroups')}</h3>
+            <h3 className="text-zinc-900 dark:text-white font-bold uppercase tracking-wider mb-6" dir={isRTL ? 'rtl' : 'ltr'}>{t('footer.productGroups')}</h3>
             <ul className="space-y-3 text-sm">
               {productLinks.map((product) => {
                 const IconComponent = product.icon;
@@ -211,10 +211,14 @@ export const Footer = memo(function Footer() {
                   <li key={product.key}>
                     <a
                       href={`/products/${product.key}`}
-                      className="flex items-center gap-2 hover:text-primary transition-colors text-left"
+                      className={`flex items-center hover:text-primary transition-colors gap-2 ${
+                        isRTL ? 'flex-row-reverse text-right' : 'text-left'
+                      }`}
+                      dir={isRTL ? 'rtl' : 'ltr'}
                     >
-                      <IconComponent size={14} className="text-red-600 dark:text-red-500" />
-                      {t(`productItems.${product.key}.title`)}
+                      {!isRTL && <IconComponent size={14} className="text-red-600 dark:text-red-500 shrink-0" />}
+                      <span className="flex-1">{t(`productItems.${product.key}.title`)}</span>
+                      {isRTL && <IconComponent size={14} className="text-red-600 dark:text-red-500 shrink-0" />}
                     </a>
                   </li>
                 );
@@ -224,7 +228,7 @@ export const Footer = memo(function Footer() {
         </div>
 
         <div className="border-t border-zinc-200 dark:border-zinc-800 pt-8 text-center text-xs uppercase tracking-widest font-medium">
-          <p>{t('footer.copyright')}</p>
+          <p dir={isRTL ? 'rtl' : 'ltr'}>{t('footer.copyright')}</p>
         </div>
       </div>
     </footer>

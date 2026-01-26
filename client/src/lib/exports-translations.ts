@@ -44,10 +44,15 @@ export const exportsTranslations = {
     },
     legend: {
       productionCenter: 'Üretim Merkezi',
-      turkey: 'Türkiye',
       exportCountries: 'İhracat Ülkeleri',
       otherCountries: 'Diğer Ülkeler',
       export: 'İhracat',
+    },
+    regions: {
+      europeAsia: 'Avrupa & Asya',
+      centralAsia: 'Orta Asya',
+      africa: 'Afrika',
+      middleEast: 'Orta Doğu',
     },
     whyUs: {
       title: 'NEDEN BİZİ',
@@ -139,10 +144,15 @@ export const exportsTranslations = {
     },
     legend: {
       productionCenter: 'Production Center',
-      turkey: 'Turkey',
       exportCountries: 'Export Countries',
       otherCountries: 'Other Countries',
       export: 'Export',
+    },
+    regions: {
+      europeAsia: 'Europe & Asia',
+      centralAsia: 'Central Asia',
+      africa: 'Africa',
+      middleEast: 'Middle East',
     },
     whyUs: {
       title: 'WHY THEY',
@@ -234,10 +244,15 @@ export const exportsTranslations = {
     },
     legend: {
       productionCenter: 'Produktionszentrum',
-      turkey: 'Türkei',
       exportCountries: 'Exportländer',
       otherCountries: 'Andere Länder',
       export: 'Export',
+    },
+    regions: {
+      europeAsia: 'Europa & Asien',
+      centralAsia: 'Zentralasien',
+      africa: 'Afrika',
+      middleEast: 'Naher Osten',
     },
     whyUs: {
       title: 'WARUM',
@@ -329,10 +344,15 @@ export const exportsTranslations = {
     },
     legend: {
       productionCenter: 'Centre de Production',
-      turkey: 'Turquie',
       exportCountries: 'Pays d\'Exportation',
       otherCountries: 'Autres Pays',
       export: 'Exportation',
+    },
+    regions: {
+      europeAsia: 'Europe & Asie',
+      centralAsia: 'Asie Centrale',
+      africa: 'Afrique',
+      middleEast: 'Moyen-Orient',
     },
     whyUs: {
       title: 'POURQUOI',
@@ -424,10 +444,15 @@ export const exportsTranslations = {
     },
     legend: {
       productionCenter: 'Centro de Producción',
-      turkey: 'Turquía',
       exportCountries: 'Países de Exportación',
       otherCountries: 'Otros Países',
       export: 'Exportación',
+    },
+    regions: {
+      europeAsia: 'Europa & Asia',
+      centralAsia: 'Asia Central',
+      africa: 'África',
+      middleEast: 'Oriente Medio',
     },
     whyUs: {
       title: '¿POR QUÉ',
@@ -519,10 +544,15 @@ export const exportsTranslations = {
     },
     legend: {
       productionCenter: 'مركز الإنتاج',
-      turkey: 'تركيا',
       exportCountries: 'دول التصدير',
       otherCountries: 'دول أخرى',
       export: 'تصدير',
+    },
+    regions: {
+      europeAsia: 'أوروبا وآسيا',
+      centralAsia: 'آسيا الوسطى',
+      africa: 'أفريقيا',
+      middleEast: 'الشرق الأوسط',
     },
     whyUs: {
       title: 'لماذا',
@@ -614,10 +644,15 @@ export const exportsTranslations = {
     },
     legend: {
       productionCenter: 'Производственный Центр',
-      turkey: 'Турция',
       exportCountries: 'Страны Экспорта',
       otherCountries: 'Другие Страны',
       export: 'Экспорт',
+    },
+    regions: {
+      europeAsia: 'Европа и Азия',
+      centralAsia: 'Центральная Азия',
+      africa: 'Африка',
+      middleEast: 'Ближний Восток',
     },
     whyUs: {
       title: 'ПОЧЕМУ',

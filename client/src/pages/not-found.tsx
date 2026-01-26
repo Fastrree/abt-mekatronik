@@ -3,10 +3,11 @@ import { Home, ArrowLeft, Phone } from "lucide-react";
 import { useI18n } from "@/lib/i18n";
 
 export default function NotFound() {
-  const { t } = useI18n();
+  const { t, language } = useI18n();
+  const isRTL = language === 'ar';
   
   return (
-    <div className="min-h-screen w-full flex items-center justify-center bg-zinc-900 relative overflow-hidden">
+    <div className="min-h-screen w-full flex items-center justify-center bg-zinc-900 relative overflow-hidden" dir={isRTL ? 'rtl' : 'ltr'}>
       {/* Background decoration */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-red-600/10 rounded-full blur-3xl" />
@@ -30,14 +31,15 @@ export default function NotFound() {
         </p>
         
         {/* Action Buttons */}
-        <div className="flex flex-col sm:flex-row gap-4 justify-center">
+        <div className={`flex flex-col sm:flex-row gap-4 justify-center ${isRTL ? 'sm:flex-row-reverse' : ''}`}>
           <Button 
             size="lg"
             className="bg-red-600 hover:bg-red-700 text-white font-bold"
             onClick={() => window.location.href = '/'}
           >
-            <Home className="mr-2 h-5 w-5" />
+            {!isRTL && <Home className="mr-2 h-5 w-5" />}
             {t('notFound.homeButton')}
+            {isRTL && <Home className="ml-2 h-5 w-5" />}
           </Button>
           <Button 
             size="lg"
@@ -45,8 +47,9 @@ export default function NotFound() {
             className="border-zinc-600 text-zinc-300 hover:bg-zinc-800"
             onClick={() => window.history.back()}
           >
-            <ArrowLeft className="mr-2 h-5 w-5" />
+            {!isRTL && <ArrowLeft className="mr-2 h-5 w-5" />}
             {t('notFound.backButton')}
+            {isRTL && <ArrowLeft className="ml-2 h-5 w-5" />}
           </Button>
           <Button 
             size="lg"
@@ -54,8 +57,9 @@ export default function NotFound() {
             className="border-zinc-600 text-zinc-300 hover:bg-zinc-800"
             onClick={() => window.location.href = '/#contact'}
           >
-            <Phone className="mr-2 h-5 w-5" />
+            {!isRTL && <Phone className="mr-2 h-5 w-5" />}
             {t('notFound.contactButton')}
+            {isRTL && <Phone className="ml-2 h-5 w-5" />}
           </Button>
         </div>
         

@@ -2,9 +2,19 @@ import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { SkipLink } from "@/components/SkipLink";
 import { OptimizedImage } from "@/components/OptimizedImage";
+import { smoothScrollToElement } from "@/lib/scroll-utils";
 import { Globe, TrendingUp, Award, Package, Ship, CheckCircle } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { useI18n } from "@/lib/i18n";
+
+// Twemoji type declaration
+declare global {
+  interface Window {
+    twemoji?: {
+      parse: (node: HTMLElement | Document, options?: { folder?: string; ext?: string }) => void;
+    };
+  }
+}
 
 function OurExports() {
   const { language, t } = useI18n();
@@ -16,6 +26,33 @@ function OurExports() {
   const [isMapHovered, setIsMapHovered] = useState(false);
   const [isZooming, setIsZooming] = useState(false);
 
+  // Parse emojis on component mount and when hoveredCountry changes
+  useEffect(() => {
+    const parseEmojis = () => {
+      if (typeof window.twemoji !== 'undefined') {
+        // Parse all emoji containers
+        const emojiContainers = document.querySelectorAll('.emoji-container');
+        emojiContainers.forEach(container => {
+          if (container) {
+            window.twemoji?.parse(container as HTMLElement, {
+              folder: 'svg',
+              ext: '.svg',
+              base: 'https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/'
+            });
+          }
+        });
+      }
+    };
+
+    // Initial parse
+    parseEmojis();
+
+    // Re-parse after a short delay (for dynamic content)
+    const timer = setTimeout(parseEmojis, 200);
+
+    return () => clearTimeout(timer);
+  }, [hoveredCountry]); // Re-parse when hovered country changes
+
   const exportCountryCodes = [
     "TR", // Türkiye
     "UZ", // Özbekistan
@@ -25,13 +62,14 @@ function OurExports() {
     "TM"  // Türkmenistan
   ];
 
-  const countryNames: { [key: string]: string } = {
-    TR: "🇹🇷 Türkiye",
-    UZ: "🇺🇿 Özbekistan",
-    EG: "🇪🇬 Mısır",
-    TJ: "🇹🇯 Tacikistan",
-    KZ: "🇰🇿 Kazakistan",
-    TM: "🇹🇲 Türkmenistan"
+  // Country names with flags - using emoji-container class for Twemoji parsing
+  const countryNames: { [key: string]: { flag: string; name: string } } = {
+    TR: { flag: "🇹🇷", name: "TÜRKİYE" },
+    UZ: { flag: "🇺🇿", name: "ÖZBEKİSTAN" },
+    EG: { flag: "🇪🇬", name: "MISIR" },
+    TJ: { flag: "🇹🇯", name: "TACİKİSTAN" },
+    KZ: { flag: "🇰🇿", name: "KAZAKİSTAN" },
+    TM: { flag: "🇹🇲", name: "TÜRKMENİSTAN" }
   };
 
   useEffect(() => {
@@ -368,12 +406,12 @@ function OurExports() {
   }, [isMapHovered]);
 
   const exportCountries = [
-    { name: "Türkiye", flag: "🇹🇷", region: "Avrupa & Asya" },
-    { name: "Özbekistan", flag: "🇺🇿", region: "Orta Asya" },
-    { name: "Mısır", flag: "🇪🇬", region: "Afrika" },
-    { name: "Tacikistan", flag: "🇹🇯", region: "Orta Asya" },
-    { name: "Kazakistan", flag: "🇰🇿", region: "Orta Asya" },
-    { name: "Türkmenistan", flag: "🇹🇲", region: "Orta Asya" }
+    { name: "TÜRKİYE", flag: "🇹🇷", regionKey: "europeAsia" },
+    { name: "ÖZBEKİSTAN", flag: "🇺🇿", regionKey: "centralAsia" },
+    { name: "MISIR", flag: "🇪🇬", regionKey: "africa" },
+    { name: "TACİKİSTAN", flag: "🇹🇯", regionKey: "centralAsia" },
+    { name: "KAZAKİSTAN", flag: "🇰🇿", regionKey: "centralAsia" },
+    { name: "TÜRKMENİSTAN", flag: "🇹🇲", regionKey: "centralAsia" }
   ];
 
   const exportStats = [
@@ -523,10 +561,10 @@ function OurExports() {
                       {/* Tooltip Content - Red for all, special badge for Turkey */}
                       <div className="bg-gradient-to-br from-red-600 to-red-700 text-white px-3 py-2 rounded-2xl shadow-xl border border-red-500 animate-in fade-in slide-in-from-left-2 duration-200 min-w-[120px] max-w-[180px]">
                         <div className="flex items-center gap-2 mb-1">
-                          <span className="text-xl xs:text-lg drop-shadow-lg">{countryNames[hoveredCountry.code]?.split(' ')[0]}</span>
+                          <span className="text-2xl xs:text-xl drop-shadow-lg emoji-container" style={{ lineHeight: 1 }}>{countryNames[hoveredCountry.code]?.flag}</span>
                           <div className="flex-1">
                             <div className="font-black text-xs xs:text-[10px] leading-tight break-words">
-                              {countryNames[hoveredCountry.code]?.split(' ').slice(1).join(' ')}
+                              {countryNames[hoveredCountry.code]?.name}
                             </div>
                           </div>
                         </div>
@@ -554,14 +592,13 @@ function OurExports() {
               {/* Legend - Desktop only */}
               <div className="mt-6 xs:mt-4 hidden sm:flex items-center justify-center gap-8 xs:gap-3 flex-wrap">
                 <div className="flex items-center gap-3 xs:gap-2">
-                  <div className="relative">
-                    <div className="w-6 h-6 xs:w-5 xs:h-5 bg-red-600 dark:bg-red-500 rounded-sm"></div>
-                    <div className="absolute -top-1 -right-1 w-3 h-3 xs:w-2 xs:h-2 bg-yellow-400 rounded-full animate-pulse"></div>
+                  <div className="relative inline-block">
+                    <div className="w-6 h-6 xs:w-5 xs:h-5 bg-red-600 dark:bg-red-500 rounded-full"></div>
                   </div>
                   <span className="text-sm xs:text-xs font-semibold text-zinc-700 dark:text-zinc-300">{t('exports.legend.exportCountries')}</span>
                 </div>
                 <div className="flex items-center gap-3 xs:gap-2">
-                  <div className="w-6 h-6 xs:w-5 xs:h-5 bg-zinc-200 dark:bg-zinc-700 rounded-sm"></div>
+                  <div className="w-6 h-6 xs:w-5 xs:h-5 bg-zinc-200 dark:bg-zinc-700 rounded-full"></div>
                   <span className="text-sm xs:text-xs font-semibold text-zinc-700 dark:text-zinc-300">{t('exports.legend.otherCountries')}</span>
                 </div>
                 <div className="flex items-center gap-3 xs:gap-2 px-4 xs:px-3 py-2 xs:py-1.5 bg-gradient-to-r from-blue-600 to-blue-700 rounded-2xl xs:rounded-xl shadow-lg">
@@ -573,7 +610,7 @@ function OurExports() {
                     <div className="text-xl xs:text-lg">🏭</div>
                     <div className="flex flex-col">
                       <span className="text-xs xs:text-[10px] font-bold text-white/80 uppercase tracking-wider leading-tight">{t('exports.legend.productionCenter')}</span>
-                      <span className="text-sm xs:text-xs font-black text-white leading-tight">{t('exports.legend.turkey')}</span>
+                      <span className="text-sm xs:text-xs font-black text-white leading-tight">TÜRKİYE</span>
                     </div>
                   </div>
                 </div>
@@ -583,9 +620,9 @@ function OurExports() {
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4 xs:gap-2">
             {exportCountries.map((country, index) => (
               <div key={country.name} className="bg-white dark:bg-zinc-800 p-4 xs:p-3 rounded-xl border-2 border-zinc-200 dark:border-zinc-700 hover:border-red-500 dark:hover:border-red-500 shadow-lg hover:shadow-xl transition-all group text-center animate-in slide-up duration-600" style={{ animationDelay: `${index * 50}ms` }}>
-                <div className="text-4xl xs:text-3xl mb-2 xs:mb-1.5 group-hover:scale-110 transition-transform">{country.flag}</div>
+                <div className="text-5xl xs:text-4xl mb-2 xs:mb-1.5 group-hover:scale-110 transition-transform emoji-container" style={{ lineHeight: 1 }}>{country.flag}</div>
                 <h3 className="text-sm xs:text-xs font-bold text-zinc-900 dark:text-white mb-1 xs:mb-0.5 break-words leading-tight" dir={language === 'ar' ? 'rtl' : 'ltr'}>{country.name}</h3>
-                <p className="text-[10px] xs:text-[9px] text-zinc-500 dark:text-zinc-400 break-words" dir={language === 'ar' ? 'rtl' : 'ltr'}>{country.region}</p>
+                <p className="text-[10px] xs:text-[9px] text-zinc-500 dark:text-zinc-400 break-words" dir={language === 'ar' ? 'rtl' : 'ltr'}>{t(`exports.regions.${country.regionKey}`)}</p>
               </div>
             ))}
           </div>
@@ -642,12 +679,7 @@ function OurExports() {
             <p className="text-xl xs:text-lg text-white/90 mb-8 xs:mb-6 leading-relaxed" dir={language === 'ar' ? 'rtl' : 'ltr'}>{t('exports.cta.description')}</p>
             <div className="flex flex-col sm:flex-row gap-3 xs:gap-2 justify-center">
               <button 
-                onClick={() => {
-                  const contactElement = document.getElementById('contact');
-                  if (contactElement) {
-                    contactElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                  }
-                }}
+                onClick={() => smoothScrollToElement('contact')}
                 className="inline-flex items-center justify-center px-6 xs:px-3 py-3 xs:py-2.5 bg-white text-red-600 font-bold text-base xs:text-sm rounded-xl hover:bg-white/90 transition-all shadow-xl hover:shadow-2xl hover:scale-105"
               >
                 {t('exports.cta.contactButton')}

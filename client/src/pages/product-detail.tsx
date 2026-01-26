@@ -4,6 +4,7 @@ import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { SkipLink } from "@/components/SkipLink";
 import { Button } from "@/components/ui/button";
+import { smoothScrollToElement } from "@/lib/scroll-utils";
 import { 
   ArrowLeft, 
   CheckCircle, 
@@ -107,10 +108,7 @@ export default function ProductDetail() {
 
   const scrollToContact = () => {
     // Scroll to contact section on current page (Footer)
-    const contactElement = document.getElementById('contact');
-    if (contactElement) {
-      contactElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
+    smoothScrollToElement('contact');
   };
 
   return (
@@ -193,14 +191,6 @@ export default function ProductDetail() {
               </Button>
             </div>
           </div>
-        </div>
-
-        {/* Scroll Indicator */}
-        <div className="absolute bottom-10 xs:bottom-6 left-1/2 -translate-x-1/2 text-white/70 flex flex-col items-center gap-2 animate-bounce" aria-hidden="true">
-          <span className="text-[10px] uppercase tracking-[0.3em]">
-            {heroTranslations.scrollIndicator}
-          </span>
-          <div className="w-[1px] h-12 xs:h-8 bg-gradient-to-b from-red-600 to-transparent"></div>
         </div>
       </section>
 

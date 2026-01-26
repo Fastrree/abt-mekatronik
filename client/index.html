@@ -174,6 +174,25 @@
     <!-- jsVectorMap CSS for World Map -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jsvectormap@1.7.0/dist/css/jsvectormap.min.css">
     
+    <!-- Twemoji for cross-platform emoji support (especially flags on Windows) -->
+    <script src="https://cdn.jsdelivr.net/npm/twemoji@14.0.2/dist/twemoji.min.js" crossorigin="anonymous"></script>
+    <style>
+      /* Twemoji inline styling for better emoji rendering */
+      img.emoji {
+        height: 1.2em !important;
+        width: 1.2em !important;
+        margin: 0 !important;
+        vertical-align: -0.15em !important;
+        display: inline-block !important;
+      }
+      
+      /* Larger emojis in emoji-container */
+      .emoji-container img.emoji {
+        height: 1.5em !important;
+        width: 1.5em !important;
+      }
+    </style>
+    
     <!-- Schema.org - FAQ -->
     <script type="application/ld+json">
     {

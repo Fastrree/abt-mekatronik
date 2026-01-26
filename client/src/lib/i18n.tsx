@@ -102,13 +102,37 @@ interface I18nProviderProps {
 }
 
 export function I18nProvider({ children }: I18nProviderProps) {
-  // Initialize language from localStorage or default to 'tr'
+  // Detect browser language
+  const detectBrowserLanguage = (): Language => {
+    if (typeof window === 'undefined') return 'tr';
+    
+    // Get browser language (e.g., 'tr-TR', 'en-US', 'de-DE')
+    const browserLang = navigator.language || (navigator as any).userLanguage;
+    const langCode = browserLang.split('-')[0].toLowerCase();
+    
+    // Map browser language to supported languages
+    const supportedLanguages: Language[] = ['tr', 'en', 'de', 'fr', 'es', 'ar', 'ru'];
+    
+    // Check if browser language is supported
+    if (supportedLanguages.includes(langCode as Language)) {
+      return langCode as Language;
+    }
+    
+    // Default to Turkish
+    return 'tr';
+  };
+
+  // Initialize language from localStorage or browser language
   const [language, setLanguageState] = useState<Language>(() => {
     if (typeof window !== 'undefined') {
+      // First check localStorage (user preference)
       const savedLanguage = localStorage.getItem('abt-language');
       if (savedLanguage && ['tr', 'en', 'de', 'fr', 'es', 'ar', 'ru'].includes(savedLanguage)) {
         return savedLanguage as Language;
       }
+      
+      // If no saved preference, detect browser language
+      return detectBrowserLanguage();
     }
     return 'tr';
   });
@@ -442,16 +466,26 @@ Piyasada bulunmayan veya mevcut makinelerin karşılayamadığı özel üretim i
     backButton: 'Geri Git',
     contactButton: 'İletişim',
   },
+  errorBoundary: {
+    title: 'Bir Şeyler Yanlış Gitti',
+    description: 'Üzgünüz, beklenmeyen bir hata oluştu. Teknik ekibimiz bilgilendirildi.',
+    retryButton: 'Tekrar Dene',
+    homeButton: 'Ana Sayfaya Dön',
+  },
   cookie: {
+    title: 'Çerez Politikası',
     message: 'Bu web sitesi, deneyiminizi geliştirmek için çerezleri kullanmaktadır.',
+    details: 'Çerezler, web sitemizin düzgün çalışması ve analitik veriler için kullanılır. Gizliliğinize saygı duyuyoruz.',
     accept: 'Kabul Et',
     decline: 'Reddet',
+    close: 'Kapat',
     learnMore: 'Daha Fazla Bilgi',
   },
   whatsapp: {
     tooltip: 'WhatsApp ile yazın',
   },
   exitPopup: {
+    badge: '🎁 Özel Teklif',
     title: 'Bekleyin!',
     subtitle: 'Size özel bir teklifimiz var',
     description: 'Projeleriniz için ücretsiz keşif ve fiyat teklifi almak ister misiniz?',
@@ -476,6 +510,7 @@ Piyasada bulunmayan veya mevcut makinelerin karşılayamadığı özel üretim i
   },
   clients: {
     title: 'Güvenilir İş Ortaklarımız',
+    viewAll: 'Tüm Ortaklarımızı Gör',
     industries: {
       tekstil: 'TEKSTİL',
       celik: 'ÇELİK',
@@ -776,16 +811,26 @@ Needs analysis → Concept design → 3D modeling → Prototype → Test → Ser
     backButton: 'Go Back',
     contactButton: 'Contact',
   },
+  errorBoundary: {
+    title: 'Something Went Wrong',
+    description: 'Sorry, an unexpected error occurred. Our technical team has been notified.',
+    retryButton: 'Try Again',
+    homeButton: 'Go to Homepage',
+  },
   cookie: {
+    title: 'Cookie Policy',
     message: 'This website uses cookies to enhance your experience.',
+    details: 'Cookies are used for proper website functionality and analytics. We respect your privacy.',
     accept: 'Accept',
     decline: 'Decline',
+    close: 'Close',
     learnMore: 'Learn More',
   },
   whatsapp: {
     tooltip: 'Chat on WhatsApp',
   },
   exitPopup: {
+    badge: '🎁 Special Offer',
     title: 'Wait!',
     subtitle: 'We have a special offer for you',
     description: 'Would you like to get a free site survey and quote for your projects?',
@@ -810,6 +855,7 @@ Needs analysis → Concept design → 3D modeling → Prototype → Test → Ser
   },
   clients: {
     title: 'Our Trusted Partners',
+    viewAll: 'View All Partners',
     industries: {
       tekstil: 'TEXTILE',
       celik: 'STEEL',
@@ -1061,16 +1107,26 @@ Löst spezielle Produktionsanforderungen, die auf dem Markt nicht verfügbar sin
     backButton: 'Zurück',
     contactButton: 'Kontakt',
   },
+  errorBoundary: {
+    title: 'Etwas ist schief gelaufen',
+    description: 'Entschuldigung, ein unerwarteter Fehler ist aufgetreten. Unser technisches Team wurde benachrichtigt.',
+    retryButton: 'Erneut versuchen',
+    homeButton: 'Zur Startseite',
+  },
   cookie: {
+    title: 'Cookie-Richtlinie',
     message: 'Diese Website verwendet Cookies, um Ihre Erfahrung zu verbessern.',
+    details: 'Cookies werden für die ordnungsgemäße Funktion der Website und Analysen verwendet. Wir respektieren Ihre Privatsphäre.',
     accept: 'Akzeptieren',
     decline: 'Ablehnen',
+    close: 'Schließen',
     learnMore: 'Mehr erfahren',
   },
   whatsapp: {
     tooltip: 'Auf WhatsApp schreiben',
   },
   exitPopup: {
+    badge: '🎁 Sonderangebot',
     title: 'Warten Sie!',
     subtitle: 'Wir haben ein Sonderangebot für Sie',
     description: 'Möchten Sie eine kostenlose Besichtigung und ein Angebot für Ihre Projekte erhalten?',
@@ -1095,6 +1151,7 @@ Löst spezielle Produktionsanforderungen, die auf dem Markt nicht verfügbar sin
   },
   clients: {
     title: 'Unsere vertrauenswürdigen Partner',
+    viewAll: 'Alle Partner Ansehen',
     industries: {
       tekstil: 'TEXTIL',
       celik: 'STAHL',
@@ -1329,16 +1386,26 @@ Résout les besoins de production spéciaux non disponibles sur le marché.
     backButton: 'Retour',
     contactButton: 'Contact',
   },
+  errorBoundary: {
+    title: 'Quelque chose s\'est mal passé',
+    description: 'Désolé, une erreur inattendue s\'est produite. Notre équipe technique a été informée.',
+    retryButton: 'Réessayer',
+    homeButton: 'Retour à l\'accueil',
+  },
   cookie: {
+    title: 'Politique de Cookies',
     message: 'Ce site utilise des cookies pour améliorer votre expérience.',
+    details: 'Les cookies sont utilisés pour le bon fonctionnement du site et les analyses. Nous respectons votre vie privée.',
     accept: 'Accepter',
     decline: 'Refuser',
+    close: 'Fermer',
     learnMore: 'En savoir plus',
   },
   whatsapp: {
     tooltip: 'Écrire sur WhatsApp',
   },
   exitPopup: {
+    badge: '🎁 Offre Spéciale',
     title: 'Attendez!',
     subtitle: 'Nous avons une offre spéciale pour vous',
     description: 'Souhaitez-vous obtenir une visite gratuite et un devis pour vos projets?',
@@ -1363,6 +1430,7 @@ Résout les besoins de production spéciaux non disponibles sur le marché.
   },
   clients: {
     title: 'Nos partenaires de confiance',
+    viewAll: 'Voir Tous Les Partenaires',
     industries: {
       tekstil: 'TEXTILE',
       celik: 'ACIER',
@@ -1597,16 +1665,26 @@ Resuelve necesidades de producción especiales no disponibles en el mercado.
     backButton: 'Volver',
     contactButton: 'Contacto',
   },
+  errorBoundary: {
+    title: 'Algo salió mal',
+    description: 'Lo sentimos, ocurrió un error inesperado. Nuestro equipo técnico ha sido notificado.',
+    retryButton: 'Intentar de nuevo',
+    homeButton: 'Ir al inicio',
+  },
   cookie: {
+    title: 'Política de Cookies',
     message: 'Este sitio web utiliza cookies para mejorar su experiencia.',
+    details: 'Las cookies se utilizan para el correcto funcionamiento del sitio web y análisis. Respetamos su privacidad.',
     accept: 'Aceptar',
     decline: 'Rechazar',
+    close: 'Cerrar',
     learnMore: 'Más información',
   },
   whatsapp: {
     tooltip: 'Escribir en WhatsApp',
   },
   exitPopup: {
+    badge: '🎁 Oferta Especial',
     title: '¡Espere!',
     subtitle: 'Tenemos una oferta especial para usted',
     description: '¿Le gustaría obtener una visita gratuita y un presupuesto para sus proyectos?',
@@ -1631,6 +1709,7 @@ Resuelve necesidades de producción especiales no disponibles en el mercado.
   },
   clients: {
     title: 'Nuestros socios de confianza',
+    viewAll: 'Ver Todos Los Socios',
     industries: {
       tekstil: 'TEXTIL',
       celik: 'ACERO',
@@ -1931,16 +2010,26 @@ const ar = {
     backButton: 'رجوع',
     contactButton: 'اتصل بنا',
   },
+  errorBoundary: {
+    title: 'حدث خطأ ما',
+    description: 'عذراً، حدث خطأ غير متوقع. تم إبلاغ فريقنا التقني.',
+    retryButton: 'حاول مرة أخرى',
+    homeButton: 'العودة للرئيسية',
+  },
   cookie: {
+    title: 'سياسة ملفات تعريف الارتباط',
     message: 'يستخدم هذا الموقع ملفات تعريف الارتباط لتحسين تجربتك.',
+    details: 'تُستخدم ملفات تعريف الارتباط لضمان عمل الموقع بشكل صحيح والتحليلات. نحن نحترم خصوصيتك.',
     accept: 'قبول',
     decline: 'رفض',
+    close: 'إغلاق',
     learnMore: 'معرفة المزيد',
   },
   whatsapp: {
     tooltip: 'تحدث على واتساب',
   },
   exitPopup: {
+    badge: '🎁 عرض خاص',
     title: 'انتظر!',
     subtitle: 'لدينا عرض خاص لك',
     description: 'هل ترغب في الحصول على زيارة موقع مجانية وعرض أسعار لمشاريعك؟',
@@ -1965,6 +2054,7 @@ const ar = {
   },
   clients: {
     title: 'شركاؤنا الموثوقون',
+    viewAll: 'عرض جميع الشركاء',
     industries: {
       tekstil: 'النسيج',
       celik: 'الصلب',
@@ -2265,16 +2355,26 @@ const ru = {
     backButton: 'Назад',
     contactButton: 'Контакты',
   },
+  errorBoundary: {
+    title: 'Что-то пошло не так',
+    description: 'Извините, произошла непредвиденная ошибка. Наша техническая команда была уведомлена.',
+    retryButton: 'Попробовать снова',
+    homeButton: 'На Главную',
+  },
   cookie: {
+    title: 'Политика использования файлов cookie',
     message: 'Этот веб-сайт использует файлы cookie для улучшения вашего опыта.',
+    details: 'Файлы cookie используются для правильной работы сайта и аналитики. Мы уважаем вашу конфиденциальность.',
     accept: 'Принять',
     decline: 'Отклонить',
+    close: 'Закрыть',
     learnMore: 'Узнать Больше',
   },
   whatsapp: {
     tooltip: 'Написать в WhatsApp',
   },
   exitPopup: {
+    badge: '🎁 Специальное Предложение',
     title: 'Подождите!',
     subtitle: 'У нас есть специальное предложение для вас',
     description: 'Хотите получить бесплатный выезд на объект и предложение для ваших проектов?',
@@ -2299,6 +2399,7 @@ const ru = {
   },
   clients: {
     title: 'Наши Надёжные Партнёры',
+    viewAll: 'Посмотреть Всех Партнёров',
     industries: {
       tekstil: 'ТЕКСТИЛЬ',
       celik: 'СТАЛЬ',

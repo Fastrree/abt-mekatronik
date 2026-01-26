@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { LanguageSelector } from "@/components/LanguageSelector";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { useI18n } from "@/lib/i18n";
+import { smoothScrollToElement } from "@/lib/scroll-utils";
 import { useLocation } from "wouter";
 
 type ProductKey = 'konveyor' | 'tekstil' | 'celik' | 'ozelMakine';
@@ -54,10 +55,7 @@ export const Navbar = memo(function Navbar() {
     const currentPath = window.location.pathname;
     if (currentPath === '/') {
       e.preventDefault();
-      const element = document.getElementById(sectionId);
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
+      smoothScrollToElement(sectionId);
     }
     // If on another page, let the default link behavior work (navigate to /#section)
   }, []);
@@ -67,16 +65,25 @@ export const Navbar = memo(function Navbar() {
     const currentPath = window.location.pathname;
     if (currentPath === '/') {
       // Already on home page, just scroll
-      const element = document.getElementById(sectionId);
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
+      smoothScrollToElement(sectionId);
     } else {
       // Navigate to home page with hash
       setLocation(`/#${sectionId}`);
     }
     setIsQuickMenuOpen(false);
   }, [setLocation]);
+
+  // Smart CTA handler: scroll to contact on current page
+  const handleCTAClick = useCallback((e: React.MouseEvent) => {
+    e.preventDefault();
+    const currentPath = window.location.pathname;
+    
+    // All pages have contact section in Footer, just scroll to it
+    smoothScrollToElement('contact');
+    
+    // Close dropdown if open
+    setIsQuickMenuOpen(false);
+  }, []);
 
   return (
     <nav
@@ -121,6 +128,7 @@ export const Navbar = memo(function Navbar() {
                       setIsQuickMenuOpen(false);
                     }}
                     className="block px-3 py-2 text-sm text-white hover:text-gray-200 hover:bg-zinc-700 rounded-md transition-colors"
+                    dir={isRTL ? 'rtl' : 'ltr'}
                   >
                     {t('nav.home')}
                   </a>
@@ -131,6 +139,7 @@ export const Navbar = memo(function Navbar() {
                       href="/about"
                       onClick={() => setIsQuickMenuOpen(false)}
                       className="block px-3 py-2 text-sm text-white hover:text-gray-200 hover:bg-zinc-700 rounded-md transition-colors"
+                      dir={isRTL ? 'rtl' : 'ltr'}
                     >
                       {t('nav.about')}
                     </a>
@@ -138,7 +147,7 @@ export const Navbar = memo(function Navbar() {
 
                   {/* 3. Ürünler (Products Section) */}
                   <div className="border-t border-zinc-600 mt-2 pt-2">
-                    <div className="text-xs font-semibold text-gray-300 uppercase tracking-wider px-3 py-2">
+                    <div className={`text-xs font-semibold text-gray-300 uppercase tracking-wider px-3 py-2 ${isRTL ? 'text-right' : 'text-left'}`} dir={isRTL ? 'rtl' : 'ltr'}>
                       {t('nav.products')}
                     </div>
                     {productLinks.map((product) => {
@@ -148,10 +157,14 @@ export const Navbar = memo(function Navbar() {
                           key={product.key}
                           href={`/products/${product.key}`}
                           onClick={() => setIsQuickMenuOpen(false)}
-                          className="w-full flex items-center gap-3 px-3 py-2.5 text-sm text-white hover:text-gray-200 hover:bg-zinc-700 rounded-md transition-colors text-left"
+                          className={`w-full flex items-center px-3 py-2.5 text-sm text-white hover:text-gray-200 hover:bg-zinc-700 rounded-md transition-colors gap-3 ${
+                            isRTL ? 'flex-row-reverse text-right' : 'text-left'
+                          }`}
+                          dir={isRTL ? 'rtl' : 'ltr'}
                         >
-                          <IconComponent size={16} className="text-red-500" />
-                          {product.name}
+                          {!isRTL && <IconComponent size={16} className="text-red-500 shrink-0" />}
+                          <span className="flex-1">{product.name}</span>
+                          {isRTL && <IconComponent size={16} className="text-red-500 shrink-0" />}
                         </a>
                       );
                     })}
@@ -161,7 +174,8 @@ export const Navbar = memo(function Navbar() {
                   <div className="border-t border-zinc-600 mt-2 pt-2">
                     <button
                       onClick={() => navigateToSection('engineering')}
-                      className="w-full text-left block px-3 py-2 text-sm text-white hover:text-gray-200 hover:bg-zinc-700 rounded-md transition-colors"
+                      className={`w-full block px-3 py-2 text-sm text-white hover:text-gray-200 hover:bg-zinc-700 rounded-md transition-colors ${isRTL ? 'text-right' : 'text-left'}`}
+                      dir={isRTL ? 'rtl' : 'ltr'}
                     >
                       {t('nav.engineering')}
                     </button>
@@ -171,7 +185,8 @@ export const Navbar = memo(function Navbar() {
                   <div className="border-t border-zinc-600 mt-2 pt-2">
                     <button
                       onClick={() => navigateToSection('projects')}
-                      className="w-full text-left block px-3 py-2 text-sm text-white hover:text-gray-200 hover:bg-zinc-700 rounded-md transition-colors"
+                      className={`w-full block px-3 py-2 text-sm text-white hover:text-gray-200 hover:bg-zinc-700 rounded-md transition-colors ${isRTL ? 'text-right' : 'text-left'}`}
+                      dir={isRTL ? 'rtl' : 'ltr'}
                     >
                       {t('nav.projects')}
                     </button>
@@ -181,7 +196,8 @@ export const Navbar = memo(function Navbar() {
                   <div className="border-t border-zinc-600 mt-2 pt-2">
                     <button
                       onClick={() => navigateToSection('faq')}
-                      className="w-full text-left block px-3 py-2 text-sm text-white hover:text-gray-200 hover:bg-zinc-700 rounded-md transition-colors"
+                      className={`w-full block px-3 py-2 text-sm text-white hover:text-gray-200 hover:bg-zinc-700 rounded-md transition-colors ${isRTL ? 'text-right' : 'text-left'}`}
+                      dir={isRTL ? 'rtl' : 'ltr'}
                     >
                       {t('nav.faq')}
                     </button>
@@ -191,7 +207,8 @@ export const Navbar = memo(function Navbar() {
                   <div className="border-t border-zinc-600 mt-2 pt-2">
                     <button
                       onClick={() => navigateToSection('testimonials')}
-                      className="w-full text-left block px-3 py-2 text-sm text-white hover:text-gray-200 hover:bg-zinc-700 rounded-md transition-colors"
+                      className={`w-full block px-3 py-2 text-sm text-white hover:text-gray-200 hover:bg-zinc-700 rounded-md transition-colors ${isRTL ? 'text-right' : 'text-left'}`}
+                      dir={isRTL ? 'rtl' : 'ltr'}
                     >
                       {t('nav.testimonials')}
                     </button>
@@ -201,7 +218,8 @@ export const Navbar = memo(function Navbar() {
                   <div className="border-t border-zinc-600 mt-2 pt-2">
                     <button
                       onClick={() => navigateToSection('partners')}
-                      className="w-full text-left block px-3 py-2 text-sm text-white hover:text-gray-200 hover:bg-zinc-700 rounded-md transition-colors"
+                      className={`w-full block px-3 py-2 text-sm text-white hover:text-gray-200 hover:bg-zinc-700 rounded-md transition-colors ${isRTL ? 'text-right' : 'text-left'}`}
+                      dir={isRTL ? 'rtl' : 'ltr'}
                     >
                       {t('nav.partners')}
                     </button>
@@ -213,6 +231,7 @@ export const Navbar = memo(function Navbar() {
                       href="/exports"
                       onClick={() => setIsQuickMenuOpen(false)}
                       className="block px-3 py-2 text-sm text-white hover:text-gray-200 hover:bg-zinc-700 rounded-md transition-colors"
+                      dir={isRTL ? 'rtl' : 'ltr'}
                     >
                       {t('nav.exports')}
                     </a>
@@ -222,7 +241,8 @@ export const Navbar = memo(function Navbar() {
                   <div className="border-t border-zinc-600 mt-2 pt-2">
                     <button
                       onClick={() => navigateToSection('contact')}
-                      className="w-full text-left block px-3 py-2 text-sm text-white hover:text-gray-200 hover:bg-zinc-700 rounded-md transition-colors"
+                      className={`w-full block px-3 py-2 text-sm text-white hover:text-gray-200 hover:bg-zinc-700 rounded-md transition-colors ${isRTL ? 'text-right' : 'text-left'}`}
+                      dir={isRTL ? 'rtl' : 'ltr'}
                     >
                       {t('nav.contact')}
                     </button>
@@ -231,8 +251,9 @@ export const Navbar = memo(function Navbar() {
                   {/* CTA - Highlighted */}
                   <div className="border-t border-zinc-600 mt-2 pt-2">
                     <button
-                      onClick={() => navigateToSection('contact')}
-                      className="w-full text-left block px-3 py-2.5 text-sm font-semibold text-red-500 hover:text-red-400 hover:bg-red-600/10 rounded-md transition-colors"
+                      onClick={handleCTAClick}
+                      className={`w-full block px-3 py-2.5 text-sm font-semibold text-red-500 hover:text-red-400 hover:bg-red-600/10 rounded-md transition-colors ${isRTL ? 'text-right' : 'text-left'}`}
+                      dir={isRTL ? 'rtl' : 'ltr'}
                     >
                       🚀 {t('products.getQuote')}
                     </button>
@@ -350,8 +371,8 @@ export const Navbar = memo(function Navbar() {
           
           {/* CTA Button */}
           <a 
-            href="/#contact"
-            onClick={(e) => handleSectionClick(e, 'contact')}
+            href="#contact"
+            onClick={handleCTAClick}
           >
             <Button variant="default" className="bg-primary hover:bg-primary/90 text-white font-bold rounded-none skew-x-[-10deg] text-sm px-4 py-2">
               <span className="skew-x-[10deg]">{t('products.getQuote')}</span>

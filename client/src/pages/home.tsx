@@ -4,6 +4,7 @@ import { SkipLink } from "@/components/SkipLink";
 import { Button } from "@/components/ui/button";
 import { Settings, Cog, PenTool, ChevronRight, Truck, Factory, Wrench, Layers, Phone, Mail, MapPin, Shield, Award, CheckCircle } from "lucide-react";
 import { useI18n } from "@/lib/i18n";
+import { smoothScrollToElement } from "@/lib/scroll-utils";
 import { OptimizedImage } from "@/components/OptimizedImage";
 import { FAQ, Testimonials, ClientLogos, ComponentLoader } from "@/components/LazyComponents";
 import { Suspense } from "react";
@@ -67,22 +68,25 @@ export default function Home() {
 
         <div className="container mx-auto px-4 xs:px-3 sm:px-6 relative z-10 pt-20">
           <div className="max-w-4xl animate-in fade-in-left duration-800">
-            <div className="inline-block mb-3 xs:mb-2 px-2.5 xs:px-2 py-1 xs:py-0.5 bg-red-600/20 border border-red-600/50 text-red-500 font-bold text-xs xs:text-[10px] tracking-widest uppercase rounded-sm backdrop-blur-sm">
+            {/* Badge - Mobilde gizle, tablet ve üstünde göster */}
+            <div className="hidden sm:inline-block mb-3 px-2.5 py-1 bg-red-600/20 border border-red-600/50 text-red-500 font-bold text-xs tracking-widest uppercase rounded-sm backdrop-blur-sm">
               {t('hero.badge')}
             </div>
-            <h1 id="hero-title" className="text-3xl xs:text-2xl sm:text-5xl md:text-7xl lg:text-8xl font-black text-white leading-[0.9] mb-6 xs:mb-4 sm:mb-8 tracking-tighter">
+            {/* Başlık - Mobilde daha küçük, okunabilir boyut */}
+            <h1 id="hero-title" className="text-2xl xs:text-xl sm:text-5xl md:text-7xl lg:text-8xl font-black text-white leading-tight xs:leading-tight sm:leading-[0.9] mb-4 xs:mb-3 sm:mb-8 tracking-tight xs:tracking-tight sm:tracking-tighter">
               {t('hero.title1')} <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-gray-100 to-gray-400">{t('hero.title2')}</span> <br />
               <span className="text-red-500">{t('hero.title3')}</span> {t('hero.title4')}
             </h1>
-            <p className="text-base xs:text-sm sm:text-xl md:text-2xl text-gray-200 max-w-2xl mb-8 xs:mb-6 sm:mb-10 font-light leading-relaxed border-l-4 xs:border-l-2 border-red-500 pl-4 xs:pl-2 sm:pl-6">
+            {/* Açıklama - Mobilde daha küçük font */}
+            <p className="text-sm xs:text-xs sm:text-xl md:text-2xl text-gray-200 max-w-2xl mb-6 xs:mb-4 sm:mb-10 font-light leading-relaxed xs:leading-relaxed border-l-2 xs:border-l-2 sm:border-l-4 border-red-500 pl-3 xs:pl-2 sm:pl-6">
               {t('hero.description')}
             </p>
             <div className="flex flex-col sm:flex-row gap-3 xs:gap-2 sm:gap-4 w-full sm:w-auto" role="group" aria-label="Ana eylem butonları">
               <Button 
                 size="lg" 
                 className="w-full xs:w-full sm:w-auto bg-red-600 hover:bg-red-700 text-white font-bold text-base xs:text-sm sm:text-lg px-6 xs:px-3 sm:px-8 py-5 xs:py-3 sm:py-6 rounded-none skew-x-[-10deg] border-2 border-red-600 hover:shadow-[0_0_30px_rgba(220,38,38,0.5)] transition-all"
-                onClick={() => document.getElementById('products')?.scrollIntoView({ behavior: 'smooth' })}
+                onClick={() => smoothScrollToElement('products')}
                 aria-label="Çözümlerimizi keşfedin"
               >
                 <span className="skew-x-[10deg]">{t('hero.solutions')}</span>
@@ -91,7 +95,7 @@ export default function Home() {
                 size="lg" 
                 variant="outline" 
                 className="w-full xs:w-full sm:w-auto border-gray-300 text-white hover:bg-white/10 hover:text-white font-bold text-base xs:text-sm sm:text-lg px-6 xs:px-3 sm:px-8 py-5 xs:py-3 sm:py-6 rounded-none skew-x-[-10deg] backdrop-blur-sm"
-                onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })}
+                onClick={() => smoothScrollToElement('projects')}
                 aria-label="Projelerimizi görüntüleyin"
               >
                 <span className="skew-x-[10deg]">{t('hero.projects')}</span>
@@ -100,9 +104,10 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 text-white/70 flex flex-col items-center gap-2 animate-bounce" aria-hidden="true">
-          <span className="text-[10px] uppercase tracking-[0.3em]">{t('hero.scroll')}</span>
-          <div className="w-[1px] h-12 bg-gradient-to-b from-red-600 to-transparent"></div>
+        {/* Scroll indicator - Mobilde daha büyük ve görünür */}
+        <div className="absolute bottom-4 xs:bottom-3 left-1/2 -translate-x-1/2 text-white/70 flex flex-col items-center gap-2 xs:gap-1 animate-bounce" aria-hidden="true">
+          <span className="text-xs xs:text-[11px] sm:text-[10px] uppercase tracking-[0.3em] font-medium">{t('hero.scroll')}</span>
+          <div className="w-[1px] h-12 xs:h-8 sm:h-12 bg-gradient-to-b from-red-600 to-transparent"></div>
         </div>
       </section>
 
@@ -148,8 +153,12 @@ export default function Home() {
                 <div className="w-10 xs:w-8 h-1 bg-red-600 mb-3 xs:mb-2 transition-all duration-300 group-hover:w-16"></div>
                 <h3 className="text-xl xs:text-base font-bold text-zinc-900 dark:text-white mb-2 xs:mb-1 group-hover:text-red-600 dark:group-hover:text-red-500 transition-colors">{t('productItems.konveyor.title')}</h3>
                 <p className="text-zinc-700 dark:text-zinc-400 text-sm xs:text-xs mb-4 xs:mb-2 line-clamp-2">{t('productItems.konveyor.shortDesc')}</p>
-                <span className="inline-flex items-center text-zinc-900 dark:text-white font-semibold text-sm xs:text-xs uppercase tracking-wider group-hover:translate-x-2 transition-transform">
-                  {t('products.viewDetails')} <ChevronRight className="ml-1 w-4 h-4 xs:w-3 xs:h-3 text-red-600 dark:text-red-500" />
+                <span className={`inline-flex items-center text-zinc-900 dark:text-white font-semibold text-sm xs:text-xs uppercase tracking-wider group-hover:translate-x-2 transition-transform ${
+                  language === 'ar' ? 'flex-row-reverse' : ''
+                }`}>
+                  {language === 'ar' && <ChevronRight className="mr-1 w-4 h-4 xs:w-3 xs:h-3 text-red-600 dark:text-red-500" aria-hidden="true" />}
+                  {t('products.viewDetails')}
+                  {language !== 'ar' && <ChevronRight className="ml-1 w-4 h-4 xs:w-3 xs:h-3 text-red-600 dark:text-red-500" aria-hidden="true" />}
                 </span>
               </div>
             </a>
@@ -178,8 +187,12 @@ export default function Home() {
                 <div className="w-10 xs:w-8 h-1 bg-red-600 mb-3 xs:mb-2 transition-all duration-300 group-hover:w-16" aria-hidden="true"></div>
                 <h3 className="text-xl xs:text-base font-bold text-zinc-900 dark:text-white mb-2 xs:mb-1 group-hover:text-red-600 dark:group-hover:text-red-500 transition-colors">{t('productItems.tekstil.title')}</h3>
                 <p className="text-zinc-700 dark:text-zinc-400 text-sm xs:text-xs mb-4 xs:mb-2 line-clamp-2">{t('productItems.tekstil.shortDesc')}</p>
-                <span className="inline-flex items-center text-zinc-900 dark:text-white font-semibold text-sm xs:text-xs uppercase tracking-wider group-hover:translate-x-2 transition-transform">
-                  {t('products.viewDetails')} <ChevronRight className="ml-1 w-4 h-4 xs:w-3 xs:h-3 text-red-600 dark:text-red-500" aria-hidden="true" />
+                <span className={`inline-flex items-center text-zinc-900 dark:text-white font-semibold text-sm xs:text-xs uppercase tracking-wider group-hover:translate-x-2 transition-transform ${
+                  language === 'ar' ? 'flex-row-reverse' : ''
+                }`}>
+                  {language === 'ar' && <ChevronRight className="mr-1 w-4 h-4 xs:w-3 xs:h-3 text-red-600 dark:text-red-500" aria-hidden="true" />}
+                  {t('products.viewDetails')}
+                  {language !== 'ar' && <ChevronRight className="ml-1 w-4 h-4 xs:w-3 xs:h-3 text-red-600 dark:text-red-500" aria-hidden="true" />}
                 </span>
               </div>
             </a>
@@ -208,8 +221,12 @@ export default function Home() {
                 <div className="w-10 xs:w-8 h-1 bg-red-600 mb-3 xs:mb-2 transition-all duration-300 group-hover:w-16" aria-hidden="true"></div>
                 <h3 className="text-xl xs:text-base font-bold text-zinc-900 dark:text-white mb-2 xs:mb-1 group-hover:text-red-600 dark:group-hover:text-red-500 transition-colors">{t('productItems.celik.title')}</h3>
                 <p className="text-zinc-700 dark:text-zinc-400 text-sm xs:text-xs mb-4 xs:mb-2 line-clamp-2">{t('productItems.celik.shortDesc')}</p>
-                <span className="inline-flex items-center text-zinc-900 dark:text-white font-semibold text-sm xs:text-xs uppercase tracking-wider group-hover:translate-x-2 transition-transform">
-                  {t('products.viewDetails')} <ChevronRight className="ml-1 w-4 h-4 xs:w-3 xs:h-3 text-red-600 dark:text-red-500" aria-hidden="true" />
+                <span className={`inline-flex items-center text-zinc-900 dark:text-white font-semibold text-sm xs:text-xs uppercase tracking-wider group-hover:translate-x-2 transition-transform ${
+                  language === 'ar' ? 'flex-row-reverse' : ''
+                }`}>
+                  {language === 'ar' && <ChevronRight className="mr-1 w-4 h-4 xs:w-3 xs:h-3 text-red-600 dark:text-red-500" aria-hidden="true" />}
+                  {t('products.viewDetails')}
+                  {language !== 'ar' && <ChevronRight className="ml-1 w-4 h-4 xs:w-3 xs:h-3 text-red-600 dark:text-red-500" aria-hidden="true" />}
                 </span>
               </div>
             </a>
@@ -238,8 +255,12 @@ export default function Home() {
                 <div className="w-10 xs:w-8 h-1 bg-red-600 mb-3 xs:mb-2 transition-all duration-300 group-hover:w-16" aria-hidden="true"></div>
                 <h3 className="text-xl xs:text-base font-bold text-zinc-900 dark:text-white mb-2 xs:mb-1 group-hover:text-red-600 dark:group-hover:text-red-500 transition-colors">{t('productItems.ozelMakine.title')}</h3>
                 <p className="text-zinc-700 dark:text-zinc-400 text-sm xs:text-xs mb-4 xs:mb-2 line-clamp-2">{t('productItems.ozelMakine.shortDesc')}</p>
-                <span className="inline-flex items-center text-zinc-900 dark:text-white font-semibold text-sm xs:text-xs uppercase tracking-wider group-hover:translate-x-2 transition-transform">
-                  {t('products.viewDetails')} <ChevronRight className="ml-1 w-4 h-4 xs:w-3 xs:h-3 text-red-600 dark:text-red-500" aria-hidden="true" />
+                <span className={`inline-flex items-center text-zinc-900 dark:text-white font-semibold text-sm xs:text-xs uppercase tracking-wider group-hover:translate-x-2 transition-transform ${
+                  language === 'ar' ? 'flex-row-reverse' : ''
+                }`}>
+                  {language === 'ar' && <ChevronRight className="mr-1 w-4 h-4 xs:w-3 xs:h-3 text-red-600 dark:text-red-500" aria-hidden="true" />}
+                  {t('products.viewDetails')}
+                  {language !== 'ar' && <ChevronRight className="ml-1 w-4 h-4 xs:w-3 xs:h-3 text-red-600 dark:text-red-500" aria-hidden="true" />}
                 </span>
               </div>
             </a>
@@ -264,7 +285,7 @@ export default function Home() {
             <Button 
               size="lg"
               className="bg-white text-red-600 hover:bg-zinc-100 font-bold text-sm xs:text-xs sm:text-base px-6 xs:px-3 sm:px-8 py-4 xs:py-3 sm:py-6 rounded-none skew-x-[-10deg] shadow-xl hover:shadow-2xl transition-all hover:scale-105"
-              onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+              onClick={() => smoothScrollToElement('contact')}
               aria-label="Hemen teklif alın"
             >
               <span className="skew-x-[10deg] flex items-center gap-1.5 xs:gap-1">

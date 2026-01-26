@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ABT Favicon Generator</title>
+    <style>
+        body {
+            font-family: 'Inter', Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #18181b;
+            color: #fafafa;
+        }
+        h1 {
+            color: #dc2626;
+            text-align: center;
+        }
+        .preview {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin: 30px 0;
+        }
+        .preview-item {
+            text-align: center;
+            padding: 20px;
+            background: #27272a;
+            border-radius: 8px;
+            border: 2px solid #3f3f46;
+        }
+        .preview-item canvas {
+            display: block;
+            margin: 10px auto;
+            border: 1px solid #3f3f46;
+        }
+        .preview-item p {
+            margin: 10px 0 0 0;
+            font-size: 14px;
+            color: #a1a1aa;
+        }
+        button {
+            background: #dc2626;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            display: block;
+            margin: 20px auto;
+        }
+        button:hover {
+            background: #b91c1c;
+        }
+        .instructions {
+            background: #27272a;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #dc2626;
+            margin-top: 30px;
+        }
+        .instructions h3 {
+            margin-top: 0;
+            color: #dc2626;
+        }
+        .instructions ol {
+            line-height: 1.8;
+        }
+        .instructions code {
+            background: #18181b;
+            padding: 2px 6px;
+            border-radius: 4px;
+            color: #fbbf24;
+        }
+    </style>
+</head>
+<body>
+    <h1>🎨 ABT MEKATRONİK Favicon Generator</h1>
+    
+    <div class="preview" id="preview"></div>
+    
+    <button onclick="downloadAll()">📥 Tüm Favicon'ları İndir</button>
+    
+    <div class="instructions">
+        <h3>📝 Kullanım Talimatları</h3>
+        <ol>
+            <li>Yukarıdaki <strong>"Tüm Favicon'ları İndir"</strong> butonuna tıklayın</li>
+            <li>İndirilen dosyaları <code>client/public/</code> klasörüne kopyalayın</li>
+            <li>Eski favicon dosyalarını silin (favicon.png)</li>
+            <li>Tarayıcınızı yenileyin (Ctrl+F5 veya Cmd+Shift+R)</li>
+            <li>Favicon'un güncellendiğini göreceksiniz! 🎉</li>
+        </ol>
+        <p><strong>Not:</strong> Tarayıcılar favicon'ları cache'ler. Değişikliği görmek için hard refresh yapmanız gerekebilir.</p>
+    </div>
+
+    <script>
+        const sizes = [
+            { name: 'favicon-16x16.png', size: 16, desc: 'Tarayıcı Sekmesi' },
+            { name: 'favicon-32x32.png', size: 32, desc: 'Retina Ekranlar' },
+            { name: 'apple-touch-icon.png', size: 180, desc: 'iOS Home Screen' },
+            { name: 'android-chrome-192x192.png', size: 192, desc: 'Android' },
+            { name: 'android-chrome-512x512.png', size: 512, desc: 'PWA' }
+        ];
+
+        function createFavicon(size) {
+            const canvas = document.createElement('canvas');
+            canvas.width = size;
+            canvas.height = size;
+            const ctx = canvas.getContext('2d');
+
+            // Kırmızı arka plan (rounded corners)
+            ctx.fillStyle = '#DC2626';
+            const radius = size < 32 ? 2 : Math.min(8, size / 12);
+            ctx.beginPath();
+            ctx.moveTo(radius, 0);
+            ctx.lineTo(size - radius, 0);
+            ctx.quadraticCurveTo(size, 0, size, radius);
+            ctx.lineTo(size, size - radius);
+            ctx.quadraticCurveTo(size, size, size - radius, size);
+            ctx.lineTo(radius, size);
+            ctx.quadraticCurveTo(0, size, 0, size - radius);
+            ctx.lineTo(0, radius);
+            ctx.quadraticCurveTo(0, 0, radius, 0);
+            ctx.closePath();
+            ctx.fill();
+
+            // Beyaz ABT yazısı
+            ctx.fillStyle = '#FFFFFF';
+            ctx.font = `900 ${size * 0.32}px Arial, sans-serif`;
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.letterSpacing = '-1px';
+            ctx.fillText('ABT', size / 2, size / 2);
+
+            return canvas;
+        }
+
+        function displayPreviews() {
+            const preview = document.getElementById('preview');
+            sizes.forEach(({ name, size, desc }) => {
+                const canvas = createFavicon(size);
+                
+                const item = document.createElement('div');
+                item.className = 'preview-item';
+                
+                const displayCanvas = canvas.cloneNode(true);
+                displayCanvas.style.width = Math.min(size, 128) + 'px';
+                displayCanvas.style.height = Math.min(size, 128) + 'px';
+                
+                const p = document.createElement('p');
+                p.innerHTML = `<strong>${name}</strong><br>${size}x${size}px<br>${desc}`;
+                
+                item.appendChild(displayCanvas);
+                item.appendChild(p);
+                preview.appendChild(item);
+            });
+        }
+
+        function downloadAll() {
+            sizes.forEach(({ name, size }) => {
+                const canvas = createFavicon(size);
+                canvas.toBlob((blob) => {
+                    const url = URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = name;
+                    a.click();
+                    URL.revokeObjectURL(url);
+                }, 'image/png');
+            });
+            
+            alert('✅ Tüm favicon dosyaları indiriliyor!\n\nİndirilen dosyaları client/public/ klasörüne kopyalayın.');
+        }
+
+        // Sayfa yüklendiğinde preview'ları göster
+        displayPreviews();
+    </script>
+</body>
+</html>

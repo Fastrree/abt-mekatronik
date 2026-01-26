@@ -392,3 +392,106 @@ When updating CDN versions:
 
 **STATUS**: ACTIVE & ENFORCED  
 **LAST UPDATED**: 2026-01-27
+
+
+## ADR-010: Accept style-src 'unsafe-inline' (Pragmatic Tradeoff)
+
+**Date**: 2026-01-27  
+**Status**: Accepted  
+**Tags**: security, csp, tailwind, pragmatism
+
+### Context
+HTTP Observatory reports warning for `style-src 'unsafe-inline'` in CSP. Current score: 115/100 (A+).
+
+### Problem
+- Tailwind CSS uses utility-first approach with thousands of inline classes
+- React components use inline styles for dynamic styling
+- Third-party libraries (Google Fonts, jsVectorMap) inject inline styles
+- Removing `unsafe-inline` would break the entire application
+
+### Decision
+**Accept `style-src 'unsafe-inline'` as a pragmatic tradeoff.**
+
+### Risk Analysis
+
+**CSS Injection Risk (style-src 'unsafe-inline'):**
+- 🟡 **LOW RISK**: Can only modify appearance, not execute code
+- Attacker can: Change colors, hide elements, phishing UI
+- Attacker CANNOT: Execute JavaScript, steal data, XSS
+
+**JavaScript Injection Risk (script-src 'unsafe-inline'):**
+- 🔴 **CRITICAL RISK**: Can execute arbitrary code
+- Attacker can: Steal credentials, inject malware, full XSS
+- **Status**: ✅ MITIGATED (NO unsafe-inline in script-src)
+
+### Alternatives Considered
+
+**1. Nonce-Based CSP**
+```html
+<style nonce="random123">...</style>
+```
+**Why Not:**
+- Requires Server-Side Rendering (SSR)
+- Incompatible with Tailwind's build process
+- Adds significant complexity
+- Vite doesn't support nonce injection out-of-box
+
+**2. Hash-Based CSP**
+```http
+style-src 'sha256-abc123' 'sha256-def456' ...
+```
+**Why Not:**
+- Thousands of Tailwind classes = thousands of hashes
+- Hashes change on every build
+- Maintenance nightmare
+- CSP header would be massive (>10KB)
+
+**3. External Stylesheets Only**
+```css
+/* Move all Tailwind to external CSS */
+```
+**Why Not:**
+- Defeats the entire purpose of Tailwind CSS
+- Loses utility-first benefits
+- Massive refactoring required
+- Performance degradation (larger CSS bundle)
+
+### Rationale
+- **Pragmatism over Perfectionism**: 115/100 (A+) is already excellent
+- **Risk vs Reward**: +5 points for 10x complexity increase
+- **Industry Standard**: Most Tailwind sites use `unsafe-inline` for styles
+- **Critical Protection**: `script-src` is strict (NO unsafe-inline)
+- **Real-World Impact**: CSS injection is low-severity compared to XSS
+
+### Consequences
+**Positive**: 
+- Tailwind CSS works as intended
+- React inline styles work
+- Third-party libraries work
+- Maintainable codebase
+- Excellent performance
+
+**Negative**: 
+- HTTP Observatory warning (informational, not critical)
+- Theoretical CSS injection risk (low severity)
+- Score: 115/100 instead of 120/100 (minimal difference)
+
+### Mitigation
+Even with `unsafe-inline`, we have multiple layers of protection:
+1. ✅ Input sanitization (XSS prevention)
+2. ✅ Output encoding (HTML entities)
+3. ✅ Strict `script-src` (NO JavaScript injection)
+4. ✅ CORS policy (cross-origin protection)
+5. ✅ HTTPS only (MITM protection)
+
+### Review Criteria
+Revisit this decision if:
+- Tailwind adds native nonce/hash support
+- Vite adds CSP nonce injection
+- CSS injection becomes a real threat (currently theoretical)
+- HTTP Observatory changes scoring algorithm
+
+---
+
+**STATUS**: ACCEPTED & DOCUMENTED  
+**LAST UPDATED**: 2026-01-27

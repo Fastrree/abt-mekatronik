@@ -46,7 +46,7 @@ export const Footer = memo(function Footer() {
           <div className="grid lg:grid-cols-2 gap-8">
             {/* MAP - Premium Interactive Design */}
             <a
-              href="https://www.google.com/maps/search/?api=1&query=37.5467137,36.93"
+              href="https://www.google.com/maps/search/?api=1&query=37.546286099999996,37.1050861"
               target="_blank"
               rel="noopener noreferrer"
               className="relative block h-[400px] lg:h-[500px] rounded-2xl overflow-hidden border-2 border-zinc-200 dark:border-zinc-700 shadow-2xl bg-gradient-to-br from-zinc-50 via-white to-zinc-100 dark:from-zinc-900 dark:via-zinc-800 dark:to-zinc-900 group cursor-pointer transition-all hover:shadow-red-500/20 hover:border-red-500/50"
@@ -79,8 +79,8 @@ export const Footer = memo(function Footer() {
                       ABT MEKATRONİK
                     </h3>
                     <p className="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed font-medium">
-                      ELMALAR MAH. YENİ İSKAN KÜME EVLERİ<br />
-                      NO: 79/6A DULKADİROĞLU / KAHRAMANMARAŞ
+                      Elmalar, 46090<br />
+                      Dulkadiroğlu/Kahramanmaraş
                     </p>
                   </div>
                 </div>
@@ -123,8 +123,8 @@ export const Footer = memo(function Footer() {
                   <div>
                     <h4 className="font-bold text-zinc-900 dark:text-white mb-1">{t('footer.address')}</h4>
                     <p className="text-sm text-zinc-600 dark:text-zinc-400">
-                      ELMALAR MAH. YENİ İSKAN KÜME EVLERİ NO: 79/6A<br />
-                      DULKADİROĞLU / KAHRAMANMARAŞ
+                      Elmalar, 46090<br />
+                      Dulkadiroğlu/Kahramanmaraş
                     </p>
                   </div>
                 </div>

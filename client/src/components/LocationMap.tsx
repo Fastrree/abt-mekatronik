@@ -27,8 +27,8 @@ interface LocationMapProps {
 }
 
 export function LocationMap({ className = '' }: LocationMapProps) {
-  // ABT Mekatronik coordinates (approximate)
-  const position: [number, number] = [37.5467137, 36.93];
+  // ABT Mekatronik coordinates (exact location from Google Maps)
+  const position: [number, number] = [37.546286099999996, 37.1050861];
 
   return (
     <div className={className}>
@@ -49,8 +49,8 @@ export function LocationMap({ className = '' }: LocationMapProps) {
               <strong className="text-red-600 font-bold">ABT MEKATRONİK</strong>
               <br />
               <span className="text-xs">
-                ELMALAR MAH. YENİ İSKAN KÜME EVLERİ<br />
-                NO: 79/6A DULKADİROĞLU / KAHRAMANMARAŞ
+                Elmalar, 46090<br />
+                Dulkadiroğlu/Kahramanmaraş
               </span>
             </div>
           </Popup>

@@ -5,7 +5,7 @@ User-agent: *
 Allow: /
 
 # Sitemap konumu
-Sitemap: https://abtmekatronik.com/sitemap.xml
+Sitemap: https://abt-mekatronik.vercel.app/sitemap.xml
 
 # Crawl-delay önerisi (opsiyonel)
 Crawl-delay: 1

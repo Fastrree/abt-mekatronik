@@ -14,18 +14,18 @@
  * Mobile: 341-767px ekranlar
  * Desktop: 768px+
  * 
- * NOT: Contact (Teklif Al) butonuna göre optimize edildi
- * Contact için -110px (150px daha aşağı), diğerleri orantılı ayarlandı
+ * NOT: Mobilde çok daha aşağı scroll için agresif negatif offset'ler
+ * Negatif değerler içeriği navbar'ın çok altında gösterir
  */
 const SECTION_OFFSETS: Record<string, { ultraMobile: number; mobile: number; desktop: number }> = {
-  products: { ultraMobile: -100, mobile: -90, desktop: 20 },      // Daha fazla aşağı
-  engineering: { ultraMobile: -100, mobile: -90, desktop: 60 },   // Daha fazla aşağı
-  projects: { ultraMobile: -100, mobile: -90, desktop: 40 },      // Daha fazla aşağı
-  faq: { ultraMobile: -100, mobile: -90, desktop: 80 },           // Daha fazla aşağı
-  testimonials: { ultraMobile: -100, mobile: -90, desktop: 80 },  // Daha fazla aşağı
-  partners: { ultraMobile: -100, mobile: -90, desktop: 80 },      // Daha fazla aşağı
-  contact: { ultraMobile: -110, mobile: -100, desktop: -10 },     // 150px daha aşağı (40→-110, 50→-100)
-  default: { ultraMobile: -100, mobile: -90, desktop: 80 },       // Daha fazla aşağı
+  products: { ultraMobile: -200, mobile: -180, desktop: 20 },      // Çok daha aşağı
+  engineering: { ultraMobile: -200, mobile: -180, desktop: 60 },   // Çok daha aşağı
+  projects: { ultraMobile: -200, mobile: -180, desktop: 40 },      // Çok daha aşağı
+  faq: { ultraMobile: -200, mobile: -180, desktop: 80 },           // Çok daha aşağı
+  testimonials: { ultraMobile: -200, mobile: -180, desktop: 80 },  // Çok daha aşağı
+  partners: { ultraMobile: -200, mobile: -180, desktop: 80 },      // Çok daha aşağı
+  contact: { ultraMobile: -220, mobile: -200, desktop: -10 },      // En fazla aşağı (Teklif Al)
+  default: { ultraMobile: -200, mobile: -180, desktop: 80 },       // Çok daha aşağı
 };
 
 /**

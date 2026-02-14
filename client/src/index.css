@@ -164,19 +164,31 @@
     scroll-behavior: smooth;
   }
   
-  /* Touch-friendly hover states */
+  /* Disable hover effects on touch devices */
   @media (hover: none) {
-    .group:active .group-hover\:scale-110 {
-      transform: scale(1.05);
+    /* Remove all hover transforms on mobile */
+    *[class*="hover:scale"],
+    *[class*="hover:-translate"],
+    *[class*="hover:rotate"],
+    *[class*="group-hover:scale"],
+    *[class*="group-hover:-translate"],
+    *[class*="group-hover:rotate"] {
+      transform: none !important;
     }
-    .group:active .group-hover\:grayscale-0 {
-      filter: grayscale(0);
+    
+    /* Keep only essential hover effects (colors, borders) */
+    /* But remove transform-based effects that cause issues on mobile */
+    .group:hover,
+    .group:active {
+      transform: none !important;
     }
-    .group:active .group-hover\:text-red-500 {
-      color: rgb(239 68 68);
+    
+    /* Active state for touch feedback (minimal) */
+    .group:active .group-hover\:text-white {
+      color: rgb(255 255 255);
     }
-    .group:active .group-hover\:w-16 {
-      width: 4rem;
+    .group:active .group-hover\:bg-red-600 {
+      background-color: rgb(220 38 38);
     }
   }
   
@@ -682,9 +694,42 @@ video {
   transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.hover-lift:hover {
-  transform: translateY(-2px);
-  will-change: transform;
+/* Only apply hover effects on devices that support hover */
+@media (hover: hover) and (pointer: fine) {
+  .hover-lift:hover {
+    transform: translateY(-2px);
+    will-change: transform;
+  }
+}
+
+/* Disable hover transforms on touch devices */
+@media (hover: none) {
+  /* Disable all scale transforms on hover */
+  [class*="hover:scale"]:hover,
+  [class*="group-hover:scale"]:hover,
+  .group:hover [class*="group-hover:scale"] {
+    transform: none !important;
+  }
+  
+  /* Disable all translate transforms on hover */
+  [class*="hover:-translate"]:hover,
+  [class*="hover:translate"]:hover,
+  [class*="group-hover:-translate"]:hover,
+  [class*="group-hover:translate"]:hover,
+  .group:hover [class*="group-hover:-translate"],
+  .group:hover [class*="group-hover:translate"] {
+    transform: none !important;
+  }
+  
+  /* Disable all rotate transforms on hover */
+  [class*="hover:rotate"]:hover,
+  [class*="group-hover:rotate"]:hover,
+  .group:hover [class*="group-hover:rotate"] {
+    transform: none !important;
+  }
+  
+  /* Keep color and border changes for visual feedback */
+  /* These work fine on mobile and provide good UX */
 }
 
 /* Content visibility for off-screen content */

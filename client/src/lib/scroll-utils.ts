@@ -13,16 +13,18 @@
  * Ultra-mobile: 300-340px ekranlar için özel ayar
  * Mobile: 341-767px ekranlar
  * Desktop: 768px+
+ * 
+ * NOT: Mobil offset'ler %15 azaltıldı (daha aşağı scroll için)
  */
 const SECTION_OFFSETS: Record<string, { ultraMobile: number; mobile: number; desktop: number }> = {
-  products: { ultraMobile: 60, mobile: 70, desktop: 20 },
-  engineering: { ultraMobile: 60, mobile: 70, desktop: 60 },
-  projects: { ultraMobile: 60, mobile: 70, desktop: 40 },
-  faq: { ultraMobile: 60, mobile: 70, desktop: 80 },
-  testimonials: { ultraMobile: 60, mobile: 70, desktop: 80 },
-  partners: { ultraMobile: 60, mobile: 70, desktop: 80 },
-  contact: { ultraMobile: 50, mobile: 60, desktop: -10 },
-  default: { ultraMobile: 60, mobile: 70, desktop: 80 },
+  products: { ultraMobile: 50, mobile: 60, desktop: 20 },      // 60→50, 70→60
+  engineering: { ultraMobile: 50, mobile: 60, desktop: 60 },   // 60→50, 70→60
+  projects: { ultraMobile: 50, mobile: 60, desktop: 40 },      // 60→50, 70→60
+  faq: { ultraMobile: 50, mobile: 60, desktop: 80 },           // 60→50, 70→60
+  testimonials: { ultraMobile: 50, mobile: 60, desktop: 80 },  // 60→50, 70→60
+  partners: { ultraMobile: 50, mobile: 60, desktop: 80 },      // 60→50, 70→60
+  contact: { ultraMobile: 40, mobile: 50, desktop: -10 },      // 50→40, 60→50
+  default: { ultraMobile: 50, mobile: 60, desktop: 80 },       // 60→50, 70→60
 };
 
 /**

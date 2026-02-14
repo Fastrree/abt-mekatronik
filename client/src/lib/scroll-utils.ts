@@ -14,18 +14,18 @@
  * Mobile: 341-767px ekranlar
  * Desktop: 768px+
  * 
- * NOT: Mobilde çok daha aşağı scroll için agresif negatif offset'ler
+ * NOT: Mobilde maksimum aşağı scroll için çok agresif negatif offset'ler
  * Negatif değerler içeriği navbar'ın çok altında gösterir
  */
 const SECTION_OFFSETS: Record<string, { ultraMobile: number; mobile: number; desktop: number }> = {
-  products: { ultraMobile: -200, mobile: -180, desktop: 20 },      // Çok daha aşağı
-  engineering: { ultraMobile: -200, mobile: -180, desktop: 60 },   // Çok daha aşağı
-  projects: { ultraMobile: -200, mobile: -180, desktop: 40 },      // Çok daha aşağı
-  faq: { ultraMobile: -200, mobile: -180, desktop: 80 },           // Çok daha aşağı
-  testimonials: { ultraMobile: -200, mobile: -180, desktop: 80 },  // Çok daha aşağı
-  partners: { ultraMobile: -200, mobile: -180, desktop: 80 },      // Çok daha aşağı
-  contact: { ultraMobile: -220, mobile: -200, desktop: -10 },      // En fazla aşağı (Teklif Al)
-  default: { ultraMobile: -200, mobile: -180, desktop: 80 },       // Çok daha aşağı
+  products: { ultraMobile: -300, mobile: -280, desktop: 20 },      // Maksimum aşağı
+  engineering: { ultraMobile: -300, mobile: -280, desktop: 60 },   // Maksimum aşağı
+  projects: { ultraMobile: -300, mobile: -280, desktop: 40 },      // Maksimum aşağı
+  faq: { ultraMobile: -300, mobile: -280, desktop: 80 },           // Maksimum aşağı
+  testimonials: { ultraMobile: -300, mobile: -280, desktop: 80 },  // Maksimum aşağı
+  partners: { ultraMobile: -300, mobile: -280, desktop: 80 },      // Maksimum aşağı
+  contact: { ultraMobile: -320, mobile: -300, desktop: -10 },      // En maksimum aşağı (Teklif Al)
+  default: { ultraMobile: -300, mobile: -280, desktop: 80 },       // Maksimum aşağı
 };
 
 /**

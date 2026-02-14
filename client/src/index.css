@@ -379,6 +379,310 @@
   }
 }
 
+/* 300px ULTRA-TINY Screen Optimization (iPhone SE, Galaxy Fold) */
+@media (max-width: 340px) {
+  /* CRITICAL: Prevent horizontal scroll */
+  body {
+    overflow-x: hidden !important;
+  }
+  
+  * {
+    max-width: 100vw;
+  }
+  
+  /* Ultra-compact container */
+  .container {
+    padding-left: 0.5rem !important;
+    padding-right: 0.5rem !important;
+    max-width: 100% !important;
+  }
+  
+  /* Ultra-small typography */
+  h1 {
+    font-size: 1.75rem !important;
+    line-height: 1.1 !important;
+  }
+  
+  h2 {
+    font-size: 1.25rem !important;
+    line-height: 1.2 !important;
+  }
+  
+  h3 {
+    font-size: 1.125rem !important;
+  }
+  
+  p, span, div {
+    font-size: 0.8125rem !important;
+  }
+  
+  /* Ultra-compact buttons */
+  button, .btn {
+    padding: 0.375rem 0.5rem !important;
+    font-size: 0.75rem !important;
+    min-width: 40px !important;
+    min-height: 40px !important;
+  }
+  
+  /* Navbar ultra-compact */
+  nav {
+    padding-top: 0.375rem !important;
+    padding-bottom: 0.375rem !important;
+  }
+  
+  nav .container {
+    gap: 0.125rem !important;
+    padding-left: 0.25rem !important;
+    padding-right: 0.25rem !important;
+  }
+  
+  /* Logo ultra-small */
+  nav a {
+    font-size: 0.875rem !important;
+  }
+  
+  nav a span:first-child {
+    font-size: 1rem !important;
+  }
+  
+  nav a span:last-child {
+    font-size: 0.5rem !important;
+  }
+  
+  /* Icon buttons ultra-small */
+  nav button {
+    padding: 0.25rem !important;
+    min-width: 36px !important;
+    min-height: 36px !important;
+  }
+  
+  nav button svg {
+    width: 16px !important;
+    height: 16px !important;
+  }
+  
+  /* Hero section ultra-compact */
+  section {
+    padding-top: 1rem !important;
+    padding-bottom: 1rem !important;
+  }
+  
+  #hero {
+    min-height: 400px !important;
+  }
+  
+  #hero h1 {
+    font-size: 1.75rem !important;
+    line-height: 1 !important;
+    margin-bottom: 0.5rem !important;
+  }
+  
+  #hero p {
+    font-size: 0.75rem !important;
+    line-height: 1.3 !important;
+    margin-bottom: 0.75rem !important;
+  }
+  
+  /* Full width buttons */
+  #hero button,
+  button {
+    width: 100% !important;
+    margin-bottom: 0.375rem !important;
+  }
+  
+  /* Ultra-compact grids */
+  .grid {
+    gap: 0.375rem !important;
+  }
+  
+  /* Single column on ultra-tiny */
+  .grid-cols-2,
+  .grid-cols-3,
+  .grid-cols-4,
+  .md\:grid-cols-2,
+  .md\:grid-cols-3,
+  .lg\:grid-cols-4 {
+    grid-template-columns: repeat(1, minmax(0, 1fr)) !important;
+  }
+  
+  /* Keep 2 columns only for projects gallery */
+  #projects .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+  
+  /* Ultra-compact cards */
+  .card, article {
+    padding: 0.5rem !important;
+    border-radius: 0.5rem !important;
+  }
+  
+  /* Product cards ultra-compact */
+  #products article {
+    height: 280px !important;
+  }
+  
+  /* Stats ultra-compact */
+  .text-4xl, .text-5xl, .text-6xl {
+    font-size: 1.5rem !important;
+  }
+  
+  .text-3xl {
+    font-size: 1.25rem !important;
+  }
+  
+  .text-2xl {
+    font-size: 1.125rem !important;
+  }
+  
+  .text-xl {
+    font-size: 1rem !important;
+  }
+  
+  /* Contact form ultra-compact */
+  #contact input,
+  #contact textarea,
+  input,
+  textarea {
+    font-size: 0.75rem !important;
+    padding: 0.375rem !important;
+    min-height: 36px !important;
+  }
+  
+  #contact .h-12,
+  .h-12 {
+    height: 2rem !important;
+  }
+  
+  /* Footer ultra-compact */
+  footer {
+    padding-top: 1.5rem !important;
+    padding-bottom: 1.5rem !important;
+  }
+  
+  footer h3 {
+    font-size: 0.875rem !important;
+    margin-bottom: 0.375rem !important;
+  }
+  
+  footer a, footer p, footer li {
+    font-size: 0.6875rem !important;
+    line-height: 1.3 !important;
+  }
+  
+  footer .grid {
+    grid-template-columns: repeat(1, minmax(0, 1fr)) !important;
+  }
+  
+  /* WhatsApp button ultra-small */
+  .fixed.bottom-6.right-6,
+  .fixed.bottom-4.right-4 {
+    bottom: 0.5rem !important;
+    right: 0.5rem !important;
+  }
+  
+  .fixed.bottom-6.right-6 button,
+  .fixed.bottom-4.right-4 button {
+    width: 44px !important;
+    height: 44px !important;
+  }
+  
+  .fixed.bottom-6.right-6 svg,
+  .fixed.bottom-4.right-4 svg {
+    width: 20px !important;
+    height: 20px !important;
+  }
+  
+  /* Modal ultra-compact */
+  .fixed.inset-0 > div {
+    max-width: 98vw !important;
+    margin: 0.25rem !important;
+    padding: 0.75rem !important;
+  }
+  
+  /* Dropdown menu ultra-compact */
+  nav .absolute {
+    width: 240px !important;
+    max-width: calc(100vw - 1rem) !important;
+  }
+  
+  nav .absolute a,
+  nav .absolute button {
+    padding: 0.5rem 0.75rem !important;
+    font-size: 0.75rem !important;
+  }
+  
+  /* Image optimization */
+  img {
+    max-width: 100% !important;
+    height: auto !important;
+  }
+  
+  /* Spacing ultra-compact */
+  .space-y-4 > * + * {
+    margin-top: 0.5rem !important;
+  }
+  
+  .space-y-6 > * + * {
+    margin-top: 0.75rem !important;
+  }
+  
+  .space-y-8 > * + * {
+    margin-top: 1rem !important;
+  }
+  
+  /* Padding ultra-compact */
+  .p-6 {
+    padding: 0.75rem !important;
+  }
+  
+  .p-8 {
+    padding: 1rem !important;
+  }
+  
+  .py-12 {
+    padding-top: 1.5rem !important;
+    padding-bottom: 1.5rem !important;
+  }
+  
+  .py-16 {
+    padding-top: 2rem !important;
+    padding-bottom: 2rem !important;
+  }
+  
+  .py-24 {
+    padding-top: 2.5rem !important;
+    padding-bottom: 2.5rem !important;
+  }
+  
+  /* Gap ultra-compact */
+  .gap-4 {
+    gap: 0.5rem !important;
+  }
+  
+  .gap-6 {
+    gap: 0.75rem !important;
+  }
+  
+  .gap-8 {
+    gap: 1rem !important;
+  }
+  
+  /* Border radius smaller */
+  .rounded-2xl {
+    border-radius: 0.75rem !important;
+  }
+  
+  .rounded-xl {
+    border-radius: 0.5rem !important;
+  }
+  
+  /* Prevent text overflow */
+  * {
+    word-wrap: break-word !important;
+    overflow-wrap: break-word !important;
+  }
+}
+
 /* Custom Scrollbar Styles */
 /* Dark theme scrollbar (default) - for both body and .scrollbar-thin */
 body,

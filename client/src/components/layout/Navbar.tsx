@@ -73,13 +73,13 @@ export const Navbar = memo(function Navbar() {
     setIsQuickMenuOpen(false);
   }, [setLocation]);
 
-  // Smart CTA handler: scroll to contact on current page
+  // Smart CTA handler: scroll to contact map on current page
   const handleCTAClick = useCallback((e: React.MouseEvent) => {
     e.preventDefault();
     const currentPath = window.location.pathname;
     
-    // All pages have contact section in Footer, just scroll to it
-    smoothScrollToElement('contact');
+    // All pages have contact section in Footer, just scroll to map
+    smoothScrollToElement('contact-map');
     
     // Close dropdown if open
     setIsQuickMenuOpen(false);
@@ -253,10 +253,10 @@ export const Navbar = memo(function Navbar() {
                     </a>
                   </div>
 
-                  {/* 10. İletişim (WhatsApp Button - MOBILE ONLY) */}
+                  {/* 10. İletişim (Google Maps Card) */}
                   <div className="border-t border-zinc-700/50 mt-2 pt-2">
                     <button
-                      onClick={() => navigateToSection('contact-whatsapp')}
+                      onClick={() => navigateToSection('contact-map')}
                       className={`w-full block px-4 py-2.5 text-sm font-medium text-white hover:text-red-500 hover:bg-zinc-700/50 rounded-xl transition-all duration-300 hover:translate-x-1 ${isRTL ? 'text-right' : 'text-left'}`}
                       dir={isRTL ? 'rtl' : 'ltr'}
                     >
@@ -264,11 +264,11 @@ export const Navbar = memo(function Navbar() {
                     </button>
                   </div>
                   
-                  {/* CTA - Highlighted (WhatsApp Button - MOBILE ONLY) */}
+                  {/* CTA - Highlighted (Get Quote - Google Maps Card) */}
                   <div className="border-t border-zinc-700/50 mt-2 pt-2">
                     <button
                       onClick={() => {
-                        navigateToSection('contact-whatsapp');
+                        navigateToSection('contact-map');
                         setIsQuickMenuOpen(false);
                       }}
                       className={`w-full block px-4 py-3 text-sm font-bold text-white bg-gradient-to-r from-red-600 to-red-700 hover:from-red-500 hover:to-red-600 rounded-xl transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-red-600/50 ${isRTL ? 'text-right' : 'text-left'}`}
@@ -371,9 +371,9 @@ export const Navbar = memo(function Navbar() {
 
           {/* İletişim */}
           <a
-            href="/#contact"
+            href="/#contact-map"
             onClick={(e) => {
-              handleSectionClick(e, 'contact');
+              handleSectionClick(e, 'contact-map');
               closeAllDropdowns();
             }}
             className="text-xs font-semibold uppercase tracking-wider py-2.5 text-white hover:text-primary transition-colors relative group whitespace-nowrap"
@@ -390,7 +390,7 @@ export const Navbar = memo(function Navbar() {
           
           {/* CTA Button */}
           <a 
-            href="#contact"
+            href="#contact-map"
             onClick={handleCTAClick}
           >
             <Button variant="default" className="bg-primary hover:bg-primary/90 text-white font-bold rounded-none skew-x-[-10deg] text-sm px-4 py-2">

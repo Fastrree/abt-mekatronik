@@ -46,6 +46,7 @@ export const Footer = memo(function Footer() {
           <div className="grid lg:grid-cols-2 gap-8">
             {/* MAP - Premium Interactive Design */}
             <a
+              id="contact-map"
               href="https://www.google.com/maps/search/?api=1&query=37.546286099999996,37.1050861"
               target="_blank"
               rel="noopener noreferrer"
@@ -206,7 +207,7 @@ export const Footer = memo(function Footer() {
               <li><a href="/#testimonials" onClick={(e) => handleSectionClick(e, 'testimonials')} className="hover:text-primary transition-colors" dir={isRTL ? 'rtl' : 'ltr'}>{t('nav.testimonials')}</a></li>
               <li><a href="/#partners" onClick={(e) => handleSectionClick(e, 'partners')} className="hover:text-primary transition-colors" dir={isRTL ? 'rtl' : 'ltr'}>{t('nav.partners')}</a></li>
               <li><a href="/exports" className="hover:text-primary transition-colors" dir={isRTL ? 'rtl' : 'ltr'}>{t('nav.exports')}</a></li>
-              <li><a href="/#contact" onClick={(e) => handleSectionClick(e, 'contact')} className="hover:text-primary transition-colors" dir={isRTL ? 'rtl' : 'ltr'}>{t('nav.contact')}</a></li>
+              <li><a href="/#contact-map" onClick={(e) => handleSectionClick(e, 'contact-map')} className="hover:text-primary transition-colors" dir={isRTL ? 'rtl' : 'ltr'}>{t('nav.contact')}</a></li>
             </ul>
           </div>
 

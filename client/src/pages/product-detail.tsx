@@ -1,5 +1,5 @@
 import { useParams, useLocation } from "wouter";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { SkipLink } from "@/components/SkipLink";
@@ -25,6 +25,7 @@ import {
 import { useI18n } from "@/lib/i18n";
 import { productTranslations } from "@/lib/product-translations";
 import { OptimizedImage } from "@/components/OptimizedImage";
+import { ImageLightbox } from "@/components/ImageLightbox";
 
 const productIcons = {
   konveyor: Truck,
@@ -86,6 +87,8 @@ export default function ProductDetail() {
   const params = useParams<{ productKey: string }>();
   const [, setLocation] = useLocation();
   const { language } = useI18n();
+  const [lightboxOpen, setLightboxOpen] = useState(false);
+  const [lightboxIndex, setLightboxIndex] = useState(0);
   
   const productKey = params.productKey;
 
@@ -110,6 +113,26 @@ export default function ProductDetail() {
     // Scroll to contact section on current page (Footer)
     smoothScrollToElement('contact');
   };
+
+  const openLightbox = (index: number) => {
+    setLightboxIndex(index);
+    setLightboxOpen(true);
+  };
+
+  const closeLightbox = () => {
+    setLightboxOpen(false);
+  };
+
+  const nextImage = () => {
+    setLightboxIndex((prev) => (prev + 1) % images.gallery.length);
+  };
+
+  const previousImage = () => {
+    setLightboxIndex((prev) => (prev - 1 + images.gallery.length) % images.gallery.length);
+  };
+
+  // Prepare gallery images - just filenames, ImageLightbox will add /media/ prefix
+  const galleryImages = images.gallery;
 
   return (
     <div className="min-h-screen bg-white dark:bg-zinc-900 text-zinc-900 dark:text-zinc-200 selection:bg-red-900 selection:text-white overflow-x-hidden" dir={language === 'ar' ? 'rtl' : 'ltr'}>
@@ -246,16 +269,16 @@ export default function ProductDetail() {
             {translations.features.items.map((feature, index) => (
               <div
                 key={index}
-                className="group relative p-8 xs:p-6 bg-white dark:bg-zinc-900 border-2 border-zinc-200 dark:border-zinc-700 hover:border-red-600 dark:hover:border-red-500 transition-all duration-300 shadow-lg dark:shadow-none hover:shadow-2xl hover:-translate-y-2 animate-in fade-in slide-up duration-500"
+                className="group relative p-8 xs:p-6 bg-gradient-to-br from-zinc-100 to-zinc-200 dark:from-zinc-700 dark:to-zinc-800 border-2 border-zinc-200 dark:border-zinc-600 hover:border-red-600 dark:hover:border-red-500 rounded-2xl transition-all duration-300 shadow-lg dark:shadow-none hover:shadow-2xl hover:shadow-red-600/20 hover:-translate-y-2 hover:scale-[1.02] animate-in fade-in slide-up duration-500"
                 style={{ animationDelay: `${index * 100}ms` }}
               >
                 {/* Gradient Accent on Hover */}
-                <div className="absolute inset-0 bg-gradient-to-br from-red-600/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" aria-hidden="true" />
+                <div className="absolute inset-0 bg-gradient-to-br from-red-600/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity rounded-2xl" aria-hidden="true" />
                 
                 <div className="relative">
                   {/* Icon */}
-                  <div className="w-14 h-14 xs:w-12 xs:h-12 bg-red-600/10 dark:bg-red-500/10 rounded-lg flex items-center justify-center mb-6 xs:mb-4 group-hover:bg-red-600 dark:group-hover:bg-red-500 group-hover:scale-110 transition-all duration-300">
-                    <CheckCircle className="w-7 h-7 xs:w-6 xs:h-6 text-red-600 dark:text-red-500 group-hover:text-white transition-colors" />
+                  <div className="w-14 h-14 xs:w-12 xs:h-12 bg-red-600/10 dark:bg-red-500/10 rounded-xl flex items-center justify-center mb-6 xs:mb-4 group-hover:bg-red-600 dark:group-hover:bg-red-600 group-hover:scale-110 group-hover:rotate-6 transition-all duration-300">
+                    <CheckCircle className="w-7 h-7 xs:w-6 xs:h-6 text-red-600 dark:text-red-500 group-hover:text-white dark:group-hover:text-white transition-colors" />
                   </div>
                   
                   {/* Title */}
@@ -292,7 +315,8 @@ export default function ProductDetail() {
             {images.gallery.map((image, index) => (
               <div
                 key={index}
-                className="group relative aspect-square overflow-hidden bg-zinc-100 dark:bg-zinc-800 border-2 border-zinc-200 dark:border-zinc-700 hover:border-red-600 dark:hover:border-red-500 transition-all duration-300 shadow-lg dark:shadow-none hover:shadow-2xl animate-in fade-in scale-in duration-500"
+                onClick={() => openLightbox(index)}
+                className="group relative aspect-square overflow-hidden bg-zinc-100 dark:bg-zinc-800 border-2 border-zinc-200 dark:border-zinc-700 hover:border-red-600 dark:hover:border-red-500 rounded-2xl transition-all duration-300 shadow-lg dark:shadow-none hover:shadow-2xl hover:shadow-red-600/20 hover:scale-[1.02] animate-in fade-in scale-in duration-500 cursor-pointer"
                 style={{ animationDelay: `${index * 100}ms` }}
               >
                 <OptimizedImage
@@ -302,7 +326,7 @@ export default function ProductDetail() {
                   loading="lazy"
                 />
                 {/* Overlay on Hover */}
-                <div className="absolute inset-0 bg-gradient-to-t from-red-900/80 via-red-900/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4 xs:p-2">
+                <div className="absolute inset-0 bg-gradient-to-t from-red-900/80 via-red-900/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4 xs:p-2 rounded-2xl">
                   <span className="text-white font-bold text-sm xs:text-xs uppercase tracking-wider">
                     {heroTranslations.sections.project} {index + 1}
                   </span>
@@ -311,6 +335,17 @@ export default function ProductDetail() {
             ))}
           </div>
         </div>
+
+        {/* Image Lightbox */}
+        {lightboxOpen && (
+          <ImageLightbox
+            images={galleryImages}
+            currentIndex={lightboxIndex}
+            onClose={closeLightbox}
+            onNext={nextImage}
+            onPrevious={previousImage}
+          />
+        )}
       </section>
 
       {/* APPLICATIONS SECTION - Two Column Layout */}
@@ -335,13 +370,13 @@ export default function ProductDetail() {
               
               {/* Stats */}
               <div className="grid grid-cols-2 gap-6 xs:gap-4">
-                <div className="p-6 xs:p-4 bg-white dark:bg-zinc-900 border-2 border-red-600/20 dark:border-red-500/20 rounded-lg">
+                <div className="p-6 xs:p-4 bg-gradient-to-br from-zinc-100 to-zinc-200 dark:from-zinc-700 dark:to-zinc-800 border-2 border-red-600/20 dark:border-red-500/20 rounded-2xl hover:border-red-600 hover:shadow-xl hover:shadow-red-600/20 transition-all duration-300 hover:scale-[1.02]">
                   <div className="text-3xl xs:text-2xl font-black text-red-600 dark:text-red-500 mb-2">50+</div>
                   <div className="text-sm xs:text-xs text-zinc-600 dark:text-zinc-400 uppercase tracking-wider font-semibold">
                     {heroTranslations.sections.differentSectors}
                   </div>
                 </div>
-                <div className="p-6 xs:p-4 bg-white dark:bg-zinc-900 border-2 border-red-600/20 dark:border-red-500/20 rounded-lg">
+                <div className="p-6 xs:p-4 bg-gradient-to-br from-zinc-100 to-zinc-200 dark:from-zinc-700 dark:to-zinc-800 border-2 border-red-600/20 dark:border-red-500/20 rounded-2xl hover:border-red-600 hover:shadow-xl hover:shadow-red-600/20 transition-all duration-300 hover:scale-[1.02]">
                   <div className="text-3xl xs:text-2xl font-black text-red-600 dark:text-red-500 mb-2">200+</div>
                   <div className="text-sm xs:text-xs text-zinc-600 dark:text-zinc-400 uppercase tracking-wider font-semibold">
                     {heroTranslations.sections.successfulProjects}
@@ -355,11 +390,11 @@ export default function ProductDetail() {
               {translations.applications.items.map((item, index) => (
                 <div
                   key={index}
-                  className="group flex items-center gap-3 xs:gap-2 p-5 xs:p-4 bg-white dark:bg-zinc-900 border-2 border-zinc-200 dark:border-zinc-700 hover:border-red-600 dark:hover:border-red-500 transition-all duration-300 shadow-lg dark:shadow-none hover:shadow-xl hover:-translate-y-1 animate-in fade-in slide-in-from-right duration-500"
+                  className="group flex items-center gap-3 xs:gap-2 p-5 xs:p-4 bg-gradient-to-br from-zinc-100 to-zinc-200 dark:from-zinc-700 dark:to-zinc-800 border-2 border-zinc-200 dark:border-zinc-600 hover:border-red-600 dark:hover:border-red-600 rounded-2xl transition-all duration-300 shadow-lg dark:shadow-none hover:shadow-xl hover:shadow-red-600/20 hover:-translate-y-1 hover:scale-[1.02] animate-in fade-in slide-in-from-right duration-500"
                   style={{ animationDelay: `${index * 50}ms` }}
                 >
-                  <div className="shrink-0 w-10 h-10 xs:w-8 xs:h-8 bg-red-600/10 dark:bg-red-500/10 rounded-lg flex items-center justify-center group-hover:bg-red-600 dark:group-hover:bg-red-500 transition-colors">
-                    <CheckCircle className="w-5 h-5 xs:w-4 xs:h-4 text-red-600 dark:text-red-500 group-hover:text-white transition-colors" />
+                  <div className="shrink-0 w-10 h-10 xs:w-8 xs:h-8 bg-red-600/10 dark:bg-red-500/10 rounded-xl flex items-center justify-center group-hover:bg-red-600 dark:group-hover:bg-red-600 group-hover:scale-110 group-hover:rotate-6 transition-all duration-300">
+                    <CheckCircle className="w-5 h-5 xs:w-4 xs:h-4 text-red-600 dark:text-red-500 group-hover:text-white dark:group-hover:text-white transition-colors" />
                   </div>
                   <span className="text-zinc-900 dark:text-white font-semibold text-sm xs:text-xs group-hover:text-red-600 dark:group-hover:text-red-500 transition-colors">
                     {item}
@@ -393,7 +428,7 @@ export default function ProductDetail() {
               {translations.technical.specs.map((spec, index) => (
                 <div
                   key={index}
-                  className="group flex flex-col xs:flex-row justify-between xs:items-center p-6 xs:p-4 bg-zinc-50 dark:bg-zinc-800 border-2 border-zinc-200 dark:border-zinc-700 hover:border-red-600 dark:hover:border-red-500 transition-all duration-300 shadow-lg dark:shadow-none hover:shadow-xl animate-in fade-in slide-up duration-500"
+                  className="group flex flex-col xs:flex-row justify-between xs:items-center p-6 xs:p-4 bg-gradient-to-br from-zinc-100 to-zinc-200 dark:from-zinc-700 dark:to-zinc-800 border-2 border-zinc-200 dark:border-zinc-600 hover:border-red-600 dark:hover:border-red-500 rounded-2xl transition-all duration-300 shadow-lg dark:shadow-none hover:shadow-xl hover:shadow-red-600/20 hover:scale-[1.02] animate-in fade-in slide-up duration-500"
                   style={{ animationDelay: `${index * 50}ms` }}
                 >
                   <div className="flex items-center gap-3 xs:gap-2 mb-2 xs:mb-0">
@@ -406,7 +441,7 @@ export default function ProductDetail() {
             </div>
 
             {/* Additional Info */}
-            <div className="mt-8 xs:mt-6 p-6 xs:p-4 bg-gradient-to-r from-red-600/10 to-red-700/10 dark:from-red-700/20 dark:to-red-800/20 border-2 border-red-600/30 dark:border-red-500/30 rounded-lg animate-in fade-in duration-700 delay-300">
+            <div className="mt-8 xs:mt-6 p-6 xs:p-4 bg-gradient-to-r from-red-600/10 to-red-700/10 dark:from-red-700/20 dark:to-red-800/20 border-2 border-red-600/30 dark:border-red-500/30 rounded-2xl animate-in fade-in duration-700 delay-300 hover:border-red-600 hover:shadow-xl hover:shadow-red-600/20 transition-all duration-300">
               <div className="flex items-start gap-4 xs:gap-3">
                 <Settings className="w-6 h-6 xs:w-5 xs:h-5 text-red-600 dark:text-red-500 shrink-0 mt-1" />
                 <div>

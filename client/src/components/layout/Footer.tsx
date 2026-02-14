@@ -118,10 +118,12 @@ export const Footer = memo(function Footer() {
               </div>
 
               <div className="space-y-4">
-                <div className="flex items-start gap-4 p-4 bg-white dark:bg-zinc-800 rounded-xl border border-zinc-200 dark:border-zinc-700 hover:border-red-500 dark:hover:border-red-500 transition-colors">
-                  <MapPin className="text-red-600 dark:text-red-500 shrink-0 mt-1" size={24} />
+                <div className="flex items-start gap-4 p-4 bg-gradient-to-br from-zinc-100 to-zinc-200 dark:from-zinc-700 dark:to-zinc-800 rounded-2xl border-2 border-zinc-200 dark:border-zinc-600 hover:border-red-600 hover:scale-[1.02] hover:shadow-xl hover:shadow-red-600/20 transition-all duration-300 group">
+                  <div className="bg-white dark:bg-zinc-600 p-2 rounded-xl shadow-md group-hover:bg-red-50 dark:group-hover:bg-red-900/20 transition-all">
+                    <MapPin className="text-red-600 dark:text-red-500 shrink-0" size={24} />
+                  </div>
                   <div>
-                    <h4 className="font-bold text-zinc-900 dark:text-white mb-1">{t('footer.address')}</h4>
+                    <h4 className="font-bold text-zinc-900 dark:text-white mb-1 group-hover:text-red-600 dark:group-hover:text-red-500 transition-colors">{t('footer.address')}</h4>
                     <p className="text-sm text-zinc-600 dark:text-zinc-400">
                       Elmalar, 46090<br />
                       Dulkadiroğlu/Kahramanmaraş
@@ -129,21 +131,25 @@ export const Footer = memo(function Footer() {
                   </div>
                 </div>
 
-                <div className="flex items-start gap-4 p-4 bg-white dark:bg-zinc-800 rounded-xl border border-zinc-200 dark:border-zinc-700 hover:border-red-500 dark:hover:border-red-500 transition-colors">
-                  <Phone className="text-red-600 dark:text-red-500 shrink-0 mt-1" size={24} />
+                <div className="flex items-start gap-4 p-4 bg-gradient-to-br from-zinc-100 to-zinc-200 dark:from-zinc-700 dark:to-zinc-800 rounded-2xl border-2 border-zinc-200 dark:border-zinc-600 hover:border-red-600 hover:scale-[1.02] hover:shadow-xl hover:shadow-red-600/20 transition-all duration-300 group">
+                  <div className="bg-white dark:bg-zinc-600 p-2 rounded-xl shadow-md group-hover:bg-red-50 dark:group-hover:bg-red-900/20 transition-all">
+                    <Phone className="text-red-600 dark:text-red-500 shrink-0" size={24} />
+                  </div>
                   <div>
-                    <h4 className="font-bold text-zinc-900 dark:text-white mb-1">{t('footer.phone')}</h4>
-                    <a href="tel:+905373197281" className="text-sm text-zinc-600 dark:text-zinc-400 hover:text-red-600 dark:hover:text-red-500 transition-colors">
+                    <h4 className="font-bold text-zinc-900 dark:text-white mb-1 group-hover:text-red-600 dark:group-hover:text-red-500 transition-colors">{t('footer.phone')}</h4>
+                    <a href="tel:+905373197281" className="text-sm text-zinc-600 dark:text-zinc-400 hover:text-red-600 dark:hover:text-red-500 transition-colors font-medium">
                       0 537 319 72 81
                     </a>
                   </div>
                 </div>
 
-                <div className="flex items-start gap-4 p-4 bg-white dark:bg-zinc-800 rounded-xl border border-zinc-200 dark:border-zinc-700 hover:border-red-500 dark:hover:border-red-500 transition-colors">
-                  <Mail className="text-red-600 dark:text-red-500 shrink-0 mt-1" size={24} />
+                <div className="flex items-start gap-4 p-4 bg-gradient-to-br from-zinc-100 to-zinc-200 dark:from-zinc-700 dark:to-zinc-800 rounded-2xl border-2 border-zinc-200 dark:border-zinc-600 hover:border-red-600 hover:scale-[1.02] hover:shadow-xl hover:shadow-red-600/20 transition-all duration-300 group">
+                  <div className="bg-white dark:bg-zinc-600 p-2 rounded-xl shadow-md group-hover:bg-red-50 dark:group-hover:bg-red-900/20 transition-all">
+                    <Mail className="text-red-600 dark:text-red-500 shrink-0" size={24} />
+                  </div>
                   <div>
-                    <h4 className="font-bold text-zinc-900 dark:text-white mb-1">{t('footer.email')}</h4>
-                    <a href="mailto:info@abtmekatronik.com" className="text-sm text-zinc-600 dark:text-zinc-400 hover:text-red-600 dark:hover:text-red-500 transition-colors">
+                    <h4 className="font-bold text-zinc-900 dark:text-white mb-1 group-hover:text-red-600 dark:group-hover:text-red-500 transition-colors">{t('footer.email')}</h4>
+                    <a href="mailto:info@abtmekatronik.com" className="text-sm text-zinc-600 dark:text-zinc-400 hover:text-red-600 dark:hover:text-red-500 transition-colors font-medium">
                       info@abtmekatronik.com
                     </a>
                   </div>

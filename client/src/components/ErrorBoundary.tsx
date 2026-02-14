@@ -1,7 +1,6 @@
 import * as Sentry from "@sentry/react";
 import { Button } from "./ui/button";
 import { AlertTriangle } from "lucide-react";
-import { useI18n } from "@/lib/i18n";
 
 interface FallbackProps {
   error: unknown;
@@ -11,12 +10,10 @@ interface FallbackProps {
 }
 
 const ErrorFallback = ({ error, resetError }: FallbackProps) => {
-  const { t, language } = useI18n();
-  const isRTL = language === 'ar';
   const errorMessage = error instanceof Error ? error.message : 'Unknown error occurred';
   
   return (
-    <div className="min-h-screen flex items-center justify-center bg-zinc-900 p-4" dir={isRTL ? 'rtl' : 'ltr'}>
+    <div className="min-h-screen flex items-center justify-center bg-zinc-900 p-4">
       <div className="max-w-md w-full bg-zinc-800/50 backdrop-blur-sm border-2 border-red-600/30 rounded-2xl p-8 text-center">
         <div className="flex justify-center mb-6">
           <div className="w-20 h-20 rounded-full bg-red-600/10 flex items-center justify-center">
@@ -25,11 +22,11 @@ const ErrorFallback = ({ error, resetError }: FallbackProps) => {
         </div>
         
         <h1 className="text-2xl font-bold text-white mb-4">
-          {t('errorBoundary.title')}
+          Something went wrong
         </h1>
         
         <p className="text-zinc-400 mb-6">
-          {t('errorBoundary.description')}
+          We're sorry for the inconvenience. Please try again or return to the home page.
         </p>
         
         {import.meta.env.DEV && (
@@ -40,13 +37,13 @@ const ErrorFallback = ({ error, resetError }: FallbackProps) => {
           </div>
         )}
         
-        <div className={`flex gap-4 justify-center ${isRTL ? 'flex-row-reverse' : ''}`}>
+        <div className="flex gap-4 justify-center">
           <Button
             onClick={resetError}
             variant="default"
             className="bg-red-600 hover:bg-red-700 text-white"
           >
-            {t('errorBoundary.retryButton')}
+            Try Again
           </Button>
           
           <Button
@@ -54,7 +51,7 @@ const ErrorFallback = ({ error, resetError }: FallbackProps) => {
             variant="outline"
             className="border-zinc-600 text-zinc-300 hover:bg-zinc-800"
           >
-            {t('errorBoundary.homeButton')}
+            Go Home
           </Button>
         </div>
       </div>

@@ -37,14 +37,14 @@ function LogoItem({ client }: LogoItemProps) {
   const { t } = useI18n();
   
   return (
-    <div className="flex-shrink-0 flex flex-col items-center justify-center px-8 py-6 bg-white/80 dark:bg-zinc-800/50 border border-zinc-300 dark:border-zinc-700/50 rounded-lg hover:border-red-600/50 transition-all duration-300 group min-w-[180px] shadow-lg dark:shadow-none">
+    <div className="flex-shrink-0 flex flex-col items-center justify-center px-8 py-6 bg-gradient-to-br from-zinc-100 to-zinc-200 dark:from-zinc-700 dark:to-zinc-800 border-2 border-zinc-200 dark:border-zinc-600 rounded-2xl hover:border-red-600 hover:scale-[1.02] hover:shadow-xl hover:shadow-red-600/20 transition-all duration-300 group min-w-[180px]">
       {/* Placeholder logo - replace with actual images */}
-      <div className="w-20 h-20 bg-zinc-100 dark:bg-zinc-700/50 rounded-lg flex items-center justify-center mb-3 group-hover:bg-red-600/20 transition-all duration-300 group-hover:scale-110">
-        <span className="text-3xl font-black text-zinc-700 dark:text-zinc-500 group-hover:text-red-600 dark:group-hover:text-red-500 transition-colors">
+      <div className="w-20 h-20 bg-white dark:bg-zinc-600 rounded-xl flex items-center justify-center mb-3 group-hover:bg-red-50 dark:group-hover:bg-red-900/20 transition-all duration-300 group-hover:scale-110 shadow-md">
+        <span className="text-3xl font-black text-zinc-700 dark:text-zinc-300 group-hover:text-red-600 dark:group-hover:text-red-500 transition-colors">
           {client.name.charAt(0)}
         </span>
       </div>
-      <span className="text-xs text-zinc-600 dark:text-zinc-500 uppercase tracking-wider group-hover:text-zinc-700 dark:group-hover:text-zinc-400 transition-colors">
+      <span className="text-xs text-zinc-600 dark:text-zinc-400 uppercase tracking-wider font-semibold group-hover:text-red-600 dark:group-hover:text-red-500 transition-colors">
         {t(`clients.industries.${client.industryKey}`)}
       </span>
     </div>
@@ -83,14 +83,14 @@ export const ClientLogos = memo(function ClientLogos() {
           {featuredClients.map((client, index) => (
             <div 
               key={`first-${index}`}
-              className="flex-shrink-0 flex flex-col items-center justify-center px-6 py-6 bg-white/80 dark:bg-zinc-800/50 border border-zinc-300 dark:border-zinc-700/50 rounded-lg hover:border-red-600/50 transition-all duration-300 group min-w-[180px] shadow-lg dark:shadow-none"
+              className="flex-shrink-0 flex flex-col items-center justify-center px-6 py-6 bg-gradient-to-br from-zinc-100 to-zinc-200 dark:from-zinc-700 dark:to-zinc-800 border-2 border-zinc-200 dark:border-zinc-600 rounded-2xl hover:border-red-600 hover:scale-[1.02] hover:shadow-xl hover:shadow-red-600/20 transition-all duration-300 group min-w-[180px]"
             >
-              <div className="w-20 h-20 bg-zinc-100 dark:bg-zinc-700/50 rounded-lg flex items-center justify-center mb-3 group-hover:bg-red-600/20 transition-all duration-300 group-hover:scale-110">
-                <span className="text-3xl font-black text-zinc-700 dark:text-zinc-500 group-hover:text-red-600 dark:group-hover:text-red-500 transition-colors">
+              <div className="w-20 h-20 bg-white dark:bg-zinc-600 rounded-xl flex items-center justify-center mb-3 group-hover:bg-red-50 dark:group-hover:bg-red-900/20 transition-all duration-300 group-hover:scale-110 shadow-md">
+                <span className="text-3xl font-black text-zinc-700 dark:text-zinc-300 group-hover:text-red-600 dark:group-hover:text-red-500 transition-colors">
                   {client.name.charAt(0)}
                 </span>
               </div>
-              <span className="text-xs text-zinc-600 dark:text-zinc-500 uppercase tracking-wider group-hover:text-zinc-700 dark:group-hover:text-zinc-400 transition-colors text-center">
+              <span className="text-xs text-zinc-600 dark:text-zinc-400 uppercase tracking-wider font-semibold group-hover:text-red-600 dark:group-hover:text-red-500 transition-colors text-center">
                 {t(`clients.industries.${client.industryKey}`)}
               </span>
             </div>
@@ -100,14 +100,14 @@ export const ClientLogos = memo(function ClientLogos() {
           {featuredClients.map((client, index) => (
             <div 
               key={`second-${index}`}
-              className="flex-shrink-0 flex flex-col items-center justify-center px-6 py-6 bg-white/80 dark:bg-zinc-800/50 border border-zinc-300 dark:border-zinc-700/50 rounded-lg hover:border-red-600/50 transition-all duration-300 group min-w-[180px] shadow-lg dark:shadow-none"
+              className="flex-shrink-0 flex flex-col items-center justify-center px-6 py-6 bg-gradient-to-br from-zinc-100 to-zinc-200 dark:from-zinc-700 dark:to-zinc-800 border-2 border-zinc-200 dark:border-zinc-600 rounded-2xl hover:border-red-600 hover:scale-[1.02] hover:shadow-xl hover:shadow-red-600/20 transition-all duration-300 group min-w-[180px]"
             >
-              <div className="w-20 h-20 bg-zinc-100 dark:bg-zinc-700/50 rounded-lg flex items-center justify-center mb-3 group-hover:bg-red-600/20 transition-all duration-300 group-hover:scale-110">
-                <span className="text-3xl font-black text-zinc-700 dark:text-zinc-500 group-hover:text-red-600 dark:group-hover:text-red-500 transition-colors">
+              <div className="w-20 h-20 bg-white dark:bg-zinc-600 rounded-xl flex items-center justify-center mb-3 group-hover:bg-red-50 dark:group-hover:bg-red-900/20 transition-all duration-300 group-hover:scale-110 shadow-md">
+                <span className="text-3xl font-black text-zinc-700 dark:text-zinc-300 group-hover:text-red-600 dark:group-hover:text-red-500 transition-colors">
                   {client.name.charAt(0)}
                 </span>
               </div>
-              <span className="text-xs text-zinc-600 dark:text-zinc-500 uppercase tracking-wider group-hover:text-zinc-700 dark:group-hover:text-zinc-400 transition-colors text-center">
+              <span className="text-xs text-zinc-600 dark:text-zinc-400 uppercase tracking-wider font-semibold group-hover:text-red-600 dark:group-hover:text-red-500 transition-colors text-center">
                 {t(`clients.industries.${client.industryKey}`)}
               </span>
             </div>

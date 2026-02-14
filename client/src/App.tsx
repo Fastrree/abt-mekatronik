@@ -13,12 +13,26 @@ import { WhatsAppButton } from "@/components/WhatsAppButton";
 import { ScrollProgress } from "@/components/ScrollProgress";
 import { BackToTop } from "@/components/BackToTop";
 import { ExitIntentPopup } from "@/components/ExitIntentPopup";
-import Home from "@/pages/home";
-import About from "@/pages/about";
-import OurExports from "@/pages/our-exports";
-import ProductDetail from "@/pages/product-detail";
-import NotFound from "@/pages/not-found";
-import { useEffect } from "react";
+import { useEffect, lazy, Suspense } from "react";
+
+// Lazy load pages for code splitting
+const Home = lazy(() => import("@/pages/home"));
+const About = lazy(() => import("@/pages/about"));
+const OurExports = lazy(() => import("@/pages/our-exports"));
+const ProductDetail = lazy(() => import("@/pages/product-detail"));
+const NotFound = lazy(() => import("@/pages/not-found"));
+
+// Loading fallback component
+function PageLoader() {
+  return (
+    <div className="min-h-screen bg-white dark:bg-zinc-900 flex items-center justify-center">
+      <div className="flex flex-col items-center gap-4">
+        <div className="w-12 h-12 border-4 border-red-600 border-t-transparent rounded-full animate-spin" />
+        <p className="text-zinc-600 dark:text-zinc-400 text-sm font-medium">Yükleniyor...</p>
+      </div>
+    </div>
+  );
+}
 
 function Router() {
   const [location] = useLocation();
@@ -56,13 +70,15 @@ function Router() {
   }, [location]); // location dependency ekledik
 
   return (
-    <Switch>
-      <Route path="/" component={Home} />
-      <Route path="/about" component={About} />
-      <Route path="/exports" component={OurExports} />
-      <Route path="/products/:productKey" component={ProductDetail} />
-      <Route component={NotFound} />
-    </Switch>
+    <Suspense fallback={<PageLoader />}>
+      <Switch>
+        <Route path="/" component={Home} />
+        <Route path="/about" component={About} />
+        <Route path="/exports" component={OurExports} />
+        <Route path="/products/:productKey" component={ProductDetail} />
+        <Route component={NotFound} />
+      </Switch>
+    </Suspense>
   );
 }
 

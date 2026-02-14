@@ -23,32 +23,31 @@ export const Testimonials = memo(function Testimonials() {
           {testimonials.map((_, index) => (
             <div
               key={index}
-              className="bg-white dark:bg-zinc-800 border border-zinc-300 dark:border-zinc-700 p-6 rounded-lg relative shadow-lg dark:shadow-none animate-in slide-up duration-600"
-              style={{ animationDelay: `${index * 150}ms` }}
+              className="bg-gradient-to-br from-zinc-100 to-zinc-200 dark:from-zinc-700 dark:to-zinc-800 border-2 border-zinc-200 dark:border-zinc-600 p-6 rounded-2xl relative shadow-lg hover:shadow-xl hover:scale-[1.02] hover:border-red-600 dark:hover:border-red-500 transition-all duration-300"
             >
-              <Quote className={`absolute top-0 w-8 h-8 text-red-600/20 ${isRTL ? 'left-4' : 'right-4'}`} />
+              <Quote className={`absolute top-4 w-8 h-8 text-red-600/20 ${isRTL ? 'left-4' : 'right-4'}`} />
               
               {/* Stars */}
               <div className="flex gap-1 mb-4">
                 {[...Array(5)].map((_, i) => (
-                  <Star key={i} className="w-4 h-4 fill-yellow-500 text-yellow-500" />
+                  <Star key={i} className="w-5 h-5 fill-yellow-500 text-yellow-500" />
                 ))}
               </div>
 
               {/* Quote */}
-              <p className="text-zinc-700 dark:text-zinc-300 mb-6 leading-relaxed">
+              <p className="text-zinc-700 dark:text-zinc-300 mb-6 leading-relaxed text-sm">
                 "{t(`testimonials.items.${index}.quote`)}"
               </p>
 
               {/* Author */}
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 bg-red-600/20 rounded-full flex items-center justify-center">
-                  <span className="text-red-600 dark:text-red-500 font-bold">
+                <div className="w-12 h-12 bg-red-600/20 rounded-full flex items-center justify-center">
+                  <span className="text-red-600 dark:text-red-500 font-bold text-lg">
                     {t(`testimonials.items.${index}.name`).charAt(0)}
                   </span>
                 </div>
                 <div>
-                  <p className="text-zinc-900 dark:text-white font-semibold text-sm">
+                  <p className="text-zinc-900 dark:text-white font-semibold">
                     {t(`testimonials.items.${index}.name`)}
                   </p>
                   <p className="text-zinc-600 dark:text-zinc-500 text-xs">

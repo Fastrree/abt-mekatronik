@@ -98,28 +98,32 @@ export const Navbar = memo(function Navbar() {
         {/* LEFT SIDE: Hamburger Menu + Logo */}
         <div className="flex items-center gap-1.5 sm:gap-2 lg:gap-4">
           {/* Hamburger Menu - Mobile & Desktop */}
-          <div className="relative">
+          <div 
+            className="relative"
+            onMouseEnter={() => setIsQuickMenuOpen(true)}
+            onMouseLeave={() => setIsQuickMenuOpen(false)}
+          >
             <button
               onClick={() => setIsQuickMenuOpen(!isQuickMenuOpen)}
-              className={`flex items-center gap-1 xs:gap-0.5 p-2 xs:p-1 rounded-lg transition-colors ${
+              className={`group flex items-center gap-1.5 xs:gap-1 px-3 py-2 xs:px-2 xs:py-1.5 rounded-xl transition-all duration-300 border-2 ${
                 isScrolled
-                  ? "text-white hover:bg-zinc-700/50"
-                  : "text-white hover:bg-zinc-700/50"
-              }`}
+                  ? "text-white border-zinc-700 hover:border-red-500 hover:bg-red-600/10 hover:shadow-lg hover:shadow-red-600/20"
+                  : "text-white border-zinc-700/50 hover:border-red-500 hover:bg-red-600/10 hover:shadow-lg hover:shadow-red-600/20"
+              } ${isQuickMenuOpen ? 'border-red-500 bg-red-600/10 shadow-lg shadow-red-600/20' : ''}`}
               aria-label={t('nav.quickAccess')}
             >
-              <Menu size={20} className="xs:w-4 xs:h-4" />
-              <ChevronDown size={14} className={`transition-transform hidden sm:block xs:w-3 xs:h-3 ${isQuickMenuOpen ? 'rotate-180' : ''}`} />
+              <Menu size={20} className="xs:w-4 xs:h-4 group-hover:scale-110 transition-transform" />
+              <ChevronDown size={14} className={`transition-all hidden sm:block xs:w-3 xs:h-3 group-hover:scale-110 ${isQuickMenuOpen ? 'rotate-180' : ''}`} />
             </button>
             
             {/* Quick Menu Dropdown - Hierarchical Structure */}
             {isQuickMenuOpen && (
               <div 
-                className="absolute top-full mt-2 w-64 bg-zinc-800 border border-zinc-600 rounded-lg shadow-xl overflow-hidden animate-in fade-in slide-in-from-top-2 z-50"
+                className="absolute top-full mt-0.5 w-64 bg-gradient-to-br from-zinc-800 to-zinc-900 border-2 border-zinc-700 rounded-2xl shadow-2xl shadow-red-600/10 overflow-hidden animate-in fade-in slide-in-from-top-2 z-50"
                 style={{ [isRTL ? 'right' : 'left']: 0 }}
                 dir={isRTL ? 'rtl' : 'ltr'}
               >
-                <div className="p-2 max-h-[70vh] overflow-y-auto scrollbar-thin">
+                <div className="p-3 max-h-[70vh] overflow-y-auto scrollbar-thin">
                   {/* 1. Ana Sayfa */}
                   <a
                     href="/"
@@ -127,18 +131,18 @@ export const Navbar = memo(function Navbar() {
                       handleHomeClick(e);
                       setIsQuickMenuOpen(false);
                     }}
-                    className="block px-3 py-2 text-sm text-white hover:text-gray-200 hover:bg-zinc-700 rounded-md transition-colors"
+                    className="block px-4 py-2.5 text-sm font-medium text-white hover:text-red-500 hover:bg-zinc-700/50 rounded-xl transition-all duration-300 hover:translate-x-1"
                     dir={isRTL ? 'rtl' : 'ltr'}
                   >
                     {t('nav.home')}
                   </a>
 
                   {/* 2. Hakkımızda (Separate Page) */}
-                  <div className="border-t border-zinc-600 mt-2 pt-2">
+                  <div className="border-t border-zinc-700/50 mt-2 pt-2">
                     <a
                       href="/about"
                       onClick={() => setIsQuickMenuOpen(false)}
-                      className="block px-3 py-2 text-sm text-white hover:text-gray-200 hover:bg-zinc-700 rounded-md transition-colors"
+                      className="block px-4 py-2.5 text-sm font-medium text-white hover:text-red-500 hover:bg-zinc-700/50 rounded-xl transition-all duration-300 hover:translate-x-1"
                       dir={isRTL ? 'rtl' : 'ltr'}
                     >
                       {t('nav.about')}
@@ -146,8 +150,8 @@ export const Navbar = memo(function Navbar() {
                   </div>
 
                   {/* 3. Ürünler (Products Section) */}
-                  <div className="border-t border-zinc-600 mt-2 pt-2">
-                    <div className={`text-xs font-semibold text-gray-300 uppercase tracking-wider px-3 py-2 ${isRTL ? 'text-right' : 'text-left'}`} dir={isRTL ? 'rtl' : 'ltr'}>
+                  <div className="border-t border-zinc-700/50 mt-2 pt-2">
+                    <div className={`text-xs font-bold text-red-500 uppercase tracking-wider px-4 py-2 ${isRTL ? 'text-right' : 'text-left'}`} dir={isRTL ? 'rtl' : 'ltr'}>
                       {t('nav.products')}
                     </div>
                     {productLinks.map((product) => {
@@ -157,24 +161,24 @@ export const Navbar = memo(function Navbar() {
                           key={product.key}
                           href={`/products/${product.key}`}
                           onClick={() => setIsQuickMenuOpen(false)}
-                          className={`w-full flex items-center px-3 py-2.5 text-sm text-white hover:text-gray-200 hover:bg-zinc-700 rounded-md transition-colors gap-3 ${
+                          className={`w-full flex items-center px-4 py-2.5 text-sm font-medium text-white hover:text-red-500 hover:bg-zinc-700/50 rounded-xl transition-all duration-300 gap-3 hover:translate-x-1 ${
                             isRTL ? 'flex-row-reverse text-right' : 'text-left'
                           }`}
                           dir={isRTL ? 'rtl' : 'ltr'}
                         >
-                          {!isRTL && <IconComponent size={16} className="text-red-500 shrink-0" />}
+                          {!isRTL && <IconComponent size={16} className="text-red-500 shrink-0 group-hover:scale-110 transition-transform" />}
                           <span className="flex-1">{product.name}</span>
-                          {isRTL && <IconComponent size={16} className="text-red-500 shrink-0" />}
+                          {isRTL && <IconComponent size={16} className="text-red-500 shrink-0 group-hover:scale-110 transition-transform" />}
                         </a>
                       );
                     })}
                   </div>
                   
                   {/* 4. Mühendislik (Engineering + Trust Indicators) */}
-                  <div className="border-t border-zinc-600 mt-2 pt-2">
+                  <div className="border-t border-zinc-700/50 mt-2 pt-2">
                     <button
                       onClick={() => navigateToSection('engineering')}
-                      className={`w-full block px-3 py-2 text-sm text-white hover:text-gray-200 hover:bg-zinc-700 rounded-md transition-colors ${isRTL ? 'text-right' : 'text-left'}`}
+                      className={`w-full block px-4 py-2.5 text-sm font-medium text-white hover:text-red-500 hover:bg-zinc-700/50 rounded-xl transition-all duration-300 hover:translate-x-1 ${isRTL ? 'text-right' : 'text-left'}`}
                       dir={isRTL ? 'rtl' : 'ltr'}
                     >
                       {t('nav.engineering')}
@@ -182,10 +186,10 @@ export const Navbar = memo(function Navbar() {
                   </div>
 
                   {/* 5. Projeler (Gallery) */}
-                  <div className="border-t border-zinc-600 mt-2 pt-2">
+                  <div className="border-t border-zinc-700/50 mt-2 pt-2">
                     <button
                       onClick={() => navigateToSection('projects')}
-                      className={`w-full block px-3 py-2 text-sm text-white hover:text-gray-200 hover:bg-zinc-700 rounded-md transition-colors ${isRTL ? 'text-right' : 'text-left'}`}
+                      className={`w-full block px-4 py-2.5 text-sm font-medium text-white hover:text-red-500 hover:bg-zinc-700/50 rounded-xl transition-all duration-300 hover:translate-x-1 ${isRTL ? 'text-right' : 'text-left'}`}
                       dir={isRTL ? 'rtl' : 'ltr'}
                     >
                       {t('nav.projects')}
@@ -193,10 +197,10 @@ export const Navbar = memo(function Navbar() {
                   </div>
 
                   {/* 6. SSS (FAQ) */}
-                  <div className="border-t border-zinc-600 mt-2 pt-2">
+                  <div className="border-t border-zinc-700/50 mt-2 pt-2">
                     <button
                       onClick={() => navigateToSection('faq')}
-                      className={`w-full block px-3 py-2 text-sm text-white hover:text-gray-200 hover:bg-zinc-700 rounded-md transition-colors ${isRTL ? 'text-right' : 'text-left'}`}
+                      className={`w-full block px-4 py-2.5 text-sm font-medium text-white hover:text-red-500 hover:bg-zinc-700/50 rounded-xl transition-all duration-300 hover:translate-x-1 ${isRTL ? 'text-right' : 'text-left'}`}
                       dir={isRTL ? 'rtl' : 'ltr'}
                     >
                       {t('nav.faq')}
@@ -204,10 +208,10 @@ export const Navbar = memo(function Navbar() {
                   </div>
 
                   {/* 7. Referanslar (Testimonials) */}
-                  <div className="border-t border-zinc-600 mt-2 pt-2">
+                  <div className="border-t border-zinc-700/50 mt-2 pt-2">
                     <button
                       onClick={() => navigateToSection('testimonials')}
-                      className={`w-full block px-3 py-2 text-sm text-white hover:text-gray-200 hover:bg-zinc-700 rounded-md transition-colors ${isRTL ? 'text-right' : 'text-left'}`}
+                      className={`w-full block px-4 py-2.5 text-sm font-medium text-white hover:text-red-500 hover:bg-zinc-700/50 rounded-xl transition-all duration-300 hover:translate-x-1 ${isRTL ? 'text-right' : 'text-left'}`}
                       dir={isRTL ? 'rtl' : 'ltr'}
                     >
                       {t('nav.testimonials')}
@@ -215,10 +219,10 @@ export const Navbar = memo(function Navbar() {
                   </div>
 
                   {/* 8. Ortaklarımız (Client Logos) */}
-                  <div className="border-t border-zinc-600 mt-2 pt-2">
+                  <div className="border-t border-zinc-700/50 mt-2 pt-2">
                     <button
                       onClick={() => navigateToSection('partners')}
-                      className={`w-full block px-3 py-2 text-sm text-white hover:text-gray-200 hover:bg-zinc-700 rounded-md transition-colors ${isRTL ? 'text-right' : 'text-left'}`}
+                      className={`w-full block px-4 py-2.5 text-sm font-medium text-white hover:text-red-500 hover:bg-zinc-700/50 rounded-xl transition-all duration-300 hover:translate-x-1 ${isRTL ? 'text-right' : 'text-left'}`}
                       dir={isRTL ? 'rtl' : 'ltr'}
                     >
                       {t('nav.partners')}
@@ -226,11 +230,11 @@ export const Navbar = memo(function Navbar() {
                   </div>
 
                   {/* 9. İhracatlarımız (Separate Page) */}
-                  <div className="border-t border-zinc-600 mt-2 pt-2">
+                  <div className="border-t border-zinc-700/50 mt-2 pt-2">
                     <a
                       href="/exports"
                       onClick={() => setIsQuickMenuOpen(false)}
-                      className="block px-3 py-2 text-sm text-white hover:text-gray-200 hover:bg-zinc-700 rounded-md transition-colors"
+                      className="block px-4 py-2.5 text-sm font-medium text-white hover:text-red-500 hover:bg-zinc-700/50 rounded-xl transition-all duration-300 hover:translate-x-1"
                       dir={isRTL ? 'rtl' : 'ltr'}
                     >
                       {t('nav.exports')}
@@ -238,10 +242,10 @@ export const Navbar = memo(function Navbar() {
                   </div>
 
                   {/* 10. İletişim (Contact in Footer) */}
-                  <div className="border-t border-zinc-600 mt-2 pt-2">
+                  <div className="border-t border-zinc-700/50 mt-2 pt-2">
                     <button
                       onClick={() => navigateToSection('contact')}
-                      className={`w-full block px-3 py-2 text-sm text-white hover:text-gray-200 hover:bg-zinc-700 rounded-md transition-colors ${isRTL ? 'text-right' : 'text-left'}`}
+                      className={`w-full block px-4 py-2.5 text-sm font-medium text-white hover:text-red-500 hover:bg-zinc-700/50 rounded-xl transition-all duration-300 hover:translate-x-1 ${isRTL ? 'text-right' : 'text-left'}`}
                       dir={isRTL ? 'rtl' : 'ltr'}
                     >
                       {t('nav.contact')}
@@ -249,10 +253,10 @@ export const Navbar = memo(function Navbar() {
                   </div>
                   
                   {/* CTA - Highlighted */}
-                  <div className="border-t border-zinc-600 mt-2 pt-2">
+                  <div className="border-t border-zinc-700/50 mt-2 pt-2">
                     <button
                       onClick={handleCTAClick}
-                      className={`w-full block px-3 py-2.5 text-sm font-semibold text-red-500 hover:text-red-400 hover:bg-red-600/10 rounded-md transition-colors ${isRTL ? 'text-right' : 'text-left'}`}
+                      className={`w-full block px-4 py-3 text-sm font-bold text-white bg-gradient-to-r from-red-600 to-red-700 hover:from-red-500 hover:to-red-600 rounded-xl transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-red-600/50 ${isRTL ? 'text-right' : 'text-left'}`}
                       dir={isRTL ? 'rtl' : 'ltr'}
                     >
                       🚀 {t('products.getQuote')}

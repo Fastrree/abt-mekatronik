@@ -619,9 +619,9 @@ function OurExports() {
           </div>
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4 xs:gap-2">
             {exportCountries.map((country, index) => (
-              <div key={country.name} className="bg-white dark:bg-zinc-800 p-4 xs:p-3 rounded-xl border-2 border-zinc-200 dark:border-zinc-700 hover:border-red-500 dark:hover:border-red-500 shadow-lg hover:shadow-xl transition-all group text-center animate-in slide-up duration-600" style={{ animationDelay: `${index * 50}ms` }}>
-                <div className="text-5xl xs:text-4xl mb-2 xs:mb-1.5 group-hover:scale-110 transition-transform emoji-container" style={{ lineHeight: 1 }}>{country.flag}</div>
-                <h3 className="text-sm xs:text-xs font-bold text-zinc-900 dark:text-white mb-1 xs:mb-0.5 break-words leading-tight" dir={language === 'ar' ? 'rtl' : 'ltr'}>{country.name}</h3>
+              <div key={country.name} className="bg-gradient-to-br from-white to-zinc-50 dark:from-zinc-800 dark:to-zinc-900 p-4 xs:p-3 rounded-2xl border-2 border-zinc-200 dark:border-zinc-700 hover:border-red-500 dark:hover:border-red-500 shadow-lg hover:shadow-2xl hover:shadow-red-600/20 transition-all duration-300 group text-center animate-in slide-up hover:-translate-y-2 hover:scale-105" style={{ animationDelay: `${index * 50}ms` }}>
+                <div className="text-5xl xs:text-4xl mb-2 xs:mb-1.5 group-hover:scale-125 transition-transform duration-300 emoji-container" style={{ lineHeight: 1 }}>{country.flag}</div>
+                <h3 className="text-sm xs:text-xs font-bold text-zinc-900 dark:text-white mb-1 xs:mb-0.5 break-words leading-tight group-hover:text-red-600 dark:group-hover:text-red-500 transition-colors" dir={language === 'ar' ? 'rtl' : 'ltr'}>{country.name}</h3>
                 <p className="text-[10px] xs:text-[9px] text-zinc-500 dark:text-zinc-400 break-words" dir={language === 'ar' ? 'rtl' : 'ltr'}>{t(`exports.regions.${country.regionKey}`)}</p>
               </div>
             ))}
@@ -637,13 +637,14 @@ function OurExports() {
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4 xs:gap-3">
             {exportProducts.map((product, index) => (
-              <div key={product.title} className="group relative overflow-hidden bg-zinc-100 dark:bg-zinc-900 rounded-xl border-2 border-zinc-200 dark:border-zinc-700 hover:border-red-500 dark:hover:border-red-500 shadow-lg hover:shadow-xl transition-all animate-in scale-in duration-600" style={{ animationDelay: `${index * 100}ms` }}>
-                <div className="aspect-square overflow-hidden">
-                  <OptimizedImage src={`/media/${encodeURIComponent(product.image)}`} alt={product.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy" />
+              <div key={product.title} className="group relative overflow-hidden bg-gradient-to-br from-zinc-100 to-zinc-200 dark:from-zinc-900 dark:to-zinc-800 rounded-2xl border-2 border-zinc-200 dark:border-zinc-700 hover:border-red-500 dark:hover:border-red-500 shadow-lg hover:shadow-2xl hover:shadow-red-600/20 transition-all duration-300 animate-in scale-in hover:-translate-y-2 hover:scale-105" style={{ animationDelay: `${index * 100}ms` }}>
+                <div className="aspect-square overflow-hidden rounded-t-2xl">
+                  <OptimizedImage src={`/media/${encodeURIComponent(product.image)}`} alt={product.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500 grayscale-[30%] group-hover:grayscale-0" loading="lazy" />
                 </div>
-                <div className="p-4 xs:p-3">
-                  <h3 className="text-base xs:text-sm font-bold text-zinc-900 dark:text-white mb-1.5 xs:mb-1">{product.title}</h3>
-                  <p className="text-xs xs:text-[10px] text-zinc-600 dark:text-zinc-400 leading-snug">{product.description}</p>
+                <div className="absolute inset-0 bg-gradient-to-t from-red-600/20 via-red-600/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl" />
+                <div className="p-4 xs:p-3 relative z-10">
+                  <h3 className="text-base xs:text-sm font-bold text-zinc-900 dark:text-white mb-1.5 xs:mb-1 transition-colors">{product.title}</h3>
+                  <p className="text-xs xs:text-[10px] text-zinc-600 dark:text-zinc-400 leading-snug group-hover:text-zinc-900 dark:group-hover:text-zinc-200 transition-colors">{product.description}</p>
                 </div>
               </div>
             ))}
@@ -659,11 +660,11 @@ function OurExports() {
             </div>
             <div className="grid md:grid-cols-2 gap-4 xs:gap-3">
               {exportAdvantages.map((advantage, index) => (
-                <div key={advantage} className="flex items-center gap-3 xs:gap-2 bg-white dark:bg-zinc-800 p-4 xs:p-3 rounded-xl border-2 border-zinc-200 dark:border-zinc-700 hover:border-red-500 dark:hover:border-red-500 shadow-lg hover:shadow-xl transition-all animate-in slide-up duration-600" style={{ animationDelay: `${index * 100}ms` }}>
-                  <div className="shrink-0 w-10 h-10 xs:w-8 xs:h-8 bg-red-600/10 dark:bg-red-500/10 rounded-full flex items-center justify-center">
-                    <CheckCircle className="w-5 h-5 xs:w-4 xs:h-4 text-red-600 dark:text-red-500" />
+                <div key={advantage} className="flex items-center gap-3 xs:gap-2 bg-gradient-to-br from-white to-zinc-50 dark:from-zinc-800 dark:to-zinc-900 p-4 xs:p-3 rounded-2xl border-2 border-zinc-200 dark:border-zinc-700 hover:border-red-500 dark:hover:border-red-500 shadow-lg hover:shadow-2xl hover:shadow-red-600/20 transition-all duration-300 animate-in slide-up hover:-translate-y-1 hover:scale-[1.02]" style={{ animationDelay: `${index * 100}ms` }}>
+                  <div className="shrink-0 w-10 h-10 xs:w-8 xs:h-8 bg-red-600/10 dark:bg-red-500/10 rounded-xl flex items-center justify-center group-hover:bg-red-600 dark:group-hover:bg-red-500 group-hover:scale-110 group-hover:rotate-6 transition-all duration-300">
+                    <CheckCircle className="w-5 h-5 xs:w-4 xs:h-4 text-red-600 dark:text-red-500 group-hover:text-white transition-colors" />
                   </div>
-                  <span className="text-sm xs:text-xs font-semibold text-zinc-900 dark:text-white leading-snug" dir={language === 'ar' ? 'rtl' : 'ltr'}>{advantage}</span>
+                  <span className="text-sm xs:text-xs font-semibold text-zinc-900 dark:text-white leading-snug group-hover:text-red-600 dark:group-hover:text-red-500 transition-colors" dir={language === 'ar' ? 'rtl' : 'ltr'}>{advantage}</span>
                 </div>
               ))}
             </div>
@@ -680,11 +681,11 @@ function OurExports() {
             <div className="flex flex-col sm:flex-row gap-3 xs:gap-2 justify-center">
               <button 
                 onClick={() => smoothScrollToElement('contact')}
-                className="inline-flex items-center justify-center px-6 xs:px-3 py-3 xs:py-2.5 bg-white text-red-600 font-bold text-base xs:text-sm rounded-xl hover:bg-white/90 transition-all shadow-xl hover:shadow-2xl hover:scale-105"
+                className="inline-flex items-center justify-center px-8 xs:px-6 py-4 xs:py-3 bg-white text-red-600 font-bold text-base xs:text-sm rounded-2xl hover:bg-white/90 transition-all duration-300 shadow-xl hover:shadow-2xl hover:scale-110 hover:-translate-y-1"
               >
                 {t('exports.cta.contactButton')}
               </button>
-              <a href="https://wa.me/905373197281" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center px-6 xs:px-3 py-3 xs:py-2.5 bg-white/10 text-white border-2 border-white font-bold text-base xs:text-sm rounded-xl hover:bg-white/20 transition-all backdrop-blur-sm">{t('exports.cta.whatsappButton')}</a>
+              <a href="https://wa.me/905373197281" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center px-8 xs:px-6 py-4 xs:py-3 bg-white/10 text-white border-2 border-white font-bold text-base xs:text-sm rounded-2xl hover:bg-white/20 transition-all duration-300 backdrop-blur-sm hover:scale-110 hover:-translate-y-1">{t('exports.cta.whatsappButton')}</a>
             </div>
           </div>
         </div>
@@ -751,14 +752,14 @@ function OurExports() {
               {[...Array(10)].map((_, index) => (
                 <div 
                   key={`row1-first-${index}`}
-                  className="flex-shrink-0 flex flex-col items-center justify-center px-4 xs:px-3 py-4 xs:py-3 bg-white dark:bg-zinc-800 border-2 border-zinc-200 dark:border-zinc-700 rounded-xl hover:border-red-500 dark:hover:border-red-500 shadow-lg hover:shadow-xl transition-all group min-w-[140px] xs:min-w-[120px]"
+                  className="flex-shrink-0 flex flex-col items-center justify-center px-4 xs:px-3 py-4 xs:py-3 bg-gradient-to-br from-white to-zinc-50 dark:from-zinc-800 dark:to-zinc-900 border-2 border-zinc-200 dark:border-zinc-700 rounded-2xl hover:border-red-500 dark:hover:border-red-500 shadow-lg hover:shadow-2xl hover:shadow-red-600/20 transition-all duration-300 group min-w-[140px] xs:min-w-[120px] hover:-translate-y-2 hover:scale-105"
                 >
-                  <div className="w-14 h-14 xs:w-12 xs:h-12 bg-zinc-100 dark:bg-zinc-700/50 rounded-lg flex items-center justify-center mb-2 xs:mb-1.5 group-hover:bg-red-600/20 transition-all duration-300 group-hover:scale-110">
-                    <span className="text-xl xs:text-lg font-black text-zinc-700 dark:text-zinc-500 group-hover:text-red-600 dark:group-hover:text-red-500 transition-colors">
+                  <div className="w-14 h-14 xs:w-12 xs:h-12 bg-zinc-100 dark:bg-zinc-700/50 rounded-xl flex items-center justify-center mb-2 xs:mb-1.5 group-hover:bg-red-600 dark:group-hover:bg-red-500 transition-all duration-300 group-hover:scale-110 group-hover:rotate-6">
+                    <span className="text-xl xs:text-lg font-black text-zinc-700 dark:text-zinc-500 group-hover:text-white transition-colors">
                       {String.fromCharCode(65 + index)}
                     </span>
                   </div>
-                  <span className="text-[10px] xs:text-[9px] text-zinc-600 dark:text-zinc-500 uppercase tracking-wider group-hover:text-zinc-700 dark:group-hover:text-zinc-400 transition-colors text-center">
+                  <span className="text-[10px] xs:text-[9px] text-zinc-600 dark:text-zinc-500 uppercase tracking-wider group-hover:text-red-600 dark:group-hover:text-red-500 transition-colors text-center font-semibold">
                     {t('exports.partners.partner')} {index + 1}
                   </span>
                 </div>
@@ -768,14 +769,14 @@ function OurExports() {
               {[...Array(10)].map((_, index) => (
                 <div 
                   key={`row1-second-${index}`}
-                  className="flex-shrink-0 flex flex-col items-center justify-center px-4 xs:px-3 py-4 xs:py-3 bg-white dark:bg-zinc-800 border-2 border-zinc-200 dark:border-zinc-700 rounded-xl hover:border-red-500 dark:hover:border-red-500 shadow-lg hover:shadow-xl transition-all group min-w-[140px] xs:min-w-[120px]"
+                  className="flex-shrink-0 flex flex-col items-center justify-center px-4 xs:px-3 py-4 xs:py-3 bg-gradient-to-br from-white to-zinc-50 dark:from-zinc-800 dark:to-zinc-900 border-2 border-zinc-200 dark:border-zinc-700 rounded-2xl hover:border-red-500 dark:hover:border-red-500 shadow-lg hover:shadow-2xl hover:shadow-red-600/20 transition-all duration-300 group min-w-[140px] xs:min-w-[120px] hover:-translate-y-2 hover:scale-105"
                 >
-                  <div className="w-14 h-14 xs:w-12 xs:h-12 bg-zinc-100 dark:bg-zinc-700/50 rounded-lg flex items-center justify-center mb-2 xs:mb-1.5 group-hover:bg-red-600/20 transition-all duration-300 group-hover:scale-110">
-                    <span className="text-xl xs:text-lg font-black text-zinc-700 dark:text-zinc-500 group-hover:text-red-600 dark:group-hover:text-red-500 transition-colors">
+                  <div className="w-14 h-14 xs:w-12 xs:h-12 bg-zinc-100 dark:bg-zinc-700/50 rounded-xl flex items-center justify-center mb-2 xs:mb-1.5 group-hover:bg-red-600 dark:group-hover:bg-red-500 transition-all duration-300 group-hover:scale-110 group-hover:rotate-6">
+                    <span className="text-xl xs:text-lg font-black text-zinc-700 dark:text-zinc-500 group-hover:text-white transition-colors">
                       {String.fromCharCode(65 + index)}
                     </span>
                   </div>
-                  <span className="text-[10px] xs:text-[9px] text-zinc-600 dark:text-zinc-500 uppercase tracking-wider group-hover:text-zinc-700 dark:group-hover:text-zinc-400 transition-colors text-center">
+                  <span className="text-[10px] xs:text-[9px] text-zinc-600 dark:text-zinc-500 uppercase tracking-wider group-hover:text-red-600 dark:group-hover:text-red-500 transition-colors text-center font-semibold">
                     {t('exports.partners.partner')} {index + 1}
                   </span>
                 </div>
@@ -794,14 +795,14 @@ function OurExports() {
               {[...Array(10)].map((_, index) => (
                 <div 
                   key={`row2-first-${index}`}
-                  className="flex-shrink-0 flex flex-col items-center justify-center px-4 xs:px-3 py-4 xs:py-3 bg-white dark:bg-zinc-800 border-2 border-zinc-200 dark:border-zinc-700 rounded-xl hover:border-red-500 dark:hover:border-red-500 shadow-lg hover:shadow-xl transition-all group min-w-[140px] xs:min-w-[120px]"
+                  className="flex-shrink-0 flex flex-col items-center justify-center px-4 xs:px-3 py-4 xs:py-3 bg-gradient-to-br from-white to-zinc-50 dark:from-zinc-800 dark:to-zinc-900 border-2 border-zinc-200 dark:border-zinc-700 rounded-2xl hover:border-red-500 dark:hover:border-red-500 shadow-lg hover:shadow-2xl hover:shadow-red-600/20 transition-all duration-300 group min-w-[140px] xs:min-w-[120px] hover:-translate-y-2 hover:scale-105"
                 >
-                  <div className="w-14 h-14 xs:w-12 xs:h-12 bg-zinc-100 dark:bg-zinc-700/50 rounded-lg flex items-center justify-center mb-2 xs:mb-1.5 group-hover:bg-red-600/20 transition-all duration-300 group-hover:scale-110">
-                    <span className="text-xl xs:text-lg font-black text-zinc-700 dark:text-zinc-500 group-hover:text-red-600 dark:group-hover:text-red-500 transition-colors">
+                  <div className="w-14 h-14 xs:w-12 xs:h-12 bg-zinc-100 dark:bg-zinc-700/50 rounded-xl flex items-center justify-center mb-2 xs:mb-1.5 group-hover:bg-red-600 dark:group-hover:bg-red-500 transition-all duration-300 group-hover:scale-110 group-hover:rotate-6">
+                    <span className="text-xl xs:text-lg font-black text-zinc-700 dark:text-zinc-500 group-hover:text-white transition-colors">
                       {String.fromCharCode(75 + index)}
                     </span>
                   </div>
-                  <span className="text-[10px] xs:text-[9px] text-zinc-600 dark:text-zinc-500 uppercase tracking-wider group-hover:text-zinc-700 dark:group-hover:text-zinc-400 transition-colors text-center">
+                  <span className="text-[10px] xs:text-[9px] text-zinc-600 dark:text-zinc-500 uppercase tracking-wider group-hover:text-red-600 dark:group-hover:text-red-500 transition-colors text-center font-semibold">
                     {t('exports.partners.partner')} {index + 11}
                   </span>
                 </div>
@@ -811,14 +812,14 @@ function OurExports() {
               {[...Array(10)].map((_, index) => (
                 <div 
                   key={`row2-second-${index}`}
-                  className="flex-shrink-0 flex flex-col items-center justify-center px-4 xs:px-3 py-4 xs:py-3 bg-white dark:bg-zinc-800 border-2 border-zinc-200 dark:border-zinc-700 rounded-xl hover:border-red-500 dark:hover:border-red-500 shadow-lg hover:shadow-xl transition-all group min-w-[140px] xs:min-w-[120px]"
+                  className="flex-shrink-0 flex flex-col items-center justify-center px-4 xs:px-3 py-4 xs:py-3 bg-gradient-to-br from-white to-zinc-50 dark:from-zinc-800 dark:to-zinc-900 border-2 border-zinc-200 dark:border-zinc-700 rounded-2xl hover:border-red-500 dark:hover:border-red-500 shadow-lg hover:shadow-2xl hover:shadow-red-600/20 transition-all duration-300 group min-w-[140px] xs:min-w-[120px] hover:-translate-y-2 hover:scale-105"
                 >
-                  <div className="w-14 h-14 xs:w-12 xs:h-12 bg-zinc-100 dark:bg-zinc-700/50 rounded-lg flex items-center justify-center mb-2 xs:mb-1.5 group-hover:bg-red-600/20 transition-all duration-300 group-hover:scale-110">
-                    <span className="text-xl xs:text-lg font-black text-zinc-700 dark:text-zinc-500 group-hover:text-red-600 dark:group-hover:text-red-500 transition-colors">
+                  <div className="w-14 h-14 xs:w-12 xs:h-12 bg-zinc-100 dark:bg-zinc-700/50 rounded-xl flex items-center justify-center mb-2 xs:mb-1.5 group-hover:bg-red-600 dark:group-hover:bg-red-500 transition-all duration-300 group-hover:scale-110 group-hover:rotate-6">
+                    <span className="text-xl xs:text-lg font-black text-zinc-700 dark:text-zinc-500 group-hover:text-white transition-colors">
                       {String.fromCharCode(75 + index)}
                     </span>
                   </div>
-                  <span className="text-[10px] xs:text-[9px] text-zinc-600 dark:text-zinc-500 uppercase tracking-wider group-hover:text-zinc-700 dark:group-hover:text-zinc-400 transition-colors text-center">
+                  <span className="text-[10px] xs:text-[9px] text-zinc-600 dark:text-zinc-500 uppercase tracking-wider group-hover:text-red-600 dark:group-hover:text-red-500 transition-colors text-center font-semibold">
                     {t('exports.partners.partner')} {index + 11}
                   </span>
                 </div>

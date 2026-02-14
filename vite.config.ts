@@ -55,11 +55,30 @@ export default defineConfig({
           ],
           'form-vendor': ['react-hook-form', '@hookform/resolvers', 'zod'],
           'utils-vendor': ['clsx', 'tailwind-merge', 'class-variance-authority'],
+          'icons-vendor': ['lucide-react'],
+          'query-vendor': ['@tanstack/react-query'],
+          'theme-vendor': ['next-themes'],
         },
         // Optimize chunk names for better caching
-        chunkFileNames: 'assets/[name]-[hash].js',
+        chunkFileNames: (chunkInfo) => {
+          // Separate vendor chunks from app chunks
+          const isVendor = chunkInfo.name.includes('vendor');
+          return isVendor 
+            ? 'assets/vendor/[name]-[hash].js'
+            : 'assets/[name]-[hash].js';
+        },
         entryFileNames: 'assets/[name]-[hash].js',
-        assetFileNames: 'assets/[name]-[hash].[ext]',
+        assetFileNames: (assetInfo) => {
+          // Organize assets by type
+          const info = assetInfo.name.split('.');
+          const ext = info[info.length - 1];
+          if (/png|jpe?g|svg|gif|tiff|bmp|ico|webp/i.test(ext)) {
+            return 'assets/images/[name]-[hash].[ext]';
+          } else if (/woff2?|ttf|otf|eot/i.test(ext)) {
+            return 'assets/fonts/[name]-[hash].[ext]';
+          }
+          return 'assets/[name]-[hash].[ext]';
+        },
       },
     },
     // Chunk size warnings
@@ -76,6 +95,10 @@ export default defineConfig({
     commonjsOptions: {
       transformMixedEsModules: true,
     },
+    // Compression
+    reportCompressedSize: true,
+    // Optimize assets
+    assetsInlineLimit: 4096, // Inline assets smaller than 4kb
   },
   server: {
     host: "0.0.0.0",

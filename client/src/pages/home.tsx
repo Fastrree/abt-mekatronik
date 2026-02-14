@@ -7,13 +7,55 @@ import { useI18n } from "@/lib/i18n";
 import { smoothScrollToElement } from "@/lib/scroll-utils";
 import { OptimizedImage } from "@/components/OptimizedImage";
 import { FAQ, Testimonials, ClientLogos, ComponentLoader } from "@/components/LazyComponents";
-import { Suspense } from "react";
+import { ImageLightbox } from "@/components/ImageLightbox";
+import { Suspense, useEffect, useState } from "react";
 
 export default function Home() {
   const { t, language } = useI18n();
   
   // Detect Edge browser
   const isEdge = /Edg/.test(navigator.userAgent);
+
+  // Detect theme
+  const [isDark, setIsDark] = useState(document.documentElement.classList.contains('dark'));
+  
+  useEffect(() => {
+    const observer = new MutationObserver(() => {
+      setIsDark(document.documentElement.classList.contains('dark'));
+    });
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+    return () => observer.disconnect();
+  }, []);
+
+  // Lightbox state
+  const galleryImages = [
+    "WhatsApp Image 2026-01-16 at 14.32.03 (3).jpeg",
+    "WhatsApp Image 2026-01-16 at 14.32.03 (4).jpeg",
+    "WhatsApp Image 2026-01-16 at 14.32.04 (1).jpeg",
+    "WhatsApp Image 2026-01-16 at 14.32.04 (2).jpeg",
+    "WhatsApp Image 2026-01-16 at 14.32.05 (1).jpeg",
+    "WhatsApp Image 2026-01-16 at 14.32.05 (2).jpeg",
+    "WhatsApp Image 2026-01-16 at 14.32.06 (2).jpeg",
+    "WhatsApp Image 2026-01-16 at 14.32.06 (3).jpeg",
+    "WhatsApp Image 2026-01-16 at 14.32.06 (4).jpeg",
+    "WhatsApp Image 2026-01-16 at 14.32.07 (4).jpeg",
+    "WhatsApp Image 2026-01-16 at 14.32.07 (5).jpeg",
+    "WhatsApp Image 2026-01-16 at 14.32.08 (1).jpeg",
+  ];
+  
+  const [lightboxOpen, setLightboxOpen] = useState(false);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  const openLightbox = (index: number) => {
+    setCurrentImageIndex(index);
+    setLightboxOpen(true);
+  };
+
+  const closeLightbox = () => setLightboxOpen(false);
+  
+  const nextImage = () => setCurrentImageIndex((prev) => (prev + 1) % galleryImages.length);
+  
+  const previousImage = () => setCurrentImageIndex((prev) => (prev - 1 + galleryImages.length) % galleryImages.length);
 
   return (
     <div className="min-h-screen bg-white dark:bg-zinc-900 text-zinc-900 dark:text-zinc-200 selection:bg-red-900 selection:text-white overflow-x-hidden" dir={language === 'ar' ? 'rtl' : 'ltr'}>
@@ -66,7 +108,7 @@ export default function Home() {
           <div className="absolute inset-0 bg-gradient-to-r from-zinc-900/70 via-zinc-900/50 to-zinc-900/30 dark:from-zinc-900/90 dark:via-zinc-900/80 dark:to-zinc-900/60" style={{ zIndex: 2 }} aria-hidden="true" />
         </div>
 
-        <div className="container mx-auto px-4 xs:px-3 sm:px-6 relative z-10 pt-20">
+        <div className="container mx-auto px-4 xs:px-3 sm:px-6 relative z-10 pt-28 sm:pt-32">
           <div className="max-w-4xl animate-in fade-in-left duration-800">
             {/* Badge - Mobilde gizle, tablet ve üstünde göster */}
             <div className="hidden sm:inline-block mb-3 px-2.5 py-1 bg-red-600/20 border border-red-600/50 text-red-500 font-bold text-xs tracking-widest uppercase rounded-sm backdrop-blur-sm">
@@ -151,9 +193,9 @@ export default function Home() {
                   <span className="text-xs xs:text-[10px] text-red-600 dark:text-red-400 uppercase tracking-wider font-semibold">{t('productItems.konveyor.subtitle')}</span>
                 </div>
                 <div className="w-10 xs:w-8 h-1 bg-red-600 mb-3 xs:mb-2 transition-all duration-300 group-hover:w-16"></div>
-                <h3 className="text-xl xs:text-base font-bold text-zinc-900 dark:text-white mb-2 xs:mb-1 group-hover:text-red-600 dark:group-hover:text-red-500 transition-colors">{t('productItems.konveyor.title')}</h3>
-                <p className="text-zinc-700 dark:text-zinc-400 text-sm xs:text-xs mb-4 xs:mb-2 line-clamp-2">{t('productItems.konveyor.shortDesc')}</p>
-                <span className={`inline-flex items-center text-zinc-900 dark:text-white font-semibold text-sm xs:text-xs uppercase tracking-wider group-hover:translate-x-2 transition-transform ${
+                <h3 className="text-xl xs:text-base font-bold text-zinc-900 dark:text-white mb-2 xs:mb-1 transition-colors">{t('productItems.konveyor.title')}</h3>
+                <p className="text-zinc-700 dark:text-zinc-400 text-sm xs:text-xs mb-4 xs:mb-2 line-clamp-2 group-hover:text-zinc-900 dark:group-hover:text-zinc-200 transition-colors">{t('productItems.konveyor.shortDesc')}</p>
+                <span className={`inline-flex items-center text-red-600 dark:text-red-500 font-semibold text-sm xs:text-xs uppercase tracking-wider group-hover:translate-x-2 transition-transform ${
                   language === 'ar' ? 'flex-row-reverse' : ''
                 }`}>
                   {language === 'ar' && <ChevronRight className="mr-1 w-4 h-4 xs:w-3 xs:h-3 text-red-600 dark:text-red-500" aria-hidden="true" />}
@@ -382,26 +424,26 @@ export default function Home() {
             {/* Certifications - Top Row */}
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 xs:gap-2 sm:gap-6 mb-8 xs:mb-6 sm:mb-12 animate-in fade-in duration-600">
               <div className="flex flex-col items-center gap-1.5 xs:gap-1 sm:gap-2 group animate-in scale-in duration-500">
-                <div className="w-20 h-20 xs:w-16 xs:h-16 sm:w-24 sm:h-24 bg-white dark:bg-zinc-700 border-2 border-zinc-200 dark:border-zinc-600 rounded-lg flex items-center justify-center group-hover:border-red-600 dark:group-hover:border-red-500 group-hover:shadow-xl group-hover:shadow-red-600/20 transition-all p-1.5 xs:p-1 sm:p-2">
-                  <OptimizedImage src="/certifications/iso9001.webp" alt="ISO 9001" className="w-full h-full object-contain" loading="lazy" />
+                <div className="w-20 h-20 xs:w-16 xs:h-16 sm:w-24 sm:h-24 dark:bg-zinc-700 dark:border-2 dark:border-zinc-600 rounded-2xl overflow-hidden flex items-center justify-center group-hover:scale-110 group-hover:shadow-lg group-hover:shadow-red-600/20 transition-all p-3">
+                  <OptimizedImage src={isDark ? "/certifications/iso.png?t=1737738100" : "/certifications/isoLight.png?t=1737739400"} alt="ISO 9001" className="w-full h-full object-contain" loading="lazy" />
                 </div>
                 <span className="text-[10px] xs:text-[9px] sm:text-xs text-zinc-600 dark:text-zinc-400 font-semibold group-hover:text-red-600 dark:group-hover:text-red-500 transition-colors">ISO 9001</span>
               </div>
               <div className="flex flex-col items-center gap-1.5 xs:gap-1 sm:gap-2 group animate-in scale-in duration-500" style={{ animationDelay: '50ms' }}>
-                <div className="w-20 h-20 xs:w-16 xs:h-16 sm:w-24 sm:h-24 bg-white dark:bg-zinc-700 border-2 border-zinc-200 dark:border-zinc-600 rounded-lg flex items-center justify-center group-hover:border-red-600 dark:group-hover:border-red-500 group-hover:shadow-xl group-hover:shadow-red-600/20 transition-all p-1.5 xs:p-1 sm:p-2">
-                  <OptimizedImage src="/certifications/tse.webp" alt="TSE" className="w-full h-full object-contain" loading="lazy" />
+                <div className="w-20 h-20 xs:w-16 xs:h-16 sm:w-24 sm:h-24 dark:bg-zinc-700 dark:border-2 dark:border-zinc-600 rounded-2xl overflow-hidden flex items-center justify-center group-hover:scale-110 group-hover:shadow-lg group-hover:shadow-red-600/20 transition-all p-1">
+                  <OptimizedImage src={isDark ? "/certifications/tse.png?t=1737738100" : "/certifications/tseLight.png?t=1737739400"} alt="TSE" className="w-full h-full object-contain" loading="lazy" />
                 </div>
                 <span className="text-[10px] xs:text-[9px] sm:text-xs text-zinc-600 dark:text-zinc-400 font-semibold group-hover:text-red-600 dark:group-hover:text-red-500 transition-colors">TSE</span>
               </div>
               <div className="flex flex-col items-center gap-1.5 xs:gap-1 sm:gap-2 group animate-in scale-in duration-500" style={{ animationDelay: '100ms' }}>
-                <div className="w-20 h-20 xs:w-16 xs:h-16 sm:w-24 sm:h-24 bg-white dark:bg-zinc-700 border-2 border-zinc-200 dark:border-zinc-600 rounded-lg flex items-center justify-center group-hover:border-red-600 dark:group-hover:border-red-500 group-hover:shadow-xl group-hover:shadow-red-600/20 transition-all p-1.5 xs:p-1 sm:p-2">
-                  <OptimizedImage src="/certifications/ce.webp" alt="CE" className="w-full h-full object-contain" loading="lazy" />
+                <div className="w-20 h-20 xs:w-16 xs:h-16 sm:w-24 sm:h-24 dark:bg-zinc-700 dark:border-2 dark:border-zinc-600 rounded-2xl overflow-hidden flex items-center justify-center group-hover:scale-110 group-hover:shadow-lg group-hover:shadow-red-600/20 transition-all p-3 pt-5">
+                  <OptimizedImage src={isDark ? "/certifications/ce.png?t=1737738100" : "/certifications/ceLight.png?t=1737739300"} alt="CE" className="w-full h-full object-contain" loading="lazy" />
                 </div>
                 <span className="text-[10px] xs:text-[9px] sm:text-xs text-zinc-600 dark:text-zinc-400 font-semibold group-hover:text-red-600 dark:group-hover:text-red-500 transition-colors">CE</span>
               </div>
               <div className="flex flex-col items-center gap-1.5 xs:gap-1 sm:gap-2 group animate-in scale-in duration-500" style={{ animationDelay: '150ms' }}>
-                <div className="w-20 h-20 xs:w-16 xs:h-16 sm:w-24 sm:h-24 bg-white dark:bg-zinc-700 border-2 border-zinc-200 dark:border-zinc-600 rounded-lg flex items-center justify-center group-hover:border-red-600 dark:group-hover:border-red-500 group-hover:shadow-xl group-hover:shadow-red-600/20 transition-all p-1.5 xs:p-1 sm:p-2">
-                  <OptimizedImage src="/certifications/golden.webp" alt="Quality" className="w-full h-full object-contain" loading="lazy" />
+                <div className="w-20 h-20 xs:w-16 xs:h-16 sm:w-24 sm:h-24 dark:bg-zinc-700 dark:border-2 dark:border-zinc-600 rounded-2xl overflow-hidden flex items-center justify-center group-hover:scale-110 group-hover:shadow-lg group-hover:shadow-red-600/20 transition-all p-1">
+                  <OptimizedImage src={isDark ? "/certifications/guaranteed.png?t=1737738100" : "/certifications/guaranteedLight.png?t=1737739500"} alt="Quality" className="w-full h-full object-contain" loading="lazy" />
                 </div>
                 <span className="text-[10px] xs:text-[9px] sm:text-xs text-zinc-600 dark:text-zinc-400 font-semibold group-hover:text-red-600 dark:group-hover:text-red-500 transition-colors">{t('certifications.quality')}</span>
               </div>
@@ -435,23 +477,11 @@ export default function Home() {
           </div>
 
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 xs:gap-1.5">
-            {[
-              "WhatsApp Image 2026-01-16 at 14.32.03 (3).jpeg",
-              "WhatsApp Image 2026-01-16 at 14.32.03 (4).jpeg",
-              "WhatsApp Image 2026-01-16 at 14.32.04 (1).jpeg",
-              "WhatsApp Image 2026-01-16 at 14.32.04 (2).jpeg",
-              "WhatsApp Image 2026-01-16 at 14.32.05 (1).jpeg",
-              "WhatsApp Image 2026-01-16 at 14.32.05 (2).jpeg",
-              "WhatsApp Image 2026-01-16 at 14.32.06 (2).jpeg",
-              "WhatsApp Image 2026-01-16 at 14.32.06 (3).jpeg",
-              "WhatsApp Image 2026-01-16 at 14.32.06 (4).jpeg",
-              "WhatsApp Image 2026-01-16 at 14.32.07 (4).jpeg",
-              "WhatsApp Image 2026-01-16 at 14.32.07 (5).jpeg",
-              "WhatsApp Image 2026-01-16 at 14.32.08 (1).jpeg",
-            ].map((img, index) => (
-              <div
+            {galleryImages.map((img, index) => (
+              <button
                 key={img}
-                className="group relative aspect-square overflow-hidden bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 shadow-lg dark:shadow-none animate-in scale-in duration-500"
+                onClick={() => openLightbox(index)}
+                className="group relative aspect-square overflow-hidden bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 shadow-lg dark:shadow-none animate-in scale-in duration-500 cursor-pointer"
                 style={{ animationDelay: `${index * 50}ms` }}
               >
                 <OptimizedImage 
@@ -462,9 +492,20 @@ export default function Home() {
                   aspectRatio="1/1"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-white/60 via-transparent to-transparent dark:from-zinc-900/60 dark:via-transparent dark:to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-              </div>
+              </button>
             ))}
           </div>
+
+          {/* Lightbox */}
+          {lightboxOpen && (
+            <ImageLightbox
+              images={galleryImages}
+              currentIndex={currentImageIndex}
+              onClose={closeLightbox}
+              onNext={nextImage}
+              onPrevious={previousImage}
+            />
+          )}
 
           {/* Video Showcase - TEMPORARILY DISABLED FOR TESTING */}
           {/* 

@@ -253,10 +253,10 @@ export const Navbar = memo(function Navbar() {
                     </a>
                   </div>
 
-                  {/* 10. İletişim (Contact in Footer) */}
+                  {/* 10. İletişim (WhatsApp Button - MOBILE ONLY) */}
                   <div className="border-t border-zinc-700/50 mt-2 pt-2">
                     <button
-                      onClick={() => navigateToSection('contact')}
+                      onClick={() => navigateToSection('contact-whatsapp')}
                       className={`w-full block px-4 py-2.5 text-sm font-medium text-white hover:text-red-500 hover:bg-zinc-700/50 rounded-xl transition-all duration-300 hover:translate-x-1 ${isRTL ? 'text-right' : 'text-left'}`}
                       dir={isRTL ? 'rtl' : 'ltr'}
                     >
@@ -264,10 +264,13 @@ export const Navbar = memo(function Navbar() {
                     </button>
                   </div>
                   
-                  {/* CTA - Highlighted */}
+                  {/* CTA - Highlighted (WhatsApp Button - MOBILE ONLY) */}
                   <div className="border-t border-zinc-700/50 mt-2 pt-2">
                     <button
-                      onClick={handleCTAClick}
+                      onClick={() => {
+                        navigateToSection('contact-whatsapp');
+                        setIsQuickMenuOpen(false);
+                      }}
                       className={`w-full block px-4 py-3 text-sm font-bold text-white bg-gradient-to-r from-red-600 to-red-700 hover:from-red-500 hover:to-red-600 rounded-xl transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-red-600/50 ${isRTL ? 'text-right' : 'text-left'}`}
                       dir={isRTL ? 'rtl' : 'ltr'}
                     >

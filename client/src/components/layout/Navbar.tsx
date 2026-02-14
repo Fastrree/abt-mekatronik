@@ -73,13 +73,13 @@ export const Navbar = memo(function Navbar() {
     setIsQuickMenuOpen(false);
   }, [setLocation]);
 
-  // Smart CTA handler: scroll to contact on current page
+  // Smart CTA handler: scroll to WhatsApp button on current page
   const handleCTAClick = useCallback((e: React.MouseEvent) => {
     e.preventDefault();
     const currentPath = window.location.pathname;
     
-    // All pages have contact section in Footer, just scroll to it
-    smoothScrollToElement('contact');
+    // All pages have WhatsApp button in Footer, scroll to it
+    smoothScrollToElement('contact-whatsapp');
     
     // Close dropdown if open
     setIsQuickMenuOpen(false);
@@ -253,10 +253,10 @@ export const Navbar = memo(function Navbar() {
                     </a>
                   </div>
 
-                  {/* 10. İletişim (Contact in Footer) */}
+                  {/* 10. İletişim (WhatsApp Button in Footer) */}
                   <div className="border-t border-zinc-700/50 mt-2 pt-2">
                     <button
-                      onClick={() => navigateToSection('contact')}
+                      onClick={() => navigateToSection('contact-whatsapp')}
                       className={`w-full block px-4 py-2.5 text-sm font-medium text-white hover:text-red-500 hover:bg-zinc-700/50 rounded-xl transition-all duration-300 hover:translate-x-1 ${isRTL ? 'text-right' : 'text-left'}`}
                       dir={isRTL ? 'rtl' : 'ltr'}
                     >

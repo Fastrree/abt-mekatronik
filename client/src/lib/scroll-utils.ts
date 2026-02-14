@@ -1,32 +1,16 @@
 /**
- * Scroll Utility Functions
+ * DYNAMIC SCROLL SYSTEM V2.0
  * 
- * Mobil ve desktop için optimize edilmiş scroll fonksiyonları
- * Navbar yüksekliğini hesaba katarak doğru pozisyona scroll yapar
+ * Akıllı, dinamik scroll sistemi - sabit offset'ler yerine gerçek pozisyon hesaplama
+ * Mobilde tam eşleştirme garantisi ile çalışır
  * 
- * ULTRA-MOBILE OPTIMIZATION (300px-340px)
+ * FEATURES:
+ * - Dinamik navbar yüksekliği hesaplama
+ * - Element'in gerçek pozisyonunu bulma
+ * - Viewport'a göre optimal scroll pozisyonu
+ * - Otomatik düzeltme mekanizması
+ * - Mobil-first yaklaşım
  */
-
-/**
- * Section-specific offset configuration
- * Her section için özel offset değerleri
- * Ultra-mobile: 300-340px ekranlar için özel ayar
- * Mobile: 341-767px ekranlar
- * Desktop: 768px+
- * 
- * NOT: Mobilde maksimum aşağı scroll için çok agresif negatif offset'ler
- * Negatif değerler içeriği navbar'ın çok altında gösterir
- */
-const SECTION_OFFSETS: Record<string, { ultraMobile: number; mobile: number; desktop: number }> = {
-  products: { ultraMobile: -300, mobile: -280, desktop: 20 },      // Maksimum aşağı
-  engineering: { ultraMobile: -300, mobile: -280, desktop: 60 },   // Maksimum aşağı
-  projects: { ultraMobile: -300, mobile: -280, desktop: 40 },      // Maksimum aşağı
-  faq: { ultraMobile: -300, mobile: -280, desktop: 80 },           // Maksimum aşağı
-  testimonials: { ultraMobile: -300, mobile: -280, desktop: 80 },  // Maksimum aşağı
-  partners: { ultraMobile: -300, mobile: -280, desktop: 80 },      // Maksimum aşağı
-  contact: { ultraMobile: -320, mobile: -300, desktop: -10 },      // En maksimum aşağı (Teklif Al)
-  default: { ultraMobile: -300, mobile: -280, desktop: 80 },       // Maksimum aşağı
-};
 
 /**
  * Get navbar height dynamically
@@ -34,7 +18,7 @@ const SECTION_OFFSETS: Record<string, { ultraMobile: number; mobile: number; des
  */
 function getNavbarHeight(): number {
   const navbar = document.querySelector('nav');
-  return navbar ? navbar.offsetHeight : 0;
+  return navbar ? navbar.offsetHeight : 64; // Fallback: 64px
 }
 
 /**
@@ -48,10 +32,84 @@ function getDeviceType(): 'ultraMobile' | 'mobile' | 'desktop' {
 }
 
 /**
- * Smooth scroll to element with ultra-mobile optimization
+ * Calculate optimal scroll position for mobile
+ * Mobil için optimal scroll pozisyonunu hesaplar
+ * 
+ * Strateji:
+ * 1. Element'in sayfadaki gerçek pozisyonunu bul
+ * 2. Navbar yüksekliğini çıkar
+ * 3. Mobilde ekstra padding ekle (içerik navbar'ın altında görünsün)
+ * 4. Viewport yüksekliğini hesaba kat
+ */
+function calculateOptimalScrollPosition(element: HTMLElement, deviceType: 'ultraMobile' | 'mobile' | 'desktop'): number {
+  // Element'in sayfadaki mutlak pozisyonu
+  const elementRect = element.getBoundingClientRect();
+  const elementTop = elementRect.top + window.pageYOffset;
+  
+  // Navbar yüksekliği
+  const navbarHeight = getNavbarHeight();
+  
+  // Viewport yüksekliği
+  const viewportHeight = window.innerHeight;
+  
+  // Mobil için ekstra padding (içerik navbar'ın çok altında görünsün)
+  let mobilePadding = 0;
+  if (deviceType === 'ultraMobile') {
+    mobilePadding = viewportHeight * 0.15; // Viewport'un %15'i kadar padding
+  } else if (deviceType === 'mobile') {
+    mobilePadding = viewportHeight * 0.12; // Viewport'un %12'si kadar padding
+  }
+  
+  // Desktop için minimal padding
+  const desktopPadding = deviceType === 'desktop' ? 20 : 0;
+  
+  // Final scroll pozisyonu
+  // Element'in üstü - navbar yüksekliği - mobil padding + desktop padding
+  const scrollPosition = elementTop - navbarHeight - mobilePadding + desktopPadding;
+  
+  return Math.max(0, scrollPosition); // Negatif değer olmasın
+}
+
+/**
+ * Verify and correct scroll position
+ * Scroll sonrası pozisyonu doğrula ve gerekirse düzelt
+ */
+function verifyAndCorrectScroll(element: HTMLElement, deviceType: 'ultraMobile' | 'mobile' | 'desktop', attempt: number = 0): void {
+  if (attempt > 3) return; // Maksimum 3 deneme
+  
+  const rect = element.getBoundingClientRect();
+  const navbarHeight = getNavbarHeight();
+  const viewportHeight = window.innerHeight;
+  
+  // Mobilde ideal pozisyon: navbar'ın altında, viewport'un üst %20'sinde
+  const idealTopPosition = deviceType === 'desktop' 
+    ? navbarHeight + 20 
+    : navbarHeight + (viewportHeight * 0.15);
+  
+  const currentTopPosition = rect.top;
+  const positionDifference = Math.abs(currentTopPosition - idealTopPosition);
+  
+  // Eğer pozisyon farkı 50px'den fazlaysa düzelt
+  if (positionDifference > 50) {
+    const correction = currentTopPosition - idealTopPosition;
+    
+    window.scrollBy({
+      top: correction,
+      behavior: 'smooth'
+    });
+    
+    // Tekrar kontrol et
+    setTimeout(() => {
+      verifyAndCorrectScroll(element, deviceType, attempt + 1);
+    }, 400);
+  }
+}
+
+/**
+ * MAIN SCROLL FUNCTION - Dynamic & Intelligent
  * 
  * @param elementId - Target element ID
- * @param offset - Additional offset (default: auto-calculated based on screen size and section)
+ * @param offset - Manual offset (optional, overrides automatic calculation)
  */
 export function smoothScrollToElement(elementId: string, offset?: number): void {
   const element = document.getElementById(elementId);
@@ -62,68 +120,37 @@ export function smoothScrollToElement(elementId: string, offset?: number): void 
 
   // Detect device type
   const deviceType = getDeviceType();
-  const sectionConfig = SECTION_OFFSETS[elementId] || SECTION_OFFSETS.default;
   
-  // Get appropriate offset based on device
-  let baseOffset: number;
-  switch (deviceType) {
-    case 'ultraMobile':
-      baseOffset = sectionConfig.ultraMobile;
-      break;
-    case 'mobile':
-      baseOffset = sectionConfig.mobile;
-      break;
-    case 'desktop':
-      baseOffset = sectionConfig.desktop;
-      break;
-  }
-  
-  // Use dynamic navbar height for more accurate positioning
-  const navbarHeight = getNavbarHeight();
-  
-  // Add extra padding for ultra-mobile to ensure content is fully visible
-  const extraPadding = deviceType === 'ultraMobile' ? 15 : (deviceType === 'mobile' ? 10 : 0);
-  const scrollOffset = offset ?? (baseOffset + extraPadding);
+  // Calculate optimal scroll position
+  const scrollPosition = offset !== undefined 
+    ? element.getBoundingClientRect().top + window.pageYOffset - offset
+    : calculateOptimalScrollPosition(element, deviceType);
 
-  // Get element position
-  const elementPosition = element.getBoundingClientRect().top;
-  const offsetPosition = elementPosition + window.pageYOffset - scrollOffset;
-
-  // Smooth scroll with fallback for older browsers
+  // Smooth scroll
   try {
     window.scrollTo({
-      top: offsetPosition,
+      top: scrollPosition,
       behavior: 'smooth'
     });
   } catch (error) {
-    // Fallback for browsers that don't support smooth scrolling
-    window.scrollTo(0, offsetPosition);
+    // Fallback for older browsers
+    window.scrollTo(0, scrollPosition);
   }
   
-  // Additional check: After scroll completes, verify element is visible
+  // Verify and correct after scroll completes
   setTimeout(() => {
-    const rect = element.getBoundingClientRect();
-    const isVisible = rect.top >= navbarHeight && rect.top < window.innerHeight;
-    
-    if (!isVisible) {
-      // Fine-tune scroll if element is not properly visible
-      const adjustment = deviceType === 'ultraMobile' ? -20 : -10;
-      window.scrollBy({
-        top: adjustment,
-        behavior: 'smooth'
-      });
-    }
-  }, 600); // Wait for smooth scroll to complete
+    verifyAndCorrectScroll(element, deviceType);
+  }, 600);
   
-  // Log for debugging (remove in production)
+  // Development logging
   if (process.env.NODE_ENV === 'development') {
-    console.log(`Scrolling to ${elementId}:`, {
+    console.log(`🎯 Dynamic Scroll to ${elementId}:`, {
       deviceType,
-      navbarHeight,
-      scrollOffset,
-      elementPosition,
-      finalPosition: offsetPosition,
-      extraPadding
+      navbarHeight: getNavbarHeight(),
+      viewportHeight: window.innerHeight,
+      elementTop: element.getBoundingClientRect().top + window.pageYOffset,
+      scrollPosition,
+      calculatedAutomatically: offset === undefined
     });
   }
 }

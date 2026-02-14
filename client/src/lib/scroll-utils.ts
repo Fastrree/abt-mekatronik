@@ -1,24 +1,29 @@
 /**
- * DYNAMIC SCROLL SYSTEM V2.0
+ * DYNAMIC SCROLL SYSTEM V2.1 - ENHANCED
  * 
- * Akıllı, dinamik scroll sistemi - sabit offset'ler yerine gerçek pozisyon hesaplama
- * Mobilde tam eşleştirme garantisi ile çalışır
+ * Ultra-akıllı, hatasız scroll sistemi
+ * Mobilde mükemmel eşleştirme, desktop'ta klasik davranış
  * 
  * FEATURES:
- * - Dinamik navbar yüksekliği hesaplama
- * - Element'in gerçek pozisyonunu bulma
- * - Viewport'a göre optimal scroll pozisyonu
- * - Otomatik düzeltme mekanizması
- * - Mobil-first yaklaşım
+ * - Dinamik navbar yüksekliği hesaplama (her scroll'da yeniden)
+ * - Element'in gerçek pozisyonunu piksel hassasiyetiyle bulma
+ * - Viewport'a göre optimal scroll pozisyonu (mobil için özel)
+ * - Çoklu doğrulama mekanizması (5 denemeye kadar)
+ * - Hassas pozisyon kontrolü (30px tolerans)
+ * - Desktop'ta klasik davranış (değişiklik yok)
  */
 
 /**
- * Get navbar height dynamically
- * Navbar yüksekliğini dinamik olarak hesaplar
+ * Get navbar height dynamically with cache busting
+ * Navbar yüksekliğini her seferinde yeniden hesaplar
  */
 function getNavbarHeight(): number {
   const navbar = document.querySelector('nav');
-  return navbar ? navbar.offsetHeight : 64; // Fallback: 64px
+  if (!navbar) return 64; // Fallback
+  
+  // Force reflow to get accurate height
+  const height = navbar.getBoundingClientRect().height;
+  return Math.ceil(height); // Round up for safety
 }
 
 /**
@@ -32,81 +37,125 @@ function getDeviceType(): 'ultraMobile' | 'mobile' | 'desktop' {
 }
 
 /**
- * Calculate optimal scroll position for mobile
- * Mobil için optimal scroll pozisyonunu hesaplar
+ * Calculate optimal scroll position - ENHANCED
+ * Mobil için ultra-hassas pozisyon hesaplama
+ * Desktop için klasik davranış
  * 
- * Strateji:
- * 1. Element'in sayfadaki gerçek pozisyonunu bul
- * 2. Navbar yüksekliğini çıkar
- * 3. Mobilde ekstra padding ekle (içerik navbar'ın altında görünsün)
- * 4. Viewport yüksekliğini hesaba kat
+ * Strateji (Mobil):
+ * 1. Element'in sayfadaki gerçek pozisyonunu piksel hassasiyetiyle bul
+ * 2. Navbar yüksekliğini dinamik olarak hesapla
+ * 3. Viewport yüksekliğine göre optimal padding hesapla
+ * 4. Element yüksekliğini hesaba kat (küçük elementler için)
+ * 5. Scroll pozisyonunu hesapla ve güvenli aralıkta tut
  */
 function calculateOptimalScrollPosition(element: HTMLElement, deviceType: 'ultraMobile' | 'mobile' | 'desktop'): number {
-  // Element'in sayfadaki mutlak pozisyonu
+  // Element'in sayfadaki mutlak pozisyonu (piksel hassasiyeti)
   const elementRect = element.getBoundingClientRect();
   const elementTop = elementRect.top + window.pageYOffset;
+  const elementHeight = elementRect.height;
   
-  // Navbar yüksekliği
+  // Navbar yüksekliği (dinamik)
   const navbarHeight = getNavbarHeight();
   
-  // Viewport yüksekliği
-  const viewportHeight = window.innerHeight;
-  
-  // Mobil için ekstra padding (içerik navbar'ın çok altında görünsün)
-  let mobilePadding = 0;
-  if (deviceType === 'ultraMobile') {
-    mobilePadding = viewportHeight * 0.15; // Viewport'un %15'i kadar padding
-  } else if (deviceType === 'mobile') {
-    mobilePadding = viewportHeight * 0.12; // Viewport'un %12'si kadar padding
+  // Desktop için klasik davranış (DEĞİŞİKLİK YOK)
+  if (deviceType === 'desktop') {
+    return elementTop - navbarHeight - 20; // Klasik 20px padding
   }
   
-  // Desktop için minimal padding
-  const desktopPadding = deviceType === 'desktop' ? 20 : 0;
+  // MOBILE ONLY - Enhanced calculation
+  const viewportHeight = window.innerHeight;
+  
+  // Viewport bazlı dinamik padding
+  // Ultra-mobile: %18 (daha fazla aşağı)
+  // Mobile: %15 (optimal)
+  const paddingPercentage = deviceType === 'ultraMobile' ? 0.18 : 0.15;
+  let mobilePadding = viewportHeight * paddingPercentage;
+  
+  // Küçük elementler için ekstra padding (element yüksekliği < viewport'un %30'u)
+  if (elementHeight < viewportHeight * 0.3) {
+    mobilePadding += 30; // Ekstra 30px
+  }
   
   // Final scroll pozisyonu
-  // Element'in üstü - navbar yüksekliği - mobil padding + desktop padding
-  const scrollPosition = elementTop - navbarHeight - mobilePadding + desktopPadding;
+  const scrollPosition = elementTop - navbarHeight - mobilePadding;
   
-  return Math.max(0, scrollPosition); // Negatif değer olmasın
+  // Güvenli aralıkta tut (minimum 0, maksimum sayfa sonu)
+  const maxScroll = document.documentElement.scrollHeight - viewportHeight;
+  return Math.max(0, Math.min(scrollPosition, maxScroll));
 }
 
 /**
- * Verify and correct scroll position
- * Scroll sonrası pozisyonu doğrula ve gerekirse düzelt
+ * Verify and correct scroll position - ENHANCED
+ * Çoklu doğrulama ile hassas pozisyon kontrolü
+ * Mobil için agresif düzeltme, desktop için minimal müdahale
  */
-function verifyAndCorrectScroll(element: HTMLElement, deviceType: 'ultraMobile' | 'mobile' | 'desktop', attempt: number = 0): void {
-  if (attempt > 3) return; // Maksimum 3 deneme
+function verifyAndCorrectScroll(
+  element: HTMLElement, 
+  deviceType: 'ultraMobile' | 'mobile' | 'desktop', 
+  targetPadding: number,
+  attempt: number = 0
+): void {
+  // Maksimum 5 deneme (daha fazla şans)
+  if (attempt > 5) {
+    if (process.env.NODE_ENV === 'development') {
+      console.warn(`⚠️ Scroll verification failed after 5 attempts`);
+    }
+    return;
+  }
   
   const rect = element.getBoundingClientRect();
   const navbarHeight = getNavbarHeight();
   const viewportHeight = window.innerHeight;
   
-  // Mobilde ideal pozisyon: navbar'ın altında, viewport'un üst %20'sinde
-  const idealTopPosition = deviceType === 'desktop' 
-    ? navbarHeight + 20 
-    : navbarHeight + (viewportHeight * 0.15);
-  
-  const currentTopPosition = rect.top;
-  const positionDifference = Math.abs(currentTopPosition - idealTopPosition);
-  
-  // Eğer pozisyon farkı 50px'den fazlaysa düzelt
-  if (positionDifference > 50) {
-    const correction = currentTopPosition - idealTopPosition;
+  // Desktop için minimal kontrol
+  if (deviceType === 'desktop') {
+    const idealTop = navbarHeight + 20;
+    const currentTop = rect.top;
+    const difference = Math.abs(currentTop - idealTop);
     
+    // 50px'den fazla sapma varsa düzelt
+    if (difference > 50) {
+      window.scrollBy({
+        top: currentTop - idealTop,
+        behavior: 'smooth'
+      });
+      
+      setTimeout(() => {
+        verifyAndCorrectScroll(element, deviceType, targetPadding, attempt + 1);
+      }, 300);
+    }
+    return;
+  }
+  
+  // MOBILE ONLY - Hassas kontrol
+  const idealTop = navbarHeight + targetPadding;
+  const currentTop = rect.top;
+  const difference = Math.abs(currentTop - idealTop);
+  
+  // 30px tolerans (daha hassas)
+  if (difference > 30) {
+    const correction = currentTop - idealTop;
+    
+    // Smooth scroll ile düzelt
     window.scrollBy({
       top: correction,
       behavior: 'smooth'
     });
     
-    // Tekrar kontrol et
+    // Daha kısa aralıklarla tekrar kontrol (300ms)
     setTimeout(() => {
-      verifyAndCorrectScroll(element, deviceType, attempt + 1);
-    }, 400);
+      verifyAndCorrectScroll(element, deviceType, targetPadding, attempt + 1);
+    }, 300);
+  } else {
+    // Başarılı!
+    if (process.env.NODE_ENV === 'development') {
+      console.log(`✅ Scroll verified successfully (attempt ${attempt + 1}, difference: ${difference.toFixed(1)}px)`);
+    }
   }
 }
 
 /**
- * MAIN SCROLL FUNCTION - Dynamic & Intelligent
+ * MAIN SCROLL FUNCTION - Enhanced & Intelligent
  * 
  * @param elementId - Target element ID
  * @param offset - Manual offset (optional, overrides automatic calculation)
@@ -137,19 +186,27 @@ export function smoothScrollToElement(elementId: string, offset?: number): void 
     window.scrollTo(0, scrollPosition);
   }
   
-  // Verify and correct after scroll completes
+  // Calculate target padding for verification
+  const viewportHeight = window.innerHeight;
+  const targetPadding = deviceType === 'desktop' 
+    ? 20 
+    : viewportHeight * (deviceType === 'ultraMobile' ? 0.18 : 0.15);
+  
+  // Verify and correct after scroll completes (600ms for smooth scroll)
   setTimeout(() => {
-    verifyAndCorrectScroll(element, deviceType);
+    verifyAndCorrectScroll(element, deviceType, targetPadding);
   }, 600);
   
   // Development logging
   if (process.env.NODE_ENV === 'development') {
-    console.log(`🎯 Dynamic Scroll to ${elementId}:`, {
+    console.log(`🎯 Enhanced Scroll to ${elementId}:`, {
       deviceType,
       navbarHeight: getNavbarHeight(),
-      viewportHeight: window.innerHeight,
+      viewportHeight,
       elementTop: element.getBoundingClientRect().top + window.pageYOffset,
+      elementHeight: element.getBoundingClientRect().height,
       scrollPosition,
+      targetPadding: targetPadding.toFixed(1),
       calculatedAutomatically: offset === undefined
     });
   }

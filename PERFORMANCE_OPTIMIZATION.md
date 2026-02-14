@@ -296,4 +296,4 @@ Lighthouse: 92/100 (+27 points)
 
 **DURUM**: ✅ PERFORMANS HEDEFLERİ AŞILDI  
 **SON GÜNCELLEME**: 2026-01-21  
-**SORUMLU**: Kiro AI Performance Team
+**SORUMLU**: ABT MECHATRONICS Performance Team

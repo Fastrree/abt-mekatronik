@@ -100,8 +100,18 @@ export const Navbar = memo(function Navbar() {
           {/* Hamburger Menu - Mobile & Desktop */}
           <div 
             className="relative"
-            onMouseEnter={() => setIsQuickMenuOpen(true)}
-            onMouseLeave={() => setIsQuickMenuOpen(false)}
+            onMouseEnter={(e) => {
+              // Only trigger on desktop (devices with hover capability)
+              if (window.matchMedia('(hover: hover)').matches) {
+                setIsQuickMenuOpen(true);
+              }
+            }}
+            onMouseLeave={(e) => {
+              // Only trigger on desktop (devices with hover capability)
+              if (window.matchMedia('(hover: hover)').matches) {
+                setIsQuickMenuOpen(false);
+              }
+            }}
           >
             <button
               onClick={() => setIsQuickMenuOpen(!isQuickMenuOpen)}
@@ -111,6 +121,8 @@ export const Navbar = memo(function Navbar() {
                   : "text-white border-zinc-700/50 hover:border-red-500 hover:bg-red-600/10 hover:shadow-lg hover:shadow-red-600/20"
               } ${isQuickMenuOpen ? 'border-red-500 bg-red-600/10 shadow-lg shadow-red-600/20' : ''}`}
               aria-label={t('nav.quickAccess')}
+              aria-expanded={isQuickMenuOpen}
+              aria-haspopup="true"
             >
               <Menu size={20} className="xs:w-4 xs:h-4 group-hover:scale-110 transition-transform" />
               <ChevronDown size={14} className={`transition-all hidden sm:block xs:w-3 xs:h-3 group-hover:scale-110 ${isQuickMenuOpen ? 'rotate-180' : ''}`} />

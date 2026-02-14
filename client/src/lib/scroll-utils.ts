@@ -3,23 +3,26 @@
  * 
  * Mobil ve desktop için optimize edilmiş scroll fonksiyonları
  * Navbar yüksekliğini hesaba katarak doğru pozisyona scroll yapar
+ * 
+ * ULTRA-MOBILE OPTIMIZATION (300px-340px)
  */
 
 /**
  * Section-specific offset configuration
  * Her section için özel offset değerleri
- * Mobile: Daha küçük navbar + tam görünüm için optimize
- * Desktop: Standart navbar yüksekliği
+ * Ultra-mobile: 300-340px ekranlar için özel ayar
+ * Mobile: 341-767px ekranlar
+ * Desktop: 768px+
  */
-const SECTION_OFFSETS: Record<string, { mobile: number; desktop: number }> = {
-  products: { mobile: 70, desktop: 20 },      // Ürünler - mobilde tam görünür
-  engineering: { mobile: 70, desktop: 60 },   // Mühendislik - mobilde tam görünür
-  projects: { mobile: 70, desktop: 40 },      // Projeler - mobilde tam görünür
-  faq: { mobile: 70, desktop: 80 },           // SSS - mobilde tam görünür
-  testimonials: { mobile: 70, desktop: 80 },  // Referanslar - mobilde tam görünür
-  partners: { mobile: 70, desktop: 80 },      // Partnerler - mobilde tam görünür
-  contact: { mobile: 60, desktop: -10 },      // İletişim - mobilde footer tam görünür
-  default: { mobile: 70, desktop: 80 },       // Varsayılan
+const SECTION_OFFSETS: Record<string, { ultraMobile: number; mobile: number; desktop: number }> = {
+  products: { ultraMobile: 60, mobile: 70, desktop: 20 },
+  engineering: { ultraMobile: 60, mobile: 70, desktop: 60 },
+  projects: { ultraMobile: 60, mobile: 70, desktop: 40 },
+  faq: { ultraMobile: 60, mobile: 70, desktop: 80 },
+  testimonials: { ultraMobile: 60, mobile: 70, desktop: 80 },
+  partners: { ultraMobile: 60, mobile: 70, desktop: 80 },
+  contact: { ultraMobile: 50, mobile: 60, desktop: -10 },
+  default: { ultraMobile: 60, mobile: 70, desktop: 80 },
 };
 
 /**
@@ -32,7 +35,17 @@ function getNavbarHeight(): number {
 }
 
 /**
- * Smooth scroll to element with mobile optimization
+ * Detect device type based on screen width
+ */
+function getDeviceType(): 'ultraMobile' | 'mobile' | 'desktop' {
+  const width = window.innerWidth;
+  if (width <= 340) return 'ultraMobile';
+  if (width < 768) return 'mobile';
+  return 'desktop';
+}
+
+/**
+ * Smooth scroll to element with ultra-mobile optimization
  * 
  * @param elementId - Target element ID
  * @param offset - Additional offset (default: auto-calculated based on screen size and section)
@@ -44,17 +57,30 @@ export function smoothScrollToElement(elementId: string, offset?: number): void 
     return;
   }
 
-  // Auto-calculate offset based on screen size and section
-  const isMobile = window.innerWidth < 768; // md breakpoint
+  // Detect device type
+  const deviceType = getDeviceType();
   const sectionConfig = SECTION_OFFSETS[elementId] || SECTION_OFFSETS.default;
+  
+  // Get appropriate offset based on device
+  let baseOffset: number;
+  switch (deviceType) {
+    case 'ultraMobile':
+      baseOffset = sectionConfig.ultraMobile;
+      break;
+    case 'mobile':
+      baseOffset = sectionConfig.mobile;
+      break;
+    case 'desktop':
+      baseOffset = sectionConfig.desktop;
+      break;
+  }
   
   // Use dynamic navbar height for more accurate positioning
   const navbarHeight = getNavbarHeight();
-  const baseOffset = isMobile ? sectionConfig.mobile : sectionConfig.desktop;
   
-  // Add extra padding for mobile to ensure content is fully visible
-  const mobilePadding = isMobile ? 10 : 0;
-  const scrollOffset = offset ?? (baseOffset + mobilePadding);
+  // Add extra padding for ultra-mobile to ensure content is fully visible
+  const extraPadding = deviceType === 'ultraMobile' ? 15 : (deviceType === 'mobile' ? 10 : 0);
+  const scrollOffset = offset ?? (baseOffset + extraPadding);
 
   // Get element position
   const elementPosition = element.getBoundingClientRect().top;
@@ -71,14 +97,30 @@ export function smoothScrollToElement(elementId: string, offset?: number): void 
     window.scrollTo(0, offsetPosition);
   }
   
+  // Additional check: After scroll completes, verify element is visible
+  setTimeout(() => {
+    const rect = element.getBoundingClientRect();
+    const isVisible = rect.top >= navbarHeight && rect.top < window.innerHeight;
+    
+    if (!isVisible) {
+      // Fine-tune scroll if element is not properly visible
+      const adjustment = deviceType === 'ultraMobile' ? -20 : -10;
+      window.scrollBy({
+        top: adjustment,
+        behavior: 'smooth'
+      });
+    }
+  }, 600); // Wait for smooth scroll to complete
+  
   // Log for debugging (remove in production)
   if (process.env.NODE_ENV === 'development') {
     console.log(`Scrolling to ${elementId}:`, {
-      isMobile,
+      deviceType,
       navbarHeight,
       scrollOffset,
       elementPosition,
-      finalPosition: offsetPosition
+      finalPosition: offsetPosition,
+      extraPadding
     });
   }
 }

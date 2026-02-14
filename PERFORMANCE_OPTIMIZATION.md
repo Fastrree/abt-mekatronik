@@ -255,30 +255,6 @@ Lighthouse: 92/100 (+27 points)
 - 📅 Aylık: Performance review
 - 📅 Çeyrek yıllık: Comprehensive audit
 
----
-
-## 🚀 GELECEKTEKİ İYİLEŞTİRMELER
-
-### Kısa Vadeli (1-2 ay)
-- [ ] Service Worker (PWA) - Offline support
-- [ ] Image CDN (Cloudflare R2) - Daha hızlı image delivery
-- [ ] Brotli compression - %20 daha küçük bundle
-- [ ] HTTP/3 support - Daha hızlı network
-
-### Orta Vadeli (3-6 ay)
-- [ ] Edge rendering (Vercel Edge Functions)
-- [ ] Incremental Static Regeneration (ISR)
-- [ ] Advanced caching strategies
-- [ ] WebAssembly for heavy computations
-
-### Uzun Vadeli (6-12 ay)
-- [ ] Micro-frontends architecture
-- [ ] GraphQL for data fetching
-- [ ] Advanced prefetching strategies
-- [ ] AI-powered performance optimization
-
----
-
 ## 📚 KAYNAKLAR
 
 ### Araçlar

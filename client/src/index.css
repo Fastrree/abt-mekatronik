@@ -390,109 +390,109 @@
     max-width: 100vw;
   }
   
-  /* Ultra-compact container */
+  /* Compact container (not ultra-compact) */
   .container {
-    padding-left: 0.5rem !important;
-    padding-right: 0.5rem !important;
+    padding-left: 0.625rem !important; /* 10px instead of 8px */
+    padding-right: 0.625rem !important;
     max-width: 100% !important;
   }
   
-  /* Ultra-small typography */
+  /* Balanced typography (not ultra-small) */
   h1 {
-    font-size: 1.75rem !important;
+    font-size: 1.875rem !important; /* 30px instead of 28px */
     line-height: 1.1 !important;
   }
   
   h2 {
-    font-size: 1.25rem !important;
+    font-size: 1.375rem !important; /* 22px instead of 20px */
     line-height: 1.2 !important;
   }
   
   h3 {
-    font-size: 1.125rem !important;
+    font-size: 1.125rem !important; /* Keep 18px */
   }
   
   p, span, div {
-    font-size: 0.8125rem !important;
+    font-size: 0.875rem !important; /* 14px instead of 13px - more readable */
   }
   
-  /* Ultra-compact buttons */
+  /* Compact buttons (not ultra-compact) */
   button, .btn {
-    padding: 0.375rem 0.5rem !important;
-    font-size: 0.75rem !important;
-    min-width: 40px !important;
-    min-height: 40px !important;
+    padding: 0.5rem 0.75rem !important; /* Slightly larger */
+    font-size: 0.8125rem !important; /* 13px instead of 12px */
+    min-width: 44px !important; /* 44px instead of 40px - better touch target */
+    min-height: 44px !important;
   }
   
-  /* Navbar ultra-compact */
+  /* Navbar compact (not ultra-compact) */
   nav {
-    padding-top: 0.375rem !important;
-    padding-bottom: 0.375rem !important;
+    padding-top: 0.5rem !important; /* Slightly more breathing room */
+    padding-bottom: 0.5rem !important;
   }
   
   nav .container {
-    gap: 0.125rem !important;
-    padding-left: 0.25rem !important;
-    padding-right: 0.25rem !important;
+    gap: 0.25rem !important; /* Slightly more gap */
+    padding-left: 0.375rem !important;
+    padding-right: 0.375rem !important;
   }
   
-  /* Logo ultra-small */
+  /* Logo balanced */
   nav a {
-    font-size: 0.875rem !important;
+    font-size: 0.9375rem !important; /* 15px instead of 14px */
   }
   
   nav a span:first-child {
-    font-size: 1rem !important;
+    font-size: 1.125rem !important; /* 18px instead of 16px */
   }
   
   nav a span:last-child {
-    font-size: 0.5rem !important;
+    font-size: 0.625rem !important; /* 10px instead of 8px */
   }
   
-  /* Icon buttons ultra-small */
+  /* Icon buttons balanced */
   nav button {
-    padding: 0.25rem !important;
-    min-width: 36px !important;
-    min-height: 36px !important;
+    padding: 0.375rem !important; /* Slightly larger */
+    min-width: 40px !important; /* Keep 40px */
+    min-height: 40px !important;
   }
   
   nav button svg {
-    width: 16px !important;
-    height: 16px !important;
+    width: 18px !important; /* 18px instead of 16px */
+    height: 18px !important;
   }
   
-  /* Hero section ultra-compact */
+  /* Hero section compact */
   section {
-    padding-top: 1rem !important;
-    padding-bottom: 1rem !important;
+    padding-top: 1.5rem !important; /* More breathing room */
+    padding-bottom: 1.5rem !important;
   }
   
   #hero {
-    min-height: 400px !important;
+    min-height: 450px !important; /* Slightly taller */
   }
   
   #hero h1 {
-    font-size: 1.75rem !important;
-    line-height: 1 !important;
-    margin-bottom: 0.5rem !important;
+    font-size: 1.875rem !important; /* 30px - more readable */
+    line-height: 1.1 !important;
+    margin-bottom: 0.75rem !important;
   }
   
   #hero p {
-    font-size: 0.75rem !important;
-    line-height: 1.3 !important;
-    margin-bottom: 0.75rem !important;
+    font-size: 0.875rem !important; /* 14px instead of 12px */
+    line-height: 1.4 !important;
+    margin-bottom: 1rem !important;
   }
   
   /* Full width buttons */
   #hero button,
   button {
     width: 100% !important;
-    margin-bottom: 0.375rem !important;
+    margin-bottom: 0.5rem !important;
   }
   
-  /* Ultra-compact grids */
+  /* Compact grids */
   .grid {
-    gap: 0.375rem !important;
+    gap: 0.5rem !important; /* Slightly more gap */
   }
   
   /* Single column on ultra-tiny */

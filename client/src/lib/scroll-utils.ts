@@ -14,17 +14,18 @@
  * Mobile: 341-767px ekranlar
  * Desktop: 768px+
  * 
- * NOT: Mobil offset'ler %15 azaltıldı (daha aşağı scroll için)
+ * NOT: Contact (Teklif Al) butonuna göre optimize edildi
+ * Contact için -110px (150px daha aşağı), diğerleri orantılı ayarlandı
  */
 const SECTION_OFFSETS: Record<string, { ultraMobile: number; mobile: number; desktop: number }> = {
-  products: { ultraMobile: 50, mobile: 60, desktop: 20 },      // 60→50, 70→60
-  engineering: { ultraMobile: 50, mobile: 60, desktop: 60 },   // 60→50, 70→60
-  projects: { ultraMobile: 50, mobile: 60, desktop: 40 },      // 60→50, 70→60
-  faq: { ultraMobile: 50, mobile: 60, desktop: 80 },           // 60→50, 70→60
-  testimonials: { ultraMobile: 50, mobile: 60, desktop: 80 },  // 60→50, 70→60
-  partners: { ultraMobile: 50, mobile: 60, desktop: 80 },      // 60→50, 70→60
-  contact: { ultraMobile: 40, mobile: 50, desktop: -10 },      // 50→40, 60→50
-  default: { ultraMobile: 50, mobile: 60, desktop: 80 },       // 60→50, 70→60
+  products: { ultraMobile: -100, mobile: -90, desktop: 20 },      // Daha fazla aşağı
+  engineering: { ultraMobile: -100, mobile: -90, desktop: 60 },   // Daha fazla aşağı
+  projects: { ultraMobile: -100, mobile: -90, desktop: 40 },      // Daha fazla aşağı
+  faq: { ultraMobile: -100, mobile: -90, desktop: 80 },           // Daha fazla aşağı
+  testimonials: { ultraMobile: -100, mobile: -90, desktop: 80 },  // Daha fazla aşağı
+  partners: { ultraMobile: -100, mobile: -90, desktop: 80 },      // Daha fazla aşağı
+  contact: { ultraMobile: -110, mobile: -100, desktop: -10 },     // 150px daha aşağı (40→-110, 50→-100)
+  default: { ultraMobile: -100, mobile: -90, desktop: 80 },       // Daha fazla aşağı
 };
 
 /**

@@ -33,6 +33,9 @@ function OurExports() {
   const [showTurkeyPulse, setShowTurkeyPulse] = useState(true);
   const [isMapHovered, setIsMapHovered] = useState(false);
   const [isZooming, setIsZooming] = useState(false);
+  
+  // Detect mobile device
+  const isMobile = window.innerWidth < 640;
 
   // PERFORMANCE: Re-enable Twemoji ONLY for flag emojis (Windows compatibility)
   // Windows native emoji doesn't render flags properly, need Twemoji SVGs
@@ -87,14 +90,9 @@ function OurExports() {
 
   useEffect(() => {
     if (!mapRef.current || mapInstance.current) return;
-
-    const isMobile = window.innerWidth < 640;
     
-    // PERFORMANCE: Skip map loading on mobile - show static country list instead
-    if (isMobile) {
-      console.log('Mobile detected: Skipping heavy map library for better performance');
-      return;
-    }
+    // Load map for both mobile and desktop, but disable interactions on mobile
+    console.log(isMobile ? 'Mobile: Loading static map (no interactions)' : 'Desktop: Loading interactive map');
     
     let isCancelled = false; // Cancellation token
 
@@ -147,14 +145,15 @@ function OurExports() {
           return;
         }
 
-        // Mobile'da basitleştirilmiş config
+        // Map configuration - Static on mobile, Interactive on desktop
         const mapConfig: any = {
           selector: "#world-map",
           map: "world",
-          zoomButtons: !isMobile, // Mobile'da zoom butonları kapalı
-          zoomOnScroll: false,
+          zoomButtons: !isMobile, // Disable zoom buttons on mobile
+          zoomOnScroll: false, // Disable scroll zoom
           zoomMax: 12,
           zoomMin: 1,
+          draggable: !isMobile, // Disable dragging on mobile
           regionStyle: {
             initial: { 
               fill: "#d1d5db", 
@@ -162,7 +161,14 @@ function OurExports() {
               strokeWidth: 1, 
               fillOpacity: 1 
             },
-            hover: { 
+            hover: isMobile ? { 
+              // Mobile: No hover effect (static map)
+              fill: "#d1d5db",
+              stroke: "#ffffff",
+              strokeWidth: 1,
+              cursor: "default"
+            } : { 
+              // Desktop: Hover effect enabled
               fill: "#b8bcc2", 
               stroke: "#ffffff", 
               strokeWidth: 1, 
@@ -173,7 +179,14 @@ function OurExports() {
               stroke: "#ffffff", 
               strokeWidth: 1 
             },
-            selectedHover: {
+            selectedHover: isMobile ? {
+              // Mobile: No hover effect on selected regions
+              fill: "#ef4444",
+              stroke: "#ffffff",
+              strokeWidth: 1,
+              cursor: "default"
+            } : {
+              // Desktop: Hover effect on selected regions
               fill: "#dc2626",
               stroke: "#ffffff",
               strokeWidth: 1,
@@ -508,21 +521,8 @@ function OurExports() {
             <p className="text-zinc-600 dark:text-zinc-300 max-w-2xl mx-auto text-base xs:text-sm sm:text-lg px-4 xs:px-0" dir={language === 'ar' ? 'rtl' : 'ltr'}>{t('exports.countries.description')}</p>
           </div>
           <div className="max-w-6xl mx-auto mb-16 xs:mb-12">
-            {/* Mobile: Show static country cards instead of heavy map */}
-            <div className="block sm:hidden mb-8">
-              <div className="grid grid-cols-2 gap-3">
-                {exportCountries.map((country, index) => (
-                  <div key={country.name} className="bg-gradient-to-br from-white to-zinc-50 dark:from-zinc-800 dark:to-zinc-900 p-4 rounded-2xl border-2 border-zinc-200 dark:border-zinc-700 hover:border-red-500 shadow-lg text-center">
-                    <div className="text-4xl mb-2 flag-emoji" style={{ lineHeight: 1 }}>{country.flag}</div>
-                    <h3 className="text-sm font-bold text-zinc-900 dark:text-white">{country.name}</h3>
-                    <p className="text-xs text-zinc-500 dark:text-zinc-300">{t(`exports.regions.${country.regionKey}`)}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-            
-            {/* Desktop: Interactive map */}
-            <div className="hidden sm:block bg-white dark:bg-zinc-800 p-8 xs:p-4 rounded-2xl border-2 border-zinc-200 dark:border-zinc-700 shadow-2xl">
+            {/* Map: Static on mobile (no interactions), Interactive on desktop */}
+            <div className="bg-white dark:bg-zinc-800 p-8 xs:p-4 rounded-2xl border-2 border-zinc-200 dark:border-zinc-700 shadow-2xl mb-8">
               <style>{`
                 .jvm-zoom-btn {
                   background-color: #ef4444 !important;
@@ -565,11 +565,11 @@ function OurExports() {
                 ref={mapRef} 
                 className="w-full relative" 
                 style={{ height: window.innerWidth < 640 ? "400px" : "600px" }}
-                onMouseEnter={() => setIsMapHovered(true)}
-                onMouseLeave={() => setIsMapHovered(false)}
+                onMouseEnter={() => !isMobile && setIsMapHovered(true)}
+                onMouseLeave={() => !isMobile && setIsMapHovered(false)}
               >
-                {/* Türkiye Üretim Merkezi - 5 saniye göster sonra kaybol - Desktop only */}
-                {showTurkeyPulse && (
+                {/* Türkiye Üretim Merkezi - Desktop only */}
+                {showTurkeyPulse && !isMobile && (
                   <div 
                     className="absolute z-40 pointer-events-none animate-in fade-in zoom-in duration-500 hidden sm:block" 
                     style={{ 
@@ -587,8 +587,8 @@ function OurExports() {
                   </div>
                 )}
 
-                {/* Modern Hover Tooltip - Always visible on hover */}
-                {hoveredCountry && !isZooming && (
+                {/* Modern Hover Tooltip - Desktop only */}
+                {hoveredCountry && !isZooming && !isMobile && (
                   <div
                     className="absolute pointer-events-none z-50"
                     style={{
@@ -658,15 +658,17 @@ function OurExports() {
                 </div>
               </div>
             </div>
-          </div>
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4 xs:gap-2">
-            {exportCountries.map((country, index) => (
-              <div key={country.name} className="bg-gradient-to-br from-white to-zinc-50 dark:from-zinc-800 dark:to-zinc-900 p-4 xs:p-3 rounded-2xl border-2 border-zinc-200 dark:border-zinc-700 hover:border-red-500 dark:hover:border-red-500 shadow-lg hover:shadow-2xl hover:shadow-red-600/20 transition-all duration-300 group text-center animate-in slide-up hover:-translate-y-2 hover:scale-105" style={{ animationDelay: `${index * 50}ms` }}>
-                <div className="text-5xl xs:text-4xl mb-2 xs:mb-1.5 group-hover:scale-125 transition-transform duration-300 flag-emoji" style={{ lineHeight: 1 }}>{country.flag}</div>
-                <h3 className="text-sm xs:text-xs font-bold text-zinc-900 dark:text-white mb-1 xs:mb-0.5 break-words leading-tight group-hover:text-red-600 dark:group-hover:text-red-500 transition-colors" dir={language === 'ar' ? 'rtl' : 'ltr'}>{country.name}</h3>
-                <p className="text-[10px] xs:text-[9px] text-zinc-500 dark:text-zinc-300 break-words" dir={language === 'ar' ? 'rtl' : 'ltr'}>{t(`exports.regions.${country.regionKey}`)}</p>
-              </div>
-            ))}
+            
+            {/* Country Cards: Show on all screen sizes below the map */}
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 mt-8">
+              {exportCountries.map((country, index) => (
+                <div key={country.name} className="bg-gradient-to-br from-white to-zinc-50 dark:from-zinc-800 dark:to-zinc-900 p-4 rounded-2xl border-2 border-zinc-200 dark:border-zinc-700 hover:border-red-500 shadow-lg text-center transition-all duration-300 hover:-translate-y-2 hover:scale-105">
+                  <div className="text-4xl mb-2 flag-emoji" style={{ lineHeight: 1 }}>{country.flag}</div>
+                  <h3 className="text-sm font-bold text-zinc-900 dark:text-white">{country.name}</h3>
+                  <p className="text-xs text-zinc-500 dark:text-zinc-300">{t(`exports.regions.${country.regionKey}`)}</p>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>

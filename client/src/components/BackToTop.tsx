@@ -21,7 +21,7 @@ export function BackToTop() {
   return (
     <button
       onClick={scrollToTop}
-      className="fixed bottom-6 left-1/2 -translate-x-1/2 z-40 w-12 h-12 bg-white dark:bg-zinc-800 hover:bg-red-600 border border-zinc-300 dark:border-zinc-600 hover:border-red-600 rounded-full shadow-lg flex items-center justify-center transition-all duration-300 hover:scale-110 group"
+      className="fixed bottom-6 left-1/2 -translate-x-1/2 z-40 w-12 h-12 bg-white dark:bg-zinc-800 hover:bg-red-600 border border-zinc-300 dark:border-zinc-600 hover:border-red-600 rounded-full shadow-lg flex items-center justify-center transition-all duration-300 hover:scale-110 group focus:outline-none focus:ring-4 focus:ring-red-600/30"
       aria-label="Yukarı çık"
     >
       <ArrowUp className="w-5 h-5 text-zinc-700 dark:text-zinc-300 group-hover:text-white transition-colors" />

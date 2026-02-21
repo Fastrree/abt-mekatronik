@@ -54,7 +54,7 @@ export const LanguageSelector = memo(function LanguageSelector({ isScrolled = fa
       {/* Desktop: Full style with flag and language name */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className={`hidden lg:flex items-center gap-2 px-4 py-2.5 backdrop-blur-sm border-2 rounded-2xl transition-all duration-300 hover:scale-105 hover:-translate-y-0.5 hover:shadow-lg ${buttonClasses} ${
+        className={`hidden lg:flex items-center gap-2 px-4 py-2.5 backdrop-blur-sm border-2 rounded-2xl transition-all duration-300 hover:scale-105 hover:-translate-y-0.5 hover:shadow-lg focus:outline-none focus:ring-4 focus:ring-blue-400/30 ${buttonClasses} ${
           isDark ? "hover:shadow-white/20" : isScrolled ? "hover:shadow-zinc-900/20" : "hover:shadow-white/20"
         } ${
           isOpen ? (isDark ? 'bg-white/20 border-white/40' : isScrolled ? 'bg-white border-white/60' : 'bg-white/20 border-white/40') + ' scale-105' : ''
@@ -69,7 +69,7 @@ export const LanguageSelector = memo(function LanguageSelector({ isScrolled = fa
       {/* Mobile: Minimal style with just flag - WCAG AA compliant touch target */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className={`lg:hidden min-w-12 min-h-12 flex items-center justify-center gap-1 px-3 py-3 backdrop-blur-sm border-2 rounded-xl transition-all duration-300 hover:scale-105 hover:-translate-y-0.5 ${buttonClasses} ${
+        className={`lg:hidden min-w-12 min-h-12 flex items-center justify-center gap-1 px-3 py-3 backdrop-blur-sm border-2 rounded-xl transition-all duration-300 hover:scale-105 hover:-translate-y-0.5 focus:outline-none focus:ring-4 focus:ring-blue-400/30 ${buttonClasses} ${
           isOpen ? (isDark ? 'bg-white/20 border-white/40' : isScrolled ? 'bg-white border-white/60' : 'bg-white/20 border-white/40') + ' scale-105' : ''
         }`}
         aria-label={t('nav.selectLanguage')}
@@ -88,7 +88,7 @@ export const LanguageSelector = memo(function LanguageSelector({ isScrolled = fa
               <button
                 key={lang.code}
                 onClick={() => handleSelect(lang.code)}
-                className={`w-full flex items-center gap-1.5 sm:gap-2.5 px-2.5 py-2 sm:px-3 sm:py-2.5 text-left hover:bg-zinc-700 transition-all duration-200 hover:scale-[1.02] hover:translate-x-1 ${
+                className={`w-full flex items-center gap-1.5 sm:gap-2.5 px-2.5 py-2 sm:px-3 sm:py-2.5 text-left hover:bg-zinc-700 transition-all duration-200 hover:scale-[1.02] hover:translate-x-1 focus:outline-none focus:ring-2 focus:ring-blue-400/50 focus:ring-inset ${
                   language === lang.code ? 'bg-gradient-to-r from-red-600/30 to-red-600/10 text-red-400 font-bold border-l-4 border-red-500' : 'text-white hover:text-red-400'
                 }`}
               >

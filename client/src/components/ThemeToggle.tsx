@@ -38,7 +38,7 @@ export const ThemeToggle = memo(function ThemeToggle() {
   if (!mounted) {
     return (
       <button
-        className={`min-w-12 min-h-12 w-12 h-12 lg:w-11 lg:h-11 flex items-center justify-center backdrop-blur-sm rounded-2xl border-2 ${buttonClasses}`}
+        className={`min-w-12 min-h-12 w-12 h-12 lg:w-11 lg:h-11 flex items-center justify-center backdrop-blur-sm rounded-2xl border-2 focus:outline-none focus:ring-4 focus:ring-amber-400/30 ${buttonClasses}`}
         disabled
         aria-label="Toggle theme"
       >
@@ -50,7 +50,7 @@ export const ThemeToggle = memo(function ThemeToggle() {
   return (
     <button
       onClick={handleThemeToggle}
-      className={`min-w-12 min-h-12 w-12 h-12 lg:w-11 lg:h-11 flex items-center justify-center backdrop-blur-sm rounded-2xl border-2 hover:scale-105 hover:-translate-y-0.5 hover:shadow-lg transition-all duration-300 group ${buttonClasses} ${
+      className={`min-w-12 min-h-12 w-12 h-12 lg:w-11 lg:h-11 flex items-center justify-center backdrop-blur-sm rounded-2xl border-2 hover:scale-105 hover:-translate-y-0.5 hover:shadow-lg transition-all duration-300 group focus:outline-none focus:ring-4 focus:ring-amber-400/30 ${buttonClasses} ${
         isDark ? "hover:shadow-white/20" : isScrolled ? "hover:shadow-zinc-900/20" : "hover:shadow-white/20"
       }`}
       aria-label="Toggle theme"

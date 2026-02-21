@@ -174,7 +174,7 @@ export default function Home() {
             {/* Konveyör Sistemleri */}
             <a 
               href="/products/konveyor"
-              className="group relative h-[450px] xs:h-[350px] overflow-hidden bg-white dark:bg-zinc-800 border border-zinc-300 dark:border-red-600/30 border-t-0 hover:border-t-4 hover:border-t-red-600 dark:hover:border-t-red-500 transition-all cursor-pointer shadow-lg dark:shadow-none animate-in slide-up duration-600"
+              className="group relative h-[450px] xs:h-[350px] overflow-hidden bg-white dark:bg-zinc-800 border border-zinc-300 dark:border-red-600/30 border-t-0 hover:border-t-4 hover:border-t-red-600 dark:hover:border-t-red-500 transition-all cursor-pointer shadow-lg dark:shadow-none animate-in slide-up duration-600 focus:outline-none focus:ring-4 focus:ring-red-600/30"
               role="listitem"
               aria-label={`${t('productItems.konveyor.title')} - Detayları görüntülemek için tıklayın`}
             >
@@ -208,7 +208,7 @@ export default function Home() {
             {/* Tekstil Makinaları */}
             <a 
               href="/products/tekstil"
-              className="group relative h-[450px] xs:h-[350px] overflow-hidden bg-white dark:bg-zinc-800 border border-zinc-300 dark:border-red-600/30 border-t-0 hover:border-t-4 hover:border-t-red-600 dark:hover:border-t-red-500 transition-all cursor-pointer shadow-lg dark:shadow-none animate-in slide-up duration-600 delay-100"
+              className="group relative h-[450px] xs:h-[350px] overflow-hidden bg-white dark:bg-zinc-800 border border-zinc-300 dark:border-red-600/30 border-t-0 hover:border-t-4 hover:border-t-red-600 dark:hover:border-t-red-500 transition-all cursor-pointer shadow-lg dark:shadow-none animate-in slide-up duration-600 delay-100 focus:outline-none focus:ring-4 focus:ring-red-600/30"
               role="listitem"
               aria-label={`${t('productItems.tekstil.title')} - Detayları görüntülemek için tıklayın`}
             >
@@ -242,7 +242,7 @@ export default function Home() {
             {/* Çelik Konstrüksiyon */}
             <a 
               href="/products/celik"
-              className="group relative h-[450px] xs:h-[350px] overflow-hidden bg-white dark:bg-zinc-800 border border-zinc-300 dark:border-red-600/30 border-t-0 hover:border-t-4 hover:border-t-red-600 dark:hover:border-t-red-500 transition-all cursor-pointer shadow-lg dark:shadow-none animate-in slide-up duration-600 delay-200"
+              className="group relative h-[450px] xs:h-[350px] overflow-hidden bg-white dark:bg-zinc-800 border border-zinc-300 dark:border-red-600/30 border-t-0 hover:border-t-4 hover:border-t-red-600 dark:hover:border-t-red-500 transition-all cursor-pointer shadow-lg dark:shadow-none animate-in slide-up duration-600 delay-200 focus:outline-none focus:ring-4 focus:ring-red-600/30"
               role="listitem"
               aria-label={`${t('productItems.celik.title')} - Detayları görüntülemek için tıklayın`}
             >
@@ -276,7 +276,7 @@ export default function Home() {
             {/* Özel Makine Tasarımı */}
             <a 
               href="/products/ozelMakine"
-              className="group relative h-[450px] xs:h-[350px] overflow-hidden bg-white dark:bg-zinc-800 border border-zinc-300 dark:border-red-600/30 border-t-0 hover:border-t-4 hover:border-t-red-600 dark:hover:border-t-red-500 transition-all cursor-pointer shadow-lg dark:shadow-none animate-in slide-up duration-600 delay-300"
+              className="group relative h-[450px] xs:h-[350px] overflow-hidden bg-white dark:bg-zinc-800 border border-zinc-300 dark:border-red-600/30 border-t-0 hover:border-t-4 hover:border-t-red-600 dark:hover:border-t-red-500 transition-all cursor-pointer shadow-lg dark:shadow-none animate-in slide-up duration-600 delay-300 focus:outline-none focus:ring-4 focus:ring-red-600/30"
               role="listitem"
               aria-label={`${t('productItems.ozelMakine.title')} - Detayları görüntülemek için tıklayın`}
             >

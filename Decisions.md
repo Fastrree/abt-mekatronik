@@ -920,5 +920,91 @@ Implement comprehensive accessibility enhancements across all pages, prioritizin
 
 ---
 
+## ADR-010: Canonical URL Implementation for Perfect SEO
+
+**Date**: 2026-02-21  
+**Status**: Accepted  
+**Tags**: seo, canonical, google
+
+### Context
+PageSpeed Insights showed SEO score of 92/100 on About and product pages due to missing or incorrect canonical URLs. Ana sayfa had 100/100 because canonical was set in index.html, but other pages lacked proper canonical tags.
+
+### Problem
+- About page: 92/100 SEO (missing canonical)
+- Exports page: 92/100 SEO (missing canonical)
+- Product pages: 92/100 SEO (missing canonical)
+- PageSpeed warning: "Document does not have a valid rel=canonical"
+- Potential duplicate content issues
+
+### Decision
+Implement dynamic canonical URL management using custom React hook (`useCanonical`).
+
+### Implementation
+
+**Created useCanonical Hook:**
+```typescript
+// src/hooks/useCanonical.ts
+export function useCanonical(path: string, baseUrl: string = 'https://abt-mekatronik.vercel.app') {
+  useEffect(() => {
+    const canonicalUrl = `${baseUrl}${path}`;
+    let canonicalLink = document.querySelector('link[rel="canonical"]');
+    
+    if (canonicalLink) {
+      canonicalLink.href = canonicalUrl;
+    } else {
+      canonicalLink = document.createElement('link');
+      canonicalLink.rel = 'canonical';
+      canonicalLink.href = canonicalUrl;
+      document.head.appendChild(canonicalLink);
+    }
+    
+    return () => {
+      // Reset to homepage on unmount
+      const link = document.querySelector('link[rel="canonical"]');
+      if (link) link.href = baseUrl + '/';
+    };
+  }, [path, baseUrl]);
+}
+```
+
+**Applied to All Pages:**
+- About: `useCanonical('/about')`
+- Exports: `useCanonical('/exports')`
+- Product Detail: `useCanonical(\`/products/${productKey}\`)`
+
+### Rationale
+- Single source of truth for canonical URLs
+- Dynamic updates based on route
+- Prevents duplicate content penalties
+- Improves Google indexing
+- Fixes PageSpeed SEO warnings
+
+### Consequences
+**Positive**:
+- All pages expected to reach 100/100 SEO score
+- Eliminates duplicate content issues
+- Better Google indexing and ranking
+- Consistent canonical URL management
+- Easy to maintain and extend
+
+**Negative**:
+- Additional hook dependency
+- Slight overhead (negligible)
+- Requires testing across all pages
+
+### Expected Results
+- About page: 92 → 100 SEO (+8 points)
+- Exports page: 92 → 100 SEO (+8 points)
+- Product pages: 92 → 100 SEO (+8 points)
+- Average SEO score: 94.6 → 100 (+5.4 points)
+
+### Validation
+- PageSpeed Insights: No canonical warnings
+- Google Search Console: Proper indexing
+- All pages have unique canonical URLs
+- No duplicate content flags
+
+---
+
 **STATUS**: ACTIVE & ENFORCED  
 **LAST UPDATED**: 2026-02-21

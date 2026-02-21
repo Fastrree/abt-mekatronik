@@ -6,11 +6,15 @@ import { OptimizedImage } from "@/components/OptimizedImage";
 import { Award, Target, Users, Zap, CheckCircle, TrendingUp } from "lucide-react";
 import { useState, useCallback } from "react";
 import { aboutTranslations } from "@/lib/about-translations";
+import { useCanonical } from "@/hooks/useCanonical";
 
 type ProductKey = 'konveyor' | 'tekstil' | 'celik' | 'ozelMakine';
 
 export default function About() {
   const { language } = useI18n();
+  
+  // SEO: Set canonical URL for this page
+  useCanonical('/about');
 
   // Custom translation function for about page
   const t = (key: string): string => {

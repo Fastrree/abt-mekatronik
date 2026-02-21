@@ -26,6 +26,7 @@ import { useI18n } from "@/lib/i18n";
 import { productTranslations } from "@/lib/product-translations";
 import { OptimizedImage } from "@/components/OptimizedImage";
 import { ImageLightbox } from "@/components/ImageLightbox";
+import { useCanonical } from "@/hooks/useCanonical";
 
 const productIcons = {
   konveyor: Truck,
@@ -91,6 +92,9 @@ export default function ProductDetail() {
   const [lightboxIndex, setLightboxIndex] = useState(0);
   
   const productKey = params.productKey;
+  
+  // SEO: Set canonical URL for this product page
+  useCanonical(`/products/${productKey || ''}`);
 
   // Validate product key
   useEffect(() => {

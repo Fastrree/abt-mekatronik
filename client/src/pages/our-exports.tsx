@@ -6,6 +6,7 @@ import { smoothScrollToElement } from "@/lib/scroll-utils";
 import { Globe, TrendingUp, Award, Package, Ship, CheckCircle } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { useI18n } from "@/lib/i18n";
+import { useCanonical } from "@/hooks/useCanonical";
 
 // Twemoji type declaration
 declare global {
@@ -18,6 +19,9 @@ declare global {
 
 function OurExports() {
   const { language, t } = useI18n();
+  
+  // SEO: Set canonical URL for this page
+  useCanonical('/exports');
   
   const mapRef = useRef<HTMLDivElement>(null);
   const mapInstance = useRef<any>(null);

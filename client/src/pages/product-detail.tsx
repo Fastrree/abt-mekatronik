@@ -27,6 +27,7 @@ import { productTranslations } from "@/lib/product-translations";
 import { OptimizedImage } from "@/components/OptimizedImage";
 import { ImageLightbox } from "@/components/ImageLightbox";
 import { useCanonical } from "@/hooks/useCanonical";
+import { useLanguageLink } from "@/hooks/useLanguageLink";
 
 const productIcons = {
   konveyor: Truck,
@@ -88,6 +89,7 @@ export default function ProductDetail() {
   const params = useParams<{ productKey: string }>();
   const [, setLocation] = useLocation();
   const { language } = useI18n();
+  const { languageLink } = useLanguageLink();
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [lightboxIndex, setLightboxIndex] = useState(0);
   
@@ -99,9 +101,9 @@ export default function ProductDetail() {
   // Validate product key
   useEffect(() => {
     if (!productKey || !(productKey in productIcons)) {
-      setLocation("/");
+      setLocation(languageLink("/"));
     }
-  }, [productKey, setLocation]);
+  }, [productKey, setLocation, languageLink]);
 
   if (!productKey || !(productKey in productIcons)) {
     return null;
@@ -164,7 +166,7 @@ export default function ProductDetail() {
           {/* Back Button */}
           <Button
             variant="ghost"
-            onClick={() => setLocation("/")}
+            onClick={() => setLocation(languageLink("/"))}
             className="mb-8 xs:mb-4 text-white hover:text-red-500 hover:bg-white/10 backdrop-blur-sm border border-white/20 hover:border-red-500/50 transition-all group animate-in fade-in slide-in-from-left duration-500"
             aria-label={heroTranslations.backToHome}
           >

@@ -15,6 +15,7 @@ import { BackToTop } from "@/components/BackToTop";
 import { ExitIntentPopup } from "@/components/ExitIntentPopup";
 import { getLanguageFromPath, getPathWithoutLanguage } from "@/lib/language-utils";
 import { useEffect, lazy, Suspense } from "react";
+import { MAINTENANCE_MODE } from "@/config/maintenance";
 
 // Lazy load pages for code splitting
 const Home = lazy(() => import("@/pages/home"));
@@ -22,6 +23,7 @@ const About = lazy(() => import("@/pages/about"));
 const OurExports = lazy(() => import("@/pages/our-exports"));
 const ProductDetail = lazy(() => import("@/pages/product-detail"));
 const NotFound = lazy(() => import("@/pages/not-found"));
+const Maintenance = lazy(() => import("@/pages/maintenance"));
 
 // Loading fallback component
 function PageLoader() {
@@ -38,6 +40,11 @@ function PageLoader() {
 function Router() {
   const [location, setLocation] = useLocation();
   const { language, setLanguage } = useI18n();
+
+  // MAINTENANCE MODE: Show maintenance page for all routes
+  if (MAINTENANCE_MODE) {
+    return <Maintenance />;
+  }
 
   // CRITICAL: Redirect to language-prefixed URL on initial load
   useEffect(() => {

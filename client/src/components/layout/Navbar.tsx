@@ -6,12 +6,14 @@ import { ThemeToggle } from "@/components/ThemeToggle";
 import { useI18n } from "@/lib/i18n";
 import { smoothScrollToElement } from "@/lib/scroll-utils";
 import { useLocation } from "wouter";
+import { useLanguageLink } from "@/hooks/useLanguageLink";
 
 type ProductKey = 'konveyor' | 'tekstil' | 'celik' | 'ozelMakine';
 
 export const Navbar = memo(function Navbar() {
   const { t, language } = useI18n();
   const [, setLocation] = useLocation();
+  const { languageLink } = useLanguageLink();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isQuickMenuOpen, setIsQuickMenuOpen] = useState(false);
   
@@ -152,7 +154,7 @@ export const Navbar = memo(function Navbar() {
                   {/* 2. Hakkımızda (Separate Page) */}
                   <div className="border-t border-zinc-700/50 mt-2 pt-2">
                     <a
-                      href="/about"
+                      href={languageLink('/about')}
                       onClick={() => setIsQuickMenuOpen(false)}
                       className="block px-4 py-2.5 text-sm font-medium text-white hover:text-red-500 hover:bg-zinc-700/50 rounded-xl transition-all duration-300 hover:translate-x-1"
                       dir={isRTL ? 'rtl' : 'ltr'}
@@ -171,7 +173,7 @@ export const Navbar = memo(function Navbar() {
                       return (
                         <a
                           key={product.key}
-                          href={`/products/${product.key}`}
+                          href={languageLink(`/products/${product.key}`)}
                           onClick={() => setIsQuickMenuOpen(false)}
                           className={`w-full flex items-center px-4 py-2.5 text-sm font-medium text-white hover:text-red-500 hover:bg-zinc-700/50 rounded-xl transition-all duration-300 gap-3 hover:translate-x-1 ${
                             isRTL ? 'flex-row-reverse text-right' : 'text-left'
@@ -244,7 +246,7 @@ export const Navbar = memo(function Navbar() {
                   {/* 9. İhracatlarımız (Separate Page) */}
                   <div className="border-t border-zinc-700/50 mt-2 pt-2">
                     <a
-                      href="/exports"
+                      href={languageLink('/exports')}
                       onClick={() => setIsQuickMenuOpen(false)}
                       className="block px-4 py-2.5 text-sm font-medium text-white hover:text-red-500 hover:bg-zinc-700/50 rounded-xl transition-all duration-300 hover:translate-x-1"
                       dir={isRTL ? 'rtl' : 'ltr'}
@@ -315,7 +317,7 @@ export const Navbar = memo(function Navbar() {
 
           {/* Hakkımızda */}
           <a
-            href="/about"
+            href={languageLink('/about')}
             onClick={closeAllDropdowns}
             className="text-xs font-semibold uppercase tracking-wider py-2.5 text-white hover:text-primary transition-colors relative group whitespace-nowrap"
           >
@@ -364,7 +366,7 @@ export const Navbar = memo(function Navbar() {
 
           {/* İhracatlarımız */}
           <a
-            href="/exports"
+            href={languageLink('/exports')}
             onClick={closeAllDropdowns}
             className="text-xs font-semibold uppercase tracking-wider py-2.5 text-white hover:text-primary transition-colors relative group whitespace-nowrap"
           >

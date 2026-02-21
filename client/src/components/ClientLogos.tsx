@@ -1,5 +1,6 @@
 import { memo } from 'react';
 import { useI18n } from '@/lib/i18n';
+import { useLanguageLink } from '@/hooks/useLanguageLink';
 
 // Client logos - First row (left to right scroll)
 const clientsRow1 = [
@@ -53,6 +54,7 @@ function LogoItem({ client }: LogoItemProps) {
 
 export const ClientLogos = memo(function ClientLogos() {
   const { t } = useI18n();
+  const { languageLink } = useLanguageLink();
 
   // Show only first 8 partners on home page (teaser)
   const featuredClients = clientsRow1.slice(0, 8);
@@ -119,7 +121,7 @@ export const ClientLogos = memo(function ClientLogos() {
       <div className="container mx-auto px-6">
         <div className="text-center animate-in fade-in duration-600" style={{ animationDelay: '400ms' }}>
           <a 
-            href="/exports#ortaklarimiz"
+            href={`${languageLink('/exports')}#ortaklarimiz`}
             className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white font-bold text-base rounded-xl transition-all shadow-xl hover:shadow-2xl hover:scale-105 group"
           >
             <span>{t('clients.viewAll')}</span>

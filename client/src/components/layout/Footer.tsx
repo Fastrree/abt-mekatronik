@@ -2,11 +2,13 @@ import { memo } from 'react';
 import { MapPin, Phone, Mail, Linkedin, Instagram, Facebook, Truck, Factory, Layers, Wrench } from "lucide-react";
 import { useI18n } from "@/lib/i18n";
 import { smoothScrollToElement, smoothScrollToTop } from "@/lib/scroll-utils";
+import { useLanguageLink } from "@/hooks/useLanguageLink";
 
 type ProductKey = 'konveyor' | 'tekstil' | 'celik' | 'ozelMakine';
 
 export const Footer = memo(function Footer() {
   const { t, language } = useI18n();
+  const { languageLink } = useLanguageLink();
   
   const isRTL = language === 'ar';
   
@@ -198,16 +200,16 @@ export const Footer = memo(function Footer() {
             <h3 className="text-zinc-900 dark:text-white font-bold uppercase tracking-wider mb-6" dir={isRTL ? 'rtl' : 'ltr'}>{t('footer.quickAccess')}</h3>
             <ul className="space-y-3 text-sm">
               {/* Hierarchical Navigation - Matches New Page Structure */}
-              <li><a href="/" onClick={handleHomeClick} className="hover:text-primary transition-colors" dir={isRTL ? 'rtl' : 'ltr'}>{t('nav.home')}</a></li>
-              <li><a href="/about" className="hover:text-primary transition-colors" dir={isRTL ? 'rtl' : 'ltr'}>{t('nav.about')}</a></li>
-              <li><a href="/#products" onClick={(e) => handleSectionClick(e, 'products')} className="hover:text-primary transition-colors" dir={isRTL ? 'rtl' : 'ltr'}>{t('nav.products')}</a></li>
-              <li><a href="/#engineering" onClick={(e) => handleSectionClick(e, 'engineering')} className="hover:text-primary transition-colors" dir={isRTL ? 'rtl' : 'ltr'}>{t('nav.engineering')}</a></li>
-              <li><a href="/#projects" onClick={(e) => handleSectionClick(e, 'projects')} className="hover:text-primary transition-colors" dir={isRTL ? 'rtl' : 'ltr'}>{t('nav.projects')}</a></li>
-              <li><a href="/#faq" onClick={(e) => handleSectionClick(e, 'faq')} className="hover:text-primary transition-colors" dir={isRTL ? 'rtl' : 'ltr'}>{t('nav.faq')}</a></li>
-              <li><a href="/#testimonials" onClick={(e) => handleSectionClick(e, 'testimonials')} className="hover:text-primary transition-colors" dir={isRTL ? 'rtl' : 'ltr'}>{t('nav.testimonials')}</a></li>
-              <li><a href="/#partners" onClick={(e) => handleSectionClick(e, 'partners')} className="hover:text-primary transition-colors" dir={isRTL ? 'rtl' : 'ltr'}>{t('nav.partners')}</a></li>
-              <li><a href="/exports" className="hover:text-primary transition-colors" dir={isRTL ? 'rtl' : 'ltr'}>{t('nav.exports')}</a></li>
-              <li><a href="/#contact-map" onClick={(e) => handleSectionClick(e, 'contact-map')} className="hover:text-primary transition-colors" dir={isRTL ? 'rtl' : 'ltr'}>{t('nav.contact')}</a></li>
+              <li><a href={languageLink('/')} onClick={handleHomeClick} className="hover:text-primary transition-colors" dir={isRTL ? 'rtl' : 'ltr'}>{t('nav.home')}</a></li>
+              <li><a href={languageLink('/about')} className="hover:text-primary transition-colors" dir={isRTL ? 'rtl' : 'ltr'}>{t('nav.about')}</a></li>
+              <li><a href={`${languageLink('/')}#products`} onClick={(e) => handleSectionClick(e, 'products')} className="hover:text-primary transition-colors" dir={isRTL ? 'rtl' : 'ltr'}>{t('nav.products')}</a></li>
+              <li><a href={`${languageLink('/')}#engineering`} onClick={(e) => handleSectionClick(e, 'engineering')} className="hover:text-primary transition-colors" dir={isRTL ? 'rtl' : 'ltr'}>{t('nav.engineering')}</a></li>
+              <li><a href={`${languageLink('/')}#projects`} onClick={(e) => handleSectionClick(e, 'projects')} className="hover:text-primary transition-colors" dir={isRTL ? 'rtl' : 'ltr'}>{t('nav.projects')}</a></li>
+              <li><a href={`${languageLink('/')}#faq`} onClick={(e) => handleSectionClick(e, 'faq')} className="hover:text-primary transition-colors" dir={isRTL ? 'rtl' : 'ltr'}>{t('nav.faq')}</a></li>
+              <li><a href={`${languageLink('/')}#testimonials`} onClick={(e) => handleSectionClick(e, 'testimonials')} className="hover:text-primary transition-colors" dir={isRTL ? 'rtl' : 'ltr'}>{t('nav.testimonials')}</a></li>
+              <li><a href={`${languageLink('/')}#partners`} onClick={(e) => handleSectionClick(e, 'partners')} className="hover:text-primary transition-colors" dir={isRTL ? 'rtl' : 'ltr'}>{t('nav.partners')}</a></li>
+              <li><a href={languageLink('/exports')} className="hover:text-primary transition-colors" dir={isRTL ? 'rtl' : 'ltr'}>{t('nav.exports')}</a></li>
+              <li><a href={`${languageLink('/')}#contact-map`} onClick={(e) => handleSectionClick(e, 'contact-map')} className="hover:text-primary transition-colors" dir={isRTL ? 'rtl' : 'ltr'}>{t('nav.contact')}</a></li>
             </ul>
           </div>
 
@@ -219,7 +221,7 @@ export const Footer = memo(function Footer() {
                 return (
                   <li key={product.key}>
                     <a
-                      href={`/products/${product.key}`}
+                      href={languageLink(`/products/${product.key}`)}
                       className={`flex items-center hover:text-primary transition-colors gap-2 ${
                         isRTL ? 'flex-row-reverse text-right' : 'text-left'
                       }`}

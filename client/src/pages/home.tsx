@@ -4,6 +4,7 @@ import { SkipLink } from "@/components/SkipLink";
 import { Button } from "@/components/ui/button";
 import { Settings, Cog, PenTool, ChevronRight, Truck, Factory, Wrench, Layers, Phone, Mail, MapPin, Shield, Award, CheckCircle } from "lucide-react";
 import { useI18n } from "@/lib/i18n";
+import { useLanguageLink } from "@/hooks/useLanguageLink";
 import { smoothScrollToElement } from "@/lib/scroll-utils";
 import { OptimizedImage } from "@/components/OptimizedImage";
 import { FAQ, Testimonials, ClientLogos } from "@/components/LazyComponents";
@@ -12,6 +13,7 @@ import { Suspense, useEffect, useState } from "react";
 
 export default function Home() {
   const { t, language } = useI18n();
+  const { languageLink } = useLanguageLink();
   
   // Detect Edge browser
   const isEdge = /Edg/.test(navigator.userAgent);
@@ -176,7 +178,7 @@ export default function Home() {
           <div className="grid grid-cols-1 xs:grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 xs:gap-2 sm:gap-6" role="list" aria-label="Ürün kategorileri">
             {/* Konveyör Sistemleri */}
             <a 
-              href="/products/konveyor"
+              href={languageLink('/products/konveyor')}
               className="group relative h-[450px] xs:h-[350px] overflow-hidden bg-white dark:bg-zinc-800 border border-zinc-300 dark:border-red-600/30 border-t-0 hover:border-t-4 hover:border-t-red-600 dark:hover:border-t-red-500 transition-all cursor-pointer shadow-lg dark:shadow-none animate-in slide-up duration-600 focus:outline-none focus:ring-4 focus:ring-red-600/30"
               role="listitem"
               aria-label={`${t('productItems.konveyor.title')} - Detayları görüntülemek için tıklayın`}
@@ -210,7 +212,7 @@ export default function Home() {
 
             {/* Tekstil Makinaları */}
             <a 
-              href="/products/tekstil"
+              href={languageLink('/products/tekstil')}
               className="group relative h-[450px] xs:h-[350px] overflow-hidden bg-white dark:bg-zinc-800 border border-zinc-300 dark:border-red-600/30 border-t-0 hover:border-t-4 hover:border-t-red-600 dark:hover:border-t-red-500 transition-all cursor-pointer shadow-lg dark:shadow-none animate-in slide-up duration-600 delay-100 focus:outline-none focus:ring-4 focus:ring-red-600/30"
               role="listitem"
               aria-label={`${t('productItems.tekstil.title')} - Detayları görüntülemek için tıklayın`}
@@ -244,7 +246,7 @@ export default function Home() {
 
             {/* Çelik Konstrüksiyon */}
             <a 
-              href="/products/celik"
+              href={languageLink('/products/celik')}
               className="group relative h-[450px] xs:h-[350px] overflow-hidden bg-white dark:bg-zinc-800 border border-zinc-300 dark:border-red-600/30 border-t-0 hover:border-t-4 hover:border-t-red-600 dark:hover:border-t-red-500 transition-all cursor-pointer shadow-lg dark:shadow-none animate-in slide-up duration-600 delay-200 focus:outline-none focus:ring-4 focus:ring-red-600/30"
               role="listitem"
               aria-label={`${t('productItems.celik.title')} - Detayları görüntülemek için tıklayın`}
@@ -278,7 +280,7 @@ export default function Home() {
 
             {/* Özel Makine Tasarımı */}
             <a 
-              href="/products/ozelMakine"
+              href={languageLink('/products/ozelMakine')}
               className="group relative h-[450px] xs:h-[350px] overflow-hidden bg-white dark:bg-zinc-800 border border-zinc-300 dark:border-red-600/30 border-t-0 hover:border-t-4 hover:border-t-red-600 dark:hover:border-t-red-500 transition-all cursor-pointer shadow-lg dark:shadow-none animate-in slide-up duration-600 delay-300 focus:outline-none focus:ring-4 focus:ring-red-600/30"
               role="listitem"
               aria-label={`${t('productItems.ozelMakine.title')} - Detayları görüntülemek için tıklayın`}

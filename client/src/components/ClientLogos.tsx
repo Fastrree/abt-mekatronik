@@ -44,7 +44,7 @@ function LogoItem({ client }: LogoItemProps) {
           {client.name.charAt(0)}
         </span>
       </div>
-      <span className="text-xs text-zinc-600 dark:text-zinc-400 uppercase tracking-wider font-semibold group-hover:text-red-600 dark:group-hover:text-red-500 transition-colors">
+      <span className="text-xs text-zinc-600 dark:text-zinc-300 uppercase tracking-wider font-semibold group-hover:text-red-600 dark:group-hover:text-red-500 transition-colors">
         {t(`clients.industries.${client.industryKey}`)}
       </span>
     </div>
@@ -62,7 +62,7 @@ export const ClientLogos = memo(function ClientLogos() {
       {/* Title Section - With Container */}
       <div className="container mx-auto px-6 mb-12">
         <div className="text-center animate-in slide-in-from-bottom duration-500">
-          <h3 className="text-zinc-600 dark:text-zinc-400 text-sm uppercase tracking-widest font-semibold mb-2">
+          <h3 className="text-zinc-600 dark:text-zinc-300 text-sm uppercase tracking-widest font-semibold mb-2">
             {t('clients.title')}
           </h3>
           <p className="text-zinc-500 dark:text-zinc-500 text-xs">
@@ -90,7 +90,7 @@ export const ClientLogos = memo(function ClientLogos() {
                   {client.name.charAt(0)}
                 </span>
               </div>
-              <span className="text-xs text-zinc-600 dark:text-zinc-400 uppercase tracking-wider font-semibold group-hover:text-red-600 dark:group-hover:text-red-500 transition-colors text-center">
+              <span className="text-xs text-zinc-600 dark:text-zinc-300 uppercase tracking-wider font-semibold group-hover:text-red-600 dark:group-hover:text-red-500 transition-colors text-center">
                 {t(`clients.industries.${client.industryKey}`)}
               </span>
             </div>
@@ -107,7 +107,7 @@ export const ClientLogos = memo(function ClientLogos() {
                   {client.name.charAt(0)}
                 </span>
               </div>
-              <span className="text-xs text-zinc-600 dark:text-zinc-400 uppercase tracking-wider font-semibold group-hover:text-red-600 dark:group-hover:text-red-500 transition-colors text-center">
+              <span className="text-xs text-zinc-600 dark:text-zinc-300 uppercase tracking-wider font-semibold group-hover:text-red-600 dark:group-hover:text-red-500 transition-colors text-center">
                 {t(`clients.industries.${client.industryKey}`)}
               </span>
             </div>

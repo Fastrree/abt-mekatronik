@@ -36,7 +36,7 @@ export const Footer = memo(function Footer() {
   };
 
   return (
-    <footer className="bg-zinc-50 dark:bg-zinc-900 text-zinc-600 dark:text-zinc-400" dir={isRTL ? 'rtl' : 'ltr'}>
+    <footer className="bg-zinc-50 dark:bg-zinc-900 text-zinc-600 dark:text-zinc-300" dir={isRTL ? 'rtl' : 'ltr'}>
       {/* FOOTER CONTENT */}
       <div className="container mx-auto px-6 pt-20 pb-10">
         {/* GOOGLE MAPS SECTION */}
@@ -79,7 +79,7 @@ export const Footer = memo(function Footer() {
                     <h3 className="font-black text-lg text-zinc-900 dark:text-white mb-2 tracking-tight">
                       ABT MEKATRONİK
                     </h3>
-                    <p className="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed font-medium">
+                    <p className="text-sm text-zinc-600 dark:text-zinc-300 leading-relaxed font-medium">
                       Elmalar, 46090<br />
                       Dulkadiroğlu/Kahramanmaraş
                     </p>
@@ -113,7 +113,7 @@ export const Footer = memo(function Footer() {
                 <h3 className="text-2xl font-black text-zinc-900 dark:text-white mb-4" dir={isRTL ? 'rtl' : 'ltr'}>
                   {t('footer.contactTitle')}
                 </h3>
-                <p className="text-sm text-zinc-600 dark:text-zinc-400 mb-6" dir={isRTL ? 'rtl' : 'ltr'}>
+                <p className="text-sm text-zinc-600 dark:text-zinc-300 mb-6" dir={isRTL ? 'rtl' : 'ltr'}>
                   {t('footer.contactSubtitle')}
                 </p>
               </div>
@@ -125,7 +125,7 @@ export const Footer = memo(function Footer() {
                   </div>
                   <div>
                     <h4 className="font-bold text-zinc-900 dark:text-white mb-1 group-hover:text-red-600 dark:group-hover:text-red-500 transition-colors">{t('footer.address')}</h4>
-                    <p className="text-sm text-zinc-600 dark:text-zinc-400">
+                    <p className="text-sm text-zinc-600 dark:text-zinc-300">
                       Elmalar, 46090<br />
                       Dulkadiroğlu/Kahramanmaraş
                     </p>
@@ -138,7 +138,7 @@ export const Footer = memo(function Footer() {
                   </div>
                   <div>
                     <h4 className="font-bold text-zinc-900 dark:text-white mb-1 group-hover:text-red-600 dark:group-hover:text-red-500 transition-colors">{t('footer.phone')}</h4>
-                    <a href="tel:+905373197281" className="text-sm text-zinc-600 dark:text-zinc-400 hover:text-red-600 dark:hover:text-red-500 transition-colors font-medium">
+                    <a href="tel:+905373197281" className="text-sm text-zinc-600 dark:text-zinc-300 hover:text-red-600 dark:hover:text-red-500 transition-colors font-medium">
                       0 537 319 72 81
                     </a>
                   </div>
@@ -150,7 +150,7 @@ export const Footer = memo(function Footer() {
                   </div>
                   <div>
                     <h4 className="font-bold text-zinc-900 dark:text-white mb-1 group-hover:text-red-600 dark:group-hover:text-red-500 transition-colors">{t('footer.email')}</h4>
-                    <a href="mailto:info@abtmekatronik.com" className="text-sm text-zinc-600 dark:text-zinc-400 hover:text-red-600 dark:hover:text-red-500 transition-colors font-medium">
+                    <a href="mailto:info@abtmekatronik.com" className="text-sm text-zinc-600 dark:text-zinc-300 hover:text-red-600 dark:hover:text-red-500 transition-colors font-medium">
                       info@abtmekatronik.com
                     </a>
                   </div>

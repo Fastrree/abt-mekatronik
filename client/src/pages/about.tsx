@@ -79,7 +79,7 @@ export default function About() {
             <div className="animate-in fade-in duration-600">
               <h3 className="text-red-600 dark:text-red-500 font-bold tracking-widest uppercase mb-4">{t('about.storySubtitle')}</h3>
               <h2 className="text-4xl md:text-5xl font-black text-zinc-900 dark:text-white mb-8">{t('about.storyTitle')}</h2>
-              <div className="space-y-6 text-zinc-600 dark:text-zinc-400 leading-relaxed">
+              <div className="space-y-6 text-zinc-600 dark:text-zinc-300 leading-relaxed">
                 <p>{t('about.storyParagraph1')}</p>
                 <p>{t('about.storyParagraph2')}</p>
                 <p>{t('about.storyParagraph3')}</p>
@@ -100,15 +100,15 @@ export default function About() {
                 <div className="grid grid-cols-1 xs:grid-cols-3 gap-6">
                   <div className="bg-gradient-to-br from-zinc-100 to-zinc-200 dark:from-zinc-700 dark:to-zinc-800 p-6 border-2 border-zinc-200 dark:border-zinc-600 rounded-2xl text-center hover:border-red-600 hover:shadow-xl transition-all duration-300 hover:scale-[1.02]">
                     <div className="text-4xl font-black text-red-600 dark:text-red-500 mb-2">15+</div>
-                    <div className="text-sm font-semibold text-zinc-600 dark:text-zinc-400">{t('about.yearsExperience')}</div>
+                    <div className="text-sm font-semibold text-zinc-600 dark:text-zinc-300">{t('about.yearsExperience')}</div>
                   </div>
                   <div className="bg-gradient-to-br from-zinc-100 to-zinc-200 dark:from-zinc-700 dark:to-zinc-800 p-6 border-2 border-zinc-200 dark:border-zinc-600 rounded-2xl text-center hover:border-red-600 hover:shadow-xl transition-all duration-300 hover:scale-[1.02]">
                     <div className="text-4xl font-black text-red-600 dark:text-red-500 mb-2">200+</div>
-                    <div className="text-sm font-semibold text-zinc-600 dark:text-zinc-400">{t('about.completedProjects')}</div>
+                    <div className="text-sm font-semibold text-zinc-600 dark:text-zinc-300">{t('about.completedProjects')}</div>
                   </div>
                   <div className="bg-gradient-to-br from-zinc-100 to-zinc-200 dark:from-zinc-700 dark:to-zinc-800 p-6 border-2 border-zinc-200 dark:border-zinc-600 rounded-2xl text-center hover:border-red-600 hover:shadow-xl transition-all duration-300 hover:scale-[1.02]">
                     <div className="text-4xl font-black text-red-600 dark:text-red-500 mb-2">50+</div>
-                    <div className="text-sm font-semibold text-zinc-600 dark:text-zinc-400">{t('about.happyClients')}</div>
+                    <div className="text-sm font-semibold text-zinc-600 dark:text-zinc-300">{t('about.happyClients')}</div>
                   </div>
                 </div>
               </div>
@@ -224,7 +224,7 @@ export default function About() {
                   </h3>
 
                   {/* Description */}
-                  <p className="relative text-zinc-600 dark:text-zinc-400 leading-relaxed">
+                  <p className="relative text-zinc-600 dark:text-zinc-300 leading-relaxed">
                     {item.description}
                   </p>
 
@@ -258,7 +258,7 @@ export default function About() {
               >
                 <CheckCircle className="w-12 h-12 text-red-600 dark:text-red-500 mb-4 group-hover:scale-110 transition-transform" />
                 <h3 className="text-xl font-bold text-zinc-900 dark:text-white mb-2">{cert.name}</h3>
-                <p className="text-zinc-600 dark:text-zinc-400 text-sm">{cert.description}</p>
+                <p className="text-zinc-600 dark:text-zinc-300 text-sm">{cert.description}</p>
               </div>
             ))}
           </div>

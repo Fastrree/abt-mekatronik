@@ -79,7 +79,7 @@ export const OptimizedVideo = memo(function OptimizedVideo({
         </video>
       ) : hasError ? (
         <div className="w-full h-full flex items-center justify-center bg-zinc-100 dark:bg-zinc-800">
-          <p className="text-sm text-zinc-500 dark:text-zinc-400">Video yüklenemedi</p>
+          <p className="text-sm text-zinc-500 dark:text-zinc-300">Video yüklenemedi</p>
         </div>
       ) : (
         // Loading state with poster

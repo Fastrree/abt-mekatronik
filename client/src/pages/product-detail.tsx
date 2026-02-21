@@ -185,7 +185,7 @@ export default function ProductDetail() {
             </h1>
 
             {/* Description */}
-            <p className="text-xl xs:text-base sm:text-2xl text-zinc-300 dark:text-zinc-400 max-w-2xl mb-8 xs:mb-6 font-light leading-relaxed border-l-4 border-red-500 pl-6 xs:pl-4 animate-in fade-in slide-in-from-left duration-700 delay-300">
+            <p className="text-xl xs:text-base sm:text-2xl text-zinc-300 dark:text-zinc-300 max-w-2xl mb-8 xs:mb-6 font-light leading-relaxed border-l-4 border-red-500 pl-6 xs:pl-4 animate-in fade-in slide-in-from-left duration-700 delay-300">
               {translations.hero.description}
             </p>
 
@@ -287,7 +287,7 @@ export default function ProductDetail() {
                   </h3>
                   
                   {/* Description */}
-                  <p className="text-zinc-600 dark:text-zinc-400 leading-relaxed xs:text-sm">
+                  <p className="text-zinc-600 dark:text-zinc-300 leading-relaxed xs:text-sm">
                     {feature.description}
                   </p>
                 </div>
@@ -364,7 +364,7 @@ export default function ProductDetail() {
               <h2 className="text-4xl xs:text-3xl md:text-5xl font-black text-zinc-900 dark:text-white mb-6 xs:mb-4">
                 {translations.applications.title}
               </h2>
-              <p className="text-lg xs:text-base text-zinc-600 dark:text-zinc-400 leading-relaxed mb-8 xs:mb-6">
+              <p className="text-lg xs:text-base text-zinc-600 dark:text-zinc-300 leading-relaxed mb-8 xs:mb-6">
                 {heroTranslations.sections.applicationsDescription}
               </p>
               
@@ -372,13 +372,13 @@ export default function ProductDetail() {
               <div className="grid grid-cols-2 gap-6 xs:gap-4">
                 <div className="p-6 xs:p-4 bg-gradient-to-br from-zinc-100 to-zinc-200 dark:from-zinc-700 dark:to-zinc-800 border-2 border-red-600/20 dark:border-red-500/20 rounded-2xl hover:border-red-600 hover:shadow-xl hover:shadow-red-600/20 transition-all duration-300 hover:scale-[1.02]">
                   <div className="text-3xl xs:text-2xl font-black text-red-600 dark:text-red-500 mb-2">50+</div>
-                  <div className="text-sm xs:text-xs text-zinc-600 dark:text-zinc-400 uppercase tracking-wider font-semibold">
+                  <div className="text-sm xs:text-xs text-zinc-600 dark:text-zinc-300 uppercase tracking-wider font-semibold">
                     {heroTranslations.sections.differentSectors}
                   </div>
                 </div>
                 <div className="p-6 xs:p-4 bg-gradient-to-br from-zinc-100 to-zinc-200 dark:from-zinc-700 dark:to-zinc-800 border-2 border-red-600/20 dark:border-red-500/20 rounded-2xl hover:border-red-600 hover:shadow-xl hover:shadow-red-600/20 transition-all duration-300 hover:scale-[1.02]">
                   <div className="text-3xl xs:text-2xl font-black text-red-600 dark:text-red-500 mb-2">200+</div>
-                  <div className="text-sm xs:text-xs text-zinc-600 dark:text-zinc-400 uppercase tracking-wider font-semibold">
+                  <div className="text-sm xs:text-xs text-zinc-600 dark:text-zinc-300 uppercase tracking-wider font-semibold">
                     {heroTranslations.sections.successfulProjects}
                   </div>
                 </div>
@@ -417,7 +417,7 @@ export default function ProductDetail() {
             <h2 className="text-4xl xs:text-3xl md:text-5xl font-black text-zinc-900 dark:text-white mb-4">
               {translations.technical.title}
             </h2>
-            <p className="text-lg xs:text-base text-zinc-600 dark:text-zinc-400 max-w-2xl mx-auto">
+            <p className="text-lg xs:text-base text-zinc-600 dark:text-zinc-300 max-w-2xl mx-auto">
               {heroTranslations.sections.technicalSpecsDescription}
             </p>
           </div>
@@ -435,7 +435,7 @@ export default function ProductDetail() {
                     <div className="w-2 h-2 bg-red-600 dark:bg-red-500 rounded-full group-hover:scale-150 transition-transform shrink-0" aria-hidden="true" />
                     <span className="font-bold text-zinc-900 dark:text-white text-base xs:text-sm">{spec.label}</span>
                   </div>
-                  <span className="text-zinc-600 dark:text-zinc-400 font-semibold text-sm xs:text-xs xs:text-right">{spec.value}</span>
+                  <span className="text-zinc-600 dark:text-zinc-300 font-semibold text-sm xs:text-xs xs:text-right">{spec.value}</span>
                 </div>
               ))}
             </div>
@@ -448,7 +448,7 @@ export default function ProductDetail() {
                   <h3 className="font-bold text-zinc-900 dark:text-white mb-2 xs:mb-1 text-base xs:text-sm">
                     {heroTranslations.sections.customizableTitle}
                   </h3>
-                  <p className="text-zinc-600 dark:text-zinc-400 text-sm xs:text-xs leading-relaxed">
+                  <p className="text-zinc-600 dark:text-zinc-300 text-sm xs:text-xs leading-relaxed">
                     {heroTranslations.sections.customizableDescription}
                   </p>
                 </div>

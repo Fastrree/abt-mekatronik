@@ -125,7 +125,7 @@ export const OptimizedImage = memo(function OptimizedImage({
       {/* Error fallback */}
       {hasError && (
         <div className="absolute inset-0 flex items-center justify-center bg-zinc-100 dark:bg-zinc-800">
-          <p className="text-sm text-zinc-500 dark:text-zinc-400">Görsel yüklenemedi</p>
+          <p className="text-sm text-zinc-500 dark:text-zinc-300">Görsel yüklenemedi</p>
         </div>
       )}
 

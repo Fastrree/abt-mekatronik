@@ -30,7 +30,7 @@ const FAQItem = memo(function FAQItem({
           </span>
         </div>
         <ChevronDown 
-          className={`w-6 h-6 text-zinc-600 dark:text-zinc-400 transition-transform duration-300 ${
+          className={`w-6 h-6 text-zinc-600 dark:text-zinc-300 transition-transform duration-300 ${
             isOpen ? 'rotate-180' : ''
           }`}
           aria-hidden="true"

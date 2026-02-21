@@ -477,7 +477,7 @@ function OurExports() {
         <div className="container mx-auto px-6 xs:px-4">
           <div className="text-center mb-16 xs:mb-12">
             <h2 className="text-3xl xs:text-2xl sm:text-4xl md:text-5xl font-black text-zinc-900 dark:text-white mb-6 xs:mb-4 px-4 xs:px-0" dir={language === 'ar' ? 'rtl' : 'ltr'}><span className="text-red-600 dark:text-red-500">{t('exports.countries.title')}</span> {t('exports.countries.titleHighlight')}</h2>
-            <p className="text-zinc-600 dark:text-zinc-400 max-w-2xl mx-auto text-base xs:text-sm sm:text-lg px-4 xs:px-0" dir={language === 'ar' ? 'rtl' : 'ltr'}>{t('exports.countries.description')}</p>
+            <p className="text-zinc-600 dark:text-zinc-300 max-w-2xl mx-auto text-base xs:text-sm sm:text-lg px-4 xs:px-0" dir={language === 'ar' ? 'rtl' : 'ltr'}>{t('exports.countries.description')}</p>
           </div>
           <div className="max-w-6xl mx-auto mb-16 xs:mb-12">
             <div className="bg-white dark:bg-zinc-800 p-8 xs:p-4 rounded-2xl border-2 border-zinc-200 dark:border-zinc-700 shadow-2xl">
@@ -622,7 +622,7 @@ function OurExports() {
               <div key={country.name} className="bg-gradient-to-br from-white to-zinc-50 dark:from-zinc-800 dark:to-zinc-900 p-4 xs:p-3 rounded-2xl border-2 border-zinc-200 dark:border-zinc-700 hover:border-red-500 dark:hover:border-red-500 shadow-lg hover:shadow-2xl hover:shadow-red-600/20 transition-all duration-300 group text-center animate-in slide-up hover:-translate-y-2 hover:scale-105" style={{ animationDelay: `${index * 50}ms` }}>
                 <div className="text-5xl xs:text-4xl mb-2 xs:mb-1.5 group-hover:scale-125 transition-transform duration-300 emoji-container" style={{ lineHeight: 1 }}>{country.flag}</div>
                 <h3 className="text-sm xs:text-xs font-bold text-zinc-900 dark:text-white mb-1 xs:mb-0.5 break-words leading-tight group-hover:text-red-600 dark:group-hover:text-red-500 transition-colors" dir={language === 'ar' ? 'rtl' : 'ltr'}>{country.name}</h3>
-                <p className="text-[10px] xs:text-[9px] text-zinc-500 dark:text-zinc-400 break-words" dir={language === 'ar' ? 'rtl' : 'ltr'}>{t(`exports.regions.${country.regionKey}`)}</p>
+                <p className="text-[10px] xs:text-[9px] text-zinc-500 dark:text-zinc-300 break-words" dir={language === 'ar' ? 'rtl' : 'ltr'}>{t(`exports.regions.${country.regionKey}`)}</p>
               </div>
             ))}
           </div>
@@ -633,7 +633,7 @@ function OurExports() {
         <div className="container mx-auto px-6 xs:px-4">
           <div className="text-center mb-16 xs:mb-12">
             <h2 className="text-3xl xs:text-2xl sm:text-4xl md:text-5xl font-black text-zinc-900 dark:text-white mb-6 xs:mb-4 px-4 xs:px-0" dir={language === 'ar' ? 'rtl' : 'ltr'}>{t('exports.productsSection.title')} <span className="text-red-600 dark:text-red-500">{t('exports.productsSection.titleHighlight')}</span></h2>
-            <p className="text-zinc-600 dark:text-zinc-400 max-w-2xl mx-auto text-base xs:text-sm sm:text-lg px-4 xs:px-0" dir={language === 'ar' ? 'rtl' : 'ltr'}>{t('exports.productsSection.description')}</p>
+            <p className="text-zinc-600 dark:text-zinc-300 max-w-2xl mx-auto text-base xs:text-sm sm:text-lg px-4 xs:px-0" dir={language === 'ar' ? 'rtl' : 'ltr'}>{t('exports.productsSection.description')}</p>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4 xs:gap-3">
             {exportProducts.map((product, index) => (
@@ -644,7 +644,7 @@ function OurExports() {
                 <div className="absolute inset-0 bg-gradient-to-t from-red-600/20 via-red-600/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl" />
                 <div className="p-4 xs:p-3 relative z-10">
                   <h3 className="text-base xs:text-sm font-bold text-zinc-900 dark:text-white mb-1.5 xs:mb-1 transition-colors">{product.title}</h3>
-                  <p className="text-xs xs:text-[10px] text-zinc-600 dark:text-zinc-400 leading-snug group-hover:text-zinc-900 dark:group-hover:text-zinc-200 transition-colors">{product.description}</p>
+                  <p className="text-xs xs:text-[10px] text-zinc-600 dark:text-zinc-300 leading-snug group-hover:text-zinc-900 dark:group-hover:text-zinc-200 transition-colors">{product.description}</p>
                 </div>
               </div>
             ))}
@@ -702,7 +702,7 @@ function OurExports() {
             <h2 className="text-4xl xs:text-3xl md:text-5xl font-black text-zinc-900 dark:text-white mb-6" dir={language === 'ar' ? 'rtl' : 'ltr'}>
               {t('exports.partners.title')} <span className="text-red-600 dark:text-red-500">{t('exports.partners.titleHighlight')}</span>
             </h2>
-            <p className="text-zinc-600 dark:text-zinc-400 max-w-2xl mx-auto text-lg xs:text-base" dir={language === 'ar' ? 'rtl' : 'ltr'}>
+            <p className="text-zinc-600 dark:text-zinc-300 max-w-2xl mx-auto text-lg xs:text-base" dir={language === 'ar' ? 'rtl' : 'ltr'}>
               {t('exports.partners.description')}
             </p>
           </div>

@@ -165,7 +165,7 @@ export default function Home() {
               <p className="text-red-600 dark:text-red-500 font-bold tracking-widest uppercase mb-2 xs:mb-1 text-xs xs:text-[10px]">{t('products.subtitle')}</p>
               <h2 id="products-title" className="text-3xl xs:text-2xl sm:text-4xl md:text-5xl font-black text-zinc-900 dark:text-white">{t('products.title')}</h2>
             </div>
-            <p className="text-zinc-600 dark:text-zinc-400 max-w-md text-right md:text-left leading-relaxed text-sm xs:text-xs">
+            <p className="text-zinc-600 dark:text-zinc-300 max-w-md text-right md:text-left leading-relaxed text-sm xs:text-xs">
               {t('products.description')}
             </p>
           </div>
@@ -194,7 +194,7 @@ export default function Home() {
                 </div>
                 <div className="w-10 xs:w-8 h-1 bg-red-600 mb-3 xs:mb-2 transition-all duration-300 group-hover:w-16"></div>
                 <h3 className="text-xl xs:text-base font-bold text-zinc-900 dark:text-white mb-2 xs:mb-1 transition-colors">{t('productItems.konveyor.title')}</h3>
-                <p className="text-zinc-700 dark:text-zinc-400 text-sm xs:text-xs mb-4 xs:mb-2 line-clamp-2 group-hover:text-zinc-900 dark:group-hover:text-zinc-200 transition-colors">{t('productItems.konveyor.shortDesc')}</p>
+                <p className="text-zinc-700 dark:text-zinc-300 text-sm xs:text-xs mb-4 xs:mb-2 line-clamp-2 group-hover:text-zinc-900 dark:group-hover:text-zinc-200 transition-colors">{t('productItems.konveyor.shortDesc')}</p>
                 <span className={`inline-flex items-center text-red-600 dark:text-red-500 font-semibold text-sm xs:text-xs uppercase tracking-wider group-hover:translate-x-2 transition-transform ${
                   language === 'ar' ? 'flex-row-reverse' : ''
                 }`}>
@@ -228,7 +228,7 @@ export default function Home() {
                 </div>
                 <div className="w-10 xs:w-8 h-1 bg-red-600 mb-3 xs:mb-2 transition-all duration-300 group-hover:w-16" aria-hidden="true"></div>
                 <h3 className="text-xl xs:text-base font-bold text-zinc-900 dark:text-white mb-2 xs:mb-1 group-hover:text-red-600 dark:group-hover:text-red-500 transition-colors">{t('productItems.tekstil.title')}</h3>
-                <p className="text-zinc-700 dark:text-zinc-400 text-sm xs:text-xs mb-4 xs:mb-2 line-clamp-2">{t('productItems.tekstil.shortDesc')}</p>
+                <p className="text-zinc-700 dark:text-zinc-300 text-sm xs:text-xs mb-4 xs:mb-2 line-clamp-2">{t('productItems.tekstil.shortDesc')}</p>
                 <span className={`inline-flex items-center text-zinc-900 dark:text-white font-semibold text-sm xs:text-xs uppercase tracking-wider group-hover:translate-x-2 transition-transform ${
                   language === 'ar' ? 'flex-row-reverse' : ''
                 }`}>
@@ -262,7 +262,7 @@ export default function Home() {
                 </div>
                 <div className="w-10 xs:w-8 h-1 bg-red-600 mb-3 xs:mb-2 transition-all duration-300 group-hover:w-16" aria-hidden="true"></div>
                 <h3 className="text-xl xs:text-base font-bold text-zinc-900 dark:text-white mb-2 xs:mb-1 group-hover:text-red-600 dark:group-hover:text-red-500 transition-colors">{t('productItems.celik.title')}</h3>
-                <p className="text-zinc-700 dark:text-zinc-400 text-sm xs:text-xs mb-4 xs:mb-2 line-clamp-2">{t('productItems.celik.shortDesc')}</p>
+                <p className="text-zinc-700 dark:text-zinc-300 text-sm xs:text-xs mb-4 xs:mb-2 line-clamp-2">{t('productItems.celik.shortDesc')}</p>
                 <span className={`inline-flex items-center text-zinc-900 dark:text-white font-semibold text-sm xs:text-xs uppercase tracking-wider group-hover:translate-x-2 transition-transform ${
                   language === 'ar' ? 'flex-row-reverse' : ''
                 }`}>
@@ -296,7 +296,7 @@ export default function Home() {
                 </div>
                 <div className="w-10 xs:w-8 h-1 bg-red-600 mb-3 xs:mb-2 transition-all duration-300 group-hover:w-16" aria-hidden="true"></div>
                 <h3 className="text-xl xs:text-base font-bold text-zinc-900 dark:text-white mb-2 xs:mb-1 group-hover:text-red-600 dark:group-hover:text-red-500 transition-colors">{t('productItems.ozelMakine.title')}</h3>
-                <p className="text-zinc-700 dark:text-zinc-400 text-sm xs:text-xs mb-4 xs:mb-2 line-clamp-2">{t('productItems.ozelMakine.shortDesc')}</p>
+                <p className="text-zinc-700 dark:text-zinc-300 text-sm xs:text-xs mb-4 xs:mb-2 line-clamp-2">{t('productItems.ozelMakine.shortDesc')}</p>
                 <span className={`inline-flex items-center text-zinc-900 dark:text-white font-semibold text-sm xs:text-xs uppercase tracking-wider group-hover:translate-x-2 transition-transform ${
                   language === 'ar' ? 'flex-row-reverse' : ''
                 }`}>
@@ -368,7 +368,7 @@ export default function Home() {
                   </div>
                   <div>
                     <h4 className="text-lg xs:text-sm sm:text-xl font-bold text-zinc-900 dark:text-white mb-1.5 xs:mb-1">{t('engineering.customDesign')}</h4>
-                    <p className="text-zinc-600 dark:text-zinc-400 leading-relaxed text-sm xs:text-xs xs:leading-snug">
+                    <p className="text-zinc-600 dark:text-zinc-300 leading-relaxed text-sm xs:text-xs xs:leading-snug">
                       {t('engineering.customDesignDesc')}
                     </p>
                   </div>
@@ -380,7 +380,7 @@ export default function Home() {
                   </div>
                   <div>
                     <h4 className="text-lg xs:text-sm sm:text-xl font-bold text-zinc-900 dark:text-white mb-1.5 xs:mb-1">{t('engineering.precision')}</h4>
-                    <p className="text-zinc-600 dark:text-zinc-400 leading-relaxed text-sm xs:text-xs xs:leading-snug">
+                    <p className="text-zinc-600 dark:text-zinc-300 leading-relaxed text-sm xs:text-xs xs:leading-snug">
                       {t('engineering.precisionDesc')}
                     </p>
                   </div>
@@ -392,7 +392,7 @@ export default function Home() {
                   </div>
                   <div>
                     <h4 className="text-lg xs:text-sm sm:text-xl font-bold text-zinc-900 dark:text-white mb-1.5 xs:mb-1">{t('engineering.turnkey')}</h4>
-                    <p className="text-zinc-600 dark:text-zinc-400 leading-relaxed text-sm xs:text-xs xs:leading-snug">
+                    <p className="text-zinc-600 dark:text-zinc-300 leading-relaxed text-sm xs:text-xs xs:leading-snug">
                       {t('engineering.turnkeyDesc')}
                     </p>
                   </div>
@@ -427,25 +427,25 @@ export default function Home() {
                 <div className="w-20 h-20 xs:w-16 xs:h-16 sm:w-24 sm:h-24 dark:bg-zinc-700 dark:border-2 dark:border-zinc-600 rounded-2xl overflow-hidden flex items-center justify-center group-hover:scale-110 group-hover:shadow-lg group-hover:shadow-red-600/20 transition-all p-3">
                   <OptimizedImage src={isDark ? "/certifications/iso.png?t=1737738100" : "/certifications/isoLight.png?t=1737739400"} alt="ISO 9001" className="w-full h-full object-contain" loading="lazy" />
                 </div>
-                <span className="text-[10px] xs:text-[9px] sm:text-xs text-zinc-600 dark:text-zinc-400 font-semibold group-hover:text-red-600 dark:group-hover:text-red-500 transition-colors">ISO 9001</span>
+                <span className="text-[10px] xs:text-[9px] sm:text-xs text-zinc-600 dark:text-zinc-300 font-semibold group-hover:text-red-600 dark:group-hover:text-red-500 transition-colors">ISO 9001</span>
               </div>
               <div className="flex flex-col items-center gap-1.5 xs:gap-1 sm:gap-2 group animate-in scale-in duration-500" style={{ animationDelay: '50ms' }}>
                 <div className="w-20 h-20 xs:w-16 xs:h-16 sm:w-24 sm:h-24 dark:bg-zinc-700 dark:border-2 dark:border-zinc-600 rounded-2xl overflow-hidden flex items-center justify-center group-hover:scale-110 group-hover:shadow-lg group-hover:shadow-red-600/20 transition-all p-1">
                   <OptimizedImage src={isDark ? "/certifications/tse.png?t=1737738100" : "/certifications/tseLight.png?t=1737739400"} alt="TSE" className="w-full h-full object-contain" loading="lazy" />
                 </div>
-                <span className="text-[10px] xs:text-[9px] sm:text-xs text-zinc-600 dark:text-zinc-400 font-semibold group-hover:text-red-600 dark:group-hover:text-red-500 transition-colors">TSE</span>
+                <span className="text-[10px] xs:text-[9px] sm:text-xs text-zinc-600 dark:text-zinc-300 font-semibold group-hover:text-red-600 dark:group-hover:text-red-500 transition-colors">TSE</span>
               </div>
               <div className="flex flex-col items-center gap-1.5 xs:gap-1 sm:gap-2 group animate-in scale-in duration-500" style={{ animationDelay: '100ms' }}>
                 <div className="w-20 h-20 xs:w-16 xs:h-16 sm:w-24 sm:h-24 dark:bg-zinc-700 dark:border-2 dark:border-zinc-600 rounded-2xl overflow-hidden flex items-center justify-center group-hover:scale-110 group-hover:shadow-lg group-hover:shadow-red-600/20 transition-all p-3 pt-5">
                   <OptimizedImage src={isDark ? "/certifications/ce.png?t=1737738100" : "/certifications/ceLight.png?t=1737739300"} alt="CE" className="w-full h-full object-contain" loading="lazy" />
                 </div>
-                <span className="text-[10px] xs:text-[9px] sm:text-xs text-zinc-600 dark:text-zinc-400 font-semibold group-hover:text-red-600 dark:group-hover:text-red-500 transition-colors">CE</span>
+                <span className="text-[10px] xs:text-[9px] sm:text-xs text-zinc-600 dark:text-zinc-300 font-semibold group-hover:text-red-600 dark:group-hover:text-red-500 transition-colors">CE</span>
               </div>
               <div className="flex flex-col items-center gap-1.5 xs:gap-1 sm:gap-2 group animate-in scale-in duration-500" style={{ animationDelay: '150ms' }}>
                 <div className="w-20 h-20 xs:w-16 xs:h-16 sm:w-24 sm:h-24 dark:bg-zinc-700 dark:border-2 dark:border-zinc-600 rounded-2xl overflow-hidden flex items-center justify-center group-hover:scale-110 group-hover:shadow-lg group-hover:shadow-red-600/20 transition-all p-1">
                   <OptimizedImage src={isDark ? "/certifications/guaranteed.png?t=1737738100" : "/certifications/guaranteedLight.png?t=1737739500"} alt="Quality" className="w-full h-full object-contain" loading="lazy" />
                 </div>
-                <span className="text-[10px] xs:text-[9px] sm:text-xs text-zinc-600 dark:text-zinc-400 font-semibold group-hover:text-red-600 dark:group-hover:text-red-500 transition-colors">{t('certifications.quality')}</span>
+                <span className="text-[10px] xs:text-[9px] sm:text-xs text-zinc-600 dark:text-zinc-300 font-semibold group-hover:text-red-600 dark:group-hover:text-red-500 transition-colors">{t('certifications.quality')}</span>
               </div>
             </div>
 
@@ -453,15 +453,15 @@ export default function Home() {
             <div className="grid grid-cols-3 gap-6 xs:gap-3 sm:gap-8 animate-in fade-in duration-600" style={{ animationDelay: '200ms' }}>
               <div className="text-center group">
                 <div className="text-4xl xs:text-3xl sm:text-5xl font-black text-red-600 dark:text-red-500 mb-1.5 xs:mb-1 sm:mb-2 group-hover:scale-110 transition-transform">15+</div>
-                <div className="text-xs xs:text-[10px] sm:text-sm text-zinc-600 dark:text-zinc-400 uppercase tracking-wider font-semibold">{t('trust.years')}</div>
+                <div className="text-xs xs:text-[10px] sm:text-sm text-zinc-600 dark:text-zinc-300 uppercase tracking-wider font-semibold">{t('trust.years')}</div>
               </div>
               <div className="text-center group">
                 <div className="text-4xl xs:text-3xl sm:text-5xl font-black text-red-600 dark:text-red-500 mb-1.5 xs:mb-1 sm:mb-2 group-hover:scale-110 transition-transform">200+</div>
-                <div className="text-xs xs:text-[10px] sm:text-sm text-zinc-600 dark:text-zinc-400 uppercase tracking-wider font-semibold">{t('trust.projects')}</div>
+                <div className="text-xs xs:text-[10px] sm:text-sm text-zinc-600 dark:text-zinc-300 uppercase tracking-wider font-semibold">{t('trust.projects')}</div>
               </div>
               <div className="text-center group">
                 <div className="text-4xl xs:text-3xl sm:text-5xl font-black text-red-600 dark:text-red-500 mb-1.5 xs:mb-1 sm:mb-2 group-hover:scale-110 transition-transform">50+</div>
-                <div className="text-xs xs:text-[10px] sm:text-sm text-zinc-600 dark:text-zinc-400 uppercase tracking-wider font-semibold">{t('trust.clients')}</div>
+                <div className="text-xs xs:text-[10px] sm:text-sm text-zinc-600 dark:text-zinc-300 uppercase tracking-wider font-semibold">{t('trust.clients')}</div>
               </div>
             </div>
           </div>

@@ -16,7 +16,7 @@ export function ComponentLoader() {
     <div className="w-full py-24 flex items-center justify-center">
       <div className="flex flex-col items-center gap-4">
         <div className="w-12 h-12 border-4 border-zinc-300 dark:border-zinc-600 border-t-red-600 rounded-full animate-spin" />
-        <p className="text-sm text-zinc-600 dark:text-zinc-400">Yükleniyor...</p>
+        <p className="text-sm text-zinc-600 dark:text-zinc-300">Yükleniyor...</p>
       </div>
     </div>
   );

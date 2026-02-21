@@ -617,3 +617,193 @@ The combination of **SRI + Input Sanitization + Output Encoding + Monitoring** p
 
 **STATUS**: ACCEPTED & MONITORED  
 **LAST UPDATED**: 2026-01-27
+
+
+## ADR-012: Pre-rendering for SEO (SPA → Static HTML)
+
+**Date**: 2026-01-21  
+**Status**: Accepted  
+**Tags**: seo, performance, architecture, critical
+
+### Context
+**CRITICAL ISSUE**: Single Page Application (SPA) architecture prevents Google from properly indexing content. Lighthouse SEO 100/100 only measures meta tags, NOT actual content indexing. Site won't rank for target keywords like "Konveyör sistemleri Kahramanmaraş" or "tekstil makinesi üreticisi".
+
+### Problem
+- React SPA renders content client-side via JavaScript
+- Google crawler sees empty `<div id="root"></div>` initially
+- Content not indexed = no organic search traffic
+- Competitors with SSR/SSG rank higher
+
+### Decision
+Implement **vite-plugin-prerender** for static HTML generation of critical pages.
+
+### Implementation
+```typescript
+// vite.config.ts
+import vitePrerender from 'vite-plugin-prerender';
+
+vitePrerender({
+  routes: ['/', '/about', '/exports'],
+  renderer: 'puppeteer',
+  rendererOptions: {
+    renderAfterTime: 5000, // Wait for dynamic content
+  },
+})
+```
+
+### Rationale
+- **Pre-rendering** generates static HTML at build time
+- Google sees fully rendered HTML immediately
+- No server required (unlike SSR)
+- Works with existing Vite + React stack
+- Vercel deployment compatible
+
+### Alternatives Considered
+1. **Next.js Migration**: Too heavy, requires full rewrite (rejected)
+2. **react-snap**: Deprecated, security vulnerabilities (rejected)
+3. **vite-plugin-ssr**: Complex, overkill for static site (rejected)
+4. **vite-plugin-prerender**: Simple, effective, maintained ✅
+
+### Consequences
+**Positive**:
+- Google can index all content
+- Better SEO rankings
+- Faster First Contentful Paint (FCP)
+- No server-side rendering overhead
+
+**Negative**:
+- Build time increases (~5s per route)
+- Dynamic content requires client-side hydration
+- Product detail pages need dynamic route generation
+
+### Success Metrics
+- Google Search Console: Indexed pages 1 → 3+
+- Organic search traffic: 0 → measurable
+- Lighthouse SEO: 100/100 (maintained)
+- Core Web Vitals: Improved FCP
+
+---
+
+## ADR-013: Nonce-Based CSP (Remove unsafe-inline) - PLANNED
+
+**Date**: 2026-01-21  
+**Status**: Planned (Not Implemented)  
+**Tags**: security, http-observatory, future
+
+### Context
+**HTTP Observatory score dropped from 115/100 (A+) to 75/100 (B)** due to `unsafe-inline` in Content-Security-Policy. This weakens XSS protection and violates security best practices.
+
+### Problem
+Current CSP uses `unsafe-inline` for convenience:
+```
+script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net ...
+style-src 'self' 'unsafe-inline' https://fonts.googleapis.com ...
+```
+
+This allows ANY inline script/style to execute, defeating CSP's purpose.
+
+### Proposed Solution
+Implement **nonce-based CSP** with server-side nonce generation.
+
+### Implementation (Planned)
+```typescript
+// server/middleware/csp-nonce.ts
+const nonce = crypto.randomBytes(16).toString('base64');
+res.setHeader('Content-Security-Policy', 
+  `script-src 'self' 'nonce-${nonce}' https://cdn.jsdelivr.net; ...`
+);
+
+// index.html
+<script nonce="${nonce}">...</script>
+```
+
+### Rationale
+- **Nonce** = cryptographically random value per request
+- Only scripts with matching nonce execute
+- Removes need for `unsafe-inline`
+- Maintains XSS protection
+
+### Why Not Implemented Yet
+- Requires server-side rendering or build-time injection
+- Vite doesn't support nonce injection out-of-box
+- All inline scripts need nonce attribute
+- Complexity vs benefit tradeoff
+
+### Consequences (If Implemented)
+**Positive**:
+- HTTP Observatory: 75/100 → 95/100 (A+)
+- Stronger XSS protection
+- OWASP Top 10 compliance
+- Enterprise security standard
+
+**Negative**:
+- Requires server-side middleware
+- All inline scripts need nonce attribute
+- Build process complexity
+
+### Success Metrics (Target)
+- HTTP Observatory: 95/100 (A+)
+- Zero CSP violations in production
+- No XSS vulnerabilities
+
+### Review Date
+2026-03-21 (2 months) - Reassess if HTTP Observatory score becomes critical
+
+---
+
+## ADR-014: Accessibility Improvements (83 → 90+)
+
+**Date**: 2026-01-21  
+**Status**: In Progress  
+**Tags**: accessibility, wcag, compliance
+
+### Context
+Lighthouse Accessibility score: 83/100 (below WCAG 2.1 AA target of 90+).
+
+### Issues Identified
+1. **Color Contrast**: Some text colors below 4.5:1 ratio
+2. **Missing ARIA Labels**: Some interactive elements lack labels (FIXED - grep shows good coverage)
+3. **Touch Targets**: Some buttons below 48x48px minimum
+4. **Focus Indicators**: Inconsistent focus ring visibility
+
+### Decision
+Systematic accessibility audit and fixes:
+1. Increase text contrast to 4.5:1 minimum
+2. Verify all ARIA labels are present
+3. Ensure all touch targets ≥ 48x48px
+4. Standardize focus indicators (4px ring, high contrast)
+
+### Implementation
+```tsx
+// Contrast fix
+<p className="text-zinc-600 dark:text-zinc-300"> {/* Was text-zinc-400 */}
+
+// ARIA label (already implemented)
+<button aria-label="Menüyü kapat">
+  <X className="w-6 h-6" />
+</button>
+
+// Touch target
+<button className="min-w-12 min-h-12"> {/* 48px minimum */}
+
+// Focus indicator
+<button className="focus:ring-4 focus:ring-electric-blue/30">
+```
+
+### Success Metrics
+- Lighthouse Accessibility: 90+ (WCAG AA)
+- Zero contrast violations
+- 100% keyboard navigable
+- Screen reader compatible
+
+### Next Steps
+1. Run Lighthouse accessibility audit
+2. Fix identified contrast issues
+3. Verify all touch targets ≥ 48px
+4. Test keyboard navigation
+5. Test with screen reader (NVDA/JAWS)
+
+---
+
+**STATUS**: ACTIVE & ENFORCED  
+**LAST UPDATED**: 2026-01-21

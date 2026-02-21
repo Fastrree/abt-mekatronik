@@ -2,6 +2,8 @@
   "buildCommand": "npm run build",
   "outputDirectory": "dist/public",
   "framework": null,
+  "trailingSlash": false,
+  "cleanUrls": true,
   "rewrites": [
     { "source": "/(.*)", "destination": "/index.html" }
   ],

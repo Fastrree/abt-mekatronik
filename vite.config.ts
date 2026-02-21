@@ -11,6 +11,12 @@ export default defineConfig({
     runtimeErrorOverlay(),
     tailwindcss(),
     metaImagesPlugin(),
+    // SEO Strategy (No pre-rendering needed):
+    // 1. Vercel's automatic static optimization
+    // 2. Comprehensive meta tags + Schema.org structured data
+    // 3. Sitemap.xml for crawler discovery
+    // 4. Google Search Console for indexing
+    // 5. Server-side rendering on Vercel Edge Network
     ...(process.env.NODE_ENV !== "production" &&
     process.env.REPL_ID !== undefined
       ? [

@@ -1779,3 +1779,77 @@ export function useMeta(pageType: PageType | 'product', productKey?: ProductKey)
 - Social media: Proper preview cards when sharing links
 - Analytics: Increased organic traffic from international markets
 - Code quality: Cleaner, focused on what matters
+
+
+## ADR-023: CSP Strict Mode - Remove unsafe-inline
+
+**Date**: 2026-02-22  
+**Status**: Accepted  
+**Author**: Kiro AI  
+**Tags**: security, csp, http-observatory
+
+### Context
+HTTP Observatory score stuck at 75/100 (B) due to CSP `unsafe-inline` directive. Inline Schema.org JSON-LD scripts preventing strict CSP.
+
+### Decision
+Move all inline Schema.org scripts to external `/schemas.js` file and remove `unsafe-inline` from CSP.
+
+### Implementation
+```javascript
+// schemas.js - External file
+(function() {
+  function injectSchema(data) {
+    const script = document.createElement('script');
+    script.type = 'application/ld+json';
+    script.textContent = JSON.stringify(data);
+    document.head.appendChild(script);
+  }
+  
+  // All 6 schemas injected dynamically
+  injectSchema({...}); // Organization
+  injectSchema({...}); // LocalBusiness
+  // ... etc
+})();
+```
+
+```html
+<!-- index.html -->
+<script src="/schemas.js"></script>
+```
+
+```typescript
+// CSP - Production (server/index.ts & vercel.json)
+script-src 'self' https://cdn.jsdelivr.net https://unpkg.com https://www.googletagmanager.com
+// NO 'unsafe-inline'
+```
+
+### Rationale
+- **Security**: Remove XSS attack vector (inline scripts)
+- **HTTP Observatory**: Expected score improvement 75 → 95+ (B → A+)
+- **Best Practice**: External scripts > inline scripts
+- **SEO**: Schema.org still works (dynamically injected)
+
+### Consequences
+**Positive**: 
+- Stronger CSP (no unsafe-inline)
+- Better HTTP Observatory score (target: 95+/100 A+)
+- Reduced XSS risk
+- Cleaner HTML
+
+**Negative**: 
+- Additional HTTP request for schemas.js (~3KB)
+- Schemas load slightly later (after DOM ready)
+- More complex debugging (schemas not in HTML source)
+
+### Alternatives Considered
+- **Nonce-based CSP**: Requires SSR, more complex
+- **Hash-based CSP**: Brittle (hash changes on every edit)
+- **Keep unsafe-inline**: Security risk, lower score
+
+### Success Metrics
+- HTTP Observatory: 75/100 → 95+/100 (target)
+- CSP Grade: B → A+
+- Schema.org validation: Still passing
+- Google Search Console: No structured data errors
+
+---

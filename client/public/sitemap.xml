@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
-  <!-- Homepage - All Languages -->
+  <!-- Homepage - All 7 Languages -->
   <url>
     <loc>https://abt-mekatronik.vercel.app/</loc>
     <xhtml:link rel="alternate" hreflang="tr" href="https://abt-mekatronik.vercel.app/"/>
@@ -10,8 +10,10 @@
     <xhtml:link rel="alternate" hreflang="de" href="https://abt-mekatronik.vercel.app/?lang=de"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://abt-mekatronik.vercel.app/?lang=fr"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://abt-mekatronik.vercel.app/?lang=es"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://abt-mekatronik.vercel.app/?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://abt-mekatronik.vercel.app/?lang=ru"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://abt-mekatronik.vercel.app/"/>
-    <lastmod>2026-01-16</lastmod>
+    <lastmod>2026-02-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
@@ -24,7 +26,9 @@
     <xhtml:link rel="alternate" hreflang="de" href="https://abt-mekatronik.vercel.app/?lang=de#products"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://abt-mekatronik.vercel.app/?lang=fr#products"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://abt-mekatronik.vercel.app/?lang=es#products"/>
-    <lastmod>2026-01-16</lastmod>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://abt-mekatronik.vercel.app/?lang=ar#products"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://abt-mekatronik.vercel.app/?lang=ru#products"/>
+    <lastmod>2026-02-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -37,7 +41,9 @@
     <xhtml:link rel="alternate" hreflang="de" href="https://abt-mekatronik.vercel.app/?lang=de#engineering"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://abt-mekatronik.vercel.app/?lang=fr#engineering"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://abt-mekatronik.vercel.app/?lang=es#engineering"/>
-    <lastmod>2026-01-16</lastmod>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://abt-mekatronik.vercel.app/?lang=ar#engineering"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://abt-mekatronik.vercel.app/?lang=ru#engineering"/>
+    <lastmod>2026-02-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -50,9 +56,41 @@
     <xhtml:link rel="alternate" hreflang="de" href="https://abt-mekatronik.vercel.app/?lang=de#projects"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://abt-mekatronik.vercel.app/?lang=fr#projects"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://abt-mekatronik.vercel.app/?lang=es#projects"/>
-    <lastmod>2026-01-16</lastmod>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://abt-mekatronik.vercel.app/?lang=ar#projects"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://abt-mekatronik.vercel.app/?lang=ru#projects"/>
+    <lastmod>2026-02-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
+  </url>
+  
+  <!-- Exports Section (NEW) -->
+  <url>
+    <loc>https://abt-mekatronik.vercel.app/#exports</loc>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://abt-mekatronik.vercel.app/#exports"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://abt-mekatronik.vercel.app/?lang=en#exports"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://abt-mekatronik.vercel.app/?lang=de#exports"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://abt-mekatronik.vercel.app/?lang=fr#exports"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://abt-mekatronik.vercel.app/?lang=es#exports"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://abt-mekatronik.vercel.app/?lang=ar#exports"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://abt-mekatronik.vercel.app/?lang=ru#exports"/>
+    <lastmod>2026-02-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  
+  <!-- Clients Section (NEW) -->
+  <url>
+    <loc>https://abt-mekatronik.vercel.app/#clients</loc>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://abt-mekatronik.vercel.app/#clients"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://abt-mekatronik.vercel.app/?lang=en#clients"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://abt-mekatronik.vercel.app/?lang=de#clients"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://abt-mekatronik.vercel.app/?lang=fr#clients"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://abt-mekatronik.vercel.app/?lang=es#clients"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://abt-mekatronik.vercel.app/?lang=ar#clients"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://abt-mekatronik.vercel.app/?lang=ru#clients"/>
+    <lastmod>2026-02-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
   </url>
   
   <!-- Contact Section -->
@@ -63,7 +101,9 @@
     <xhtml:link rel="alternate" hreflang="de" href="https://abt-mekatronik.vercel.app/?lang=de#contact"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://abt-mekatronik.vercel.app/?lang=fr#contact"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://abt-mekatronik.vercel.app/?lang=es#contact"/>
-    <lastmod>2026-01-16</lastmod>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://abt-mekatronik.vercel.app/?lang=ar#contact"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://abt-mekatronik.vercel.app/?lang=ru#contact"/>
+    <lastmod>2026-02-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>

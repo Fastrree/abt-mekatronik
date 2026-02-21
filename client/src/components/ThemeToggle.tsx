@@ -42,7 +42,7 @@ export const ThemeToggle = memo(function ThemeToggle() {
         disabled
         aria-label="Toggle theme"
       >
-        <Sun className="h-4 w-4 lg:h-5 lg:w-5 text-zinc-400" />
+        <Sun className="h-4 w-4 lg:h-5 lg:w-5 text-zinc-300" />
       </button>
     );
   }

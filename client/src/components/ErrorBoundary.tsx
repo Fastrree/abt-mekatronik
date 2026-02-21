@@ -25,7 +25,7 @@ const ErrorFallback = ({ error, resetError }: FallbackProps) => {
           Something went wrong
         </h1>
         
-        <p className="text-zinc-400 mb-6">
+        <p className="text-zinc-300 mb-6">
           We're sorry for the inconvenience. Please try again or return to the home page.
         </p>
         

@@ -65,7 +65,7 @@ export const ClientLogos = memo(function ClientLogos() {
           <h3 className="text-zinc-600 dark:text-zinc-300 text-sm uppercase tracking-widest font-semibold mb-2">
             {t('clients.title')}
           </h3>
-          <p className="text-zinc-500 dark:text-zinc-500 text-xs">
+          <p className="text-zinc-500 dark:text-zinc-300 text-xs">
             Türkiye'nin önde gelen firmaları ile çalışıyoruz
           </p>
         </div>

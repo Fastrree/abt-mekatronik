@@ -755,11 +755,11 @@ function OurExports() {
                   className="flex-shrink-0 flex flex-col items-center justify-center px-4 xs:px-3 py-4 xs:py-3 bg-gradient-to-br from-white to-zinc-50 dark:from-zinc-800 dark:to-zinc-900 border-2 border-zinc-200 dark:border-zinc-700 rounded-2xl hover:border-red-500 dark:hover:border-red-500 shadow-lg hover:shadow-2xl hover:shadow-red-600/20 transition-all duration-300 group min-w-[140px] xs:min-w-[120px] hover:-translate-y-2 hover:scale-105"
                 >
                   <div className="w-14 h-14 xs:w-12 xs:h-12 bg-zinc-100 dark:bg-zinc-700/50 rounded-xl flex items-center justify-center mb-2 xs:mb-1.5 group-hover:bg-red-600 dark:group-hover:bg-red-500 transition-all duration-300 group-hover:scale-110 group-hover:rotate-6">
-                    <span className="text-xl xs:text-lg font-black text-zinc-700 dark:text-zinc-500 group-hover:text-white transition-colors">
+                    <span className="text-xl xs:text-lg font-black text-zinc-700 dark:text-zinc-300 group-hover:text-white transition-colors">
                       {String.fromCharCode(65 + index)}
                     </span>
                   </div>
-                  <span className="text-[10px] xs:text-[9px] text-zinc-600 dark:text-zinc-500 uppercase tracking-wider group-hover:text-red-600 dark:group-hover:text-red-500 transition-colors text-center font-semibold">
+                  <span className="text-[10px] xs:text-[9px] text-zinc-600 dark:text-zinc-300 uppercase tracking-wider group-hover:text-red-600 dark:group-hover:text-red-500 transition-colors text-center font-semibold">
                     {t('exports.partners.partner')} {index + 1}
                   </span>
                 </div>
@@ -772,11 +772,11 @@ function OurExports() {
                   className="flex-shrink-0 flex flex-col items-center justify-center px-4 xs:px-3 py-4 xs:py-3 bg-gradient-to-br from-white to-zinc-50 dark:from-zinc-800 dark:to-zinc-900 border-2 border-zinc-200 dark:border-zinc-700 rounded-2xl hover:border-red-500 dark:hover:border-red-500 shadow-lg hover:shadow-2xl hover:shadow-red-600/20 transition-all duration-300 group min-w-[140px] xs:min-w-[120px] hover:-translate-y-2 hover:scale-105"
                 >
                   <div className="w-14 h-14 xs:w-12 xs:h-12 bg-zinc-100 dark:bg-zinc-700/50 rounded-xl flex items-center justify-center mb-2 xs:mb-1.5 group-hover:bg-red-600 dark:group-hover:bg-red-500 transition-all duration-300 group-hover:scale-110 group-hover:rotate-6">
-                    <span className="text-xl xs:text-lg font-black text-zinc-700 dark:text-zinc-500 group-hover:text-white transition-colors">
+                    <span className="text-xl xs:text-lg font-black text-zinc-700 dark:text-zinc-300 group-hover:text-white transition-colors">
                       {String.fromCharCode(65 + index)}
                     </span>
                   </div>
-                  <span className="text-[10px] xs:text-[9px] text-zinc-600 dark:text-zinc-500 uppercase tracking-wider group-hover:text-red-600 dark:group-hover:text-red-500 transition-colors text-center font-semibold">
+                  <span className="text-[10px] xs:text-[9px] text-zinc-600 dark:text-zinc-300 uppercase tracking-wider group-hover:text-red-600 dark:group-hover:text-red-500 transition-colors text-center font-semibold">
                     {t('exports.partners.partner')} {index + 1}
                   </span>
                 </div>
@@ -798,11 +798,11 @@ function OurExports() {
                   className="flex-shrink-0 flex flex-col items-center justify-center px-4 xs:px-3 py-4 xs:py-3 bg-gradient-to-br from-white to-zinc-50 dark:from-zinc-800 dark:to-zinc-900 border-2 border-zinc-200 dark:border-zinc-700 rounded-2xl hover:border-red-500 dark:hover:border-red-500 shadow-lg hover:shadow-2xl hover:shadow-red-600/20 transition-all duration-300 group min-w-[140px] xs:min-w-[120px] hover:-translate-y-2 hover:scale-105"
                 >
                   <div className="w-14 h-14 xs:w-12 xs:h-12 bg-zinc-100 dark:bg-zinc-700/50 rounded-xl flex items-center justify-center mb-2 xs:mb-1.5 group-hover:bg-red-600 dark:group-hover:bg-red-500 transition-all duration-300 group-hover:scale-110 group-hover:rotate-6">
-                    <span className="text-xl xs:text-lg font-black text-zinc-700 dark:text-zinc-500 group-hover:text-white transition-colors">
+                    <span className="text-xl xs:text-lg font-black text-zinc-700 dark:text-zinc-300 group-hover:text-white transition-colors">
                       {String.fromCharCode(75 + index)}
                     </span>
                   </div>
-                  <span className="text-[10px] xs:text-[9px] text-zinc-600 dark:text-zinc-500 uppercase tracking-wider group-hover:text-red-600 dark:group-hover:text-red-500 transition-colors text-center font-semibold">
+                  <span className="text-[10px] xs:text-[9px] text-zinc-600 dark:text-zinc-300 uppercase tracking-wider group-hover:text-red-600 dark:group-hover:text-red-500 transition-colors text-center font-semibold">
                     {t('exports.partners.partner')} {index + 11}
                   </span>
                 </div>
@@ -815,11 +815,11 @@ function OurExports() {
                   className="flex-shrink-0 flex flex-col items-center justify-center px-4 xs:px-3 py-4 xs:py-3 bg-gradient-to-br from-white to-zinc-50 dark:from-zinc-800 dark:to-zinc-900 border-2 border-zinc-200 dark:border-zinc-700 rounded-2xl hover:border-red-500 dark:hover:border-red-500 shadow-lg hover:shadow-2xl hover:shadow-red-600/20 transition-all duration-300 group min-w-[140px] xs:min-w-[120px] hover:-translate-y-2 hover:scale-105"
                 >
                   <div className="w-14 h-14 xs:w-12 xs:h-12 bg-zinc-100 dark:bg-zinc-700/50 rounded-xl flex items-center justify-center mb-2 xs:mb-1.5 group-hover:bg-red-600 dark:group-hover:bg-red-500 transition-all duration-300 group-hover:scale-110 group-hover:rotate-6">
-                    <span className="text-xl xs:text-lg font-black text-zinc-700 dark:text-zinc-500 group-hover:text-white transition-colors">
+                    <span className="text-xl xs:text-lg font-black text-zinc-700 dark:text-zinc-300 group-hover:text-white transition-colors">
                       {String.fromCharCode(75 + index)}
                     </span>
                   </div>
-                  <span className="text-[10px] xs:text-[9px] text-zinc-600 dark:text-zinc-500 uppercase tracking-wider group-hover:text-red-600 dark:group-hover:text-red-500 transition-colors text-center font-semibold">
+                  <span className="text-[10px] xs:text-[9px] text-zinc-600 dark:text-zinc-300 uppercase tracking-wider group-hover:text-red-600 dark:group-hover:text-red-500 transition-colors text-center font-semibold">
                     {t('exports.partners.partner')} {index + 11}
                   </span>
                 </div>
@@ -835,3 +835,4 @@ function OurExports() {
 }
 
 export default OurExports;
+

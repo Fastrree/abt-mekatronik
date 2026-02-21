@@ -50,7 +50,7 @@ export function CookieBanner() {
             {/* Close button */}
             <button
               onClick={handleDecline}
-              className="absolute top-4 right-4 p-2 text-zinc-400 hover:text-white hover:bg-zinc-700/50 rounded-lg transition-all"
+              className="absolute top-4 right-4 p-2 text-zinc-300 hover:text-white hover:bg-zinc-700/50 rounded-lg transition-all"
               aria-label={t('cookie.close')}
             >
               <X size={20} />
@@ -71,7 +71,7 @@ export function CookieBanner() {
                 <p className="text-sm sm:text-base text-zinc-300 leading-relaxed">
                   {t('cookie.message')}
                 </p>
-                <p className="text-xs text-zinc-400">
+                <p className="text-xs text-zinc-300">
                   {t('cookie.details')}
                 </p>
               </div>

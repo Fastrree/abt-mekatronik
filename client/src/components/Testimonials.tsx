@@ -50,7 +50,7 @@ export const Testimonials = memo(function Testimonials() {
                   <p className="text-zinc-900 dark:text-white font-semibold">
                     {t(`testimonials.items.${index}.name`)}
                   </p>
-                  <p className="text-zinc-600 dark:text-zinc-500 text-xs">
+                  <p className="text-zinc-600 dark:text-zinc-300 text-xs">
                     {t(`testimonials.items.${index}.company`)}
                   </p>
                 </div>

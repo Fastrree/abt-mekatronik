@@ -52,7 +52,7 @@ export function ExitIntentPopup() {
           {/* Close Button - Optimized (no backdrop-blur) */}
           <button
             onClick={() => setIsVisible(false)}
-            className="absolute top-4 right-4 z-10 p-2 bg-zinc-800 hover:bg-red-600 text-zinc-400 hover:text-white rounded-xl transition-all duration-300 hover:scale-110 hover:rotate-90 border border-zinc-700 hover:border-red-500"
+            className="absolute top-4 right-4 z-10 p-2 bg-zinc-800 hover:bg-red-600 text-zinc-300 hover:text-white rounded-xl transition-all duration-300 hover:scale-110 hover:rotate-90 border border-zinc-700 hover:border-red-500"
             aria-label="Kapat"
           >
             <X size={20} />

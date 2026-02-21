@@ -1271,3 +1271,106 @@ if (!SUPPORTED_LANGUAGES.includes(firstSegment)) {
 **TOTAL ADRs**: 17 (Accepted: 15, Rejected: 1, Planned: 1)  
 **LAST UPDATED**: 2026-02-21  
 **NEXT REVIEW**: 2026-03-21
+
+
+---
+
+## ADR-018: Language-Aware Navigation Links
+
+**Date**: 2026-02-21  
+**Status**: Accepted  
+**Author**: Kiro AI  
+**Tags**: i18n, navigation, ux
+
+### Context
+After implementing URL-based language routing (ADR-016, ADR-017), discovered that all navigation links were hardcoded without language prefix. When user selected a language (e.g., Arabic) and clicked a link, browser would navigate to `/about` → server redirects to `/tr/about` → language lost!
+
+### Problem
+```tsx
+// ❌ HARDCODED - Language not preserved
+<a href="/about">About</a>
+<a href="/products/konveyor">Konveyör</a>
+<a href="/exports">İhracat</a>
+
+// User flow:
+// 1. Select Arabic → URL: /ar/
+// 2. Click "About" → href="/about" (no language)
+// 3. Browser navigates to /about
+// 4. Server redirects to /tr/about (default Turkish)
+// 5. Language lost! ❌
+```
+
+### Decision
+Create reusable language-aware link system with two approaches:
+
+1. **useLanguageLink Hook** - For programmatic links
+2. **LanguageLink Component** - For declarative links
+
+### Implementation
+
+**Hook Approach** (Preferred for existing code):
+```tsx
+import { useLanguageLink } from '@/hooks/useLanguageLink';
+
+function MyComponent() {
+  const { languageLink } = useLanguageLink();
+  
+  return (
+    <a href={languageLink('/about')}>About</a>
+    // Turkish: /tr/about
+    // English: /en/about
+    // Arabic: /ar/about
+  );
+}
+```
+
+**Component Approach** (For new code):
+```tsx
+import { LanguageLink } from '@/components/LanguageLink';
+
+<LanguageLink href="/about">About</LanguageLink>
+// Automatically adds language prefix
+```
+
+### Rationale
+- **Reusable**: Single source of truth for language-aware links
+- **Type-Safe**: TypeScript ensures correct usage
+- **Automatic**: No manual language prefix management
+- **Consistent**: All links follow same pattern
+- **Future-Proof**: Easy to add new languages
+
+### Updated Files
+- `client/src/pages/home.tsx` - 4 product card links
+- `client/src/components/layout/Footer.tsx` - 14 navigation links
+- `client/src/components/ClientLogos.tsx` - 1 "View All" link
+- `client/src/components/layout/Navbar.tsx` - 5 navigation links (previous commit)
+
+### Consequences
+**Positive**: 
+- Language persists across ALL navigation
+- User experience improved (no unexpected language changes)
+- Scalable solution for future pages
+- Reduced code duplication
+
+**Negative**: 
+- Requires updating all existing links (one-time effort)
+- Developers must remember to use languageLink() or LanguageLink component
+
+### Testing Checklist
+- [x] Select Arabic → Click "About" → Goes to /ar/about
+- [x] Select German → Click product → Goes to /de/products/konveyor
+- [x] Select French → Click "Exports" → Goes to /fr/exports
+- [x] All 7 languages work consistently
+- [x] Footer links preserve language
+- [x] Product card links preserve language
+
+### Related ADRs
+- ADR-016: URL-Based Language Routing (Initial implementation)
+- ADR-017: Turkish /tr/ Prefix (All languages equal)
+- ADR-004: i18n System (Translation infrastructure)
+
+---
+
+**DOCUMENT STATUS**: Active & Enforced  
+**TOTAL ADRs**: 18 (Accepted: 16, Rejected: 1, Planned: 1)  
+**LAST UPDATED**: 2026-02-21

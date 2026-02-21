@@ -195,6 +195,7 @@ export default function ProductDetail() {
                 onClick={scrollToContact}
                 size="lg"
                 className="bg-red-600 hover:bg-red-700 text-white font-bold text-base xs:text-sm sm:text-lg px-8 xs:px-6 py-6 xs:py-5 rounded-none skew-x-[-10deg] border-2 border-red-600 hover:shadow-[0_0_30px_rgba(220,38,38,0.5)] transition-all group"
+                aria-label="Teklif almak için iletişime geç"
               >
                 <span className="skew-x-[10deg] flex items-center gap-2">
                   {heroTranslations.getQuote}
@@ -206,6 +207,7 @@ export default function ProductDetail() {
                 size="lg"
                 variant="outline"
                 className="border-2 border-white/30 text-white hover:bg-white/10 hover:border-white hover:text-white font-bold text-base xs:text-sm sm:text-lg px-8 xs:px-6 py-6 xs:py-5 rounded-none skew-x-[-10deg] backdrop-blur-sm transition-all group"
+                aria-label="WhatsApp ile iletişime geç"
               >
                 <span className="skew-x-[10deg] flex items-center gap-2">
                   <Phone className="w-5 h-5 xs:w-4 xs:h-4 group-hover:rotate-12 transition-transform" />

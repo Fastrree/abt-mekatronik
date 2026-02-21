@@ -483,6 +483,7 @@ export default function Home() {
                 onClick={() => openLightbox(index)}
                 className="group relative aspect-square overflow-hidden bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 shadow-lg dark:shadow-none animate-in scale-in duration-500 cursor-pointer"
                 style={{ animationDelay: `${index * 50}ms` }}
+                aria-label={`Proje görseli ${index + 1} - Büyütmek için tıklayın`}
               >
                 <OptimizedImage 
                   src={`/media/${encodeURIComponent(img)}`}

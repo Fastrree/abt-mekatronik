@@ -697,6 +697,7 @@ function OurExports() {
               <button 
                 onClick={() => smoothScrollToElement('contact')}
                 className="inline-flex items-center justify-center px-8 xs:px-6 py-4 xs:py-3 bg-white text-red-600 font-bold text-base xs:text-sm rounded-2xl hover:bg-white/90 transition-all duration-300 shadow-xl hover:shadow-2xl hover:scale-110 hover:-translate-y-1"
+                aria-label="İletişim bölümüne git"
               >
                 {t('exports.cta.contactButton')}
               </button>

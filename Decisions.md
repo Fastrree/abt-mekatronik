@@ -1676,7 +1676,7 @@ Fix all hardcoded navigation links and path detection logic:
 
 ---
 
-## ADR-022: SEO Meta Tags System - Comprehensive Multi-Language Support
+## ADR-022: SEO Meta Tags System - Professional Translations, No Keywords
 
 **Date**: 2026-02-21  
 **Status**: Accepted  
@@ -1686,76 +1686,96 @@ Fix all hardcoded navigation links and path detection logic:
 ### Context
 Need comprehensive SEO meta tag system for all 7 languages (TR, EN, DE, FR, ES, AR, RU) across all pages (Home, About, Exports, 4 Product Details) to improve search engine visibility and international reach.
 
+**Critical Decision**: Remove `<meta name="keywords">` tag - Google doesn't use it since 2009.
+
 ### Decision
-Implement centralized meta tag translation system with dynamic updates via React hook.
+Implement centralized meta tag translation system with dynamic updates via React hook, focusing ONLY on tags that matter for SEO.
 
 ### Implementation
 ```typescript
-// meta-translations.ts - Centralized translations
-export const metaTranslations: Record<string, MetaTranslations> = {
-  tr: { home: {...}, about: {...}, exports: {...}, products: {...} },
-  en: { home: {...}, about: {...}, exports: {...}, products: {...} },
-  // ... all 7 languages
-};
+// meta-translations.ts - NO keywords field
+export interface PageMeta {
+  title: string;
+  description: string;
+  ogTitle: string;
+  ogDescription: string;
+  twitterTitle: string;
+  twitterDescription: string;
+  // keywords: REMOVED - Google ignores since 2009
+}
 
 // useMeta.ts - Dynamic meta tag management
 export function useMeta(pageType: PageType | 'product', productKey?: ProductKey) {
   const { language } = useI18n();
   
   useEffect(() => {
-    // Update document.title, meta description, keywords, OG tags, Twitter tags
+    // Update only tags that matter for SEO
     document.title = meta.title;
-    // ... update all meta tags
+    document.querySelector('meta[name="description"]')?.setAttribute('content', meta.description);
+    // NO keywords update - Google doesn't use it
   }, [language, pageType, productKey]);
 }
-
-// Usage in pages
-useMeta('home');                    // Home page
-useMeta('about');                   // About page
-useMeta('product', 'konveyor');     // Product detail page
 ```
 
 ### Rationale
 - **SEO Optimization**: Proper meta tags improve search engine ranking
-- **Multi-Language Support**: Each language has culturally appropriate translations
+- **Multi-Language Support**: Professional translations from i18n.tsx (not AI generated)
 - **Dynamic Updates**: Meta tags update automatically when language changes
 - **Centralized Management**: Single source of truth for all meta translations
 - **Type Safety**: TypeScript ensures all required fields are present
+- **No Keywords**: Google announced in 2009 that keywords meta tag is not a ranking factor
 
-### Meta Tags Included
-1. `<title>` - Page title (50-60 characters)
-2. `<meta name="description">` - Description (150-160 characters)
-3. `<meta name="keywords">` - Keywords (10-15 relevant keywords)
-4. `<meta property="og:title">` - Open Graph title (Facebook, LinkedIn)
-5. `<meta property="og:description">` - Open Graph description
-6. `<meta name="twitter:title">` - Twitter Card title
-7. `<meta name="twitter:description">` - Twitter Card description
-8. `<html lang="...">` - Language attribute
+### Meta Tags Included (What Matters)
+1. ✅ `<title>` - Page title (50-60 characters) - **CRITICAL for SEO**
+2. ✅ `<meta name="description">` - Description (150-160 characters) - **CRITICAL for SEO**
+3. ✅ `<meta property="og:title">` - Open Graph title (Facebook, LinkedIn)
+4. ✅ `<meta property="og:description">` - Open Graph description
+5. ✅ `<meta name="twitter:title">` - Twitter Card title
+6. ✅ `<meta name="twitter:description">` - Twitter Card description
+7. ✅ `<html lang="...">` - Language attribute
+8. ❌ `<meta name="keywords">` - **REMOVED** - Google doesn't use since 2009
 
 ### Coverage
 - **Languages**: 7 (TR, EN, DE, FR, ES, AR, RU)
 - **Pages**: 7 (Home, About, Exports, 4 Product Details)
 - **Total Combinations**: 49 unique meta tag sets
+- **Translation Quality**: Professional (from i18n.tsx), not AI generated
 
 ### Consequences
 **Positive**: 
-- Improved SEO for all languages
+- Improved SEO for all languages (title + description are what matters)
 - Better social media sharing (OG tags)
 - Automatic updates on language change
 - Centralized translation management
 - Type-safe implementation
+- Cleaner code (no useless keywords field)
+- Professional translations (from i18n.tsx)
 
 **Negative**: 
-- Large translation file (459 lines)
+- Large translation file (but smaller without keywords)
 - Manual translation updates required
 - No automated translation validation
+
+### Why No Keywords Meta Tag?
+**Google's Official Statement (2009)**:
+> "Google doesn't use the keywords meta tag in web ranking."
+> - Matt Cutts, Google Webmaster Central Blog
+
+**Other Search Engines**:
+- Bing: Doesn't use keywords meta tag
+- Yandex: Unclear, but not a primary ranking factor
+- Baidu: Unclear, but not a primary ranking factor
+
+**Conclusion**: Focus on title and description - they actually matter for SEO.
 
 ### Alternatives Considered
 - **react-helmet**: External dependency, not needed for simple meta tag management
 - **next-seo**: Next.js specific, we use Vite
 - **Inline meta tags**: Not dynamic, requires duplication
+- **Keep keywords**: Waste of time, Google ignores it
 
 ### Success Metrics
 - Google Search Console: Improved indexing for all languages
 - Social media: Proper preview cards when sharing links
 - Analytics: Increased organic traffic from international markets
+- Code quality: Cleaner, focused on what matters

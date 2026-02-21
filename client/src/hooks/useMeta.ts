@@ -46,10 +46,6 @@ export function useMeta(pageType: PageType | 'product', productKey?: ProductKey)
     const descMeta = document.querySelector('meta[name="description"]');
     if (descMeta) descMeta.setAttribute('content', meta.description);
 
-    // Update meta keywords
-    const keywordsMeta = document.querySelector('meta[name="keywords"]');
-    if (keywordsMeta) keywordsMeta.setAttribute('content', meta.keywords);
-
     // Update Open Graph meta tags
     const ogTitleMeta = document.querySelector('meta[property="og:title"]');
     if (ogTitleMeta) ogTitleMeta.setAttribute('content', meta.ogTitle);

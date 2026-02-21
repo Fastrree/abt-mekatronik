@@ -26,32 +26,29 @@ function OurExports() {
   const [isMapHovered, setIsMapHovered] = useState(false);
   const [isZooming, setIsZooming] = useState(false);
 
+  // PERFORMANCE: Disable Twemoji parsing - use native emoji for better performance
+  // Native emoji is faster and doesn't require external CDN
   // Parse emojis on component mount and when hoveredCountry changes
   useEffect(() => {
-    const parseEmojis = () => {
-      if (typeof window.twemoji !== 'undefined') {
-        // Parse all emoji containers
-        const emojiContainers = document.querySelectorAll('.emoji-container');
-        emojiContainers.forEach(container => {
-          if (container) {
-            window.twemoji?.parse(container as HTMLElement, {
-              folder: 'svg',
-              ext: '.svg',
-              base: 'https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/'
-            });
-          }
-        });
-      }
-    };
-
-    // Initial parse
-    parseEmojis();
-
-    // Re-parse after a short delay (for dynamic content)
-    const timer = setTimeout(parseEmojis, 200);
-
-    return () => clearTimeout(timer);
-  }, [hoveredCountry]); // Re-parse when hovered country changes
+    // DISABLED FOR PERFORMANCE - Native emoji is sufficient
+    // const parseEmojis = () => {
+    //   if (typeof window.twemoji !== 'undefined') {
+    //     const emojiContainers = document.querySelectorAll('.emoji-container');
+    //     emojiContainers.forEach(container => {
+    //       if (container) {
+    //         window.twemoji?.parse(container as HTMLElement, {
+    //           folder: 'svg',
+    //           ext: '.svg',
+    //           base: 'https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/'
+    //         });
+    //       }
+    //     });
+    //   }
+    // };
+    // parseEmojis();
+    // const timer = setTimeout(parseEmojis, 200);
+    // return () => clearTimeout(timer);
+  }, [hoveredCountry]);
 
   const exportCountryCodes = [
     "TR", // Türkiye
@@ -76,6 +73,13 @@ function OurExports() {
     if (!mapRef.current || mapInstance.current) return;
 
     const isMobile = window.innerWidth < 640;
+    
+    // PERFORMANCE: Skip map loading on mobile - show static country list instead
+    if (isMobile) {
+      console.log('Mobile detected: Skipping heavy map library for better performance');
+      return;
+    }
+    
     let isCancelled = false; // Cancellation token
 
     const loadMap = async () => {
@@ -488,7 +492,21 @@ function OurExports() {
             <p className="text-zinc-600 dark:text-zinc-300 max-w-2xl mx-auto text-base xs:text-sm sm:text-lg px-4 xs:px-0" dir={language === 'ar' ? 'rtl' : 'ltr'}>{t('exports.countries.description')}</p>
           </div>
           <div className="max-w-6xl mx-auto mb-16 xs:mb-12">
-            <div className="bg-white dark:bg-zinc-800 p-8 xs:p-4 rounded-2xl border-2 border-zinc-200 dark:border-zinc-700 shadow-2xl">
+            {/* Mobile: Show static country cards instead of heavy map */}
+            <div className="block sm:hidden mb-8">
+              <div className="grid grid-cols-2 gap-3">
+                {exportCountries.map((country, index) => (
+                  <div key={country.name} className="bg-gradient-to-br from-white to-zinc-50 dark:from-zinc-800 dark:to-zinc-900 p-4 rounded-2xl border-2 border-zinc-200 dark:border-zinc-700 hover:border-red-500 shadow-lg text-center">
+                    <div className="text-4xl mb-2 emoji-container">{country.flag}</div>
+                    <h3 className="text-sm font-bold text-zinc-900 dark:text-white">{country.name}</h3>
+                    <p className="text-xs text-zinc-500 dark:text-zinc-300">{t(`exports.regions.${country.regionKey}`)}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+            
+            {/* Desktop: Interactive map */}
+            <div className="hidden sm:block bg-white dark:bg-zinc-800 p-8 xs:p-4 rounded-2xl border-2 border-zinc-200 dark:border-zinc-700 shadow-2xl">
               <style>{`
                 .jvm-zoom-btn {
                   background-color: #ef4444 !important;
@@ -754,6 +772,21 @@ function OurExports() {
             .animate-scroll-left:hover,
             .animate-scroll-right:hover {
               animation-play-state: paused;
+            }
+            
+            /* PERFORMANCE: Respect user's motion preferences */
+            @media (prefers-reduced-motion: reduce) {
+              .animate-scroll-left,
+              .animate-scroll-right {
+                animation: none;
+              }
+            }
+            
+            /* PERFORMANCE: Use GPU acceleration */
+            .animate-scroll-left,
+            .animate-scroll-right {
+              will-change: transform;
+              transform: translateZ(0);
             }
           `}</style>
 

@@ -76,12 +76,12 @@ export default function About() {
       </section>
 
       {/* COMPANY STORY SECTION */}
-      <section className="py-24 bg-zinc-50 dark:bg-zinc-900">
+      <section className="py-24 bg-zinc-50 dark:bg-zinc-900" aria-labelledby="company-story-title">
         <div className="container mx-auto px-6">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <div className="animate-in fade-in duration-600">
               <h3 className="text-red-600 dark:text-red-500 font-bold tracking-widest uppercase mb-4">{t('about.storySubtitle')}</h3>
-              <h2 className="text-4xl md:text-5xl font-black text-zinc-900 dark:text-white mb-8">{t('about.storyTitle')}</h2>
+              <h2 id="company-story-title" className="text-4xl md:text-5xl font-black text-zinc-900 dark:text-white mb-8">{t('about.storyTitle')}</h2>
               <div className="space-y-6 text-zinc-600 dark:text-zinc-300 leading-relaxed">
                 <p>{t('about.storyParagraph1')}</p>
                 <p>{t('about.storyParagraph2')}</p>
@@ -102,17 +102,17 @@ export default function About() {
                 />
                 
                 {/* Stats Cards */}
-                <div className="grid grid-cols-1 xs:grid-cols-3 gap-6">
-                  <div className="bg-gradient-to-br from-zinc-100 to-zinc-200 dark:from-zinc-700 dark:to-zinc-800 p-6 border-2 border-zinc-200 dark:border-zinc-600 rounded-2xl text-center hover:border-red-600 hover:shadow-xl transition-all duration-300 hover:scale-[1.02]">
-                    <div className="text-4xl font-black text-red-600 dark:text-red-500 mb-2">15+</div>
+                <div className="grid grid-cols-1 xs:grid-cols-3 gap-6" role="list" aria-label="Şirket istatistikleri">
+                  <div className="bg-gradient-to-br from-zinc-100 to-zinc-200 dark:from-zinc-700 dark:to-zinc-800 p-6 border-2 border-zinc-200 dark:border-zinc-600 rounded-2xl text-center hover:border-red-600 hover:shadow-xl transition-all duration-300 hover:scale-[1.02]" role="listitem">
+                    <div className="text-4xl font-black text-red-600 dark:text-red-500 mb-2" aria-label="15 yıldan fazla deneyim">15+</div>
                     <div className="text-sm font-semibold text-zinc-600 dark:text-zinc-300">{t('about.yearsExperience')}</div>
                   </div>
-                  <div className="bg-gradient-to-br from-zinc-100 to-zinc-200 dark:from-zinc-700 dark:to-zinc-800 p-6 border-2 border-zinc-200 dark:border-zinc-600 rounded-2xl text-center hover:border-red-600 hover:shadow-xl transition-all duration-300 hover:scale-[1.02]">
-                    <div className="text-4xl font-black text-red-600 dark:text-red-500 mb-2">200+</div>
+                  <div className="bg-gradient-to-br from-zinc-100 to-zinc-200 dark:from-zinc-700 dark:to-zinc-800 p-6 border-2 border-zinc-200 dark:border-zinc-600 rounded-2xl text-center hover:border-red-600 hover:shadow-xl transition-all duration-300 hover:scale-[1.02]" role="listitem">
+                    <div className="text-4xl font-black text-red-600 dark:text-red-500 mb-2" aria-label="200'den fazla tamamlanmış proje">200+</div>
                     <div className="text-sm font-semibold text-zinc-600 dark:text-zinc-300">{t('about.completedProjects')}</div>
                   </div>
-                  <div className="bg-gradient-to-br from-zinc-100 to-zinc-200 dark:from-zinc-700 dark:to-zinc-800 p-6 border-2 border-zinc-200 dark:border-zinc-600 rounded-2xl text-center hover:border-red-600 hover:shadow-xl transition-all duration-300 hover:scale-[1.02]">
-                    <div className="text-4xl font-black text-red-600 dark:text-red-500 mb-2">50+</div>
+                  <div className="bg-gradient-to-br from-zinc-100 to-zinc-200 dark:from-zinc-700 dark:to-zinc-800 p-6 border-2 border-zinc-200 dark:border-zinc-600 rounded-2xl text-center hover:border-red-600 hover:shadow-xl transition-all duration-300 hover:scale-[1.02]" role="listitem">
+                    <div className="text-4xl font-black text-red-600 dark:text-red-500 mb-2" aria-label="50'den fazla mutlu müşteri">50+</div>
                     <div className="text-sm font-semibold text-zinc-600 dark:text-zinc-300">{t('about.happyClients')}</div>
                   </div>
                 </div>
@@ -130,42 +130,42 @@ export default function About() {
       `}</style>
 
       {/* VALUES SECTION - Gradient Cards */}
-      <section className="py-24 bg-white dark:bg-zinc-800">
+      <section className="py-24 bg-white dark:bg-zinc-800" aria-labelledby="values-title">
         <div className="container mx-auto px-6">
           <div className="text-center mb-16 animate-in fade-in duration-600">
             <h3 className="text-red-600 dark:text-red-500 font-bold tracking-widest uppercase mb-2">{t('about.valuesSubtitle')}</h3>
-            <h2 className="text-4xl md:text-5xl font-black text-zinc-900 dark:text-white">{t('about.valuesTitle')}</h2>
+            <h2 id="values-title" className="text-4xl md:text-5xl font-black text-zinc-900 dark:text-white">{t('about.valuesTitle')}</h2>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6" role="list" aria-label="Şirket değerleri">
             {/* Quality */}
-            <div className="group relative overflow-hidden bg-gradient-to-br from-red-600 to-red-800 p-8 text-white rounded-2xl hover:shadow-2xl hover:shadow-red-600/30 transition-all duration-300 hover:-translate-y-2 hover:scale-[1.02]">
+            <div className="group relative overflow-hidden bg-gradient-to-br from-red-600 to-red-800 p-8 text-white rounded-2xl hover:shadow-2xl hover:shadow-red-600/30 transition-all duration-300 hover:-translate-y-2 hover:scale-[1.02]" role="listitem">
               <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -mr-16 -mt-16 group-hover:scale-150 transition-transform duration-500" aria-hidden="true" />
-              <Award className="w-12 h-12 mb-4 relative z-10 group-hover:scale-110 transition-transform" />
+              <Award className="w-12 h-12 mb-4 relative z-10 group-hover:scale-110 transition-transform" aria-hidden="true" />
               <h3 className="text-xl font-bold mb-2 relative z-10">{t('about.valueQuality')}</h3>
               <p className="text-sm text-white/90 relative z-10">{t('about.valueQualityDesc')}</p>
             </div>
 
             {/* Innovation */}
-            <div className="group relative overflow-hidden bg-gradient-to-br from-zinc-700 to-zinc-900 p-8 text-white rounded-2xl hover:shadow-2xl hover:shadow-zinc-600/30 transition-all duration-300 hover:-translate-y-2 hover:scale-[1.02]">
+            <div className="group relative overflow-hidden bg-gradient-to-br from-zinc-700 to-zinc-900 p-8 text-white rounded-2xl hover:shadow-2xl hover:shadow-zinc-600/30 transition-all duration-300 hover:-translate-y-2 hover:scale-[1.02]" role="listitem">
               <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -mr-16 -mt-16 group-hover:scale-150 transition-transform duration-500" aria-hidden="true" />
-              <Zap className="w-12 h-12 mb-4 relative z-10 group-hover:scale-110 transition-transform" />
+              <Zap className="w-12 h-12 mb-4 relative z-10 group-hover:scale-110 transition-transform" aria-hidden="true" />
               <h3 className="text-xl font-bold mb-2 relative z-10">{t('about.valueInnovation')}</h3>
               <p className="text-sm text-white/90 relative z-10">{t('about.valueInnovationDesc')}</p>
             </div>
 
             {/* Customer Focus */}
-            <div className="group relative overflow-hidden bg-gradient-to-br from-blue-600 to-blue-800 p-8 text-white rounded-2xl hover:shadow-2xl hover:shadow-blue-600/30 transition-all duration-300 hover:-translate-y-2 hover:scale-[1.02]">
+            <div className="group relative overflow-hidden bg-gradient-to-br from-blue-600 to-blue-800 p-8 text-white rounded-2xl hover:shadow-2xl hover:shadow-blue-600/30 transition-all duration-300 hover:-translate-y-2 hover:scale-[1.02]" role="listitem">
               <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -mr-16 -mt-16 group-hover:scale-150 transition-transform duration-500" aria-hidden="true" />
-              <Target className="w-12 h-12 mb-4 relative z-10 group-hover:scale-110 transition-transform" />
+              <Target className="w-12 h-12 mb-4 relative z-10 group-hover:scale-110 transition-transform" aria-hidden="true" />
               <h3 className="text-xl font-bold mb-2 relative z-10">{t('about.valueCustomer')}</h3>
               <p className="text-sm text-white/90 relative z-10">{t('about.valueCustomerDesc')}</p>
             </div>
 
             {/* Teamwork */}
-            <div className="group relative overflow-hidden bg-gradient-to-br from-green-600 to-green-800 p-8 text-white rounded-2xl hover:shadow-2xl hover:shadow-green-600/30 transition-all duration-300 hover:-translate-y-2 hover:scale-[1.02]">
+            <div className="group relative overflow-hidden bg-gradient-to-br from-green-600 to-green-800 p-8 text-white rounded-2xl hover:shadow-2xl hover:shadow-green-600/30 transition-all duration-300 hover:-translate-y-2 hover:scale-[1.02]" role="listitem">
               <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -mr-16 -mt-16 group-hover:scale-150 transition-transform duration-500" aria-hidden="true" />
-              <Users className="w-12 h-12 mb-4 relative z-10 group-hover:scale-110 transition-transform" />
+              <Users className="w-12 h-12 mb-4 relative z-10 group-hover:scale-110 transition-transform" aria-hidden="true" />
               <h3 className="text-xl font-bold mb-2 relative z-10">{t('about.valueTeamwork')}</h3>
               <p className="text-sm text-white/90 relative z-10">{t('about.valueTeamworkDesc')}</p>
             </div>
@@ -174,17 +174,17 @@ export default function About() {
       </section>
 
       {/* TIMELINE SECTION - ULTRA MODERN */}
-      <section className="py-24 bg-zinc-50 dark:bg-zinc-900 relative overflow-hidden">
+      <section className="py-24 bg-zinc-50 dark:bg-zinc-900 relative overflow-hidden" aria-labelledby="timeline-title">
         {/* Background Effects */}
-        <div className="absolute inset-0 opacity-30">
-          <div className="absolute top-0 left-1/4 w-96 h-96 bg-red-500/20 rounded-full blur-3xl animate-pulse" />
-          <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-blue-500/20 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
+        <div className="absolute inset-0 opacity-30" aria-hidden="true">
+          <div className="absolute top-0 left-1/4 w-96 h-96 bg-red-500/20 rounded-full blur-3xl animate-pulse" aria-hidden="true" />
+          <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-blue-500/20 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} aria-hidden="true" />
         </div>
 
         <div className="container mx-auto px-6 relative z-10">
           <div className="text-center mb-16 animate-in fade-in duration-600">
             <h3 className="text-red-600 dark:text-red-500 font-bold tracking-widest uppercase mb-2">{t('about.timelineSubtitle')}</h3>
-            <h2 className="text-4xl md:text-5xl font-black text-zinc-900 dark:text-white">{t('about.timelineTitle')}</h2>
+            <h2 id="timeline-title" className="text-4xl md:text-5xl font-black text-zinc-900 dark:text-white">{t('about.timelineTitle')}</h2>
           </div>
 
           <div className="max-w-4xl mx-auto">
@@ -195,12 +195,12 @@ export default function About() {
                 style={{ animationDelay: `${index * 100}ms` }}
               >
                 {/* Animated Timeline Dot */}
-                <div className="absolute -left-4 top-0 w-8 h-8 bg-gradient-to-br from-red-500 to-red-700 rounded-full border-4 border-white dark:border-zinc-900 shadow-lg group-hover:scale-125 group-hover:shadow-red-500/50 transition-all duration-300">
-                  <div className="absolute inset-0 bg-red-400 rounded-full animate-ping opacity-75" />
+                <div className="absolute -left-4 top-0 w-8 h-8 bg-gradient-to-br from-red-500 to-red-700 rounded-full border-4 border-white dark:border-zinc-900 shadow-lg group-hover:scale-125 group-hover:shadow-red-500/50 transition-all duration-300" aria-hidden="true">
+                  <div className="absolute inset-0 bg-red-400 rounded-full animate-ping opacity-75" aria-hidden="true" />
                 </div>
 
                 {/* Connecting Line Glow */}
-                <div className="absolute left-0 top-8 bottom-0 w-1 bg-gradient-to-b from-red-500/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                <div className="absolute left-0 top-8 bottom-0 w-1 bg-gradient-to-b from-red-500/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" aria-hidden="true" />
 
                 {/* Modern Card */}
                 <div className="relative bg-gradient-to-br from-zinc-100 to-zinc-200 dark:from-zinc-700 dark:to-zinc-800 p-8 border-2 border-zinc-200 dark:border-zinc-600 rounded-2xl shadow-lg hover:shadow-2xl hover:shadow-red-600/20 hover:border-red-600 hover:scale-[1.03] hover:-translate-y-2 transition-all duration-500 overflow-hidden">
@@ -248,20 +248,21 @@ export default function About() {
       </section>
 
       {/* CERTIFICATIONS SECTION */}
-      <section className="py-24 bg-white dark:bg-zinc-800">
+      <section className="py-24 bg-white dark:bg-zinc-800" aria-labelledby="certifications-title">
         <div className="container mx-auto px-6">
           <div className="text-center mb-16 animate-in fade-in duration-600">
             <h3 className="text-red-600 dark:text-red-500 font-bold tracking-widest uppercase mb-2">{t('about.certificationsSubtitle')}</h3>
-            <h2 className="text-4xl md:text-5xl font-black text-zinc-900 dark:text-white">{t('about.certificationsTitle')}</h2>
+            <h2 id="certifications-title" className="text-4xl md:text-5xl font-black text-zinc-900 dark:text-white">{t('about.certificationsTitle')}</h2>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-3 gap-8" role="list" aria-label="Sertifikalar ve belgeler">
             {tArray('about.certifications').map((cert: any, index: number) => (
               <div 
                 key={index}
                 className="bg-gradient-to-br from-zinc-100 to-zinc-200 dark:from-zinc-700 dark:to-zinc-800 p-8 border-2 border-zinc-200 dark:border-zinc-600 rounded-2xl hover:border-red-600 hover:shadow-xl hover:shadow-red-600/20 transition-all duration-300 hover:-translate-y-2 hover:scale-[1.02] group"
+                role="listitem"
               >
-                <CheckCircle className="w-12 h-12 text-red-600 dark:text-red-500 mb-4 group-hover:scale-110 transition-transform" />
+                <CheckCircle className="w-12 h-12 text-red-600 dark:text-red-500 mb-4 group-hover:scale-110 transition-transform" aria-hidden="true" />
                 <h3 className="text-xl font-bold text-zinc-900 dark:text-white mb-2">{cert.name}</h3>
                 <p className="text-zinc-600 dark:text-zinc-300 text-sm">{cert.description}</p>
               </div>
@@ -271,20 +272,21 @@ export default function About() {
       </section>
 
       {/* WHY CHOOSE US SECTION */}
-      <section className="py-24 bg-gradient-to-br from-red-600 to-red-800 text-white">
+      <section className="py-24 bg-gradient-to-br from-red-600 to-red-800 text-white" aria-labelledby="why-choose-title">
         <div className="container mx-auto px-6">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-black mb-6">{t('about.whyChooseTitle')}</h2>
+            <h2 id="why-choose-title" className="text-4xl md:text-5xl font-black mb-6">{t('about.whyChooseTitle')}</h2>
             <p className="text-xl text-white/90 max-w-2xl mx-auto">{t('about.whyChooseDescription')}</p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6" role="list" aria-label="Neden bizi seçmelisiniz nedenleri">
             {tArray('about.whyChooseReasons').map((reason: any, index: number) => (
               <div 
                 key={index}
                 className="bg-white/10 backdrop-blur-sm p-6 border-2 border-white/20 rounded-2xl hover:bg-white/20 hover:border-white/40 hover:scale-[1.02] hover:shadow-xl transition-all duration-300 group"
+                role="listitem"
               >
-                <TrendingUp className="w-8 h-8 mb-4 group-hover:scale-110 transition-transform" />
+                <TrendingUp className="w-8 h-8 mb-4 group-hover:scale-110 transition-transform" aria-hidden="true" />
                 <h3 className="text-lg font-bold mb-2">{reason.title}</h3>
                 <p className="text-sm text-white/90">{reason.description}</p>
               </div>

@@ -45,7 +45,9 @@ export const Navbar = memo(function Navbar() {
   // Smart navigation: if already on home page, just scroll to top
   const handleHomeClick = useCallback((e: React.MouseEvent<HTMLAnchorElement>) => {
     const currentPath = window.location.pathname;
-    if (currentPath === '/') {
+    // Check if on home page (with or without language prefix)
+    const isHomePage = currentPath === '/' || /^\/(tr|en|de|fr|es|ar|ru)\/?$/.test(currentPath);
+    if (isHomePage) {
       e.preventDefault();
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
@@ -55,7 +57,9 @@ export const Navbar = memo(function Navbar() {
   // Smart navigation for section links: if on home page, scroll; if not, navigate
   const handleSectionClick = useCallback((e: React.MouseEvent<HTMLAnchorElement>, sectionId: string) => {
     const currentPath = window.location.pathname;
-    if (currentPath === '/') {
+    // Check if on home page (with or without language prefix)
+    const isHomePage = currentPath === '/' || /^\/(tr|en|de|fr|es|ar|ru)\/?$/.test(currentPath);
+    if (isHomePage) {
       e.preventDefault();
       smoothScrollToElement(sectionId);
     }
@@ -65,15 +69,17 @@ export const Navbar = memo(function Navbar() {
   // Programmatic navigation for hamburger menu (works from any page)
   const navigateToSection = useCallback((sectionId: string) => {
     const currentPath = window.location.pathname;
-    if (currentPath === '/') {
+    // Check if on home page (with or without language prefix)
+    const isHomePage = currentPath === '/' || /^\/(tr|en|de|fr|es|ar|ru)\/?$/.test(currentPath);
+    if (isHomePage) {
       // Already on home page, just scroll
       smoothScrollToElement(sectionId);
     } else {
-      // Navigate to home page with hash
-      setLocation(`/#${sectionId}`);
+      // Navigate to home page with hash (with language prefix)
+      setLocation(`${languageLink('/')}#${sectionId}`);
     }
     setIsQuickMenuOpen(false);
-  }, [setLocation]);
+  }, [setLocation, languageLink]);
 
   // Smart CTA handler: scroll to contact map on current page
   const handleCTAClick = useCallback((e: React.MouseEvent) => {
@@ -304,7 +310,7 @@ export const Navbar = memo(function Navbar() {
         }`}>
           {/* Ana Sayfa */}
           <a
-            href="/"
+            href={languageLink('/')}
             onClick={(e) => {
               handleHomeClick(e);
               closeAllDropdowns();
@@ -327,7 +333,7 @@ export const Navbar = memo(function Navbar() {
 
           {/* Ürünler */}
           <a
-            href="/#products"
+            href={`${languageLink('/')}#products`}
             onClick={(e) => {
               handleSectionClick(e, 'products');
               closeAllDropdowns();
@@ -340,7 +346,7 @@ export const Navbar = memo(function Navbar() {
 
           {/* Mühendislik */}
           <a
-            href="/#engineering"
+            href={`${languageLink('/')}#engineering`}
             onClick={(e) => {
               handleSectionClick(e, 'engineering');
               closeAllDropdowns();
@@ -353,7 +359,7 @@ export const Navbar = memo(function Navbar() {
 
           {/* Projeler */}
           <a
-            href="/#projects"
+            href={`${languageLink('/')}#projects`}
             onClick={(e) => {
               handleSectionClick(e, 'projects');
               closeAllDropdowns();
@@ -376,7 +382,7 @@ export const Navbar = memo(function Navbar() {
 
           {/* İletişim */}
           <a
-            href="/#contact-map"
+            href={`${languageLink('/')}#contact-map`}
             onClick={(e) => {
               handleSectionClick(e, 'contact-map');
               closeAllDropdowns();

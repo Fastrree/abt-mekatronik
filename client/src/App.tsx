@@ -36,16 +36,35 @@ function PageLoader() {
 }
 
 function Router() {
-  const [location] = useLocation();
+  const [location, setLocation] = useLocation();
   const { language, setLanguage } = useI18n();
 
-  // Sync URL language with i18n context
+  // CRITICAL: Redirect to language-prefixed URL on initial load
   useEffect(() => {
     const urlLanguage = getLanguageFromPath(location);
+    
+    // If URL has no language prefix (e.g., "/" or "/about"), redirect to language-prefixed URL
+    if (!urlLanguage || urlLanguage === 'tr') {
+      // Check if current path already has language prefix
+      const hasLanguagePrefix = /^\/(tr|en|de|fr|es|ar|ru)(\/|$)/.test(location);
+      
+      if (!hasLanguagePrefix) {
+        // Build language-prefixed URL
+        const cleanPath = location === '/' ? '' : location;
+        const newPath = `/${language}${cleanPath}`;
+        
+        // Redirect to language-prefixed URL
+        console.log(`[i18n] Initial load redirect: ${location} → ${newPath}`);
+        setLocation(newPath, { replace: true });
+        return;
+      }
+    }
+    
+    // Sync URL language with i18n context
     if (urlLanguage !== language) {
       setLanguage(urlLanguage);
     }
-  }, [location, language, setLanguage]);
+  }, [location, language, setLanguage, setLocation]);
 
   // Scroll to top on route change (except hash navigation)
   useEffect(() => {

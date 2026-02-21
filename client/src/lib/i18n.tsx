@@ -130,22 +130,22 @@ export function I18nProvider({ children }: I18nProviderProps) {
     const path = pathname.startsWith('/') ? pathname.slice(1) : pathname;
     const firstSegment = path.split('/')[0];
     
-    // Check if first segment is a valid language code (excluding 'tr' as it's default)
-    const supportedLanguages: Language[] = ['en', 'de', 'fr', 'es', 'ar', 'ru'];
+    // Check if first segment is a valid language code (including 'tr')
+    const supportedLanguages: Language[] = ['tr', 'en', 'de', 'fr', 'es', 'ar', 'ru'];
     if (supportedLanguages.includes(firstSegment as Language)) {
       return firstSegment as Language;
     }
     
-    // Default to Turkish (no prefix in URL)
+    // Default to Turkish if no valid language prefix
     return 'tr';
   };
 
   // Initialize language from URL first, then localStorage, then browser
   const [language, setLanguageState] = useState<Language>(() => {
     if (typeof window !== 'undefined') {
-      // Priority 1: URL language prefix
+      // Priority 1: URL language prefix (including /tr/)
       const urlLanguage = getLanguageFromURL();
-      if (urlLanguage !== 'tr') {
+      if (urlLanguage) {
         return urlLanguage;
       }
       

@@ -25,15 +25,15 @@ The website supports 7 languages (TR, EN, DE, FR, ES, AR, RU) but language selec
 Implement URL-based language routing with the following structure:
 
 ### URL Structure
-- **Turkish (default)**: Clean URLs without language prefix
-  - `https://abtmekatronik.com/`
-  - `https://abtmekatronik.com/about`
-  - `https://abtmekatronik.com/products/konveyor`
+- **ALL Languages**: Language prefix in URL (including Turkish)
+  - `https://abtmekatronik.com/tr/`
+  - `https://abtmekatronik.com/tr/about`
+  - `https://abtmekatronik.com/en/products/konveyor`
+  - `https://abtmekatronik.com/ar/exports`
 
-- **Other Languages**: Language prefix in URL
-  - `https://abtmekatronik.com/en/`
-  - `https://abtmekatronik.com/de/about`
-  - `https://abtmekatronik.com/ar/products/tekstil`
+- **Old URLs (no prefix)**: Redirect to `/tr/`
+  - `https://abtmekatronik.com/` → `/tr/`
+  - `https://abtmekatronik.com/about` → `/tr/about`
 
 ### Language Detection Priority
 1. **URL prefix** (highest priority)
@@ -48,15 +48,16 @@ Implement URL-based language routing with the following structure:
 ```typescript
 // Extract language from URL
 getLanguageFromPath('/en/about') → 'en'
-getLanguageFromPath('/about') → 'tr' (default)
+getLanguageFromPath('/tr/about') → 'tr'
+getLanguageFromPath('/about') → 'tr' (redirects to /tr/about)
 
-// Build language-aware URLs
+// Build language-aware URLs (ALL languages have prefix)
 buildLanguagePath('/about', 'en') → '/en/about'
-buildLanguagePath('/about', 'tr') → '/about' (no prefix)
+buildLanguagePath('/about', 'tr') → '/tr/about'
 
 // Get all language alternates for SEO
 getLanguageAlternates('/about') → {
-  tr: 'https://abtmekatronik.com/about',
+  tr: 'https://abtmekatronik.com/tr/about',
   en: 'https://abtmekatronik.com/en/about',
   de: 'https://abtmekatronik.com/de/about',
   // ... all 7 languages
@@ -88,11 +89,12 @@ getLanguageAlternates('/about') → {
 
 ## Rationale
 
-### Why Turkish as Default (No Prefix)?
-1. **Primary Market**: Turkey is the main market
-2. **Clean URLs**: Turkish users get cleaner URLs
-3. **SEO Benefit**: Main domain authority goes to Turkish content
-4. **User Expectation**: Turkish users expect default language
+### Why All Languages Have Prefix (Including Turkish)?
+1. **Consistency**: All languages treated equally
+2. **No Ambiguity**: Clear language indication in every URL
+3. **Easier Routing**: Simpler logic, no special cases
+4. **Better UX**: Language switching preserves current page
+5. **SEO Clarity**: Google knows exact language for each URL
 
 ### Why URL-Based (Not Subdomain)?
 - **Simpler Infrastructure**: No need for multiple subdomains
@@ -119,14 +121,16 @@ getLanguageAlternates('/about') → {
 ✅ **Canonical URLs**: Prevents duplicate content issues  
 
 ### Negative
-⚠️ **URL Changes**: Existing bookmarks without language prefix still work (Turkish default)  
+⚠️ **URL Changes**: All URLs now require language prefix (including Turkish)  
+⚠️ **Redirect Needed**: Old URLs without prefix redirect to `/tr/`  
 ⚠️ **Complexity**: More complex routing logic  
 ⚠️ **Testing**: Need to test 49 URL combinations  
-⚠️ **Migration**: Need to update internal links  
+⚠️ **Migration**: Need to update internal links and bookmarks  
 
 ### Neutral
-ℹ️ **Backward Compatible**: Old URLs (without prefix) still work as Turkish  
+ℹ️ **Backward Compatible**: Old URLs (without prefix) redirect to `/tr/`  
 ℹ️ **No Breaking Changes**: localStorage still used as fallback  
+ℹ️ **Consistent**: All languages now have equal URL structure  
 
 ---
 
@@ -206,15 +210,18 @@ abtmekatronik.com/about (language in cookie)
 ## Testing Checklist
 
 ### Functional Testing
-- [ ] `/` → Turkish homepage
+- [ ] `/` → `/tr/` redirect
+- [ ] `/about` → `/tr/about` redirect
+- [ ] `/tr/` → Turkish homepage
 - [ ] `/en/` → English homepage
 - [ ] `/de/about` → German about page
 - [ ] `/ar/products/konveyor` → Arabic product page
-- [ ] `/invalid-lang/` → Redirect to Turkish
+- [ ] `/invalid-lang/` → Redirect to `/tr/`
 - [ ] Language selector updates URL
 - [ ] Browser back/forward works
 - [ ] Page refresh maintains language
 - [ ] Direct URL access works
+- [ ] **Arabic to other page preserves language** ✅ (FIXED)
 
 ### SEO Testing
 - [ ] Canonical URL correct for each language

@@ -16,8 +16,8 @@ export function useCanonical(path: string, baseUrl: string = 'https://abt-mekatr
     // Get clean path without language prefix
     const cleanPath = getPathWithoutLanguage(path);
     
-    // Build canonical URL with language prefix (if not Turkish)
-    const canonicalPath = language === 'tr' ? cleanPath : `/${language}${cleanPath}`;
+    // Build canonical URL with language prefix (ALL languages now have prefix)
+    const canonicalPath = `/${language}${cleanPath}`;
     const canonicalUrl = `${baseUrl}${canonicalPath}`;
     
     // Update or create canonical link
@@ -48,14 +48,14 @@ export function useCanonical(path: string, baseUrl: string = 'https://abt-mekatr
     const xDefaultLink = document.createElement('link');
     xDefaultLink.rel = 'alternate';
     xDefaultLink.hreflang = 'x-default';
-    xDefaultLink.href = `${baseUrl}${cleanPath}`;
+    xDefaultLink.href = `${baseUrl}/tr${cleanPath}`;
     document.head.appendChild(xDefaultLink);
     
     // Cleanup: Reset to homepage canonical on unmount
     return () => {
       const link = document.querySelector('link[rel="canonical"]') as HTMLLinkElement;
       if (link) {
-        link.href = baseUrl + '/';
+        link.href = baseUrl + '/tr/';
       }
       // Remove hreflang links
       document.querySelectorAll('link[rel="alternate"][hreflang]').forEach(link => link.remove());

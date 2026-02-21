@@ -12,20 +12,20 @@ URL tabanlı dil yönlendirmesi başarıyla uygulandı. Artık dil seçimi URL'y
 
 ### URL Yapısı
 
-**Türkçe (varsayılan)** - Dil kodu YOK:
+**TÜM DİLLER** - Dil kodu VAR (Türkçe dahil):
 ```
-https://abt-mekatronik.vercel.app/
-https://abt-mekatronik.vercel.app/about
-https://abt-mekatronik.vercel.app/exports
-https://abt-mekatronik.vercel.app/products/konveyor
-```
-
-**Diğer Diller** - Dil kodu VAR:
-```
+https://abt-mekatronik.vercel.app/tr/
+https://abt-mekatronik.vercel.app/tr/about
 https://abt-mekatronik.vercel.app/en/
 https://abt-mekatronik.vercel.app/de/about
 https://abt-mekatronik.vercel.app/ar/exports
-https://abt-mekatronik.vercel.app/ru/products/tekstil
+https://abt-mekatronik.vercel.app/ru/products/konveyor
+```
+
+**Eski URL'ler (prefix yok)** → `/tr/` ile yönlendirilir:
+```
+https://abt-mekatronik.vercel.app/ → /tr/
+https://abt-mekatronik.vercel.app/about → /tr/about
 ```
 
 ---
@@ -60,15 +60,16 @@ https://abt-mekatronik.vercel.app/ru/products/tekstil
 ```typescript
 // URL'den dil çıkarma
 getLanguageFromPath('/en/about') → 'en'
-getLanguageFromPath('/about') → 'tr' (varsayılan)
+getLanguageFromPath('/tr/about') → 'tr'
+getLanguageFromPath('/about') → 'tr' (varsayılan, redirect edilir)
 
-// Dil prefix'li URL oluşturma
+// Dil prefix'li URL oluşturma (TÜM DİLLER)
 buildLanguagePath('/about', 'en') → '/en/about'
-buildLanguagePath('/about', 'tr') → '/about' (prefix yok)
+buildLanguagePath('/about', 'tr') → '/tr/about'
 
 // Tüm dil alternatifleri (SEO için)
 getLanguageAlternates('/about') → {
-  tr: 'https://abt-mekatronik.vercel.app/about',
+  tr: 'https://abt-mekatronik.vercel.app/tr/about',
   en: 'https://abt-mekatronik.vercel.app/en/about',
   de: 'https://abt-mekatronik.vercel.app/de/about',
   // ... 7 dil
@@ -112,14 +113,14 @@ getLanguageAlternates('/about') → {
 
 ### hreflang Tag'leri
 ```html
-<link rel="alternate" hreflang="tr" href="https://abt-mekatronik.vercel.app/" />
+<link rel="alternate" hreflang="tr" href="https://abt-mekatronik.vercel.app/tr/" />
 <link rel="alternate" hreflang="en" href="https://abt-mekatronik.vercel.app/en/" />
 <link rel="alternate" hreflang="de" href="https://abt-mekatronik.vercel.app/de/" />
 <link rel="alternate" hreflang="fr" href="https://abt-mekatronik.vercel.app/fr/" />
 <link rel="alternate" hreflang="es" href="https://abt-mekatronik.vercel.app/es/" />
 <link rel="alternate" hreflang="ar" href="https://abt-mekatronik.vercel.app/ar/" />
 <link rel="alternate" hreflang="ru" href="https://abt-mekatronik.vercel.app/ru/" />
-<link rel="alternate" hreflang="x-default" href="https://abt-mekatronik.vercel.app/" />
+<link rel="alternate" hreflang="x-default" href="https://abt-mekatronik.vercel.app/tr/" />
 ```
 
 ### Canonical URL'ler
@@ -132,15 +133,17 @@ getLanguageAlternates('/about') → {
 ## ✅ Test Edilmesi Gerekenler
 
 ### Fonksiyonel Testler
-- [ ] `/` → Türkçe ana sayfa
+- [ ] `/` → `/tr/` yönlendirme
+- [ ] `/tr/` → Türkçe ana sayfa
 - [ ] `/en/` → İngilizce ana sayfa
 - [ ] `/de/about` → Almanca hakkımızda
 - [ ] `/ar/products/konveyor` → Arapça ürün detayı
-- [ ] `/invalid-lang/` → Türkçe'ye yönlendirme
+- [ ] `/invalid-lang/` → `/tr/` yönlendirme
 - [ ] Dil seçici URL'yi güncelliyor mu?
 - [ ] Browser geri/ileri çalışıyor mu?
 - [ ] Sayfa yenileme dili koruyor mu?
 - [ ] Direkt URL erişimi çalışıyor mu?
+- [ ] Arapça'dan başka sayfaya geçiş dili koruyor mu? ✅ (FIX)
 
 ### SEO Testleri
 - [ ] Canonical URL doğru mu?

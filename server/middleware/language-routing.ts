@@ -4,15 +4,14 @@ import { Request, Response, NextFunction } from 'express';
  * Language Routing Middleware
  * Handles URL-based language routing for multi-language support
  * 
- * Turkish (default): No language prefix
- * Other languages: Language prefix (e.g., /en/, /de/)
+ * ALL languages now have prefix (including Turkish: /tr/)
  */
 
-const SUPPORTED_LANGUAGES = ['en', 'de', 'fr', 'es', 'ar', 'ru'];
+const SUPPORTED_LANGUAGES = ['tr', 'en', 'de', 'fr', 'es', 'ar', 'ru'];
 
 /**
  * Middleware to handle language prefix in URLs
- * Validates language codes and redirects invalid ones to Turkish (default)
+ * Validates language codes and redirects invalid/missing ones to Turkish (/tr/)
  */
 export function languageRoutingMiddleware(req: Request, res: Response, next: NextFunction) {
   const pathname = req.path;
@@ -31,21 +30,15 @@ export function languageRoutingMiddleware(req: Request, res: Response, next: Nex
   const segments = pathname.split('/').filter(Boolean);
   const firstSegment = segments[0];
   
-  // Check if first segment is a language code
+  // Check if first segment is a valid language code
   if (SUPPORTED_LANGUAGES.includes(firstSegment)) {
     // Valid language prefix - continue
     return next();
   }
   
-  // Check if it's an invalid language code (2-letter code but not supported)
-  if (firstSegment && firstSegment.length === 2 && /^[a-z]{2}$/.test(firstSegment)) {
-    // Invalid language code - redirect to Turkish (remove prefix)
-    const cleanPath = '/' + segments.slice(1).join('/');
-    return res.redirect(301, cleanPath || '/');
-  }
-  
-  // No language prefix or valid path - continue (Turkish default)
-  next();
+  // No language prefix or invalid language code - redirect to Turkish
+  const cleanPath = '/' + segments.join('/');
+  return res.redirect(301, `/tr${cleanPath}`);
 }
 
 /**

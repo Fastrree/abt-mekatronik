@@ -13,8 +13,8 @@ export const DEFAULT_LANGUAGE: Language = 'tr';
 
 /**
  * Extract language code from URL path
- * @param pathname - Current URL pathname (e.g., "/en/about", "/about")
- * @returns Language code or null if Turkish (default)
+ * @param pathname - Current URL pathname (e.g., "/en/about", "/tr/about")
+ * @returns Language code (always returns a valid language, defaults to 'tr')
  */
 export function getLanguageFromPath(pathname: string): Language {
   // Remove leading slash
@@ -23,12 +23,12 @@ export function getLanguageFromPath(pathname: string): Language {
   // Extract first segment
   const firstSegment = path.split('/')[0];
   
-  // Check if first segment is a valid language code
-  if (SUPPORTED_LANGUAGES.includes(firstSegment as Language) && firstSegment !== 'tr') {
+  // Check if first segment is a valid language code (including 'tr')
+  if (SUPPORTED_LANGUAGES.includes(firstSegment as Language)) {
     return firstSegment as Language;
   }
   
-  // Default to Turkish
+  // Default to Turkish if no valid language prefix found
   return DEFAULT_LANGUAGE;
 }
 
@@ -38,37 +38,31 @@ export function getLanguageFromPath(pathname: string): Language {
  * @returns Path without language prefix
  */
 export function getPathWithoutLanguage(pathname: string): string {
-  const language = getLanguageFromPath(pathname);
+  const path = pathname.startsWith('/') ? pathname.slice(1) : pathname;
+  const firstSegment = path.split('/')[0];
   
-  // If Turkish (default), return as is
-  if (language === DEFAULT_LANGUAGE) {
-    return pathname;
+  // If first segment is a valid language code, remove it
+  if (SUPPORTED_LANGUAGES.includes(firstSegment as Language)) {
+    const segments = path.split('/');
+    segments.shift(); // Remove language code
+    return '/' + segments.join('/');
   }
   
-  // Remove language prefix
-  const path = pathname.startsWith('/') ? pathname.slice(1) : pathname;
-  const segments = path.split('/');
-  segments.shift(); // Remove language code
-  
-  return '/' + segments.join('/');
+  // No language prefix found, return as is
+  return pathname;
 }
 
 /**
  * Build URL with language prefix
  * @param path - Clean path without language (e.g., "/about", "/products/konveyor")
  * @param language - Target language code
- * @returns Full path with language prefix if needed
+ * @returns Full path with language prefix (ALL languages now have prefix)
  */
 export function buildLanguagePath(path: string, language: Language): string {
   // Ensure path starts with /
   const cleanPath = path.startsWith('/') ? path : '/' + path;
   
-  // Turkish (default) - no prefix
-  if (language === DEFAULT_LANGUAGE) {
-    return cleanPath;
-  }
-  
-  // Other languages - add prefix
+  // ALL languages now have prefix (including Turkish)
   return `/${language}${cleanPath}`;
 }
 

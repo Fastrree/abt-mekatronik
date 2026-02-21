@@ -1374,3 +1374,150 @@ import { LanguageLink } from '@/components/LanguageLink';
 **DOCUMENT STATUS**: Active & Enforced  
 **TOTAL ADRs**: 18 (Accepted: 16, Rejected: 1, Planned: 1)  
 **LAST UPDATED**: 2026-02-21
+
+
+---
+
+## ADR-019: Initial Load Language Redirect
+
+**Date**: 2026-02-21  
+**Status**: Accepted  
+**Author**: Kiro AI  
+**Tags**: i18n, ux, routing
+
+### Context
+After implementing URL-based language routing (ADR-016, ADR-017) and language-aware links (ADR-018), discovered a critical bug: when user opens the site for the first time, browser language is detected but URL is NOT redirected to language-prefixed path.
+
+### Problem Flow
+```
+1. User opens: abtmekatronik.com (URL: "/")
+2. Browser language detected: Arabic
+3. i18n context set to: Arabic ✅
+4. BUT URL stays: "/" ❌ (should be "/ar/")
+5. User clicks "About" → href="/about" (no language prefix)
+6. Server redirects: "/about" → "/tr/about" (default Turkish)
+7. Language lost! User sees Turkish instead of Arabic ❌
+```
+
+### Root Cause
+Browser language detection worked correctly and i18n context was set, but the URL was never updated to reflect the detected language. This caused a mismatch between:
+- **Internal state**: Arabic (from browser detection)
+- **URL state**: No prefix (defaults to Turkish on navigation)
+
+### Decision
+Add initial load redirect logic in `App.tsx` Router component to automatically redirect users to language-prefixed URL based on:
+1. Browser language detection
+2. localStorage preference
+3. Default to Turkish if neither available
+
+### Implementation
+
+```tsx
+function Router() {
+  const [location, setLocation] = useLocation();
+  const { language, setLanguage } = useI18n();
+
+  useEffect(() => {
+    const urlLanguage = getLanguageFromPath(location);
+    
+    // If URL has no language prefix, redirect to language-prefixed URL
+    if (!urlLanguage || urlLanguage === 'tr') {
+      const hasLanguagePrefix = /^\/(tr|en|de|fr|es|ar|ru)(\/|$)/.test(location);
+      
+      if (!hasLanguagePrefix) {
+        const cleanPath = location === '/' ? '' : location;
+        const newPath = `/${language}${cleanPath}`;
+        
+        console.log(`[i18n] Initial load redirect: ${location} → ${newPath}`);
+        setLocation(newPath, { replace: true });
+        return;
+      }
+    }
+    
+    // Sync URL language with i18n context
+    if (urlLanguage !== language) {
+      setLanguage(urlLanguage);
+    }
+  }, [location, language, setLanguage, setLocation]);
+}
+```
+
+### Rationale
+- **User Experience**: Language preference should be immediately visible in URL
+- **SEO**: Search engines can index language-specific URLs
+- **Consistency**: URL always reflects current language
+- **Bookmarking**: Users can bookmark language-specific pages
+- **Sharing**: Shared links preserve language preference
+
+### Redirect Strategy
+- **Method**: `setLocation(newPath, { replace: true })`
+- **Why replace?**: Avoids polluting browser history (back button works correctly)
+- **When**: Only on initial load or when URL has no language prefix
+- **Logging**: Console log for debugging redirect behavior
+
+### Edge Cases Handled
+1. **Root path**: `/` → `/ar/` (based on browser language)
+2. **Deep link without prefix**: `/about` → `/ar/about`
+3. **Already prefixed**: `/ar/about` → No redirect (already correct)
+4. **Turkish default**: `/` → `/tr/` (all languages equal, no special case)
+5. **Direct URL entry**: `abtmekatronik.com/products/konveyor` → `/ar/products/konveyor`
+
+### Example Flows
+
+**Flow 1: First-time Arabic user**
+```
+1. User opens: abtmekatronik.com
+2. Browser language: Arabic
+3. Redirect: "/" → "/ar/"
+4. User clicks "About" → "/ar/about" ✅
+5. Language persists!
+```
+
+**Flow 2: Returning user with localStorage**
+```
+1. User opens: abtmekatronik.com
+2. localStorage: German (from previous visit)
+3. Redirect: "/" → "/de/"
+4. User clicks product → "/de/products/konveyor" ✅
+```
+
+**Flow 3: Direct deep link**
+```
+1. User opens: abtmekatronik.com/about
+2. Browser language: French
+3. Redirect: "/about" → "/fr/about"
+4. User navigates → Language persists ✅
+```
+
+### Consequences
+**Positive**: 
+- Language preference immediately visible in URL
+- No language loss on navigation
+- Better SEO (language-specific URLs indexed)
+- Shareable language-specific links
+- Consistent user experience
+
+**Negative**: 
+- Additional redirect on initial load (minimal performance impact)
+- Slightly more complex routing logic
+- Console logs in production (can be removed)
+
+### Testing Checklist
+- [x] Open abtmekatronik.com with Arabic browser → Redirects to /ar/
+- [x] Open abtmekatronik.com with German browser → Redirects to /de/
+- [x] Open abtmekatronik.com/about with English browser → Redirects to /en/about
+- [x] Open abtmekatronik.com/ar/about → No redirect (already prefixed)
+- [x] Back button works correctly (replace: true)
+- [x] Language persists across all navigation
+
+### Related ADRs
+- ADR-016: URL-Based Language Routing (Initial implementation)
+- ADR-017: Turkish /tr/ Prefix (All languages equal)
+- ADR-018: Language-Aware Navigation Links (Link system)
+- ADR-004: i18n System (Translation infrastructure)
+
+---
+
+**DOCUMENT STATUS**: Active & Enforced  
+**TOTAL ADRs**: 19 (Accepted: 17, Rejected: 1, Planned: 1)  
+**LAST UPDATED**: 2026-02-21

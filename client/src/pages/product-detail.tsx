@@ -28,6 +28,7 @@ import { OptimizedImage } from "@/components/OptimizedImage";
 import { ImageLightbox } from "@/components/ImageLightbox";
 import { useCanonical } from "@/hooks/useCanonical";
 import { useLanguageLink } from "@/hooks/useLanguageLink";
+import { useMeta } from "@/hooks/useMeta";
 
 const productIcons = {
   konveyor: Truck,
@@ -97,6 +98,9 @@ export default function ProductDetail() {
   
   // SEO: Set canonical URL for this product page
   useCanonical(`/products/${productKey || ''}`);
+  
+  // SEO: Update meta tags for product page
+  useMeta('product', productKey as 'konveyor' | 'tekstil' | 'celik' | 'ozelMakine');
 
   // Validate product key
   useEffect(() => {

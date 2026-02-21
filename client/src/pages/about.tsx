@@ -2,6 +2,7 @@ import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { SkipLink } from "@/components/SkipLink";
 import { useI18n } from "@/lib/i18n";
+import { useMeta } from "@/hooks/useMeta";
 import { OptimizedImage } from "@/components/OptimizedImage";
 import { Award, Target, Users, Zap, CheckCircle, TrendingUp } from "lucide-react";
 import { useState, useCallback } from "react";
@@ -15,6 +16,9 @@ export default function About() {
   
   // SEO: Set canonical URL for this page
   useCanonical('/about');
+  
+  // SEO: Update meta tags for about page
+  useMeta('about');
 
   // Custom translation function for about page
   const t = (key: string): string => {

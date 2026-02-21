@@ -1672,3 +1672,90 @@ Fix all hardcoded navigation links and path detection logic:
 
 **STATUS**: ACTIVE & ENFORCED  
 **LAST UPDATED**: 2026-02-21
+
+
+---
+
+## ADR-022: SEO Meta Tags System - Comprehensive Multi-Language Support
+
+**Date**: 2026-02-21  
+**Status**: Accepted  
+**Author**: Kiro AI  
+**Tags**: seo, i18n, meta-tags
+
+### Context
+Need comprehensive SEO meta tag system for all 7 languages (TR, EN, DE, FR, ES, AR, RU) across all pages (Home, About, Exports, 4 Product Details) to improve search engine visibility and international reach.
+
+### Decision
+Implement centralized meta tag translation system with dynamic updates via React hook.
+
+### Implementation
+```typescript
+// meta-translations.ts - Centralized translations
+export const metaTranslations: Record<string, MetaTranslations> = {
+  tr: { home: {...}, about: {...}, exports: {...}, products: {...} },
+  en: { home: {...}, about: {...}, exports: {...}, products: {...} },
+  // ... all 7 languages
+};
+
+// useMeta.ts - Dynamic meta tag management
+export function useMeta(pageType: PageType | 'product', productKey?: ProductKey) {
+  const { language } = useI18n();
+  
+  useEffect(() => {
+    // Update document.title, meta description, keywords, OG tags, Twitter tags
+    document.title = meta.title;
+    // ... update all meta tags
+  }, [language, pageType, productKey]);
+}
+
+// Usage in pages
+useMeta('home');                    // Home page
+useMeta('about');                   // About page
+useMeta('product', 'konveyor');     // Product detail page
+```
+
+### Rationale
+- **SEO Optimization**: Proper meta tags improve search engine ranking
+- **Multi-Language Support**: Each language has culturally appropriate translations
+- **Dynamic Updates**: Meta tags update automatically when language changes
+- **Centralized Management**: Single source of truth for all meta translations
+- **Type Safety**: TypeScript ensures all required fields are present
+
+### Meta Tags Included
+1. `<title>` - Page title (50-60 characters)
+2. `<meta name="description">` - Description (150-160 characters)
+3. `<meta name="keywords">` - Keywords (10-15 relevant keywords)
+4. `<meta property="og:title">` - Open Graph title (Facebook, LinkedIn)
+5. `<meta property="og:description">` - Open Graph description
+6. `<meta name="twitter:title">` - Twitter Card title
+7. `<meta name="twitter:description">` - Twitter Card description
+8. `<html lang="...">` - Language attribute
+
+### Coverage
+- **Languages**: 7 (TR, EN, DE, FR, ES, AR, RU)
+- **Pages**: 7 (Home, About, Exports, 4 Product Details)
+- **Total Combinations**: 49 unique meta tag sets
+
+### Consequences
+**Positive**: 
+- Improved SEO for all languages
+- Better social media sharing (OG tags)
+- Automatic updates on language change
+- Centralized translation management
+- Type-safe implementation
+
+**Negative**: 
+- Large translation file (459 lines)
+- Manual translation updates required
+- No automated translation validation
+
+### Alternatives Considered
+- **react-helmet**: External dependency, not needed for simple meta tag management
+- **next-seo**: Next.js specific, we use Vite
+- **Inline meta tags**: Not dynamic, requires duplication
+
+### Success Metrics
+- Google Search Console: Improved indexing for all languages
+- Social media: Proper preview cards when sharing links
+- Analytics: Increased organic traffic from international markets

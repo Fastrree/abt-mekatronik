@@ -7,6 +7,7 @@ import { Globe, TrendingUp, Award, Package, Ship, CheckCircle } from "lucide-rea
 import { useEffect, useRef, useState } from "react";
 import { useI18n } from "@/lib/i18n";
 import { useCanonical } from "@/hooks/useCanonical";
+import { useMeta } from "@/hooks/useMeta";
 
 // Twemoji type declaration
 declare global {
@@ -22,6 +23,9 @@ function OurExports() {
   
   // SEO: Set canonical URL for this page
   useCanonical('/exports');
+  
+  // SEO: Update meta tags for exports page
+  useMeta('exports');
   
   const mapRef = useRef<HTMLDivElement>(null);
   const mapInstance = useRef<any>(null);

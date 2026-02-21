@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Settings, Cog, PenTool, ChevronRight, Truck, Factory, Wrench, Layers, Phone, Mail, MapPin, Shield, Award, CheckCircle } from "lucide-react";
 import { useI18n } from "@/lib/i18n";
 import { useLanguageLink } from "@/hooks/useLanguageLink";
+import { useMeta } from "@/hooks/useMeta";
 import { smoothScrollToElement } from "@/lib/scroll-utils";
 import { OptimizedImage } from "@/components/OptimizedImage";
 import { FAQ, Testimonials, ClientLogos } from "@/components/LazyComponents";
@@ -14,6 +15,9 @@ import { Suspense, useEffect, useState } from "react";
 export default function Home() {
   const { t, language } = useI18n();
   const { languageLink } = useLanguageLink();
+  
+  // SEO: Update meta tags for home page
+  useMeta('home');
   
   // Detect Edge browser
   const isEdge = /Edg/.test(navigator.userAgent);

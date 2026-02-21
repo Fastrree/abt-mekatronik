@@ -182,13 +182,13 @@ export const Footer = memo(function Footer() {
               {t('footer.description')}
             </p>
             <div className="flex space-x-4">
-              <a href="#" className="w-10 h-10 rounded-full bg-white dark:bg-zinc-800 border border-zinc-300 dark:border-zinc-700 flex items-center justify-center hover:bg-primary hover:text-white transition-colors">
+              <a href="#" className="w-10 h-10 rounded-full bg-white dark:bg-zinc-800 border border-zinc-300 dark:border-zinc-700 flex items-center justify-center hover:bg-primary hover:text-white transition-colors" aria-label="LinkedIn">
                 <Linkedin size={18} />
               </a>
-              <a href="#" className="w-10 h-10 rounded-full bg-white dark:bg-zinc-800 border border-zinc-300 dark:border-zinc-700 flex items-center justify-center hover:bg-primary hover:text-white transition-colors">
+              <a href="#" className="w-10 h-10 rounded-full bg-white dark:bg-zinc-800 border border-zinc-300 dark:border-zinc-700 flex items-center justify-center hover:bg-primary hover:text-white transition-colors" aria-label="Instagram">
                 <Instagram size={18} />
               </a>
-              <a href="#" className="w-10 h-10 rounded-full bg-white dark:bg-zinc-800 border border-zinc-300 dark:border-zinc-700 flex items-center justify-center hover:bg-primary hover:text-white transition-colors">
+              <a href="#" className="w-10 h-10 rounded-full bg-white dark:bg-zinc-800 border border-zinc-300 dark:border-zinc-700 flex items-center justify-center hover:bg-primary hover:text-white transition-colors" aria-label="Facebook">
                 <Facebook size={18} />
               </a>
             </div>

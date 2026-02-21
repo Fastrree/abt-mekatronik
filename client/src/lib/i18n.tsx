@@ -122,16 +122,40 @@ export function I18nProvider({ children }: I18nProviderProps) {
     return 'tr';
   };
 
-  // Initialize language from localStorage or browser language
+  // Get language from URL path
+  const getLanguageFromURL = (): Language => {
+    if (typeof window === 'undefined') return 'tr';
+    
+    const pathname = window.location.pathname;
+    const path = pathname.startsWith('/') ? pathname.slice(1) : pathname;
+    const firstSegment = path.split('/')[0];
+    
+    // Check if first segment is a valid language code (excluding 'tr' as it's default)
+    const supportedLanguages: Language[] = ['en', 'de', 'fr', 'es', 'ar', 'ru'];
+    if (supportedLanguages.includes(firstSegment as Language)) {
+      return firstSegment as Language;
+    }
+    
+    // Default to Turkish (no prefix in URL)
+    return 'tr';
+  };
+
+  // Initialize language from URL first, then localStorage, then browser
   const [language, setLanguageState] = useState<Language>(() => {
     if (typeof window !== 'undefined') {
-      // First check localStorage (user preference)
+      // Priority 1: URL language prefix
+      const urlLanguage = getLanguageFromURL();
+      if (urlLanguage !== 'tr') {
+        return urlLanguage;
+      }
+      
+      // Priority 2: localStorage (user preference)
       const savedLanguage = localStorage.getItem('abt-language');
       if (savedLanguage && ['tr', 'en', 'de', 'fr', 'es', 'ar', 'ru'].includes(savedLanguage)) {
         return savedLanguage as Language;
       }
       
-      // If no saved preference, detect browser language
+      // Priority 3: Browser language detection
       return detectBrowserLanguage();
     }
     return 'tr';

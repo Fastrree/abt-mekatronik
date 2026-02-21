@@ -9,6 +9,7 @@ import {
   requestSizeLimiter,
   comprehensiveBotProtection
 } from "./middleware/security";
+import { languageRoutingMiddleware, setLanguageHeader } from "./middleware/language-routing";
 
 const app = express();
 const httpServer = createServer(app);
@@ -101,6 +102,11 @@ app.use((req, res, next) => {
   
   next();
 });
+
+// 🌍 LANGUAGE ROUTING MIDDLEWARE
+// Handle URL-based language routing (must be before other middleware)
+app.use(languageRoutingMiddleware);
+app.use(setLanguageHeader);
 
 // 🔒 SECURITY MIDDLEWARE LAYER
 // Request size limiter - DoS koruması

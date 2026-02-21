@@ -13,6 +13,7 @@ import { WhatsAppButton } from "@/components/WhatsAppButton";
 import { ScrollProgress } from "@/components/ScrollProgress";
 import { BackToTop } from "@/components/BackToTop";
 import { ExitIntentPopup } from "@/components/ExitIntentPopup";
+import { getLanguageFromPath, getPathWithoutLanguage } from "@/lib/language-utils";
 import { useEffect, lazy, Suspense } from "react";
 
 // Lazy load pages for code splitting
@@ -36,6 +37,15 @@ function PageLoader() {
 
 function Router() {
   const [location] = useLocation();
+  const { language, setLanguage } = useI18n();
+
+  // Sync URL language with i18n context
+  useEffect(() => {
+    const urlLanguage = getLanguageFromPath(location);
+    if (urlLanguage !== language) {
+      setLanguage(urlLanguage);
+    }
+  }, [location, language, setLanguage]);
 
   // Scroll to top on route change (except hash navigation)
   useEffect(() => {
@@ -69,9 +79,12 @@ function Router() {
     return () => window.removeEventListener('hashchange', handleHashScroll);
   }, [location]); // location dependency ekledik
 
+  // Get clean path without language prefix for routing
+  const cleanPath = getPathWithoutLanguage(location);
+
   return (
     <Suspense fallback={<PageLoader />}>
-      <Switch>
+      <Switch location={cleanPath}>
         <Route path="/" component={Home} />
         <Route path="/about" component={About} />
         <Route path="/exports" component={OurExports} />

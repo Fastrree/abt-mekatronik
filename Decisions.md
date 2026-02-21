@@ -1060,3 +1060,94 @@ function AppContent() {
 **LAST UPDATED**: 2026-02-21  
 **NEXT REVIEW**: 2026-03-21
 
+
+
+---
+
+## ADR-016: URL-Based Language Routing
+
+**Date**: 2026-02-21  
+**Status**: Accepted  
+**Author**: Development Team  
+**Tags**: i18n, seo, routing, ux
+
+### Context
+Website supports 7 languages (TR, EN, DE, FR, ES, AR, RU) but language selection was only stored in localStorage without URL reflection. This created SEO, sharing, and analytics problems.
+
+### Decision
+Implement URL-based language routing:
+- **Turkish (default)**: Clean URLs without prefix
+  - `https://abtmekatronik.com/`
+  - `https://abtmekatronik.com/about`
+- **Other languages**: Language prefix in URL
+  - `https://abtmekatronik.com/en/`
+  - `https://abtmekatronik.com/de/about`
+  - `https://abtmekatronik.com/ar/products/konveyor`
+
+### Implementation
+```typescript
+// Language Detection Priority
+1. URL prefix (highest priority)
+2. localStorage (user preference)
+3. Browser language (auto-detect)
+
+// Core Utilities
+getLanguageFromPath('/en/about') → 'en'
+buildLanguagePath('/about', 'en') → '/en/about'
+getLanguageAlternates('/about') → { tr: '...', en: '...', ... }
+```
+
+### Rationale
+- **SEO**: Google can index all 49 URL combinations (7 languages × 7 pages)
+- **Shareable**: Users can share language-specific URLs
+- **Analytics**: Track language-specific page views in GA4
+- **UX**: URL reflects current language state
+- **hreflang**: Proper SEO signals for multilingual content
+- **Canonical**: Prevents duplicate content issues
+
+### Consequences
+**Positive**: 
+- SEO improvement (separate indexing per language)
+- Shareable language-specific URLs
+- Better analytics tracking
+- hreflang tags for all pages
+- Canonical URLs prevent duplicate content
+- Direct language access via URL
+
+**Negative**: 
+- More complex routing logic
+- Need to test 49 URL combinations
+- Migration effort for internal links
+- Slightly longer URLs for non-Turkish
+
+### Alternatives Considered
+- **Subdomain-based** (`en.abtmekatronik.com`): Too complex for 7 pages, splits domain authority
+- **Query parameters** (`/about?lang=en`): Poor SEO, ugly URLs
+- **Cookie-based** (no URL change): No SEO benefit, can't share URLs
+
+### Files Modified
+- `client/src/lib/language-utils.ts` (new)
+- `client/src/hooks/useLanguageRoute.ts` (new)
+- `client/src/lib/i18n.tsx` (URL detection)
+- `client/src/components/LanguageSelector.tsx` (URL navigation)
+- `client/src/App.tsx` (routing with language prefix)
+- `client/src/hooks/useCanonical.ts` (hreflang tags)
+- `server/middleware/language-routing.ts` (new)
+- `server/index.ts` (middleware integration)
+
+### Success Metrics
+- ✅ All 49 URLs work correctly
+- ✅ Language switching updates URL
+- ✅ hreflang tags on all pages
+- ✅ Canonical URLs correct
+- 📊 Google Search Console: No hreflang errors (post-deployment)
+- 📊 All language versions indexed (post-deployment)
+- 📊 Language-specific analytics (post-deployment)
+
+---
+
+**DOCUMENT STATUS**: Active & Enforced
+**TOTAL ADRs**: 16 (Accepted: 14, Rejected: 1, Planned: 1) 
+
+**LAST UPDATED**: 2026-02-21
+**NEXT REVIEW**: 2026-03-21

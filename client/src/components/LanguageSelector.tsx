@@ -1,5 +1,7 @@
 import { useState, memo, useEffect } from 'react';
+import { useLocation } from 'wouter';
 import { useI18n, languages, Language, getFlagSrc } from '@/lib/i18n';
+import { buildLanguagePath, getPathWithoutLanguage } from '@/lib/language-utils';
 import { ChevronDown } from 'lucide-react';
 
 interface LanguageSelectorProps {
@@ -8,6 +10,7 @@ interface LanguageSelectorProps {
 
 export const LanguageSelector = memo(function LanguageSelector({ isScrolled = false }: LanguageSelectorProps) {
   const { language, setLanguage, t } = useI18n();
+  const [location, setLocation] = useLocation();
   const [isOpen, setIsOpen] = useState(false);
   const [theme, setTheme] = useState<string | undefined>(undefined);
 
@@ -27,7 +30,18 @@ export const LanguageSelector = memo(function LanguageSelector({ isScrolled = fa
   }, []);
 
   const handleSelect = (code: Language) => {
+    // Get current path without language prefix
+    const cleanPath = getPathWithoutLanguage(location);
+    
+    // Build new path with selected language
+    const newPath = buildLanguagePath(cleanPath, code);
+    
+    // Update language in context
     setLanguage(code);
+    
+    // Navigate to new URL
+    setLocation(newPath);
+    
     setIsOpen(false);
   };
 

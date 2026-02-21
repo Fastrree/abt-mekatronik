@@ -6,7 +6,7 @@ import { Settings, Cog, PenTool, ChevronRight, Truck, Factory, Wrench, Layers, P
 import { useI18n } from "@/lib/i18n";
 import { smoothScrollToElement } from "@/lib/scroll-utils";
 import { OptimizedImage } from "@/components/OptimizedImage";
-import { FAQ, Testimonials, ClientLogos, ComponentLoader } from "@/components/LazyComponents";
+import { FAQ, Testimonials, ClientLogos } from "@/components/LazyComponents";
 import { ImageLightbox } from "@/components/ImageLightbox";
 import { Suspense, useEffect, useState } from "react";
 
@@ -86,22 +86,25 @@ export default function Home() {
                 objectPosition: 'center 40%' // Slightly adjust vertical position
               }}
               loading="eager"
+              width={1920}
+              height={1080}
             />
           ) : (
-            // Other browsers: Video with autoplay - full coverage, no white space
+            // Other browsers: Video with optimized loading - full coverage, no white space
             <video 
               src="/media/video1.mp4"
               autoPlay
               muted
               loop
               playsInline
-              preload="auto"
+              preload="metadata"
               className="absolute inset-0 w-full h-full object-cover"
               style={{ 
                 zIndex: 1,
                 objectPosition: 'center 40%' // Slightly adjust vertical position
               }}
               aria-label="ABT Mekatronik üretim tesisi video arka planı"
+              poster="/media/img1.jpeg"
             />
           )}
           {/* Overlay - Light theme: medium dark, Dark theme: very dark */}
@@ -490,7 +493,8 @@ export default function Home() {
                   alt={`ABT Mekatronik Proje ${index + 1}`}
                   loading={index < 4 ? "eager" : "lazy"}
                   className="w-full h-full object-cover transition-all duration-500 group-hover:scale-110 grayscale-[30%] group-hover:grayscale-0"
-                  aspectRatio="1/1"
+                  width={400}
+                  height={400}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-white/60 via-transparent to-transparent dark:from-zinc-900/60 dark:via-transparent dark:to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               </button>
@@ -538,21 +542,21 @@ export default function Home() {
 
       {/* FAQ SECTION */}
       <section id="faq">
-        <Suspense fallback={<ComponentLoader />}>
+        <Suspense fallback={<div className="py-24 bg-zinc-50 dark:bg-zinc-900"><div className="container mx-auto px-6"><div className="animate-pulse bg-zinc-200 dark:bg-zinc-800 h-64 rounded-2xl" /></div></div>}>
           <FAQ />
         </Suspense>
       </section>
 
       {/* TESTIMONIALS SECTION */}
       <section id="testimonials">
-        <Suspense fallback={<ComponentLoader />}>
+        <Suspense fallback={<div className="py-24 bg-white dark:bg-zinc-800"><div className="container mx-auto px-6"><div className="animate-pulse bg-zinc-200 dark:bg-zinc-800 h-64 rounded-2xl" /></div></div>}>
           <Testimonials />
         </Suspense>
       </section>
 
       {/* CLIENT LOGOS / PARTNERS SECTION */}
       <section id="partners" className="scroll-mt-24">
-        <Suspense fallback={<ComponentLoader />}>
+        <Suspense fallback={<div className="py-24 bg-zinc-50 dark:bg-zinc-900"><div className="container mx-auto px-6"><div className="animate-pulse bg-zinc-200 dark:bg-zinc-800 h-64 rounded-2xl" /></div></div>}>
           <ClientLogos />
         </Suspense>
       </section>

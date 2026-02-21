@@ -167,7 +167,7 @@ export const metaTranslations: Record<string, MetaTranslations> = {
   de: {
     home: {
       title: 'ABT MECHATRONIK | Fördersysteme, Textilmaschinen, Stahlkonstruktion',
-      description: 'Unter der Führung von ABT MECHATRONICS; von Fördersystemen bis zu Textilmaschinen bauen wir die industrielle Zukunft. Starke Technik, makellose Zukunft. 15+ Jahre Erfahrung, 200+ Projekte.',
+      description: 'Unter der Führung von ABT MECHATRONIK; von Fördersystemen bis zu Textilmaschinen bauen wir die industrielle Zukunft. Starke Technik, makellose Zukunft. 15+ Jahre Erfahrung, 200+ Projekte.',
       ogTitle: 'ABT MECHATRONIK | Industrielle Produktionslösungen',
       ogDescription: 'Fördersysteme, Textilmaschinen, Stahlkonstruktion und kundenspezifisches Maschinendesign. Hohe Präzision, starke Technik.',
       twitterTitle: 'ABT MECHATRONIK | Industrielle Lösungen',
@@ -216,9 +216,9 @@ export const metaTranslations: Record<string, MetaTranslations> = {
       },
       ozelMakine: {
         title: 'Kundenspezifisches Maschinendesign | ABT MECHATRONIK - Projektbasierte Lösungen',
-        description: 'Kundenspezifisches Maschinendesign und -fertigung: Maßgeschneiderte Ingenieurl ösungen, projektbasierte Produktion, Automatisierungsintegration. 200+ kundenspezifische Projekterfahrung.',
+        description: 'Kundenspezifisches Maschinendesign und -fertigung: Maßgeschneiderte Ingenieurlösungen, projektbasierte Produktion, Automatisierungsintegration. 200+ kundenspezifische Projekterfahrung.',
         ogTitle: 'Kundenspezifisches Maschinendesign | ABT MECHATRONIK',
-        ogDescription: 'Maßgeschneiderte Ingenieurl ösungen, projektbasierte Produktion, Automatisierungsintegration.',
+        ogDescription: 'Maßgeschneiderte Ingenieurlösungen, projektbasierte Produktion, Automatisierungsintegration.',
         twitterTitle: 'Kundenspezifisches Maschinendesign | ABT MECHATRONIK',
         twitterDescription: 'Projektbasierte kundenspezifische Maschinenlösungen.',
       },

@@ -568,10 +568,10 @@ function OurExports() {
                 onMouseEnter={() => !isMobile && setIsMapHovered(true)}
                 onMouseLeave={() => !isMobile && setIsMapHovered(false)}
               >
-                {/* Türkiye Üretim Merkezi - Desktop only */}
+                {/* Türkiye Üretim Merkezi - Desktop only (lg and above) */}
                 {showTurkeyPulse && !isMobile && (
                   <div 
-                    className="absolute z-40 pointer-events-none animate-in fade-in zoom-in duration-500 hidden sm:block" 
+                    className="absolute z-40 pointer-events-none animate-in fade-in zoom-in duration-500 hidden lg:block" 
                     style={{ 
                       left: "56.5%", 
                       top: "42%"

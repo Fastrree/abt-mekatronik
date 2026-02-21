@@ -1014,6 +1014,12 @@ function AppContent() {
 | ADR-015 | Vercel Web Analytics | Planned | 2026-01-24 | Analytics Team |
 | ADR-016 | URL-Based Language Routing | Superseded | 2026-02-22 | Development Team |
 | ADR-017 | Turkish Prefix - All Languages Equal | Accepted | 2026-02-22 | Development Team |
+| ADR-018 | Language-Aware Navigation Links | Accepted | 2026-02-22 | Kiro AI |
+| ADR-019 | Initial Load Language Redirect | Accepted | 2026-02-22 | Kiro AI |
+| ADR-020 | Fix Product Detail Hardcoded Navigation | Accepted | 2026-02-22 | AI Assistant |
+| ADR-021 | Fix Navbar Hardcoded Navigation Links | Accepted | 2026-02-22 | AI Assistant |
+| ADR-022 | SEO Meta Tags System | Accepted | 2026-02-22 | Kiro AI |
+| ADR-023 | CSP Strict Mode - Remove unsafe-inline | Accepted | 2026-02-22 | Kiro AI |
 
 ---
 
@@ -1023,10 +1029,14 @@ function AppContent() {
 |------|-------|-------|---------|
 | 2026-01-19 (Initial) | 58/100 | C | No security headers |
 | 2026-01-19 (ADR-003) | 88/100 | B+ | Added 10 security headers |
-| 2026-01-27 (ADR-011) | 115/100 | A+ | CSP improvement + SRI |
-| 2026-01-27 (Current) | 115/100 | A+ | Maximum score achieved |
+| 2026-01-27 (ADR-011) | 115/100 | A+ | CSP improvement + SRI (Vercel tool) |
+| 2026-02-22 (ADR-023) | 110/100 | A+ | CSP Strict Mode - unsafe-inline removed (Mozilla tool) |
+| 2026-02-22 (Current) | 110/100 | A+ | Production-ready security |
 
-**Note**: Score >100 possible due to bonus points for advanced security features (SRI, HSTS preload, etc.)
+**Note**: Different tools give different scores:
+- **Vercel Security Headers**: 115/100 (A+) - Vercel's own security analysis
+- **Mozilla HTTP Observatory**: 110/100 (A+) - Mozilla's official security scanner
+- Both scores are excellent and indicate enterprise-grade security
 
 ---
 

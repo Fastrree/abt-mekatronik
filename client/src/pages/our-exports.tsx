@@ -26,29 +26,37 @@ function OurExports() {
   const [isMapHovered, setIsMapHovered] = useState(false);
   const [isZooming, setIsZooming] = useState(false);
 
-  // PERFORMANCE: Disable Twemoji parsing - use native emoji for better performance
-  // Native emoji is faster and doesn't require external CDN
-  // Parse emojis on component mount and when hoveredCountry changes
+  // PERFORMANCE: Re-enable Twemoji ONLY for flag emojis (Windows compatibility)
+  // Windows native emoji doesn't render flags properly, need Twemoji SVGs
   useEffect(() => {
-    // DISABLED FOR PERFORMANCE - Native emoji is sufficient
-    // const parseEmojis = () => {
-    //   if (typeof window.twemoji !== 'undefined') {
-    //     const emojiContainers = document.querySelectorAll('.emoji-container');
-    //     emojiContainers.forEach(container => {
-    //       if (container) {
-    //         window.twemoji?.parse(container as HTMLElement, {
-    //           folder: 'svg',
-    //           ext: '.svg',
-    //           base: 'https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/'
-    //         });
-    //       }
-    //     });
-    //   }
-    // };
-    // parseEmojis();
-    // const timer = setTimeout(parseEmojis, 200);
-    // return () => clearTimeout(timer);
-  }, [hoveredCountry]);
+    const parseFlags = () => {
+      if (typeof window.twemoji !== 'undefined') {
+        // Only parse flag emojis (regional indicator symbols)
+        const flagContainers = document.querySelectorAll('.flag-emoji');
+        flagContainers.forEach(container => {
+          if (container && container.textContent) {
+            // Check if content contains flag emoji (regional indicators U+1F1E6 to U+1F1FF)
+            const hasFlag = /[\u{1F1E6}-\u{1F1FF}]{2}/u.test(container.textContent);
+            if (hasFlag) {
+              window.twemoji?.parse(container as HTMLElement, {
+                folder: 'svg',
+                ext: '.svg',
+                base: 'https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/'
+              });
+            }
+          }
+        });
+      }
+    };
+
+    // Initial parse
+    parseFlags();
+
+    // Re-parse after a short delay (for dynamic content like map tooltips)
+    const timer = setTimeout(parseFlags, 200);
+
+    return () => clearTimeout(timer);
+  }, [hoveredCountry]); // Re-parse when hovered country changes
 
   const exportCountryCodes = [
     "TR", // Türkiye
@@ -59,7 +67,7 @@ function OurExports() {
     "TM"  // Türkmenistan
   ];
 
-  // Country names with flags - using native emoji with optimized font stack
+  // Country names with flags - Twemoji will parse these for Windows compatibility
   const countryNames: { [key: string]: { flag: string; name: string } } = {
     TR: { flag: "🇹🇷", name: "TÜRKİYE" },
     UZ: { flag: "🇺🇿", name: "ÖZBEKİSTAN" },
@@ -497,10 +505,7 @@ function OurExports() {
               <div className="grid grid-cols-2 gap-3">
                 {exportCountries.map((country, index) => (
                   <div key={country.name} className="bg-gradient-to-br from-white to-zinc-50 dark:from-zinc-800 dark:to-zinc-900 p-4 rounded-2xl border-2 border-zinc-200 dark:border-zinc-700 hover:border-red-500 shadow-lg text-center">
-                    <div className="text-4xl mb-2" style={{ 
-                      fontFamily: 'Apple Color Emoji, Segoe UI Emoji, Noto Color Emoji, sans-serif',
-                      lineHeight: 1
-                    }}>{country.flag}</div>
+                    <div className="text-4xl mb-2 flag-emoji" style={{ lineHeight: 1 }}>{country.flag}</div>
                     <h3 className="text-sm font-bold text-zinc-900 dark:text-white">{country.name}</h3>
                     <p className="text-xs text-zinc-500 dark:text-zinc-300">{t(`exports.regions.${country.regionKey}`)}</p>
                   </div>
@@ -590,10 +595,7 @@ function OurExports() {
                       {/* Tooltip Content - Red for all, special badge for Turkey */}
                       <div className="bg-gradient-to-br from-red-600 to-red-700 text-white px-3 py-2 rounded-2xl shadow-xl border border-red-500 animate-in fade-in slide-in-from-left-2 duration-200 min-w-[120px] max-w-[180px]">
                         <div className="flex items-center gap-2 mb-1">
-                          <span className="text-2xl xs:text-xl drop-shadow-lg" style={{ 
-                            lineHeight: 1,
-                            fontFamily: 'Apple Color Emoji, Segoe UI Emoji, Noto Color Emoji, sans-serif'
-                          }}>{countryNames[hoveredCountry.code]?.flag}</span>
+                          <span className="text-2xl xs:text-xl drop-shadow-lg flag-emoji" style={{ lineHeight: 1 }}>{countryNames[hoveredCountry.code]?.flag}</span>
                           <div className="flex-1">
                             <div className="font-black text-xs xs:text-[10px] leading-tight break-words">
                               {countryNames[hoveredCountry.code]?.name}
@@ -652,10 +654,7 @@ function OurExports() {
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4 xs:gap-2">
             {exportCountries.map((country, index) => (
               <div key={country.name} className="bg-gradient-to-br from-white to-zinc-50 dark:from-zinc-800 dark:to-zinc-900 p-4 xs:p-3 rounded-2xl border-2 border-zinc-200 dark:border-zinc-700 hover:border-red-500 dark:hover:border-red-500 shadow-lg hover:shadow-2xl hover:shadow-red-600/20 transition-all duration-300 group text-center animate-in slide-up hover:-translate-y-2 hover:scale-105" style={{ animationDelay: `${index * 50}ms` }}>
-                <div className="text-5xl xs:text-4xl mb-2 xs:mb-1.5 group-hover:scale-125 transition-transform duration-300" style={{ 
-                  lineHeight: 1,
-                  fontFamily: 'Apple Color Emoji, Segoe UI Emoji, Noto Color Emoji, sans-serif'
-                }}>{country.flag}</div>
+                <div className="text-5xl xs:text-4xl mb-2 xs:mb-1.5 group-hover:scale-125 transition-transform duration-300 flag-emoji" style={{ lineHeight: 1 }}>{country.flag}</div>
                 <h3 className="text-sm xs:text-xs font-bold text-zinc-900 dark:text-white mb-1 xs:mb-0.5 break-words leading-tight group-hover:text-red-600 dark:group-hover:text-red-500 transition-colors" dir={language === 'ar' ? 'rtl' : 'ltr'}>{country.name}</h3>
                 <p className="text-[10px] xs:text-[9px] text-zinc-500 dark:text-zinc-300 break-words" dir={language === 'ar' ? 'rtl' : 'ltr'}>{t(`exports.regions.${country.regionKey}`)}</p>
               </div>

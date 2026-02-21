@@ -1573,3 +1573,102 @@ onClick={() => setLocation(languageLink("/"))}
 
 **STATUS**: ACTIVE & ENFORCED  
 **LAST UPDATED**: 2026-02-21
+
+
+## ADR-021: Fix Navbar Hardcoded Navigation Links
+
+**Date**: 2026-02-21  
+**Status**: Accepted  
+**Author**: AI Assistant  
+**Tags**: i18n, navigation, bug-fix, critical
+
+### Context
+User reported persistent language reset issue: "Türkçeden Rusça'ya geçtin, about sayfasına gittin, oradan herhangi bir linkle tıklayınca direkt Türkçe'ye dönüyor."
+
+Investigation revealed that Navbar component had multiple hardcoded navigation links without language prefix, causing language to reset when navigating from any page.
+
+### Problem
+Navbar.tsx had 3 critical issues:
+
+1. **Hardcoded href attributes** in desktop menu:
+   - `href="/"` - Ana Sayfa
+   - `href="/#products"` - Ürünler
+   - `href="/#engineering"` - Mühendislik
+   - `href="/#projects"` - Projeler
+   - `href="/#contact-map"` - İletişim
+
+2. **Path detection logic** didn't account for language prefixes:
+   - `handleHomeClick`: Only checked `currentPath === '/'`
+   - `handleSectionClick`: Only checked `currentPath === '/'`
+   - Didn't recognize `/ru/`, `/ar/`, `/de/` as home pages
+
+3. **navigateToSection** used hardcoded path:
+   - `setLocation('/#${sectionId}')` - No language prefix
+
+### User Journey (Before Fix)
+1. User selects Russian: `/ru/`
+2. Navigates to about: `/ru/about`
+3. Clicks "Ana Sayfa" in navbar: Goes to `/` (hardcoded)
+4. Server redirects to `/tr/` (default Turkish)
+5. Language lost! ❌
+
+### Decision
+Fix all hardcoded navigation links and path detection logic:
+
+1. **Update href attributes** to use `languageLink()`:
+   ```tsx
+   // Before
+   href="/"
+   href="/#products"
+   
+   // After
+   href={languageLink('/')}
+   href={`${languageLink('/')}#products`}
+   ```
+
+2. **Fix path detection** to recognize language-prefixed home pages:
+   ```tsx
+   // Before
+   if (currentPath === '/') { ... }
+   
+   // After
+   const isHomePage = currentPath === '/' || /^\/(tr|en|de|fr|es|ar|ru)\/?$/.test(currentPath);
+   if (isHomePage) { ... }
+   ```
+
+3. **Fix navigateToSection** to preserve language:
+   ```tsx
+   // Before
+   setLocation(`/#${sectionId}`);
+   
+   // After
+   setLocation(`${languageLink('/')}#${sectionId}`);
+   ```
+
+### Rationale
+- Navbar is used on ALL pages - any hardcoded link breaks language persistence
+- Path detection must recognize all 7 language prefixes
+- Section navigation must preserve current language
+- Consistent with ADR-018 (Language-Aware Navigation Components)
+
+### Consequences
+**Positive**: Language preserved across ALL navigation, works for all 7 languages, no more unexpected resets, consistent UX  
+**Negative**: None - this is a critical bug fix
+
+### User Journey (After Fix)
+1. User selects Russian: `/ru/`
+2. Navigates to about: `/ru/about`
+3. Clicks "Ana Sayfa" in navbar: Goes to `/ru/` ✅
+4. Language preserved! ✅
+
+### Related ADRs
+- ADR-016: URL-Based Language Routing
+- ADR-017: Turkish URL Prefix Addition
+- ADR-018: Language-Aware Navigation Components
+- ADR-019: Initial Load Language Redirect
+- ADR-020: Product Detail Hardcoded Navigation Fix
+
+---
+
+**STATUS**: ACTIVE & ENFORCED  
+**LAST UPDATED**: 2026-02-21

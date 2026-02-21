@@ -444,7 +444,15 @@ function OurExports() {
 
       <section className="relative h-[60vh] min-h-[500px] xs:min-h-[400px] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 z-0">
-          <OptimizedImage src="/media/img1.jpeg" alt="ABT Mekatronik İhracat" className="absolute inset-0 w-full h-full object-cover" loading="eager" />
+          <OptimizedImage 
+            src="/media/img1.jpeg" 
+            alt="ABT Mekatronik İhracat" 
+            className="absolute inset-0 w-full h-full object-cover" 
+            loading="eager"
+            width={1920}
+            height={1080}
+          />
+          <link rel="preload" as="image" href="/media/img1.webp" type="image/webp" />
           <div className="absolute inset-0 bg-gradient-to-r from-zinc-900/90 via-zinc-900/70 to-zinc-900/50" />
         </div>
         <div className="container mx-auto px-6 xs:px-4 relative z-10 text-center">
@@ -639,7 +647,14 @@ function OurExports() {
             {exportProducts.map((product, index) => (
               <div key={product.title} className="group relative overflow-hidden bg-gradient-to-br from-zinc-100 to-zinc-200 dark:from-zinc-900 dark:to-zinc-800 rounded-2xl border-2 border-zinc-200 dark:border-zinc-700 hover:border-red-500 dark:hover:border-red-500 shadow-lg hover:shadow-2xl hover:shadow-red-600/20 transition-all duration-300 animate-in scale-in hover:-translate-y-2 hover:scale-105" style={{ animationDelay: `${index * 100}ms` }}>
                 <div className="aspect-square overflow-hidden rounded-t-2xl">
-                  <OptimizedImage src={`/media/${encodeURIComponent(product.image)}`} alt={product.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500 grayscale-[30%] group-hover:grayscale-0" loading="lazy" />
+                  <OptimizedImage 
+                    src={`/media/${encodeURIComponent(product.image)}`} 
+                    alt={product.title} 
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500 grayscale-[30%] group-hover:grayscale-0" 
+                    loading="lazy"
+                    width={400}
+                    height={400}
+                  />
                 </div>
                 <div className="absolute inset-0 bg-gradient-to-t from-red-600/20 via-red-600/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl" />
                 <div className="p-4 xs:p-3 relative z-10">

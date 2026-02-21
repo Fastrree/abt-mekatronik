@@ -52,7 +52,10 @@ export default function About() {
             className="absolute inset-0 w-full h-full object-cover"
             style={{ objectPosition: 'center 40%' }}
             loading="eager"
+            width={1920}
+            height={1080}
           />
+          <link rel="preload" as="image" href="/media/img1.webp" type="image/webp" />
           <div className="absolute inset-0 bg-gradient-to-r from-zinc-900/90 via-zinc-900/70 to-zinc-900/50 dark:from-zinc-900/95 dark:via-zinc-900/85 dark:to-zinc-900/70" aria-hidden="true" />
         </div>
 
@@ -94,6 +97,8 @@ export default function About() {
                   alt="ABT Mekatronik üretim süreci"
                   className="w-full h-96 object-cover mb-6 rounded-xl"
                   loading="lazy"
+                  width={800}
+                  height={600}
                 />
                 
                 {/* Stats Cards */}

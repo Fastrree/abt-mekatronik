@@ -1,26 +1,10 @@
 {
   "buildCommand": "npm run build",
   "outputDirectory": "dist/public",
+  "installCommand": "npm install",
   "framework": null,
-  "trailingSlash": false,
-  "cleanUrls": true,
   "rewrites": [
     { "source": "/(.*)", "destination": "/index.html" }
-  ],
-  "functions": {
-    "api/**/*.ts": {
-      "runtime": "nodejs20.x"
-    }
-  },
-  "routes": [
-    {
-      "src": "/api/(.*)",
-      "dest": "/api/$1"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/index.html"
-    }
   ],
   "headers": [
     {

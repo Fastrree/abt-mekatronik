@@ -140,7 +140,7 @@ export const Navbar = memo(function Navbar() {
                 <div className="p-3 max-h-[70vh] overflow-y-auto scrollbar-thin">
                   {/* 1. Ana Sayfa */}
                   <a
-                    href="/"
+                    href={languageLink('/')}
                     onClick={(e) => {
                       handleHomeClick(e);
                       setIsQuickMenuOpen(false);
@@ -289,7 +289,7 @@ export const Navbar = memo(function Navbar() {
 
           {/* Logo - Mobile: Next to hamburger (not centered), Desktop: Next to hamburger */}
           <a 
-            href="/"
+            href={languageLink('/')}
             onClick={handleHomeClick}
             className="text-base sm:text-2xl font-black tracking-tighter text-white flex items-center gap-0.5 sm:gap-2 cursor-pointer hover:opacity-80 transition-opacity"
           >

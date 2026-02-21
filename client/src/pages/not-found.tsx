@@ -1,9 +1,11 @@
 import { Button } from "@/components/ui/button";
 import { Home, ArrowLeft, Phone } from "lucide-react";
 import { useI18n } from "@/lib/i18n";
+import { useLanguageLink } from "@/hooks/useLanguageLink";
 
 export default function NotFound() {
   const { t, language } = useI18n();
+  const { languageLink } = useLanguageLink();
   const isRTL = language === 'ar';
   
   return (
@@ -65,7 +67,7 @@ export default function NotFound() {
         
         {/* Logo */}
         <div className="mt-16">
-          <a href="/" className="text-2xl font-black text-white hover:opacity-80 transition-opacity">
+          <a href={languageLink('/')} className="text-2xl font-black text-white hover:opacity-80 transition-opacity">
             ABT <span className="text-red-600">MEKATRONİK</span>
           </a>
         </div>

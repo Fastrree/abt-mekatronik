@@ -66,10 +66,10 @@ export const LanguageSelector = memo(function LanguageSelector({ isScrolled = fa
         <ChevronDown size={14} className={`transition-transform duration-300 ${textClasses} ${isOpen ? 'rotate-180' : ''}`} />
       </button>
 
-      {/* Mobile: Minimal style with just flag */}
+      {/* Mobile: Minimal style with just flag - WCAG AA compliant touch target */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className={`lg:hidden flex items-center gap-1 px-2.5 py-2 backdrop-blur-sm border-2 rounded-xl transition-all duration-300 hover:scale-105 hover:-translate-y-0.5 ${buttonClasses} ${
+        className={`lg:hidden min-w-12 min-h-12 flex items-center justify-center gap-1 px-3 py-3 backdrop-blur-sm border-2 rounded-xl transition-all duration-300 hover:scale-105 hover:-translate-y-0.5 ${buttonClasses} ${
           isOpen ? (isDark ? 'bg-white/20 border-white/40' : isScrolled ? 'bg-white border-white/60' : 'bg-white/20 border-white/40') + ' scale-105' : ''
         }`}
         aria-label={t('nav.selectLanguage')}

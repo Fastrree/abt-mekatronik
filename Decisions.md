@@ -1521,3 +1521,55 @@ function Router() {
 **DOCUMENT STATUS**: Active & Enforced  
 **TOTAL ADRs**: 19 (Accepted: 17, Rejected: 1, Planned: 1)  
 **LAST UPDATED**: 2026-02-21
+
+
+## ADR-020: Fix Product Detail Hardcoded Navigation
+
+**Date**: 2026-02-21  
+**Status**: Accepted  
+**Author**: AI Assistant  
+**Tags**: i18n, navigation, bug-fix
+
+### Context
+User reported that when selecting a language (e.g., Arabic) and navigating to about page, then clicking any link from about page, the language would reset to Turkish. Investigation revealed hardcoded navigation in `product-detail.tsx`.
+
+### Problem
+Product detail page had hardcoded `setLocation("/")` calls that didn't include language prefix:
+- Back button: `onClick={() => setLocation("/")}`
+- Product validation redirect: `setLocation("/")`
+
+When user navigated: `/ar/about` → `/ar/products/konveyor` → clicked back button → went to `/` (no language prefix) → server redirected to `/tr/` → language lost!
+
+### Decision
+Replace all hardcoded `setLocation("/")` calls with `languageLink("/")` using the `useLanguageLink` hook.
+
+### Implementation
+```tsx
+// Before (WRONG)
+onClick={() => setLocation("/")}
+
+// After (CORRECT)
+const { languageLink } = useLanguageLink();
+onClick={() => setLocation(languageLink("/"))}
+```
+
+### Rationale
+- Consistent with ADR-018 (Language-Aware Navigation Components)
+- Preserves user's language selection across all navigation
+- Prevents unexpected language resets
+- Maintains URL structure consistency
+
+### Consequences
+**Positive**: Language preserved when navigating from product pages, consistent UX across all 7 languages, no more unexpected language resets  
+**Negative**: None - this is a pure bug fix
+
+### Related ADRs
+- ADR-016: URL-Based Language Routing
+- ADR-017: Turkish URL Prefix Addition
+- ADR-018: Language-Aware Navigation Components
+- ADR-019: Initial Load Language Redirect
+
+---
+
+**STATUS**: ACTIVE & ENFORCED  
+**LAST UPDATED**: 2026-02-21

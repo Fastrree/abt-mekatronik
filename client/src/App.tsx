@@ -41,11 +41,6 @@ function Router() {
   const [location, setLocation] = useLocation();
   const { language, setLanguage } = useI18n();
 
-  // MAINTENANCE MODE: Show maintenance page for all routes
-  if (MAINTENANCE_MODE) {
-    return <Maintenance />;
-  }
-
   // CRITICAL: Redirect to language-prefixed URL on initial load
   useEffect(() => {
     const urlLanguage = getLanguageFromPath(location);
@@ -140,6 +135,17 @@ function AppContent() {
     }
   }, [window.location.pathname]);
 
+  // MAINTENANCE MODE: Minimal UI (no cookies, no analytics, no extras)
+  if (MAINTENANCE_MODE) {
+    return (
+      <TooltipProvider>
+        <Toaster />
+        <Maintenance />
+      </TooltipProvider>
+    );
+  }
+
+  // NORMAL MODE: Full features
   return (
     <TooltipProvider>
       <ScrollProgress />

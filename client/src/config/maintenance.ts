@@ -6,7 +6,7 @@
  * true  = Site is in maintenance mode (all pages redirect to maintenance page)
  * false = Site is live and accessible
  */
-export const MAINTENANCE_MODE = false;
+export const MAINTENANCE_MODE = true;
 
 /**
  * HOW TO USE:

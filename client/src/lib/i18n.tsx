@@ -571,6 +571,13 @@ Piyasada bulunmayan veya mevcut makinelerin karşılayamadığı özel üretim i
     ],
   },
   exports: exportsTranslations.tr,
+  maintenance: {
+    title: 'Bakımdayız',
+    description: 'Web sitemiz şu anda bakım çalışması nedeniyle geçici olarak kapalıdır. En kısa sürede tekrar hizmetinizdeyiz.',
+    contactText: 'Acil durumlar için bize ulaşabilirsiniz:',
+    thankYou: 'Anlayışınız için teşekkür ederiz.',
+    statusBadge: 'Sistem Bakımda',
+  },
 };
 
 
@@ -916,6 +923,13 @@ Needs analysis → Concept design → 3D modeling → Prototype → Test → Ser
     ],
   },
   exports: exportsTranslations.en,
+  maintenance: {
+    title: 'Under Maintenance',
+    description: 'Our website is temporarily closed due to maintenance work. We will be back in service as soon as possible.',
+    contactText: 'For urgent matters, you can reach us:',
+    thankYou: 'Thank you for your understanding.',
+    statusBadge: 'System Under Maintenance',
+  },
 };
 
 
@@ -1212,6 +1226,13 @@ Löst spezielle Produktionsanforderungen, die auf dem Markt nicht verfügbar sin
     ],
   },
   exports: exportsTranslations.de,
+  maintenance: {
+    title: 'Wartungsarbeiten',
+    description: 'Unsere Website ist aufgrund von Wartungsarbeiten vorübergehend geschlossen. Wir sind so schnell wie möglich wieder für Sie da.',
+    contactText: 'Für dringende Angelegenheiten können Sie uns erreichen:',
+    thankYou: 'Vielen Dank für Ihr Verständnis.',
+    statusBadge: 'System in Wartung',
+  },
 };
 
 
@@ -1491,6 +1512,13 @@ Résout les besoins de production spéciaux non disponibles sur le marché.
     ],
   },
   exports: exportsTranslations.fr,
+  maintenance: {
+    title: 'En Maintenance',
+    description: 'Notre site web est temporairement fermé en raison de travaux de maintenance. Nous serons de retour en service dès que possible.',
+    contactText: 'Pour les urgences, vous pouvez nous contacter:',
+    thankYou: 'Merci de votre compréhension.',
+    statusBadge: 'Système en Maintenance',
+  },
 };
 
 
@@ -1770,6 +1798,13 @@ Resuelve necesidades de producción especiales no disponibles en el mercado.
     ],
   },
   exports: exportsTranslations.es,
+  maintenance: {
+    title: 'En Mantenimiento',
+    description: 'Nuestro sitio web está temporalmente cerrado debido a trabajos de mantenimiento. Estaremos de vuelta en servicio lo antes posible.',
+    contactText: 'Para asuntos urgentes, puede contactarnos:',
+    thankYou: 'Gracias por su comprensión.',
+    statusBadge: 'Sistema en Mantenimiento',
+  },
 };
 
 
@@ -2115,6 +2150,13 @@ const ar = {
     ],
   },
   exports: exportsTranslations.ar,
+  maintenance: {
+    title: 'قيد الصيانة',
+    description: 'موقعنا مغلق مؤقتًا بسبب أعمال الصيانة. سنعود للخدمة في أقرب وقت ممكن.',
+    contactText: 'للحالات الطارئة، يمكنك التواصل معنا:',
+    thankYou: 'شكرًا لتفهمكم.',
+    statusBadge: 'النظام قيد الصيانة',
+  },
 };
 
 
@@ -2460,6 +2502,13 @@ const ru = {
     ],
   },
   exports: exportsTranslations.ru,
+  maintenance: {
+    title: 'На Обслуживании',
+    description: 'Наш веб-сайт временно закрыт из-за технического обслуживания. Мы вернемся к работе как можно скорее.',
+    contactText: 'По срочным вопросам вы можете связаться с нами:',
+    thankYou: 'Спасибо за понимание.',
+    statusBadge: 'Система на Обслуживании',
+  },
 };
 
 

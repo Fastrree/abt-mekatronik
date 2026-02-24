@@ -409,7 +409,7 @@ export default function Maintenance() {
                 }`} />
                 <span className={`text-sm font-bold uppercase tracking-widest ${
                   isDark ? 'text-red-400' : 'text-red-700'
-                }`} dir={language === 'ar' ? 'rtl' : 'ltr'}>
+                }`}>
                   {t('maintenance.statusBadge')}
                 </span>
               </div>
@@ -435,20 +435,20 @@ export default function Maintenance() {
             {/* Title */}
             <h2 className={`text-2xl sm:text-3xl font-black tracking-tight mb-4 ${
               isDark ? 'text-white drop-shadow-lg' : 'text-slate-900'
-            }`} dir={language === 'ar' ? 'rtl' : 'ltr'}>
+            }`}>
               {t('maintenance.title')}
             </h2>
             
             {/* Description */}
             <p className={`text-base leading-relaxed mb-3 ${
               isDark ? 'text-zinc-400' : 'text-slate-600'
-            }`} dir={language === 'ar' ? 'rtl' : 'ltr'}>
+            }`}>
               {t('maintenance.description')}
             </p>
 
             <p className={`text-sm mb-10 ${
               isDark ? 'text-zinc-500' : 'text-slate-500'
-            }`} dir={language === 'ar' ? 'rtl' : 'ltr'}>
+            }`}>
               {t('maintenance.thankYou')}
             </p>
 
@@ -465,11 +465,11 @@ export default function Maintenance() {
             <div className="relative space-y-5">
               <p className={`text-xs font-bold uppercase tracking-[0.3em] mb-6 ${
                 isDark ? 'text-zinc-500' : 'text-slate-500'
-              }`} dir={language === 'ar' ? 'rtl' : 'ltr'}>
+              }`}>
                 {t('maintenance.contactText')}
               </p>
               
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <div className="flex flex-col sm:flex-row gap-4 justify-center" dir="ltr">
                 <a 
                   href="tel:+905373197281" 
                   className={`group/btn relative inline-flex items-center justify-center gap-3 px-7 py-4 border-2 rounded-xl overflow-hidden transition-all duration-500 hover:scale-105 ${
